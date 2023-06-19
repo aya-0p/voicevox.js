@@ -1,27 +1,20 @@
 {
   "name": "voicevox.js",
-  "version": "0.0.0",
-  "description": "",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "tsc & node test.js",
-    "build": "node-gyp rebuild & tsc"
+    "install": "node-gyp rebuild"
   },
-  "keywords": [],
   "author": "aya-0p",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "@types/bindings": "^1.5.1",
-    "@types/node": "^18.15.11",
-    "bindings": "^1.5.0",
-    "node-addon-api": "^6.0.0",
-    "node-gyp": "^9.3.1",
-    "pnpm": "^8.2.0",
+    "@types/node": "^20.1.1",
     "typescript": "^5.0.4"
   },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.58.0",
-    "@typescript-eslint/parser": "^5.58.0",
-    "eslint": "^8.38.0"
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^6.1.0",
+    "node-gyp": "^9.3.1"
   }
 }

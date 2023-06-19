@@ -1,27 +1,27 @@
 import bindings from "bindings";
-const voicevoxCore: VoicevoxCore = bindings("voicevox");
+const sharevoxCore: SharevoxCore = bindings("sharevox");
 
 /**
- * voicevox_coreの利用を開始する
- * - 実行しないとvoicevoxを利用できません
+ * sharevox_coreの利用を開始する
+ * - 実行しないとsharevoxを利用できません
  * @param dlPath 動的ライブラリへのパス
  *
  */
 export const initialize = (dlPath: string) =>
   new Promise<void>((resolve, reject) => {
-    const { error } = voicevoxCore.initialize(String(dlPath));
+    const { error } = sharevoxCore.initialize(String(dlPath));
     if (error) return reject(error);
     return resolve();
   });
 
 /**
- * voicevox_coreの利用を終了する
- * - 実行するとvoicevoxを利用ができなくなります
+ * sharevox_coreの利用を終了する
+ * - 実行するとsharevoxを利用ができなくなります
  * - 再度initializeを実行すると利用できます
  */
 export const finalize = () =>
   new Promise<void>((resolve, reject) => {
-    const { error } = voicevoxCore.finalize();
+    const { error } = sharevoxCore.finalize();
     if (error) return reject(error);
     return resolve();
   });
@@ -31,9 +31,9 @@ export const core = {
    * 初期化する
    * @param options 初期化オプション
    */
-  voicevoxInitialize: (options: VoicevoxInitializeOptions) =>
+  sharevoxInitialize: (options: SharevoxInitializeOptions) =>
     new Promise<void>((resolve, reject) => {
-      const { error } = voicevoxCore.voicevoxInitialize(
+      const { error } = sharevoxCore.sharevoxInitialize(
         options.accelerationMode,
         options.cpuNumThreads,
         options.loadAllModels,
@@ -43,12 +43,12 @@ export const core = {
       return resolve();
     }),
   /**
-   * voicevoxのバージョンを取得する
+   * sharevoxのバージョンを取得する
    * @return SemVerでフォーマットされたバージョン
    */
-  voicevoxGetVersion: () =>
+  sharevoxGetVersion: () =>
     new Promise<string>((resolve, reject) => {
-      const { error, result } = voicevoxCore.voicevoxGetVersion();
+      const { error, result } = sharevoxCore.sharevoxGetVersion();
       if (error) return reject(error);
       return resolve(result);
     }),
@@ -56,9 +56,9 @@ export const core = {
    * モデルを読み込む
    * @param speakerId 読み込むモデルの話者ID
    */
-  voicevoxLoadModel: (speakerId: number) =>
+  sharevoxLoadModel: (speakerId: number) =>
     new Promise<void>((resolve, reject) => {
-      const { error } = voicevoxCore.voicevoxLoadModel(Number(speakerId));
+      const { error } = sharevoxCore.sharevoxLoadModel(Number(speakerId));
       if (error) return reject(error);
       return resolve();
     }),
@@ -66,9 +66,9 @@ export const core = {
    * ハードウェアアクセラレーションがGPUモードか判定する
    * @return GPUモードならtrue、そうでないならfalse
    */
-  voicevoxIsGpuMode: () =>
+  sharevoxIsGpuMode: () =>
     new Promise<boolean>((resolve, reject) => {
-      const { error, result } = voicevoxCore.voicevoxIsGpuMode();
+      const { error, result } = sharevoxCore.sharevoxIsGpuMode();
       if (error) return reject(error);
       return resolve(result);
     }),
@@ -76,18 +76,18 @@ export const core = {
    * 指定したspeaker_idのモデルが読み込まれているか判定する
    * @return モデルが読み込まれているのであればtrue、そうでないならfalse
    */
-  voicevoxIsModelLoaded: (speakerId: number) =>
+  sharevoxIsModelLoaded: (speakerId: number) =>
     new Promise<boolean>((resolve, reject) => {
-      const { error, result } = voicevoxCore.voicevoxIsModelLoaded(speakerId);
+      const { error, result } = sharevoxCore.sharevoxIsModelLoaded(speakerId);
       if (error) return reject(error);
       return resolve(result);
     }),
   /**
    * このライブラリの利用を終了し、確保しているリソースを解放する
    */
-  voicevoxFinalize: () =>
+  sharevoxFinalize: () =>
     new Promise<void>((resolve, reject) => {
-      const { error } = voicevoxCore.voicevoxFinalize();
+      const { error } = sharevoxCore.sharevoxFinalize();
       if (error) return reject(error);
       return resolve();
     }),
@@ -95,10 +95,10 @@ export const core = {
    * メタ情報を取得する
    * @return メタ情報
    */
-  voicevoxGetMetas: <T extends boolean>(getJsonString?: T) =>
-    new Promise<T extends true ? string : Array<VoicevoxMeta>>(
+  sharevoxGetMetas: <T extends boolean>(getJsonString?: T) =>
+    new Promise<T extends true ? string : Array<SharevoxMeta>>(
       (resolve, reject) => {
-        const { error, result } = voicevoxCore.voicevoxGetMetasJson();
+        const { error, result } = sharevoxCore.sharevoxGetMetasJson();
         if (error) return reject(error);
         return resolve(getJsonString ? result : JSON.parse(result));
       }
@@ -107,11 +107,11 @@ export const core = {
    * サポートデバイス情報を取得する
    * @return サポートデバイス情報
    */
-  voicevoxGetSupportedDevices: <T extends boolean>(getJsonString?: T) =>
-    new Promise<T extends true ? string : VoicevoxSupportedDevices>(
+  sharevoxGetSupportedDevices: <T extends boolean>(getJsonString?: T) =>
+    new Promise<T extends true ? string : SharevoxSupportedDevices>(
       (resolve, reject) => {
         const { error, result } =
-          voicevoxCore.voicevoxGetSupportedDevicesJson();
+          sharevoxCore.sharevoxGetSupportedDevicesJson();
         if (error) return reject(error);
         return resolve(getJsonString ? result : JSON.parse(result));
       }
@@ -123,15 +123,15 @@ export const core = {
    * @param options AudioQueryのオプション
    * @return AudioQuery
    */
-  voicevoxAudioQuery: <T extends boolean>(
+  sharevoxAudioQuery: <T extends boolean>(
     text: string,
     speakerId: number,
-    options: VoicevoxAudioQueryOptions,
+    options: SharevoxAudioQueryOptions,
     getJsonString?: T
   ) =>
-    new Promise<T extends true ? string : VoicevoxAudioQuery>(
+    new Promise<T extends true ? string : SharevoxAudioQuery>(
       (resolve, reject) => {
-        const { error, result } = voicevoxCore.voicevoxAudioQuery(
+        const { error, result } = sharevoxCore.sharevoxAudioQuery(
           String(text),
           Number(speakerId),
           Boolean(options.kana)
@@ -147,13 +147,13 @@ export const core = {
    * @param options AudioQueryから音声合成オプション
    * @return wavデータ
    */
-  voicevoxSynthesis: (
-    audioQueryJson: string | VoicevoxAudioQuery,
+  sharevoxSynthesis: (
+    audioQueryJson: string | SharevoxAudioQuery,
     speakerId: number,
-    options: VoicevoxSynthesisOptions
+    options: SharevoxSynthesisOptions
   ) =>
     new Promise<Buffer>((resolve, reject) => {
-      const { error, result } = voicevoxCore.voicevoxSynthesis(
+      const { error, result } = sharevoxCore.sharevoxSynthesis(
         typeof audioQueryJson === "object"
           ? JSON.stringify(audioQueryJson)
           : String(audioQueryJson),
@@ -165,71 +165,71 @@ export const core = {
     }),
 };
 
-interface VoicevoxCore {
+interface SharevoxCore {
   initialize: (dlPath: string) => InitializeResult;
   finalize: () => FinalizeResult;
-  voicevoxInitialize: (
+  sharevoxInitialize: (
     accelerationMode: number,
     cpuNumThreads: number,
     loadAllModels: boolean,
     openJTalkDictDir: string
-  ) => VoicevoxInitializeResult;
-  voicevoxGetVersion: () => VoicevoxGetVersionsResult;
-  voicevoxLoadModel: (speakerId: number) => VoicevoxLoadModelResult;
-  voicevoxIsGpuMode: () => VoicevoxIsGpuModeResult;
-  voicevoxIsModelLoaded: (speakerId: number) => VoicevoxIsModelLoadedResult;
-  voicevoxFinalize: () => VoicevoxFinalizeResult;
-  voicevoxGetMetasJson: () => VoicevoxGetMetasJsonResult;
-  voicevoxGetSupportedDevicesJson: () => VoicevoxGetSupportedDevicesResult;
-  voicevoxAudioQuery: (
+  ) => SharevoxInitializeResult;
+  sharevoxGetVersion: () => SharevoxGetVersionsResult;
+  sharevoxLoadModel: (speakerId: number) => SharevoxLoadModelResult;
+  sharevoxIsGpuMode: () => SharevoxIsGpuModeResult;
+  sharevoxIsModelLoaded: (speakerId: number) => SharevoxIsModelLoadedResult;
+  sharevoxFinalize: () => SharevoxFinalizeResult;
+  sharevoxGetMetasJson: () => SharevoxGetMetasJsonResult;
+  sharevoxGetSupportedDevicesJson: () => SharevoxGetSupportedDevicesResult;
+  sharevoxAudioQuery: (
     text: string,
     speakerId: number,
     kana: boolean
-  ) => VoicevoxAudioQueryResult;
-  voicevoxSynthesis: (
+  ) => SharevoxAudioQueryResult;
+  sharevoxSynthesis: (
     audioQueryJson: string,
     speakerId: number,
     enableInterrogativeUpspeak: boolean
-  ) => VoicevoxSynthesisResult;
+  ) => SharevoxSynthesisResult;
 }
 interface Result {
   error: string;
 }
 interface InitializeResult extends Result {}
 interface FinalizeResult extends Result {}
-interface VoicevoxInitializeResult extends Result {}
-interface VoicevoxGetVersionsResult extends Result {
+interface SharevoxInitializeResult extends Result {}
+interface SharevoxGetVersionsResult extends Result {
   result: string;
 }
-interface VoicevoxLoadModelResult extends Result {}
-interface VoicevoxIsGpuModeResult extends Result {
+interface SharevoxLoadModelResult extends Result {}
+interface SharevoxIsGpuModeResult extends Result {
   result: boolean;
 }
-interface VoicevoxIsModelLoadedResult extends Result {
+interface SharevoxIsModelLoadedResult extends Result {
   result: boolean;
 }
-interface VoicevoxFinalizeResult extends Result {}
-interface VoicevoxGetMetasJsonResult extends Result {
+interface SharevoxFinalizeResult extends Result {}
+interface SharevoxGetMetasJsonResult extends Result {
   result: string;
 }
-interface VoicevoxGetSupportedDevicesResult extends Result {
+interface SharevoxGetSupportedDevicesResult extends Result {
   result: string;
 }
-interface VoicevoxAudioQueryResult extends Result {
+interface SharevoxAudioQueryResult extends Result {
   result: string;
 }
-interface VoicevoxSynthesisResult extends Result {
+interface SharevoxSynthesisResult extends Result {
   result: Buffer;
 }
 
 /**
  * 初期化オプション
  */
-export interface VoicevoxInitializeOptions {
+export interface SharevoxInitializeOptions {
   /**
    * ハードウェアアクセラレーションモード
    */
-  accelerationMode: VoicevoxAccelerationMode;
+  accelerationMode: SharevoxAccelerationMode;
   /**
    * CPU利用数を指定
    * 0を指定すると環境に合わせたCPUが利用される
@@ -248,25 +248,25 @@ export interface VoicevoxInitializeOptions {
 /**
  * ハードウェアアクセラレーションモードを設定する設定値
  */
-export enum VoicevoxAccelerationMode {
+export enum SharevoxAccelerationMode {
   /**
    * 実行環境に合った適切なハードウェアアクセラレーションモードを選択する
    */
-  VOICEVOX_ACCELERATION_MODE_AUTO = 0,
+  SHAREVOX_ACCELERATION_MODE_AUTO = 0,
   /**
    * ハードウェアアクセラレーションモードを"CPU"に設定する
    */
-  VOICEVOX_ACCELERATION_MODE_CPU = 1,
+  SHAREVOX_ACCELERATION_MODE_CPU = 1,
   /**
    * ハードウェアアクセラレーションモードを"GPU"に設定する
    */
-  VOICEVOX_ACCELERATION_MODE_GPU = 2,
+  SHAREVOX_ACCELERATION_MODE_GPU = 2,
 }
 
 /**
  * Audio query のオプション
  */
-export interface VoicevoxAudioQueryOptions {
+export interface SharevoxAudioQueryOptions {
   /**
    * aquestalk形式のkanaとしてテキストを解釈する
    */
@@ -274,9 +274,9 @@ export interface VoicevoxAudioQueryOptions {
 }
 
 /**
- * `voicevoxSynthesis` のオプション
+ * `sharevoxSynthesis` のオプション
  */
-export interface VoicevoxSynthesisOptions {
+export interface SharevoxSynthesisOptions {
   /**
    * 疑問文の調整を有効にする
    */
@@ -285,7 +285,7 @@ export interface VoicevoxSynthesisOptions {
 /**
  * メタ情報
  */
-interface VoicevoxMeta {
+interface SharevoxMeta {
   /**
    * 名前
    */
@@ -293,7 +293,7 @@ interface VoicevoxMeta {
   /**
    * スピーカースタイルの一覧
    */
-  styles: Array<VoicevoxSpeakerStyle>;
+  styles: Array<SharevoxSpeakerStyle>;
   /**
    * スピーカーのUUID
    */
@@ -306,7 +306,7 @@ interface VoicevoxMeta {
 /**
  * スピーカースタイル
  */
-interface VoicevoxSpeakerStyle {
+interface SharevoxSpeakerStyle {
   /**
    * スタイル名
    */
@@ -316,7 +316,7 @@ interface VoicevoxSpeakerStyle {
    */
   id: number;
 }
-interface VoicevoxSupportedDevices {
+interface SharevoxSupportedDevices {
   /**
    * CPUに対応しているか
    */
@@ -334,11 +334,11 @@ interface VoicevoxSupportedDevices {
 /**
  * 音声合成クエリ
  */
-interface VoicevoxAudioQuery {
+interface SharevoxAudioQuery {
   /**
    * アクセント句のリスト
    */
-  accent_phrases: Array<VoicevoxAccentPhrase>;
+  accent_phrases: Array<SharevoxAccentPhrase>;
   /**
    * 全体の話速
    */
@@ -380,11 +380,11 @@ interface VoicevoxAudioQuery {
 /**
  * アクセント句
  */
-interface VoicevoxAccentPhrase {
+interface SharevoxAccentPhrase {
   /**
    * モーラのリスト
    */
-  moras: Array<VoicevoxMora>;
+  moras: Array<SharevoxMora>;
   /**
    * アクセント箇所
    */
@@ -393,7 +393,7 @@ interface VoicevoxAccentPhrase {
    * 後ろに無音を付けるかどうか
    * モーラ（子音＋母音）ごとの情報
    */
-  pause_mora: null | VoicevoxMora;
+  pause_mora: null | SharevoxMora;
   /**
    * 疑問系かどうか
    */
@@ -403,7 +403,7 @@ interface VoicevoxAccentPhrase {
 /**
  * モーラ
  */
-interface VoicevoxMora {
+interface SharevoxMora {
   /**
    * 文字
    */
