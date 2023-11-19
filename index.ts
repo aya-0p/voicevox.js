@@ -16,7 +16,7 @@ export class Voicevox {
   #synthesizerPointer: number = 0;
   #userDictCounter: number = 0;
   /**
-   * @param path libvoicevox_core.so, libvoicevox_core.solib, voicevox_core.dllへのパス
+   * @param path libvoicevox_core.so, libvoicevox_core.solib, voicevox_core.dllを指すパス
    */
   constructor(path: string) {
     this[Core] = new VoicevoxCore(path);
