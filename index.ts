@@ -683,7 +683,7 @@ class VoicevoxUserDict {
   /**
    * ユーザー辞書の単語を更新する。
    *
-   * @param {string} wordUuid 更新する単語のUUID
+   * @param {Buffer} wordUuid 更新する単語のUUID
    * @param {VoicevoxUserDictWord} word 新しい単語のデータ
    *
    * @returns {Promise<void>}
@@ -704,7 +704,7 @@ class VoicevoxUserDict {
   /**
    * ユーザー辞書から単語を削除する。
    *
-   * @param {string} wordUuid 更新する単語のUUID
+   * @param {Buffer} wordUuid 更新する単語のUUID
    *
    * @returns {Promise<void>}
    * 
