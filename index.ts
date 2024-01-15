@@ -34,14 +34,16 @@ export class Voicevox {
    * ```js
    * voicevoxOpenJtalkRcNew("/home/user/open_jtalk_dic_utf_8-1.11");
    * ```
+   * 
+   * @throws
    */
   voicevoxOpenJtalkRcNew(openJtalkDicDir: string): Promise<VoicevoxOpenJtalkRc> {
     return new Promise<VoicevoxOpenJtalkRc>((resolve) => {
-      if (typeof openJtalkDicDir !== "string") throw "openJtalkDicDirが文字列ではありません";
+      if (typeof openJtalkDicDir !== "string") throw new VoicevoxJsError("openJtalkDicDirが文字列ではありません");
       const openJtalkPointerName = this.#openJtalkPointerCounter;
       this.#openJtalkPointerCounter++;
       const { resultCode } = this[Core].voicevoxOpenJtalkRcNew(openJtalkDicDir, openJtalkPointerName);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(new VoicevoxOpenJtalkRc(this, openJtalkPointerName));
     });
   }
@@ -63,14 +65,16 @@ export class Voicevox {
    * @param {string} path vvmファイルへのUTF-8のファイルパス
    *
    * @returns {Promise<VoicevoxVoiceModel>}
+   * 
+   * @throws
    */
   voicevoxVoiceModelNewFromPath(path: string): Promise<VoicevoxVoiceModel> {
     return new Promise<VoicevoxVoiceModel>((resolve) => {
-      if (typeof path !== "string") throw "pathが文字列ではありません";
+      if (typeof path !== "string") throw new VoicevoxJsError("pathが文字列ではありません");
       const modelPonterName = this.#voiceModelCounter;
       this.#voiceModelCounter++;
       const { resultCode } = this[Core].voicevoxVoiceModelNewFromPath(path, modelPonterName);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(new VoicevoxVoiceModel(this, modelPonterName));
     });
   }
@@ -82,15 +86,17 @@ export class Voicevox {
    * @param {VoicevoxInitializeOptions} options オプション
    *
    * @returns {Promise<VoicevoxSynthesizer>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerNew(openJtalkRc: VoicevoxOpenJtalkRc, options: VoicevoxInitializeOptions): Promise<VoicevoxSynthesizer> {
     return new Promise<VoicevoxSynthesizer>((resolve) => {
-      if (!(openJtalkRc instanceof VoicevoxOpenJtalkRc)) throw "openJtalkRcがVoicevoxOpenJtalkRcではありません";
-      if (!("accelerationMode" in options)) throw "optionsがVoicevoxInitializeOptionsではありません";
-      if (!("cpuNumThreads" in options)) throw "optionsがVoicevoxInitializeOptionsではありません";
+      if (!(openJtalkRc instanceof VoicevoxOpenJtalkRc)) throw new VoicevoxJsError("openJtalkRcがVoicevoxOpenJtalkRcではありません");
+      if (!("accelerationMode" in options)) throw new VoicevoxJsError("optionsがVoicevoxInitializeOptionsではありません");
+      if (!("cpuNumThreads" in options)) throw new VoicevoxJsError("optionsがVoicevoxInitializeOptionsではありません");
       const synthesizerPointerName = this.#synthesizerPointer++;
       const { resultCode } = this[Core].voicevoxSynthesizerNew(openJtalkRc[Pointer], synthesizerPointerName, options.accelerationMode, options.cpuNumThreads);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(new VoicevoxSynthesizer(this, synthesizerPointerName));
     });
   }
@@ -106,11 +112,13 @@ export class Voicevox {
    * ```js
    * const result = voicevoxCreateSupportedDevicesJson();
    * ```
+   * 
+   * @throws
    */
   voicevoxCreateSupportedDevicesJson(): Promise<string> {
     return new Promise<string>((resolve) => {
       const { result, resultCode } = this[Core].voicevoxCreateSupportedDevicesJson();
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -169,7 +177,7 @@ export class Voicevox {
    * VoicevoxUserDictWord を最低限のパラメータで作成する。
    *
    * @param {string} surface 表記
-   * @param {string} pronunciation 読み
+   * @param {string} pronunciation 読み、カタカナ
    * @returns {VoicevoxUserDictWord}
    *
    * @static
@@ -220,13 +228,15 @@ class VoicevoxOpenJtalkRc {
    * @param {VoicevoxUserDict} userDict ユーザー辞書
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxOpenJtalkRcUseUserDict(userDict: VoicevoxUserDict): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (!(userDict instanceof VoicevoxUserDict)) throw "userDictがVoicevoxUserDictではありません";
-      if (this[Deleted]) throw "Open JTalkは破棄済みです";
+      if (!(userDict instanceof VoicevoxUserDict)) throw new VoicevoxJsError("userDictがVoicevoxUserDictではありません");
+      if (this[Deleted]) throw new VoicevoxJsError("Open JTalkは破棄済みです");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxOpenJtalkRcUseUserDict(this[Pointer], userDict[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
   }
@@ -240,10 +250,12 @@ class VoicevoxOpenJtalkRc {
    * ```js
    * voicevoxOpenJtalkRc.voicevoxOpenJtalkRcDelete();
    * ```
+   * 
+   * @throws
    */
   voicevoxOpenJtalkRcDelete(): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "Open JTalkは破棄済みです";
+      if (this[Deleted]) throw new VoicevoxJsError("Open JTalkは破棄済みです");
       this.#voicevoxBase[Core].voicevoxOpenJtalkRcDelete(this[Pointer]);
       resolve();
     });
@@ -271,10 +283,12 @@ class VoicevoxSynthesizer {
    * VoicevoxSynthesizer を<b>破棄</b>(_destruct_)する。
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerDelete(): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       this.#voicevoxBase[Core].voicevoxSynthesizerDelete(this[Pointer]);
       resolve();
     });
@@ -285,13 +299,15 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxVoiceModel} model 音声モデル
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerLoadVoiceModel(model: VoicevoxVoiceModel): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (!(model instanceof VoicevoxVoiceModel)) throw "voiceModelがVoicevoxVoiceModelではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (!(model instanceof VoicevoxVoiceModel)) throw new VoicevoxJsError("voiceModelがVoicevoxVoiceModelではありません");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerLoadVoiceModel(this[Pointer], model[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
   }
@@ -302,13 +318,15 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxVoiceModelId} modelId 音声モデルID
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerUnloadVoiceModel(modelId: VoicevoxVoiceModelId): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof modelId !== "string") throw "modelIdがVoicevoxVoiceModelId(=string)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof modelId !== "string") throw new VoicevoxJsError("modelIdがVoicevoxVoiceModelId(=string)ではありません");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerUnloadVoiceModel(this[Pointer], modelId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
   }
@@ -317,10 +335,12 @@ class VoicevoxSynthesizer {
    * ハードウェアアクセラレーションがGPUモードか判定する。
    *
    * @returns {Promise<boolean>} GPUモードかどうか
+   * 
+   * @throws
    */
   voicevoxSynthesizerIsGpuMode(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerIsGpuMode(this[Pointer]);
       resolve(result);
     });
@@ -332,11 +352,13 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxVoiceModelId} modelId 音声モデルID
    *
    * @returns {Promise<boolean>} モデルが読み込まれているかどうか
+   * 
+   * @throws
    */
   voicevoxSynthesizerIsLoadedVoiceModel(modelId: VoicevoxVoiceModelId): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof modelId !== "string") throw "modelIdがVoicevoxVoiceModelId(=string)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof modelId !== "string") throw new VoicevoxJsError("modelIdがVoicevoxVoiceModelId(=string)ではありません");
       const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerIsLoadedVoiceModel(this[Pointer], modelId);
       resolve(result);
     });
@@ -346,10 +368,12 @@ class VoicevoxSynthesizer {
    * 今読み込んでいる音声モデルのメタ情報を、JSONで取得する。
    *
    * @returns {Promise<string>} メタ情報のJSON文字列
+   * 
+   * @throws
    */
   voicevoxSynthesizerCreateMetasJson(): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateMetasJson(this[Pointer]);
       resolve(result);
     });
@@ -370,14 +394,16 @@ class VoicevoxSynthesizer {
    *   2 //"四国めたん (ノーマル)"
    * );
    * ```
+   * 
+   * @throws
    */
   voicevoxSynthesizerCreateAudioQueryFromKana(kana: string, styleId: VoicevoxStyleId): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof kana !== "string") throw "kanaがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof kana !== "string") throw new VoicevoxJsError("kanaがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAudioQueryFromKana(this[Pointer], kana, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -397,14 +423,16 @@ class VoicevoxSynthesizer {
    *   2 //"四国めたん (ノーマル)"
    * );
    * ```
+   * 
+   * @throws
    */
   voicevoxSynthesizerCreateAudioQuery(text: string, styleId: VoicevoxStyleId): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof text !== "string") throw "textがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof text !== "string") throw new VoicevoxJsError("textがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAudioQuery(this[Pointer], text, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -424,14 +452,16 @@ class VoicevoxSynthesizer {
    *   2, // "四国めたん (ノーマル)"
    * );
    * ```
+   * 
+   * @throws
    */
   voicevoxSynthesizerCreateAccentPhrasesFromKana(kana: string, styleId: VoicevoxStyleId): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof kana !== "string") throw "kanaがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof kana !== "string") throw new VoicevoxJsError("kanaがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAccentPhrasesFromKana(this[Pointer], kana, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -451,14 +481,16 @@ class VoicevoxSynthesizer {
    *   2, // "四国めたん (ノーマル)"
    * );
    * ```
+   * 
+   * @throws
    */
   voicevoxSynthesizerCreateAccentPhrases(text: string, styleId: VoicevoxStyleId): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof text !== "string") throw "textがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof text !== "string") throw new VoicevoxJsError("textがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAccentPhrases(this[Pointer], text, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -470,14 +502,16 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxStyleId} styleId スタイルID
    *
    * @returns {Promise<string>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerReplaceMoraData(accentPhrasesJson: string, styleId: VoicevoxStyleId): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof accentPhrasesJson !== "string") throw "accentPhrasesJsonがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof accentPhrasesJson !== "string") throw new VoicevoxJsError("accentPhrasesJsonがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplaceMoraData(this[Pointer], accentPhrasesJson, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -489,14 +523,16 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxStyleId} styleId スタイルID
    *
    * @returns {Promise<string>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerReplacePhonemeLength(accentPhrasesJson: string, styleId: VoicevoxStyleId): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof accentPhrasesJson !== "string") throw "accentPhrasesJsonがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof accentPhrasesJson !== "string") throw new VoicevoxJsError("accentPhrasesJsonがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplacePhonemeLength(this[Pointer], accentPhrasesJson, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -508,14 +544,16 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxStyleId} styleId スタイルID
    *
    * @returns {Promise<string>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerReplaceMoraPitch(accentPhrasesJson: string, styleId: VoicevoxStyleId): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof accentPhrasesJson !== "string") throw "accentPhrasesJsonがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof accentPhrasesJson !== "string") throw new VoicevoxJsError("accentPhrasesJsonがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplaceMoraPitch(this[Pointer], accentPhrasesJson, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -528,15 +566,17 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxSynthesisOptions} options オプション
    *
    * @returns {Promise<Buffer>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerSynthesis(audioQueryJson: string, styleId: VoicevoxStyleId, options: VoicevoxSynthesisOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof audioQueryJson !== "string") throw "audioQueryJsonがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
-      if (!("enableInterrogativeUpspeak" in options)) throw "optionsがVoicevoxSynthesisOptionsではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof audioQueryJson !== "string") throw new VoicevoxJsError("audioQueryJsonがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
+      if (!("enableInterrogativeUpspeak" in options)) throw new VoicevoxJsError("optionsがVoicevoxSynthesisOptionsではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerSynthesis(this[Pointer], audioQueryJson, styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -549,15 +589,17 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxSynthesisOptions} options オプション
    *
    * @returns {Promise<Buffer>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerTtsFromKana(kana: string, styleId: VoicevoxStyleId, options: VoicevoxTtsOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof kana !== "string") throw "kanaがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
-      if (!("enableInterrogativeUpspeak" in options)) throw "optionsがVoicevoxTtsOptionsではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof kana !== "string") throw new VoicevoxJsError("kanaがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
+      if (!("enableInterrogativeUpspeak" in options)) throw new VoicevoxJsError("optionsがVoicevoxTtsOptionsではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerTtsFromKana(this[Pointer], kana, styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -570,15 +612,17 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxSynthesisOptions} options オプション
    *
    * @returns {Promise<Buffer>}
+   * 
+   * @throws
    */
   voicevoxSynthesizerTts(text: string, styleId: VoicevoxStyleId, options: VoicevoxTtsOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxSynthesizerは破棄されています";
-      if (typeof text !== "string") throw "textがstringではありません";
-      if (typeof styleId !== "number") throw "styleIdがVoicevoxStyleId(=number)ではありません";
-      if (!("enableInterrogativeUpspeak" in options)) throw "optionsがVoicevoxTtsOptionsではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
+      if (typeof text !== "string") throw new VoicevoxJsError("textがstringではありません");
+      if (typeof styleId !== "number") throw new VoicevoxJsError("styleIdがVoicevoxStyleId(=number)ではありません");
+      if (!("enableInterrogativeUpspeak" in options)) throw new VoicevoxJsError("optionsがVoicevoxTtsOptionsではありません");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerTts(this[Pointer], text, styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -605,34 +649,38 @@ class VoicevoxUserDict {
    * @param {string} dictPath 読み込む辞書ファイルのパス
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxUserDictLoad(dictPath: string): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxUserDictは破棄されています";
-      if (typeof dictPath !== "string") throw "dictPathがstringではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
+      if (typeof dictPath !== "string") throw new VoicevoxJsError("dictPathがstringではありません");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictLoad(this[Pointer], dictPath);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
   }
 
   /**
    * ユーザー辞書に単語を追加する。
-   *\
+   *
    * @param {VoicevoxUserDictWord} word 追加する単語
    *
-   * @returns {Promise<string>} 追加した単語のUUID
+   * @returns {Promise<string>} 追加した単語のUUIDvoicevox_wav_free
+   * 
+   * @throws
    */
   voicevoxUserDictAddWord(word: VoicevoxUserDictWord): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxUserDictは破棄されています";
-      if (!("surface" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (!("pronunciation" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (!("accentType" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (!("priority" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (!("wordType" in word)) throw "wordはVoicevoxUserDictWordではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
+      if (!("surface" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (!("pronunciation" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (!("accentType" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (!("priority" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (!("wordType" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
       const { resultCode, result } = this.#voicevoxBase[Core].voicevoxUserDictAddWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -644,18 +692,20 @@ class VoicevoxUserDict {
    * @param {VoicevoxUserDictWord} word 新しい単語のデータ
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxUserDictUpdateWord(wordUuid: string, word: VoicevoxUserDictWord): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxUserDictは破棄されています";
-      if (!("surface" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (!("pronunciation" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (!("accentType" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (!("priority" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (!("wordType" in word)) throw "wordはVoicevoxUserDictWordではありません";
-      if (typeof wordUuid !== "string") throw "wordUuidがstringではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
+      if (!("surface" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (!("pronunciation" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (!("accentType" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (!("priority" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (!("wordType" in word)) throw new VoicevoxJsError("wordはVoicevoxUserDictWordではありません");
+      if (typeof wordUuid !== "string") throw new VoicevoxJsError("wordUuidがstringではありません");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictUpdateWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType, wordUuid);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
   }
@@ -666,13 +716,15 @@ class VoicevoxUserDict {
    * @param {string} wordUuid 更新する単語のUUID
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxUserDictRemoveWord(wordUuid: string): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxUserDictは破棄されています";
-      if (typeof wordUuid !== "string") throw "wordUuidがstringではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
+      if (typeof wordUuid !== "string") throw new VoicevoxJsError("wordUuidがstringではありません");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictRemoveWord(this[Pointer], wordUuid);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
   }
@@ -681,12 +733,14 @@ class VoicevoxUserDict {
    * ユーザー辞書の単語をJSON形式で出力する。
    *
    * @returns {Promise<string>}
+   * 
+   * @throws
    */
   voicevoxUserDictToJson(): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxUserDictは破棄されています";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxUserDictToJson(this[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });
   }
@@ -697,13 +751,15 @@ class VoicevoxUserDict {
    * @param {VoicevoxUserDict} otherDict インポートするユーザー辞書
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxUserDictImport(otherDict: VoicevoxUserDict): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxUserDictは破棄されています";
-      if (!(otherDict instanceof VoicevoxUserDict)) throw "otherDictがVoicevoxUserDictではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
+      if (!(otherDict instanceof VoicevoxUserDict)) throw new VoicevoxJsError("otherDictがVoicevoxUserDictではありません");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictImport(this[Pointer], otherDict[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
   }
@@ -714,13 +770,15 @@ class VoicevoxUserDict {
    * @param {string} path 保存先のファイルパス
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxUserDictSave(path: string): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxUserDictは破棄されています";
-      if (typeof path !== "string") throw "pathがstringではありません";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
+      if (typeof path !== "string") throw new VoicevoxJsError("pathがstringではありません");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictSave(this[Pointer], path);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result;
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
   }
@@ -729,10 +787,12 @@ class VoicevoxUserDict {
    * ユーザー辞書を<b>破棄</b>(_destruct_)する。
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxUserDictDelete(): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxUserDictは破棄されています";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       this.#voicevoxBase[Core].voicevoxUserDictDelete(this[Pointer]);
       this[Deleted] = true;
       resolve();
@@ -762,10 +822,12 @@ class VoicevoxVoiceModel {
    * VoicevoxVoiceModel からIDを取得する。
    *
    * @returns {Promise<VoicevoxVoiceModelId>} 音声モデルID
+   * 
+   * @throws
    */
   voicevoxVoiceModelId(): Promise<VoicevoxVoiceModelId> {
     return new Promise<VoicevoxVoiceModelId>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxVoiceModelは破棄済みです";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxVoiceModelは破棄済みです");
       const { result } = this.#voicevoxBase[Core].voicevoxVoiceModelId(this[Pointer]);
       resolve(result);
     });
@@ -775,10 +837,12 @@ class VoicevoxVoiceModel {
    * VoicevoxVoiceModel からメタ情報を取得する。
    *
    * @returns {Promise<string>} メタ情報のJSON文字列
+   * 
+   * @throws
    */
   voicevoxVoiceModelGetMetasJson(): Promise<string> {
     return new Promise<string>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxVoiceModelは破棄済みです";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxVoiceModelは破棄済みです");
       const { result } = this.#voicevoxBase[Core].voicevoxVoiceModelGetMetasJson(this[Pointer]);
       resolve(result);
     });
@@ -788,15 +852,26 @@ class VoicevoxVoiceModel {
    * VoicevoxVoiceModel を<b>破棄</b>(_destruct_)する。
    *
    * @returns {Promise<void>}
+   * 
+   * @throws
    */
   voicevoxVoiceModelDelete(): Promise<void> {
     return new Promise<void>((resolve) => {
-      if (this[Deleted]) throw "VoicevoxVoiceModelは破棄済みです";
+      if (this[Deleted]) throw new VoicevoxJsError("VoicevoxVoiceModelは破棄済みです");
       this.#voicevoxBase[Core].voicevoxVoiceModelDelete(this[Pointer]);
       resolve();
     });
   }
 }
+
+/**
+ * voicevox.jsにより生成されたエラー
+ */
+export class VoicevoxJsError extends Error {}
+/**
+ * voicevox coreにより生成されたエラー
+ */
+export class VoicevoxError extends Error {}
 
 /**
  * 音声モデルID。
@@ -865,10 +940,12 @@ interface VoicevoxUserDictWord {
   surface: string;
   /**
    * 読み
+   * カタカナ
    */
   pronunciation: string;
   /**
    * アクセント型
+   * 音が下がる場所を指す
    */
   accentType: number;
   /**
@@ -877,6 +954,7 @@ interface VoicevoxUserDictWord {
   wordType: VoicevoxUserDictWordType;
   /**
    * 優先度
+   * 0から10
    */
   priority: number;
 }

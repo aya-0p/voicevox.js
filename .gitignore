@@ -1,9 +1,6 @@
 .vscode/
 build/
-core/
 node_modules/
 .prettierrc
-open_jtalk_dic_utf_8-1.11/
-test.ts
-test.js
+test
 index.js
