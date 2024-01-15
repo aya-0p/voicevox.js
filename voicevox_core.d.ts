@@ -522,7 +522,7 @@ export declare class VoicevoxCore {
    *
    * }
    */
-  voicevoxUserDictAddWord(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number): ResultCode & { result: string };
+  voicevoxUserDictAddWord(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number): ResultCode & { result: Buffer };
 
   /**
    * ユーザー辞書の単語を更新する。
@@ -533,7 +533,7 @@ export declare class VoicevoxCore {
    * @param {number} accentType アクセント型
    * @param {number} priority 優先度
    * @param {number} wordType 単語の種類
-   * @param {string} uuid 更新する単語のUUID
+   * @param {Buffer} uuid 更新する単語のUUID
    *
    * @returns 結果コード
    *
@@ -542,13 +542,13 @@ export declare class VoicevoxCore {
    *
    * }
    */
-  voicevoxUserDictUpdateWord(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number, uuid: string): ResultCode;
+  voicevoxUserDictUpdateWord(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number, uuid: Buffer): ResultCode;
 
   /**
    * ユーザー辞書から単語を削除する。
    *
    * @param {number} userDictPointerName ユーザー辞書ポインタ名
-   * @param {string} uuid 更新する単語のUUID
+   * @param {Buffer} uuid 更新する単語のUUID
    *
    * @returns 結果コード
    *
@@ -557,7 +557,7 @@ export declare class VoicevoxCore {
    *
    * }
    */
-  voicevoxUserDictRemoveWord(userDictPointerName: number, uuid: string): ResultCode;
+  voicevoxUserDictRemoveWord(userDictPointerName: number, uuid: Buffer): ResultCode;
 
   /**
    * ユーザー辞書の単語をJSON形式で出力する。

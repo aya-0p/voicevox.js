@@ -666,12 +666,12 @@ class VoicevoxUserDict {
    *
    * @param {VoicevoxUserDictWord} word 追加する単語
    *
-   * @returns {Promise<string>} 追加した単語のUUID
+   * @returns {Promise<Buffer>} 追加した単語のUUID
    * 
    * @throws
    */
-  addWord(word: VoicevoxUserDictWord): Promise<string> {
-    return new Promise<string>((resolve) => {
+  addWord(word: VoicevoxUserDictWord): Promise<Buffer> {
+    return new Promise<Buffer>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkVoicevoxUserDictWord(word);
       const { resultCode, result } = this.#voicevoxBase[Core].voicevoxUserDictAddWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType);
@@ -690,11 +690,11 @@ class VoicevoxUserDict {
    * 
    * @throws
    */
-  updateWord(wordUuid: string, word: VoicevoxUserDictWord): Promise<void> {
+  updateWord(wordUuid: Buffer, word: VoicevoxUserDictWord): Promise<void> {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkVoicevoxUserDictWord(word);
-      checkValidString(wordUuid, "wordUuid");
+      checkValidObject(wordUuid, "wordUuid", Buffer, "Buffer");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictUpdateWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType, wordUuid);
       if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
@@ -710,10 +710,10 @@ class VoicevoxUserDict {
    * 
    * @throws
    */
-  removeWord(wordUuid: string): Promise<void> {
+  removeWord(wordUuid: Buffer): Promise<void> {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
-      checkValidString(wordUuid, "wordUuid");
+      checkValidObject(wordUuid, "wordUuid", Buffer, "Buffer");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictRemoveWord(this[Pointer], wordUuid);
       if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();

@@ -765,13 +765,12 @@ Napi::Value Voicevox::voicevoxUserDictAddWord(const Napi::CallbackInfo &info)
 	uint8_t output_word_uuid[16];
 	VoicevoxResultCode resultCode = voicevox_user_dict_add_word(this->dll, user_dict, &word, &output_word_uuid);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
-	std::string uuid;
+	Napi::Buffer<uint8_t> buffer = Napi::Buffer<uint8_t>::New(env, 16);
 	for (size_t i = 0; i < 16; i++)
 	{
-		uuid += static_cast<char>(output_word_uuid[i]);
+		buffer[i] = output_word_uuid[i];
 	}
-	uuid.append("\0");
-	obj.Set("result", Napi::String::New(env, uuid));
+	obj.Set("result", buffer);
 	return obj;
 }
 
@@ -799,7 +798,7 @@ Napi::Value Voicevox::voicevoxUserDictUpdateWord(const Napi::CallbackInfo &info)
 	word.priority = load_uint32_t(info, 4);
 	word.word_type = static_cast<VoicevoxUserDictWordType>(load_uint32_t(info, 5));
 	uint8_t word_uuid[16];
-	const char *uuid = load_string(info, 6);
+	Napi::Buffer<uint8_t> uuid = info[6].As<Napi::Buffer<uint8_t>>();
 	for (size_t i = 0; i < 16; i++)
 	{
 		word_uuid[i] = uuid[i];
@@ -821,7 +820,7 @@ Napi::Value Voicevox::voicevoxUserDictRemoveWord(const Napi::CallbackInfo &info)
 	}
 	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	uint8_t word_uuid[16];
-	const char *uuid = load_string(info, 1);
+	Napi::Buffer<uint8_t> uuid = info[1].As<Napi::Buffer<uint8_t>>();
 	for (size_t i = 0; i < 16; i++)
 	{
 		word_uuid[i] = uuid[i];
