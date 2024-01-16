@@ -1090,7 +1090,20 @@ interface VoicevoxUserDictJson {
   surface: string;
   pronunciation: string;
   accent_type: number;
-  word_type: "PROPER_NOUN" | "COMMON_NOUN" | "VERB" | "ADJECTIVE" | "SUFFIX";
+  word_type: VoicevoxUserDictJsonWordType;
   priority: number;
   mora_count: number;
+}
+
+enum VoicevoxUserDictJsonWordType {
+  /** 固有名詞 */
+  PROPER_NOUN = "PROPER_NOUN",
+  /** 一般名刺 */
+  COMMON_NOUN = "COMMON_NOUN",
+  /** 動詞 */
+  VERB = "VERB",
+  /** 形容詞 */
+  ADJECTIVE = "ADJECTIVE",
+  /** 接尾辞 */
+  SUFFIX = "SUFFIX",
 }
