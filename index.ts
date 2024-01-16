@@ -666,36 +666,36 @@ class VoicevoxUserDict {
    *
    * @param {VoicevoxUserDictWord} word 追加する単語
    *
-   * @returns {Promise<Buffer>} 追加した単語のUUID
+   * @returns {Promise<string>} 追加した単語のUUID
    * 
    * @throws
    */
-  addWord(word: VoicevoxUserDictWord): Promise<Buffer> {
-    return new Promise<Buffer>((resolve) => {
+  addWord(word: VoicevoxUserDictWord): Promise<string> {
+    return new Promise<string>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkVoicevoxUserDictWord(word);
       const { resultCode, result } = this.#voicevoxBase[Core].voicevoxUserDictAddWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType);
       if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
-      resolve(result);
+      resolve(bufferToUuid(result));
     });
   }
 
   /**
    * ユーザー辞書の単語を更新する。
    *
-   * @param {Buffer} wordUuid 更新する単語のUUID
+   * @param {string} wordUuid 更新する単語のUUID
    * @param {VoicevoxUserDictWord} word 新しい単語のデータ
    *
    * @returns {Promise<void>}
    * 
    * @throws
    */
-  updateWord(wordUuid: Buffer, word: VoicevoxUserDictWord): Promise<void> {
+  updateWord(wordUuid: string, word: VoicevoxUserDictWord): Promise<void> {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkVoicevoxUserDictWord(word);
-      checkValidObject(wordUuid, "wordUuid", Buffer, "Buffer");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictUpdateWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType, wordUuid);
+      checkValidString(wordUuid, "wordUuid");
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictUpdateWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType, uuidToBuffer(wordUuid));
       if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
@@ -704,17 +704,17 @@ class VoicevoxUserDict {
   /**
    * ユーザー辞書から単語を削除する。
    *
-   * @param {Buffer} wordUuid 更新する単語のUUID
+   * @param {string} wordUuid 更新する単語のUUID
    *
    * @returns {Promise<void>}
    * 
    * @throws
    */
-  removeWord(wordUuid: Buffer): Promise<void> {
+  removeWord(wordUuid: string): Promise<void> {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
-      checkValidObject(wordUuid, "wordUuid", Buffer, "Buffer");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictRemoveWord(this[Pointer], wordUuid);
+      checkValidString(wordUuid, "wordUuid");
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictRemoveWord(this[Pointer], uuidToBuffer(wordUuid));
       if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve();
     });
@@ -890,9 +890,10 @@ export function bufferToUuid(buf: Buffer) {
  */
 export function uuidToBuffer(uuid: string) {
   const t = Buffer.from(uuid.replaceAll("-", ""), "hex");
+  if (t.length !== 16) throw new VoicevoxJsError("uuidが不正な値です");
   const buf = Buffer.alloc(16).fill(0);
   for (let i = 15; i >= 0; i--) {
-    buf[i] = t[i];    
+    buf[i] = t[i];
   }
   return buf;
 }
