@@ -617,12 +617,6 @@ Napi::Value Voicevox::voicevoxSynthesizerSynthesis(const Napi::CallbackInfo &inf
 	VoicevoxResultCode resultCode = voicevox_synthesizer_synthesis(this->dll, synthesizer, audio_query_json, style_id, options, &output_wav_length, &output_wav);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_wav_length));
-	try {
-    voicevox_wav_free(this->dll, output_wav);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
 	return obj;
 }
 
@@ -652,12 +646,6 @@ Napi::Value Voicevox::voicevoxSynthesizerTtsFromKana(const Napi::CallbackInfo &i
 	VoicevoxResultCode resultCode = voicevox_synthesizer_tts_from_kana(this->dll, synthesizer, kana, style_id, options, &output_wav_length, &output_wav);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_wav_length));
-	try {
-    voicevox_wav_free(this->dll, output_wav);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
 	return obj;
 }
 
@@ -681,12 +669,6 @@ Napi::Value Voicevox::voicevoxSynthesizerTts(const Napi::CallbackInfo &info)
 	VoicevoxResultCode resultCode = voicevox_synthesizer_tts(this->dll, synthesizer, text, style_id, options, &output_wav_length, &output_wav);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_wav_length));
-	try {
-    voicevox_wav_free(this->dll, output_wav);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
 	return obj;
 }
 
