@@ -762,7 +762,7 @@ type VoicevoxVoiceModelId = string;
 type VoicevoxStyleId = number;
 
 /**
- * Voicevox#voicevoxSynthesizerNew のオプション。
+ * `Voicevox#voicevoxSynthesizerNew`のオプション。
  */
 interface VoicevoxInitializeOptions {
   /**
@@ -780,7 +780,7 @@ function checkVoicevoxInitializeOptions(obj: VoicevoxInitializeOptions) {
 }
 
 /**
- * VoicevoxSynthesizer#VoicevoxSynthesizerSynthesis のオプション。
+ * `VoicevoxSynthesizer#synthesis`のオプション。
  */
 interface VoicevoxSynthesisOptions {
   /**
@@ -794,7 +794,7 @@ function checkVoicevoxSynthesisOptions(obj: VoicevoxSynthesisOptions) {
 }
 
 /**
- * VoicevoxSynthesizer#VoicevoxSynthesizerTts のオプション。
+ * `VoicevoxSynthesizer#tts`のオプション。
  */
 interface VoicevoxTtsOptions {
   /**
