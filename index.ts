@@ -1064,6 +1064,7 @@ function checkVoicevoxAccentPhraseJson(arr: Array<VoicevoxAccentPhraseJson>) {
     for (const obj2 of obj.moras) {
       checkVoicevoxMoraJson(obj2);
     }
+    if (obj.pause_mora !== null) checkVoicevoxMoraJson(obj.pause_mora);
   }
 }
 
