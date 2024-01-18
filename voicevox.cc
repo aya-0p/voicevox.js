@@ -144,11 +144,14 @@ Napi::Value Voicevox::voicevoxOpenJtalkRcDelete(const Napi::CallbackInfo &info)
 		return obj;
 	}
 	OpenJtalkRc *open_jtalk = reinterpret_cast<OpenJtalkRc *>(this->open_jtalk_pointers.at(open_jtalk_pointer_name));
-	try {
+	try
+	{
 		voicevox_open_jtalk_rc_delete(this->dll, open_jtalk);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	this->open_jtalk_pointers.erase(open_jtalk_pointer_name);
 	return obj;
@@ -159,11 +162,14 @@ Napi::Value Voicevox::voicevoxGetVersion(const Napi::CallbackInfo &info)
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
 	const char *result;
-	try {
+	try
+	{
 		result = voicevox_get_version(this->dll);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	obj.Set("result", Napi::String::New(env, copy_str(result)));
 	return obj;
@@ -210,11 +216,14 @@ Napi::Value Voicevox::voicevoxVoiceModelGetMetasJson(const Napi::CallbackInfo &i
 	}
 	const VoicevoxVoiceModel *model = reinterpret_cast<const VoicevoxVoiceModel *>(this->model_pointers.at(model_pointer_name));
 	const char *result;
-	try {
+	try
+	{
 		result = voicevox_voice_model_get_metas_json(this->dll, model);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	obj.Set("result", Napi::String::New(env, copy_str(result)));
 	return obj;
@@ -231,11 +240,14 @@ Napi::Value Voicevox::voicevoxVoiceModelDelete(const Napi::CallbackInfo &info)
 		return obj;
 	}
 	VoicevoxVoiceModel *model = reinterpret_cast<VoicevoxVoiceModel *>(this->model_pointers.at(model_pointer_name));
-	try {
+	try
+	{
 		voicevox_voice_model_delete(this->dll, model);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	this->model_pointers.erase(model_pointer_name);
 	return obj;
@@ -255,11 +267,14 @@ Napi::Value Voicevox::voicevoxSynthesizerNew(const Napi::CallbackInfo &info)
 	uint32_t out_synthesizer_pointer_name = load_uint32_t(info, 1);
 	VoicevoxSynthesizer *out_synthesizer;
 	VoicevoxInitializeOptions options;
-	try {
+	try
+	{
 		options = voicevox_make_default_initialize_options(this->dll);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	options.acceleration_mode = static_cast<VoicevoxAccelerationMode>(load_uint32_t(info, 2));
 	options.cpu_num_threads = static_cast<uint16_t>(load_uint32_t(info, 3));
@@ -280,11 +295,14 @@ Napi::Value Voicevox::voicevoxSynthesizerDelete(const Napi::CallbackInfo &info)
 		return obj;
 	}
 	VoicevoxSynthesizer *synthesizer = reinterpret_cast<VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
-	try {
+	try
+	{
 		voicevox_synthesizer_delete(this->dll, synthesizer);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	this->synthesizer_pointers.erase(synthesizer_pointer_name);
 	return obj;
@@ -342,11 +360,14 @@ Napi::Value Voicevox::voicevoxSynthesizerIsGpuMode(const Napi::CallbackInfo &inf
 	}
 	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	bool result;
-	try {
+	try
+	{
 		result = voicevox_synthesizer_is_gpu_mode(this->dll, synthesizer);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	obj.Set("result", Napi::Boolean::New(env, result));
 	return obj;
@@ -365,11 +386,14 @@ Napi::Value Voicevox::voicevoxSynthesizerIsLoadedVoiceModel(const Napi::Callback
 	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	VoicevoxVoiceModelId model_id = load_string(info, 1);
 	bool result;
-	try {
+	try
+	{
 		result = voicevox_synthesizer_is_loaded_voice_model(this->dll, synthesizer, model_id);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	obj.Set("result", Napi::Boolean::New(env, result));
 	return obj;
@@ -387,20 +411,26 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateMetasJson(const Napi::CallbackInf
 	}
 	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	char *result;
-	try {
+	try
+	{
 		result = voicevox_synthesizer_create_metas_json(this->dll, synthesizer);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	obj.Set("result", Napi::String::New(env, copy_str(result)));
-	
-	try {
-    voicevox_json_free(this->dll, result);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
+
+	try
+	{
+		voicevox_json_free(this->dll, result);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
 	return obj;
 }
 
@@ -412,12 +442,15 @@ Napi::Value Voicevox::voicevoxCreateSupportedDevicesJson(const Napi::CallbackInf
 	VoicevoxResultCode resultCode = voicevox_create_supported_devices_json(this->dll, &output_supported_devices_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::String::New(env, copy_str(output_supported_devices_json)));
-	try {
-    voicevox_json_free(this->dll, output_supported_devices_json);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
+	try
+	{
+		voicevox_json_free(this->dll, output_supported_devices_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
 	return obj;
 }
 
@@ -438,12 +471,15 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQueryFromKana(const Napi::Ca
 	VoicevoxResultCode resultCode = voicevox_synthesizer_create_audio_query_from_kana(this->dll, synthesizer, kana, style_id, &output_audio_query_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::String::New(env, copy_str(output_audio_query_json)));
-	try {
-    voicevox_json_free(this->dll, output_audio_query_json);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
+	try
+	{
+		voicevox_json_free(this->dll, output_audio_query_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
 	return obj;
 }
 
@@ -484,12 +520,15 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrasesFromKana(const Napi:
 	VoicevoxResultCode resultCode = voicevox_synthesizer_create_accent_phrases_from_kana(this->dll, synthesizer, kana, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::String::New(env, copy_str(output_accent_phrases_json)));
-	try {
-    voicevox_json_free(this->dll, output_accent_phrases_json);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
+	try
+	{
+		voicevox_json_free(this->dll, output_accent_phrases_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
 	return obj;
 }
 
@@ -530,12 +569,15 @@ Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraData(const Napi::CallbackInf
 	VoicevoxResultCode resultCode = voicevox_synthesizer_replace_mora_data(this->dll, synthesizer, accent_phrases_json, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::String::New(env, copy_str(output_accent_phrases_json)));
-	try {
-    voicevox_json_free(this->dll, output_accent_phrases_json);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
+	try
+	{
+		voicevox_json_free(this->dll, output_accent_phrases_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
 	return obj;
 }
 
@@ -556,12 +598,15 @@ Napi::Value Voicevox::voicevoxSynthesizerReplacePhonemeLength(const Napi::Callba
 	VoicevoxResultCode resultCode = voicevox_synthesizer_replace_phoneme_length(this->dll, synthesizer, accent_phrases_json, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::String::New(env, copy_str(output_accent_phrases_json)));
-	try {
-    voicevox_json_free(this->dll, output_accent_phrases_json);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
+	try
+	{
+		voicevox_json_free(this->dll, output_accent_phrases_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
 	return obj;
 }
 
@@ -582,12 +627,15 @@ Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraPitch(const Napi::CallbackIn
 	VoicevoxResultCode resultCode = voicevox_synthesizer_replace_mora_pitch(this->dll, synthesizer, accent_phrases_json, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	obj.Set("result", Napi::String::New(env, copy_str(output_accent_phrases_json)));
-	try {
-    voicevox_json_free(this->dll, output_accent_phrases_json);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
+	try
+	{
+		voicevox_json_free(this->dll, output_accent_phrases_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
 	return obj;
 }
 
@@ -605,11 +653,14 @@ Napi::Value Voicevox::voicevoxSynthesizerSynthesis(const Napi::CallbackInfo &inf
 	const char *audio_query_json = load_string(info, 1);
 	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
 	VoicevoxSynthesisOptions options;
-	try {
+	try
+	{
 		options = voicevox_make_default_synthesis_options(this->dll);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	options.enable_interrogative_upspeak = load_bool(info, 3);
 	uintptr_t output_wav_length;
@@ -634,11 +685,14 @@ Napi::Value Voicevox::voicevoxSynthesizerTtsFromKana(const Napi::CallbackInfo &i
 	const char *kana = load_string(info, 1);
 	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
 	VoicevoxTtsOptions options;
-	try {
+	try
+	{
 		options = voicevox_make_default_tts_options(this->dll);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	options.enable_interrogative_upspeak = load_bool(info, 3);
 	uintptr_t output_wav_length;
@@ -678,11 +732,14 @@ Napi::Value Voicevox::voicevoxErrorResultToMessage(const Napi::CallbackInfo &inf
 	Napi::Object obj = Napi::Object::New(env);
 	VoicevoxResultCode resultCode = static_cast<VoicevoxResultCode>(load_uint32_t(info, 0));
 	const char *result;
-	try {
+	try
+	{
 		result = voicevox_error_result_to_message(this->dll, resultCode);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	obj.Set("result", Napi::String::New(env, copy_str(result)));
 	return obj;
@@ -694,11 +751,14 @@ Napi::Value Voicevox::voicevoxUserDictNew(const Napi::CallbackInfo &info)
 	Napi::Object obj = Napi::Object::New(env);
 	uint32_t user_dict_pointer_name = load_uint32_t(info, 0);
 	VoicevoxUserDict *userDict;
-	try {
+	try
+	{
 		userDict = voicevox_user_dict_new(this->dll);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	this->user_dict_pointers.emplace(user_dict_pointer_name, reinterpret_cast<uintptr_t>(userDict));
 	return obj;
@@ -735,11 +795,14 @@ Napi::Value Voicevox::voicevoxUserDictAddWord(const Napi::CallbackInfo &info)
 	const char *surface = load_string(info, 1);
 	const char *pronunciation = load_string(info, 2);
 	VoicevoxUserDictWord word;
-	try {
+	try
+	{
 		word = voicevox_user_dict_word_make(this->dll, surface, pronunciation);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	word.accent_type = static_cast<uintptr_t>(load_uint32_t(info, 3));
 	word.priority = load_uint32_t(info, 4);
@@ -770,11 +833,14 @@ Napi::Value Voicevox::voicevoxUserDictUpdateWord(const Napi::CallbackInfo &info)
 	const char *surface = load_string(info, 1);
 	const char *pronunciation = load_string(info, 2);
 	VoicevoxUserDictWord word;
-	try {
+	try
+	{
 		word = voicevox_user_dict_word_make(this->dll, surface, pronunciation);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	word.accent_type = static_cast<uintptr_t>(load_uint32_t(info, 3));
 	word.priority = load_uint32_t(info, 4);
@@ -827,12 +893,15 @@ Napi::Value Voicevox::voicevoxUserDictToJson(const Napi::CallbackInfo &info)
 	VoicevoxResultCode resultCode = voicevox_user_dict_to_json(this->dll, user_dict, &output_json);
 	obj.Set("result", Napi::String::New(env, copy_str(output_json)));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
-	try {
-    voicevox_json_free(this->dll, output_json);
-  } catch (const std::exception& e) {
-    Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
-  }
+	try
+	{
+		voicevox_json_free(this->dll, output_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
 	return obj;
 }
 
@@ -887,11 +956,14 @@ Napi::Value Voicevox::voicevoxUserDictDelete(const Napi::CallbackInfo &info)
 		return obj;
 	}
 	VoicevoxUserDict *user_dict = reinterpret_cast<VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
-	try {
+	try
+	{
 		voicevox_user_dict_delete(this->dll, user_dict);
-	} catch (const std::exception& e) {
+	}
+	catch (const std::exception &e)
+	{
 		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
-    return obj;
+		return obj;
 	}
 	this->user_dict_pointers.erase(user_dict_pointer_name);
 	return obj;

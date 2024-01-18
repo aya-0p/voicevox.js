@@ -18,12 +18,14 @@ void dll_free(DLL &dll)
 template <typename T>
 T load_func(DLL &dll, const char *func_name)
 {
-  if (dll == NULL) {
+  if (dll == NULL)
+  {
     std::cout << "dll_not_found" << std::endl;
     throw "dll_not_loaded";
   }
   void *fn = GetProcAddress(dll, func_name);
-  if (fn == NULL) {
+  if (fn == NULL)
+  {
     std::cout << "fn_not_found" << std::endl;
     throw "fn_not_found";
   }
@@ -47,12 +49,14 @@ void dll_free(DLL &dll)
 template <typename T>
 T load_func(DLL &dll, const char *func_name)
 {
-  if (dll == NULL) {
+  if (dll == NULL)
+  {
     std::cout << "dll_not_found" << std::endl;
     throw "dll_not_loaded";
   }
   void *fn = dlsym(dll, func_name);
-  if (fn == NULL) {
+  if (fn == NULL)
+  {
     std::cout << "fn_not_found" << std::endl;
     throw "fn_not_found";
   }
@@ -116,9 +120,9 @@ void voicevox_voice_model_delete(DLL &dll,
 }
 
 VoicevoxResultCode voicevox_synthesizer_new(DLL &dll,
-                                                            const struct OpenJtalkRc *open_jtalk,
-                                                            struct VoicevoxInitializeOptions options,
-                                                            struct VoicevoxSynthesizer **out_synthesizer)
+                                            const struct OpenJtalkRc *open_jtalk,
+                                            struct VoicevoxInitializeOptions options,
+                                            struct VoicevoxSynthesizer **out_synthesizer)
 {
   return load_func<VoicevoxResultCode (*)(const struct OpenJtalkRc *, struct VoicevoxInitializeOptions, struct VoicevoxSynthesizer **)>(dll, "voicevox_synthesizer_new")(open_jtalk, options, out_synthesizer);
 }
@@ -307,7 +311,7 @@ VoicevoxResultCode voicevox_user_dict_load(DLL &dll,
                                            const struct VoicevoxUserDict *user_dict,
                                            const char *dict_path)
 {
-  return load_func<VoicevoxResultCode(*)(const struct VoicevoxUserDict *, const char *)>(dll, "voicevox_user_dict_load")(user_dict, dict_path);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const char *)>(dll, "voicevox_user_dict_load")(user_dict, dict_path);
 }
 
 VoicevoxResultCode voicevox_user_dict_add_word(DLL &dll,
