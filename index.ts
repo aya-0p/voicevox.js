@@ -727,6 +727,7 @@ export function uuidToBuffer(uuid: string) {
 }
 
 function checkValidOption<T extends {[key: string]: any}>(obj: T, interfaceName: string, options: Array<[keyof T, "boolean" | "number" | "string", true?]>) {
+  if (obj == null) throw new VoicevoxJsError(`有効な${interfaceName}ではありません(存在しない)`)
   for (const [name, type, isInteger] of options) {
     if (typeof obj[name] !== type) throw new VoicevoxJsError(`有効な${interfaceName}ではありません(${String(name)}が${type}でない)`);
     if (type === "number" && isInteger && !Number.isSafeInteger(obj[name])) throw new VoicevoxJsError(`有効な${interfaceName}ではありません(${String(name)}が整数でない)`);
