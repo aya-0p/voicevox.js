@@ -1,6 +1,7 @@
 #include "voicevox_core.h"
 #include <cstddef>
 #include <iostream>
+#include "napi.h"
 #ifdef _WIN32
 #include <windows.h>
 #define DLL HMODULE
@@ -37,6 +38,7 @@ T load_func(DLL &dll, const char *func_name)
 DLL dll_load(const char *path)
 {
   DLL dll = dlopen(path, RTLD_NOW);
+  if (dll == NULL) Napi::Error::Fatal(path, "is not dll");
   return dll;
 }
 
@@ -49,17 +51,9 @@ void dll_free(DLL &dll)
 template <typename T>
 T load_func(DLL &dll, const char *func_name)
 {
-  if (dll == NULL)
-  {
-    std::cout << "dll_not_found" << std::endl;
-    throw "dll_not_loaded";
-  }
+  if (dll == NULL) Napi::Error::Fatal("", "dll not loaded");
   void *fn = dlsym(dll, func_name);
-  if (fn == NULL)
-  {
-    std::cout << "fn_not_found" << std::endl;
-    throw "fn_not_found";
-  }
+  if (fn == NULL) Napi::Error::Fatal(func_name, "not found, Did you load voicevox_core?");
   return reinterpret_cast<T>(fn);
 }
 #endif
@@ -334,7 +328,7 @@ VoicevoxResultCode voicevox_user_dict_remove_word(DLL &dll,
                                                   const struct VoicevoxUserDict *user_dict,
                                                   const uint8_t (*word_uuid)[16])
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const uint8_t(*)[16])>(dll, "voicevox_user_dict_update_word")(user_dict, word_uuid);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const uint8_t(*)[16])>(dll, "voicevox_user_dict_remove_word")(user_dict, word_uuid);
 }
 
 VoicevoxResultCode voicevox_user_dict_to_json(DLL &dll,
