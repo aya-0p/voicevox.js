@@ -86,29 +86,12 @@ enum VoicevoxResultCode : int32_t
 {
   /**
    * 成功
-   * ~v0.13
-   */
-  VOICEVOX_RESULT_SUCCEED = 0,
-  /**
-   * 成功
-   * v0.14-v0.15
    */
   VOICEVOX_RESULT_OK = 0,
   /**
    * open_jtalk辞書ファイルが読み込まれていない
-   * ~v0.13
-   */
-  VOICEVOX_RESULT_NOT_LOADED_OPENJTALK_DICT = 1,
-  /**
-   * open_jtalk辞書ファイルが読み込まれていない
-   * v0.14~v0.15
    */
   VOICEVOX_RESULT_NOT_LOADED_OPENJTALK_DICT_ERROR = 1,
-  /**
-   * modelの読み込みに失敗した
-   * v0.14
-   */
-  VOICEVOX_RESULT_LOAD_MODEL_ERROR = 2,
   /**
    * サポートされているデバイス情報取得に失敗した
    */
@@ -118,79 +101,25 @@ enum VoicevoxResultCode : int32_t
    */
   VOICEVOX_RESULT_GPU_SUPPORT_ERROR = 4,
   /**
-   * メタ情報読み込みに失敗した
-   * v0.14
-   */
-  VOICEVOX_RESULT_LOAD_METAS_ERROR = 5,
-  /**
-   * ステータスが初期化されていない
-   * v0.14
-   */
-  VOICEVOX_RESULT_UNINITIALIZED_STATUS_ERROR = 6,
-  /**
    * スタイルIDに対するスタイルが見つからなかった
-   * v0.15
    */
   VOICEVOX_RESULT_STYLE_NOT_FOUND_ERROR = 6,
   /**
-   * 無効なspeaker_idが指定された
-   * v0.14
-   */
-  VOICEVOX_RESULT_INVALID_SPEAKER_ID_ERROR = 7,
-  /**
    * 音声モデルIDに対する音声モデルが見つからなかった
-   * v0.15
    */
   VOICEVOX_RESULT_MODEL_NOT_FOUND_ERROR = 7,
   /**
-   * 無効なmodel_indexが指定された
-   * v0.14
-   */
-  VOICEVOX_RESULT_INVALID_MODEL_INDEX_ERROR = 8,
-  /**
    * 推論に失敗した
-   * v0.15
    */
   VOICEVOX_RESULT_INFERENCE_ERROR = 8,
   /**
-   * 推論に失敗した
-   * v0.14
-   * v0.15と文字列がかぶっているためコメントアウト
-   */
-  // VOICEVOX_RESULT_INFERENCE_ERROR = 9,
-  /**
    * コンテキストラベル出力に失敗した
-   * v0.14
-   * v0.15と文字列がかぶっているためコメントアウト
-   */
-  // VOICEVOX_RESULT_EXTRACT_FULL_CONTEXT_LABEL_ERROR = 10,
-  /**
-   * 無効なutf8文字列が入力された
-   * v0.14
-   * v0.15と文字列がかぶっているためコメントアウト
-   */
-  // VOICEVOX_RESULT_INVALID_UTF8_INPUT_ERROR = 11,
-  /**
-   * コンテキストラベル出力に失敗した
-   * v0.15
    */
   VOICEVOX_RESULT_EXTRACT_FULL_CONTEXT_LABEL_ERROR = 11,
-  /**
-   * aquestalk形式のテキストの解析に失敗した
-   * v0.14
-   * v0.15と文字列がかぶっているためコメントアウト
-   */
-  // VOICEVOX_RESULT_PARSE_KANA_ERROR = 12,
   /**
    * 無効なutf8文字列が入力された
    */
   VOICEVOX_RESULT_INVALID_UTF8_INPUT_ERROR = 12,
-  /**
-   * 無効なAudioQuery
-   * v0.14
-   * v0.15と文字列がかぶっているためコメントアウト
-   */
-  // VOICEVOX_RESULT_INVALID_AUDIO_QUERY_ERROR = 13,
   /**
    * AquesTalk風記法のテキストの解析に失敗した
    */
@@ -247,6 +176,83 @@ enum VoicevoxResultCode : int32_t
    * UUIDの変換に失敗した
    */
   VOICEVOX_RESULT_INVALID_UUID_ERROR = 25,
+};
+
+/**
+ * 処理結果を示す結果コード。
+ */
+enum VoicevoxResultCodeV14 : int32_t
+{
+  /**
+   * 成功
+   */
+  VOICEVOX_RESULT_OK = 0,
+  /**
+   * open_jtalk辞書ファイルが読み込まれていない
+   */
+  VOICEVOX_RESULT_NOT_LOADED_OPENJTALK_DICT_ERROR = 1,
+  /**
+   * modelの読み込みに失敗した
+   */
+  VOICEVOX_RESULT_LOAD_MODEL_ERROR = 2,
+  /**
+   * サポートされているデバイス情報取得に失敗した
+   */
+  VOICEVOX_RESULT_GET_SUPPORTED_DEVICES_ERROR = 3,
+  /**
+   * GPUモードがサポートされていない
+   */
+  VOICEVOX_RESULT_GPU_SUPPORT_ERROR = 4,
+  /**
+   * メタ情報読み込みに失敗した
+   */
+  VOICEVOX_RESULT_LOAD_METAS_ERROR = 5,
+  /**
+   * ステータスが初期化されていない
+   */
+  VOICEVOX_RESULT_UNINITIALIZED_STATUS_ERROR = 6,
+  /**
+   * 無効なspeaker_idが指定された
+   */
+  VOICEVOX_RESULT_INVALID_SPEAKER_ID_ERROR = 7,
+  /**
+   * 無効なmodel_indexが指定された
+   */
+  VOICEVOX_RESULT_INVALID_MODEL_INDEX_ERROR = 8,
+  /**
+   * 推論に失敗した
+   */
+  VOICEVOX_RESULT_INFERENCE_ERROR = 9,
+  /**
+   * コンテキストラベル出力に失敗した
+   */
+  VOICEVOX_RESULT_EXTRACT_FULL_CONTEXT_LABEL_ERROR = 10,
+  /**
+   * 無効なutf8文字列が入力された
+   */
+  VOICEVOX_RESULT_INVALID_UTF8_INPUT_ERROR = 11,
+  /**
+   * aquestalk形式のテキストの解析に失敗した
+   */
+  VOICEVOX_RESULT_PARSE_KANA_ERROR = 12,
+  /**
+   * 無効なAudioQuery
+   */
+  VOICEVOX_RESULT_INVALID_AUDIO_QUERY_ERROR = 13,
+};
+
+/**
+ * @enum
+ * 結果コード
+ * エラーの種類が増えたら定義を増やす。
+ * 必ずエラーの値を明示的に指定すること
+ */
+enum VoicevoxResultCodeV13 : int32_t
+{
+  // 成功
+  VOICEVOX_RESULT_SUCCEED = 0,
+  // OpenJTalk辞書がロードされていない
+  VOICEVOX_RESULT_NOT_LOADED_OPENJTALK_DICT = 1,
 };
 
 /**
@@ -1243,16 +1249,16 @@ struct VoicevoxInitializeOptionsV14 voicevox_make_default_initialize_options_v14
  * @param [in] options 初期化オプション
  * @return 結果コード #VoicevoxResultCode
  */
-VoicevoxResultCode voicevox_initialize(DLL &dll,
-                                       struct VoicevoxInitializeOptionsV14 options);
+VoicevoxResultCodeV14 voicevox_initialize(DLL &dll,
+                                          struct VoicevoxInitializeOptionsV14 options);
 
 /**
  * モデルを読み込む
  * @param [in] speaker_id 読み込むモデルの話者ID
  * @return 結果コード #VoicevoxResultCode
  */
-VoicevoxResultCode voicevox_load_model(DLL &dll,
-                                       uint32_t speaker_id);
+VoicevoxResultCodeV14 voicevox_load_model(DLL &dll,
+                                          uint32_t speaker_id);
 
 /**
  * ハードウェアアクセラレーションがGPUモードか判定する
@@ -1298,12 +1304,12 @@ const char *voicevox_get_supported_devices_json(DLL &dll);
  * @param output_predict_duration_data_length uintptr_t 分のメモリ領域が割り当てられていること
  * @param output_predict_duration_data 成功後にメモリ領域が割り当てられるので ::voicevox_predict_duration_data_free で解放する必要がある
  */
-VoicevoxResultCode voicevox_predict_duration(DLL &dll,
-                                             uintptr_t length,
-                                             int64_t *phoneme_vector,
-                                             uint32_t speaker_id,
-                                             uintptr_t *output_predict_duration_data_length,
-                                             float **output_predict_duration_data);
+VoicevoxResultCodeV14 voicevox_predict_duration(DLL &dll,
+                                                uintptr_t length,
+                                                int64_t *phoneme_vector,
+                                                uint32_t speaker_id,
+                                                uintptr_t *output_predict_duration_data_length,
+                                                float **output_predict_duration_data);
 
 /**
  * ::voicevox_predict_durationで出力されたデータを解放する
@@ -1339,17 +1345,17 @@ void voicevox_predict_duration_data_free(DLL &dll,
  * @param output_predict_intonation_data_length uintptr_t 分のメモリ領域が割り当てられていること
  * @param output_predict_intonation_data 成功後にメモリ領域が割り当てられるので ::voicevox_predict_intonation_data_free で解放する必要がある
  */
-VoicevoxResultCode voicevox_predict_intonation(DLL &dll,
-                                               uintptr_t length,
-                                               int64_t *vowel_phoneme_vector,
-                                               int64_t *consonant_phoneme_vector,
-                                               int64_t *start_accent_vector,
-                                               int64_t *end_accent_vector,
-                                               int64_t *start_accent_phrase_vector,
-                                               int64_t *end_accent_phrase_vector,
-                                               uint32_t speaker_id,
-                                               uintptr_t *output_predict_intonation_data_length,
-                                               float **output_predict_intonation_data);
+VoicevoxResultCodeV14 voicevox_predict_intonation(DLL &dll,
+                                                  uintptr_t length,
+                                                  int64_t *vowel_phoneme_vector,
+                                                  int64_t *consonant_phoneme_vector,
+                                                  int64_t *start_accent_vector,
+                                                  int64_t *end_accent_vector,
+                                                  int64_t *start_accent_phrase_vector,
+                                                  int64_t *end_accent_phrase_vector,
+                                                  uint32_t speaker_id,
+                                                  uintptr_t *output_predict_intonation_data_length,
+                                                  float **output_predict_intonation_data);
 
 /**
  * ::voicevox_predict_intonationで出力されたデータを解放する
@@ -1378,14 +1384,14 @@ void voicevox_predict_intonation_data_free(DLL &dll,
  * @param output_decode_data_length uintptr_t 分のメモリ領域が割り当てられていること
  * @param output_decode_data 成功後にメモリ領域が割り当てられるので ::voicevox_decode_data_free で解放する必要がある
  */
-VoicevoxResultCode voicevox_decode(DLL &dll,
-                                   uintptr_t length,
-                                   uintptr_t phoneme_size,
-                                   float *f0,
-                                   float *phoneme_vector,
-                                   uint32_t speaker_id,
-                                   uintptr_t *output_decode_data_length,
-                                   float **output_decode_data);
+VoicevoxResultCodeV14 voicevox_decode(DLL &dll,
+                                      uintptr_t length,
+                                      uintptr_t phoneme_size,
+                                      float *f0,
+                                      float *phoneme_vector,
+                                      uint32_t speaker_id,
+                                      uintptr_t *output_decode_data_length,
+                                      float **output_decode_data);
 
 /**
  * ::voicevox_decodeで出力されたデータを解放する
@@ -1415,11 +1421,11 @@ struct VoicevoxAudioQueryOptions voicevox_make_default_audio_query_options(DLL &
  * @param text null終端文字列であること
  * @param output_audio_query_json 自動でheapメモリが割り当てられるので ::voicevox_audio_query_json_free で解放する必要がある
  */
-VoicevoxResultCode voicevox_audio_query(DLL &dll,
-                                        const char *text,
-                                        uint32_t speaker_id,
-                                        struct VoicevoxAudioQueryOptions options,
-                                        char **output_audio_query_json);
+VoicevoxResultCodeV14 voicevox_audio_query(DLL &dll,
+                                           const char *text,
+                                           uint32_t speaker_id,
+                                           struct VoicevoxAudioQueryOptions options,
+                                           char **output_audio_query_json);
 
 /**
  * AudioQuery から音声合成する
@@ -1434,12 +1440,12 @@ VoicevoxResultCode voicevox_audio_query(DLL &dll,
  * @param output_wav_length 出力先の領域が確保された状態でpointerに渡されていること
  * @param output_wav 自動で output_wav_length 分のデータが割り当てられるので ::voicevox_wav_free で解放する必要がある
  */
-VoicevoxResultCode voicevox_synthesis(DLL &dll,
-                                      const char *audio_query_json,
-                                      uint32_t speaker_id,
-                                      struct VoicevoxSynthesisOptions options,
-                                      uintptr_t *output_wav_length,
-                                      uint8_t **output_wav);
+VoicevoxResultCodeV14 voicevox_synthesis(DLL &dll,
+                                         const char *audio_query_json,
+                                         uint32_t speaker_id,
+                                         struct VoicevoxSynthesisOptions options,
+                                         uintptr_t *output_wav_length,
+                                         uint8_t **output_wav);
 
 /**
  * デフォルトのテキスト音声合成オプションを生成する
@@ -1460,12 +1466,12 @@ struct VoicevoxTtsOptionsV14 voicevox_make_default_tts_options_v14(DLL &dll);
  * @param output_wav_length 出力先の領域が確保された状態でpointerに渡されていること
  * @param output_wav は自動で output_wav_length 分のデータが割り当てられるので ::voicevox_wav_free で解放する必要がある
  */
-VoicevoxResultCode voicevox_tts(DLL &dll,
-                                const char *text,
-                                uint32_t speaker_id,
-                                struct VoicevoxTtsOptionsV14 options,
-                                uintptr_t *output_wav_length,
-                                uint8_t **output_wav);
+VoicevoxResultCodeV14 voicevox_tts(DLL &dll,
+                                   const char *text,
+                                   uint32_t speaker_id,
+                                   struct VoicevoxTtsOptionsV14 options,
+                                   uintptr_t *output_wav_length,
+                                   uint8_t **output_wav);
 
 /**
  * jsonフォーマットされた AudioQuery データのメモリを解放する
@@ -1490,9 +1496,9 @@ void voicevox_audio_query_json_free(DLL &dll,
  * 最後に実行したuse_gpuに従って他の関数が実行される。
  */
 bool initialize_v(DLL &dll,
-                bool use_gpu,
-                int cpu_num_threads,
-                bool load_all_models);
+                  bool use_gpu,
+                  int cpu_num_threads,
+                  bool load_all_models);
 
 /**
  * モデルをロードする
@@ -1610,8 +1616,8 @@ const char *last_error_message(DLL &dll);
  * open jtalkの辞書を読み込む
  * @return 結果コード
  */
-VoicevoxResultCode voicevox_load_openjtalk_dict(DLL &dll,
-                                                const char *dict_path);
+VoicevoxResultCodeV13 voicevox_load_openjtalk_dict(DLL &dll,
+                                                   const char *dict_path);
 
 /**
  * @fn
@@ -1622,11 +1628,11 @@ VoicevoxResultCode voicevox_load_openjtalk_dict(DLL &dll,
  * @param output_wav 音声データを出力する先のポインタ。使用が終わったらvoicevox_wav_freeで開放する必要がある
  * @return 結果コード
  */
-VoicevoxResultCode voicevox_tts_v13(DLL &dll,
-                                    const char *text,
-                                    int64_t speaker_id,
-                                    int *output_binary_size,
-                                    uint8_t **output_wav);
+VoicevoxResultCodeV13 voicevox_tts_v13(DLL &dll,
+                                       const char *text,
+                                       int64_t speaker_id,
+                                       int *output_binary_size,
+                                       uint8_t **output_wav);
 
 /**
  * @fn
@@ -1637,11 +1643,11 @@ VoicevoxResultCode voicevox_tts_v13(DLL &dll,
  * @param output_wav 音声データを出力する先のポインタ。使用が終わったらvoicevox_wav_freeで開放する必要がある
  * @return 結果コード
  */
-VoicevoxResultCode voicevox_tts_from_kana(DLL &dll,
-                                          const char *text,
-                                          int64_t speaker_id,
-                                          int *output_binary_size,
-                                          uint8_t **output_wav);
+VoicevoxResultCodeV13 voicevox_tts_from_kana(DLL &dll,
+                                             const char *text,
+                                             int64_t speaker_id,
+                                             int *output_binary_size,
+                                             uint8_t **output_wav);
 
 /**
  * @fn
