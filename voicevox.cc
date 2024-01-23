@@ -80,6 +80,37 @@ Napi::Object Voicevox::Init(Napi::Env env, Napi::Object exports)
 																												 InstanceMethod("voicevoxUserDictImport", &Voicevox::voicevoxUserDictImport),
 																												 InstanceMethod("voicevoxUserDictSave", &Voicevox::voicevoxUserDictSave),
 																												 InstanceMethod("voicevoxUserDictDelete", &Voicevox::voicevoxUserDictDelete),
+																												 InstanceMethod("voicevoxInitialize", &Voicevox::voicevoxInitialize),
+																												 InstanceMethod("voicevoxLoadModel", &Voicevox::voicevoxLoadModel),
+																												 InstanceMethod("voicevoxIsGpuMode", &Voicevox::voicevoxIsGpuMode),
+																												 InstanceMethod("voicevoxIsModelLoaded", &Voicevox::voicevoxIsModelLoaded),
+																												 InstanceMethod("voicevoxFinalize", &Voicevox::voicevoxFinalize),
+																												 InstanceMethod("voicevoxGetMetasJson", &Voicevox::voicevoxGetMetasJson),
+																												 InstanceMethod("voicevoxGetSupportedDevicesJson", &Voicevox::voicevoxGetSupportedDevicesJson),
+																												 InstanceMethod("voicevoxPredictDuration", &Voicevox::voicevoxPredictDuration),
+																												 InstanceMethod("voicevoxPredictIntonation", &Voicevox::voicevoxPredictIntonation),
+																												 InstanceMethod("voicevoxDecode", &Voicevox::voicevoxDecode),
+																												 InstanceMethod("voicevoxAudioQuery", &Voicevox::voicevoxAudioQuery),
+																												 InstanceMethod("voicevoxSynthesis", &Voicevox::voicevoxSynthesis),
+																												 InstanceMethod("voicevoxTts", &Voicevox::voicevoxTts),
+																												 InstanceMethod("initialize", &Voicevox::initialize),
+																												 InstanceMethod("loadModel", &Voicevox::loadModel),
+																												 InstanceMethod("isModelLoaded", &Voicevox::isModelLoaded),
+																												 InstanceMethod("finalize", &Voicevox::finalize),
+																												 InstanceMethod("metas", &Voicevox::metas),
+																												 InstanceMethod("supportedDevices", &Voicevox::supportedDevices),
+																												 InstanceMethod("yukarinSForward", &Voicevox::yukarinSForward),
+																												 InstanceMethod("yukarinSaForward", &Voicevox::yukarinSaForward),
+																												 InstanceMethod("decodeForward", &Voicevox::decodeForward),
+																												 InstanceMethod("lastErrorMessage", &Voicevox::lastErrorMessage),
+																												 InstanceMethod("voicevoxLoadOpenjtalkDict", &Voicevox::voicevoxLoadOpenjtalkDict),
+																												 InstanceMethod("voicevoxTtsV13", &Voicevox::voicevoxTtsV13),
+																												 InstanceMethod("voicevoxTtsFromKana", &Voicevox::voicevoxTtsFromKana),
+																												 InstanceMethod("initializeV11", &Voicevox::initializeV11),
+																												 InstanceMethod("initializeV9", &Voicevox::initializeV9),
+																												 InstanceMethod("yukarinSForwardV7", &Voicevox::yukarinSForwardV7),
+																												 InstanceMethod("yukarinSaForwardV7", &Voicevox::yukarinSaForwardV7),
+																												 InstanceMethod("decodeForwardV7", &Voicevox::decodeForwardV7),
 																										 });
 
 	Napi::FunctionReference *constructor = new Napi::FunctionReference();
@@ -1403,6 +1434,24 @@ Napi::Value Voicevox::metas(const Napi::CallbackInfo &info)
 	return obj;
 }
 
+Napi::Value Voicevox::supportedDevices(const Napi::CallbackInfo &info)
+{
+	Napi::Env env = info.Env();
+	Napi::Object obj = Napi::Object::New(env);
+	const char *result;
+	try
+	{
+		result = supported_devices(this->dll);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
+	obj.Set("result", Napi::String::New(env, result));
+	return obj;
+}
+
 Napi::Value Voicevox::yukarinSForward(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
@@ -1488,7 +1537,7 @@ Napi::Value Voicevox::yukarinSaForward(const Napi::CallbackInfo &info)
 	{
 		output_arr[i] = Napi::Number::New(env, output[i]);
 	}
-	
+
 	obj.Set("result", output_arr);
 	obj.Set("result2", Napi::Boolean::New(env, result));
 	return obj;
@@ -1718,7 +1767,7 @@ Napi::Value Voicevox::yukarinSaForwardV7(const Napi::CallbackInfo &info)
 	{
 		output_arr[i] = Napi::Number::New(env, output[i]);
 	}
-	
+
 	obj.Set("result", output_arr);
 	obj.Set("result2", Napi::Boolean::New(env, result));
 	return obj;
