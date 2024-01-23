@@ -8,6 +8,16 @@
     "skipLibCheck": true
   },
   "include": [
-    "index.ts"
+    "v0.15/index.ts",
+    "v0.14/index.ts",
+    "v0.13/index.ts",
+    "v0.12/index.ts",
+    "v0.11/index.ts",
+    "v0.10/index.ts",
+    "v0.9/index.ts",
+    "v0.8/index.ts",
+    "v0.7/index.ts",
+    "v0.6/index.ts",
+    "v0.5/index.ts"
   ]
 }
