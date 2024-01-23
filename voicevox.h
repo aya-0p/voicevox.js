@@ -50,6 +50,37 @@ public:
   Napi::Value voicevoxUserDictImport(const Napi::CallbackInfo &info);
   Napi::Value voicevoxUserDictSave(const Napi::CallbackInfo &info);
   Napi::Value voicevoxUserDictDelete(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxInitialize(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxLoadModel(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxIsGpuMode(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxIsModelLoaded(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxFinalize(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxGetMetasJson(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxGetSupportedDevicesJson(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxPredictDuration(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxPredictIntonation(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxDecode(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxAudioQuery(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxSynthesis(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxTts(const Napi::CallbackInfo &info);
+  Napi::Value initialize(const Napi::CallbackInfo &info);
+  Napi::Value loadModel(const Napi::CallbackInfo &info);
+  Napi::Value isModelLoaded(const Napi::CallbackInfo &info);
+  Napi::Value finalize(const Napi::CallbackInfo &info);
+  Napi::Value metas(const Napi::CallbackInfo &info);
+  Napi::Value supportedDevices(const Napi::CallbackInfo &info);
+  Napi::Value yukarinSForward(const Napi::CallbackInfo &info);
+  Napi::Value yukarinSaForward(const Napi::CallbackInfo &info);
+  Napi::Value decodeForward(const Napi::CallbackInfo &info);
+  Napi::Value lastErrorMessage(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxLoadOpenjtalkDict(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxTtsV13(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxTtsFromKana(const Napi::CallbackInfo &info);
+  Napi::Value initializeV11(const Napi::CallbackInfo &info);
+  Napi::Value initializeV9(const Napi::CallbackInfo &info);
+  Napi::Value yukarinSForwardV7(const Napi::CallbackInfo &info);
+  Napi::Value yukarinSaForwardV7(const Napi::CallbackInfo &info);
+  Napi::Value decodeForwardV7(const Napi::CallbackInfo &info);
 
 private:
   DLL dll;
