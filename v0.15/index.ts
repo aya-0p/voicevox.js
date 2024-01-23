@@ -1,7 +1,5 @@
 import { VoicevoxCore, VoicevoxResultCode, VoicevoxAccelerationMode, VoicevoxUserDictWordType } from "../voicevox_core";
 
-export * from "../voicevox_core";
-
 const Pointer = Symbol("Pointer");
 const Core = Symbol("Core");
 const Deleted = Symbol("Deleted");
