@@ -1,7 +1,8 @@
 /**
  * @version 0.15.x
  */
-const { Voicevox, VoicevoxAccelerationMode } = require("./index");
+const { VoicevoxAccelerationMode } = require("./index");
+const { Voicevox } = require("./v0.15");
 const fs = require("node:fs/promises");
 const path = require("node:path");
 
