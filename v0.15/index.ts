@@ -43,7 +43,6 @@ export class Voicevox {
    * 解放は`VoicevoxOpenJtalkRc#delete`で行う。
    * @param {string} openJtalkDicDir 辞書ディレクトリを指すパス
    * @returns {Promise<VoicevoxOpenJtalkRc>}
-   * @throws
    */
   openJtalkRcNew(openJtalkDicDir: string): Promise<VoicevoxOpenJtalkRc> {
     return new Promise<VoicevoxOpenJtalkRc>((resolve) => {
@@ -71,7 +70,6 @@ export class Voicevox {
    * VVMファイルから`VoicevoxVoiceModel`を構築(_construct_)する。
    * @param {string} path vvmファイルへのファイルパス
    * @returns {Promise<VoicevoxVoiceModel>}
-   * @throws
    */
   voiceModelNewFromPath(path: string): Promise<VoicevoxVoiceModel> {
     return new Promise<VoicevoxVoiceModel>((resolve) => {
@@ -89,7 +87,6 @@ export class Voicevox {
    * @param {VoicevoxOpenJtalkRc} openJtalkRc OpenJtalkRcクラス
    * @param {VoicevoxInitializeOptions} options オプション
    * @returns {Promise<VoicevoxSynthesizer>}
-   * @throws
    */
   synthesizerNew(openJtalkRc: VoicevoxOpenJtalkRc, options: VoicevoxInitializeOptions): Promise<VoicevoxSynthesizer> {
     return new Promise<VoicevoxSynthesizer>((resolve) => {
@@ -106,7 +103,6 @@ export class Voicevox {
    * このライブラリで利用可能なデバイスの情報を、JSONで取得する。
    * あくまで本ライブラリが対応しているデバイスの情報であることに注意。GPUが使える環境ではなかったとしても`cuda`や`dml`は`true`を示しうる。
    * @returns {Promise<VoicevoxSupportedDevicesJson>} サポートデバイス情報
-   * @throws
    */
   createSupportedDevicesJson(): Promise<VoicevoxSupportedDevicesJson> {
     return new Promise<VoicevoxSupportedDevicesJson>((resolve) => {
@@ -197,7 +193,6 @@ class VoicevoxOpenJtalkRc {
    * この関数を呼び出した後にユーザー辞書を変更した場合、再度この関数を呼び出す必要がある。
    * @param {VoicevoxUserDict} userDict ユーザー辞書
    * @returns {Promise<void>}
-   * @throws
    */
   useUserDict(userDict: VoicevoxUserDict): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -212,7 +207,6 @@ class VoicevoxOpenJtalkRc {
   /**
    * `OpenJtalkRc`を破棄(_destruct_)する。
    * @returns {Promise<void>}
-   * @throws
    */
   delete(): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -238,7 +232,6 @@ class VoicevoxSynthesizer {
   /**
    * `VoicevoxSynthesizer`を破棄(_destruct_)する。
    * @returns {Promise<void>}
-   * @throws
    */
   delete(): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -252,7 +245,6 @@ class VoicevoxSynthesizer {
    * 音声モデルを読み込む。
    * @param {VoicevoxVoiceModel} model 音声モデル
    * @returns {Promise<void>}
-   * @throws
    */
   loadVoiceModel(model: VoicevoxVoiceModel): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -268,7 +260,6 @@ class VoicevoxSynthesizer {
    * 音声モデルの読み込みを解除する。
    * @param {VoicevoxVoiceModelId} modelId 音声モデルID
    * @returns {Promise<void>}
-   * @throws
    */
   unloadVoiceModel(modelId: VoicevoxVoiceModelId): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -283,7 +274,6 @@ class VoicevoxSynthesizer {
   /**
    * ハードウェアアクセラレーションがGPUモードか判定する。
    * @returns {Promise<boolean>} GPUモードかどうか
-   * @throws
    */
   isGpuMode(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
@@ -297,7 +287,6 @@ class VoicevoxSynthesizer {
    * 指定したIDの音声モデルが読み込まれているか判定する。
    * @param {VoicevoxVoiceModelId} modelId 音声モデルID
    * @returns {Promise<boolean>} モデルが読み込まれているかどうか
-   * @throws
    */
   isLoadedVoiceModel(modelId: VoicevoxVoiceModelId): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
@@ -311,7 +300,6 @@ class VoicevoxSynthesizer {
   /**
    * 今読み込んでいる音声モデルのメタ情報を取得する。
    * @returns {Promise<Array<VoicevoxMetaJson>>} メタ情報
-   * @throws
    */
   createMetasJson(): Promise<Array<VoicevoxMetaJson>> {
     return new Promise<Array<VoicevoxMetaJson>>((resolve) => {
@@ -326,7 +314,6 @@ class VoicevoxSynthesizer {
    * @param {string} kana AquesTalk風記法
    * @param {VoicevoxStyleId} styleId スタイルID
    * @returns {Promise<VoicevoxAudioQueryJson>}
-   * @throws
    */
   createAudioQueryFromKana(kana: string, styleId: VoicevoxStyleId): Promise<VoicevoxAudioQueryJson> {
     return new Promise<VoicevoxAudioQueryJson>((resolve) => {
@@ -344,7 +331,6 @@ class VoicevoxSynthesizer {
    * @param {string} text UTF-8の日本語テキスト
    * @param {VoicevoxStyleId} styleId スタイルID
    * @returns {Promise<VoicevoxAudioQueryJson>}
-   * @throws
    */
   createAudioQuery(text: string, styleId: VoicevoxStyleId): Promise<VoicevoxAudioQueryJson> {
     return new Promise<VoicevoxAudioQueryJson>((resolve) => {
@@ -362,7 +348,6 @@ class VoicevoxSynthesizer {
    * @param {string} kana AquesTalk風記法
    * @param {VoicevoxStyleId} styleId スタイルID
    * @returns {Promise<Array<VoicevoxAccentPhraseJson>>}
-   * @throws
    */
   createAccentPhrasesFromKana(kana: string, styleId: VoicevoxStyleId): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
@@ -380,7 +365,6 @@ class VoicevoxSynthesizer {
    * @param {string} text UTF-8の日本語テキスト
    * @param {VoicevoxStyleId} styleId スタイルID
    * @returns {Promise<Array<VoicevoxAccentPhraseJson>>}
-   * @throws
    */
   createAccentPhrases(text: string, styleId: VoicevoxStyleId): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
@@ -398,7 +382,6 @@ class VoicevoxSynthesizer {
    * @param {Array<VoicevoxAccentPhraseJson>} accentPhrasesJson AccentPhraseの配列
    * @param {VoicevoxStyleId} styleId スタイルID
    * @returns {Promise<Array<VoicevoxAccentPhraseJson>>}
-   * @throws
    */
   replaceMoraData(accentPhrasesJson: Array<VoicevoxAccentPhraseJson>, styleId: VoicevoxStyleId): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
@@ -416,7 +399,6 @@ class VoicevoxSynthesizer {
    * @param {Array<VoicevoxAccentPhraseJson>} accentPhrasesJson AccentPhraseの配列
    * @param {VoicevoxStyleId} styleId スタイルID
    * @returns {Promise<Array<VoicevoxAccentPhraseJson>>}
-   * @throws
    */
   replacePhonemeLength(accentPhrasesJson: Array<VoicevoxAccentPhraseJson>, styleId: VoicevoxStyleId): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
@@ -434,7 +416,6 @@ class VoicevoxSynthesizer {
    * @param {Array<VoicevoxAccentPhraseJson>} accentPhrasesJson AccentPhraseの配列
    * @param {VoicevoxStyleId} styleId スタイルID
    * @returns {Promise<Array<VoicevoxAccentPhraseJson>>}
-   * @throws
    */
   replaceMoraPitch(accentPhrasesJson: Array<VoicevoxAccentPhraseJson>, styleId: VoicevoxStyleId): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
@@ -453,7 +434,6 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxStyleId} styleId スタイルID
    * @param {VoicevoxSynthesisOptions} options オプション
    * @returns {Promise<Buffer>}
-   * @throws
    */
   synthesis(audioQueryJson: VoicevoxAudioQueryJson, styleId: VoicevoxStyleId, options: VoicevoxSynthesisOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
@@ -473,7 +453,6 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxStyleId} styleId スタイルID
    * @param {VoicevoxSynthesisOptions} options オプション
    * @returns {Promise<Buffer>}
-   * @throws
    */
   ttsFromKana(kana: string, styleId: VoicevoxStyleId, options: VoicevoxTtsOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
@@ -493,7 +472,6 @@ class VoicevoxSynthesizer {
    * @param {VoicevoxStyleId} styleId スタイルID
    * @param {VoicevoxSynthesisOptions} options オプション
    * @returns {Promise<Buffer>}
-   * @throws
    */
   tts(text: string, styleId: VoicevoxStyleId, options: VoicevoxTtsOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
@@ -524,7 +502,6 @@ class VoicevoxUserDict {
    * ユーザー辞書にファイルを読み込ませる。
    * @param {string} dictPath 読み込む辞書ファイルのパス
    * @returns {Promise<void>}
-   * @throws
    */
   load(dictPath: string): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -540,7 +517,6 @@ class VoicevoxUserDict {
    * ユーザー辞書に単語を追加する。
    * @param {VoicevoxUserDictWord} word 追加する単語
    * @returns {Promise<string>} 追加した単語のUUID
-   * @throws
    */
   addWord(word: VoicevoxUserDictWord): Promise<string> {
     return new Promise<string>((resolve) => {
@@ -557,7 +533,6 @@ class VoicevoxUserDict {
    * @param {string} wordUuid 更新する単語のUUID
    * @param {VoicevoxUserDictWord} word 新しい単語のデータ
    * @returns {Promise<void>}
-   * @throws
    */
   updateWord(wordUuid: string, word: VoicevoxUserDictWord): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -574,7 +549,6 @@ class VoicevoxUserDict {
    * ユーザー辞書から単語を削除する。
    * @param {string} wordUuid 更新する単語のUUID
    * @returns {Promise<void>}
-   * @throws
    */
   removeWord(wordUuid: string): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -589,7 +563,6 @@ class VoicevoxUserDict {
   /**
    * ユーザー辞書の単語を出力する。
    * @returns {Promise<VoicevoxUserDictsJson>}
-   * @throws
    */
   toJson(): Promise<VoicevoxUserDictsJson> {
     return new Promise<VoicevoxUserDictsJson>((resolve) => {
@@ -604,7 +577,6 @@ class VoicevoxUserDict {
    * 他のユーザー辞書をインポートする。
    * @param {VoicevoxUserDict} otherDict インポートするユーザー辞書
    * @returns {Promise<void>}
-   * @throws
    */
   import(otherDict: VoicevoxUserDict): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -620,7 +592,6 @@ class VoicevoxUserDict {
    * ユーザー辞書をファイルに保存する。
    * @param {string} path 保存先のファイルパス
    * @returns {Promise<void>}
-   * @throws
    */
   save(path: string): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -635,7 +606,6 @@ class VoicevoxUserDict {
   /**
    * ユーザー辞書を破棄(_destruct_)する。
    * @returns {Promise<void>}
-   * @throws
    */
   delete(): Promise<void> {
     return new Promise<void>((resolve) => {
@@ -662,7 +632,6 @@ class VoicevoxVoiceModel {
   /**
    * `VoicevoxVoiceModel`からIDを取得する。
    * @returns {Promise<VoicevoxVoiceModelId>} 音声モデルID
-   * @throws
    */
   id(): Promise<VoicevoxVoiceModelId> {
     return new Promise<VoicevoxVoiceModelId>((resolve) => {
@@ -675,7 +644,6 @@ class VoicevoxVoiceModel {
   /**
    * `VoicevoxVoiceModel`からメタ情報を取得する。
    * @returns {Promise<Array<VoicevoxMetaJson>>} メタ情報
-   * @throws
    */
   getMetasJson(): Promise<Array<VoicevoxMetaJson>> {
     return new Promise<Array<VoicevoxMetaJson>>((resolve) => {
@@ -688,7 +656,6 @@ class VoicevoxVoiceModel {
   /**
    * `VoicevoxVoiceModel`を破棄(_destruct_)する。
    * @returns {Promise<void>}
-   * @throws
    */
   delete(): Promise<void> {
     return new Promise<void>((resolve) => {
