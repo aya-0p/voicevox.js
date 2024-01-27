@@ -64,3 +64,90 @@ export function checkValidString(str: string, name: string) {
 export function checkValidObject(obj: any, name: string, src: any, srcname: string) {
   if (!(obj instanceof src)) throw new VoicevoxJsError(`${name}が${srcname}ではありません`);
 }
+
+export interface VoicevoxSupportedDevicesJson {
+  cpu: boolean;
+  cuda: boolean;
+  dml: boolean;
+}
+
+export interface VoicevoxMetaJson {
+  name: string;
+  styles: Array<VoicevoxStyleJson>;
+  version: string;
+  speaker_uuid: string;
+}
+
+export interface VoicevoxStyleJson {
+  id: number;
+  name: string;
+}
+
+export interface VoicevoxAudioQueryJson {
+  accent_phrases: Array<VoicevoxAccentPhraseJson>;
+  speed_scale: number;
+  pitch_scale: number;
+  intonation_scale: number;
+  volume_scale: number;
+  pre_phoneme_length: number;
+  post_phoneme_length: number;
+  output_sampling_rate: number;
+  output_stereo: boolean;
+  kana: string;
+}
+
+export function checkVoicevoxAudioQueryJson(obj: VoicevoxAudioQueryJson) {
+  checkValidOption(obj, "VoicevoxAudioQueryJson", [
+    ["intonation_scale", "number"],
+    ["output_sampling_rate", "number", true],
+    ["output_stereo", "boolean"],
+    ["pitch_scale", "number"],
+    ["post_phoneme_length", "number"],
+    ["pre_phoneme_length", "number"],
+    ["speed_scale", "number"],
+    ["volume_scale", "number"],
+  ]);
+  checkVoicevoxAccentPhraseJson(obj.accent_phrases);
+}
+
+export interface VoicevoxAccentPhraseJson {
+  moras: Array<VoicevoxMoraJson>;
+  accent: number;
+  pause_mora: VoicevoxMoraJson | null;
+  is_interrogative: boolean;
+}
+
+export function checkVoicevoxAccentPhraseJson(arr: Array<VoicevoxAccentPhraseJson>) {
+  if (!(arr instanceof Array)) throw new VoicevoxJsError("有効なVoicevoxAccentPhraseJsonではありません(配列でない)");
+  for (const obj of arr) {
+    checkValidOption(obj, "VoicevoxAccentPhraseJson", [
+      ["accent", "number", true],
+      ["is_interrogative", "boolean"],
+    ]);
+    if (!(obj.moras instanceof Array)) throw new VoicevoxJsError("有効なVoicevoxAccentPhraseJsonではありません(一部の要素のmorasが配列でない)");
+    for (const obj2 of obj.moras) {
+      checkVoicevoxMoraJson(obj2);
+    }
+    if (obj.pause_mora !== null) checkVoicevoxMoraJson(obj.pause_mora);
+  }
+}
+
+export interface VoicevoxMoraJson {
+  text: string;
+  consonant: string | null;
+  consonant_length: number | null;
+  vowel: string;
+  vowel_length: number;
+  pitch: number;
+}
+
+export function checkVoicevoxMoraJson(obj: VoicevoxMoraJson) {
+  checkValidOption(obj, "VoicevoxMoraJson", [
+    ["pitch", "number"],
+    ["text", "string"],
+    ["vowel", "string"],
+    ["vowel_length", "number"],
+  ]);
+  if (obj.consonant !== null && typeof obj.consonant !== "string") throw new VoicevoxJsError("有効なVoicevoxMoraJsonではありません(consonantがstringまたはnullでない)");
+  if (obj.consonant !== null && typeof obj.consonant_length !== "number") throw new VoicevoxJsError("有効なVoicevoxMoraJsonではありません(consonant_lengthがnumberまたはnullでない)");
+}

@@ -1,5 +1,20 @@
 import { VoicevoxCore, VoicevoxResultCode, VoicevoxAccelerationMode, VoicevoxUserDictWordType } from "../voicevox_core";
-import { checkValidNumber, checkValidObject, checkValidOption, checkValidString, VoicevoxError, VoicevoxJsError, uuidToBuffer, bufferToUuid } from "../util";
+import {
+  checkValidNumber,
+  checkValidObject,
+  checkValidOption,
+  checkValidString,
+  VoicevoxError,
+  VoicevoxJsError,
+  uuidToBuffer,
+  bufferToUuid,
+  VoicevoxSupportedDevicesJson,
+  VoicevoxAudioQueryJson,
+  VoicevoxMetaJson,
+  VoicevoxAccentPhraseJson,
+  checkVoicevoxAccentPhraseJson,
+  checkVoicevoxAudioQueryJson,
+} from "../util";
 
 const Pointer = Symbol("Pointer");
 const Core = Symbol("Core");
@@ -18,6 +33,7 @@ export class Voicevox {
    * @param path libvoicevox_core.so, libvoicevox_core.solib, voicevox_core.dllを指すパス
    */
   constructor(path: string) {
+    checkValidString(path, "path");
     this[Core] = new VoicevoxCore(path);
   }
 
@@ -779,93 +795,6 @@ function checkVoicevoxUserDictWord(obj: VoicevoxUserDictWord) {
     ["surface", "string"],
     ["wordType", "number", true],
   ]);
-}
-
-interface VoicevoxSupportedDevicesJson {
-  cpu: boolean;
-  cuda: boolean;
-  dml: boolean;
-}
-
-interface VoicevoxMetaJson {
-  name: string;
-  styles: Array<VoicevoxStyleJson>;
-  version: string;
-  speaker_uuid: string;
-}
-
-interface VoicevoxStyleJson {
-  id: number;
-  name: string;
-}
-
-interface VoicevoxAudioQueryJson {
-  accent_phrases: Array<VoicevoxAccentPhraseJson>;
-  speed_scale: number;
-  pitch_scale: number;
-  intonation_scale: number;
-  volume_scale: number;
-  pre_phoneme_length: number;
-  post_phoneme_length: number;
-  output_sampling_rate: number;
-  output_stereo: boolean;
-  kana: string;
-}
-
-function checkVoicevoxAudioQueryJson(obj: VoicevoxAudioQueryJson) {
-  checkValidOption(obj, "VoicevoxAudioQueryJson", [
-    ["intonation_scale", "number"],
-    ["output_sampling_rate", "number", true],
-    ["output_stereo", "boolean"],
-    ["pitch_scale", "number"],
-    ["post_phoneme_length", "number"],
-    ["pre_phoneme_length", "number"],
-    ["speed_scale", "number"],
-    ["volume_scale", "number"],
-  ]);
-  checkVoicevoxAccentPhraseJson(obj.accent_phrases);
-}
-
-interface VoicevoxAccentPhraseJson {
-  moras: Array<VoicevoxMoraJson>;
-  accent: number;
-  pause_mora: VoicevoxMoraJson | null;
-  is_interrogative: boolean;
-}
-
-function checkVoicevoxAccentPhraseJson(arr: Array<VoicevoxAccentPhraseJson>) {
-  if (!(arr instanceof Array)) throw new VoicevoxJsError("有効なVoicevoxAccentPhraseJsonではありません(配列でない)");
-  for (const obj of arr) {
-    checkValidOption(obj, "VoicevoxAccentPhraseJson", [
-      ["accent", "number", true],
-      ["is_interrogative", "boolean"],
-    ]);
-    if (!(obj.moras instanceof Array)) throw new VoicevoxJsError("有効なVoicevoxAccentPhraseJsonではありません(一部の要素のmorasが配列でない)");
-    for (const obj2 of obj.moras) {
-      checkVoicevoxMoraJson(obj2);
-    }
-    if (obj.pause_mora !== null) checkVoicevoxMoraJson(obj.pause_mora);
-  }
-}
-
-interface VoicevoxMoraJson {
-  text: string;
-  consonant: string | null;
-  consonant_length: number | null;
-  vowel: string;
-  vowel_length: number;
-  pitch: number;
-}
-
-function checkVoicevoxMoraJson(obj: VoicevoxMoraJson) {
-  checkValidOption(obj, "VoicevoxMoraJson", [
-    ["pitch", "number"],
-    ["text", "string"],
-    ["vowel", "string"],
-    ["vowel_length", "number"],
-  ]);
-  if (obj.consonant !== null && typeof obj.consonant !== "string") throw new VoicevoxJsError("有効なVoicevoxMoraJsonではありません(consonantがstringまたはnullでない)");
-  if (obj.consonant !== null && typeof obj.consonant_length !== "number") throw new VoicevoxJsError("有効なVoicevoxMoraJsonではありません(consonant_lengthがnumberまたはnullでない)");
 }
 
 interface VoicevoxUserDictsJson {
