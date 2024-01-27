@@ -53,6 +53,10 @@ export function checkValidNumber(num: number, name: string, isInteger: boolean) 
   if (isInteger && !Number.isSafeInteger(num)) throw new VoicevoxJsError(`${name}が整数ではありません`);
 }
 
+export function checkValidBigint(num: bigint, name: string) {
+  if (typeof num !== "bigint") throw new VoicevoxJsError(`${name}がbigintではありません`);
+}
+
 export function checkValidBoolean(bol: boolean, name: string) {
   if (typeof bol !== "boolean") throw new VoicevoxJsError(`${name}がbooleanではありません`);
 }
@@ -63,6 +67,28 @@ export function checkValidString(str: string, name: string) {
 
 export function checkValidObject(obj: any, name: string, src: any, srcname: string) {
   if (!(obj instanceof src)) throw new VoicevoxJsError(`${name}が${srcname}ではありません`);
+}
+
+export function checkValidArray<T extends string | number | bigint>(arr: Array<T>, name: string, type: "string" | "number" | "bigint", isInteger?: boolean) {
+  if (arr == null) throw new VoicevoxJsError(`有効な${name}ではありません(存在しない)`);
+  if (!(arr instanceof Array)) throw new VoicevoxJsError(`有効な${name}ではありません(Arrayでない)`);
+  try {
+    for (const obj of arr) {
+      switch (type) {
+        case "string":
+          checkValidString(obj as any, "中身");
+          break;
+        case "number":
+          checkValidNumber(obj as any, "中身", isInteger as boolean);
+          break;
+        case "bigint":
+          checkValidBigint(obj as any, "中身");
+          break;
+      }
+    }
+  } catch (e: any) {
+    throw new VoicevoxJsError(`有効な${name}ではありません(${e.message})`);
+  }
 }
 
 export interface VoicevoxSupportedDevicesJson {
