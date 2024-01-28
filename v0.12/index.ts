@@ -190,7 +190,7 @@ export class Voicevox {
     return new Promise<Buffer>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, resultCode } = this[Core].voicevoxTtsV13(text, speakerId);
+      const { result, resultCode } = this[Core].voicevoxTtsV12(text, speakerId);
       if (resultCode !== VoicevoxResultCodeV12.VOICEVOX_RESULT_SUCCEED) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
       resolve(result);
     });

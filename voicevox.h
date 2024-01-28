@@ -74,13 +74,13 @@ public:
   Napi::Value decodeForward(const Napi::CallbackInfo &info);
   Napi::Value lastErrorMessage(const Napi::CallbackInfo &info);
   Napi::Value voicevoxLoadOpenjtalkDict(const Napi::CallbackInfo &info);
-  Napi::Value voicevoxTtsV13(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxTtsV12(const Napi::CallbackInfo &info);
   Napi::Value voicevoxTtsFromKana(const Napi::CallbackInfo &info);
-  Napi::Value initializeV11(const Napi::CallbackInfo &info);
-  Napi::Value initializeV9(const Napi::CallbackInfo &info);
-  Napi::Value yukarinSForwardV7(const Napi::CallbackInfo &info);
-  Napi::Value yukarinSaForwardV7(const Napi::CallbackInfo &info);
-  Napi::Value decodeForwardV7(const Napi::CallbackInfo &info);
+  Napi::Value initializeV10(const Napi::CallbackInfo &info);
+  Napi::Value initializeV5(const Napi::CallbackInfo &info);
+  Napi::Value yukarinSForwardV5(const Napi::CallbackInfo &info);
+  Napi::Value yukarinSaForwardV5(const Napi::CallbackInfo &info);
+  Napi::Value decodeForwardV5(const Napi::CallbackInfo &info);
 
 private:
   DLL dll;

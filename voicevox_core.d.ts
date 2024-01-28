@@ -944,7 +944,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsV13(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
+  voicevoxTtsV12(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
 
   /**
    * text to spearchをAquesTalkライクな記法で実行する
@@ -968,7 +968,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.10.x, v0.11.xで利用できます
    */
-  initializeV11(rootDirPath: string, useGpu: boolean, cpuNumThreads: number): Result<boolean>;
+  initializeV10(rootDirPath: string, useGpu: boolean, cpuNumThreads: number): Result<boolean>;
 
   /**
    * 初期化する
@@ -981,7 +981,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.5.x, v0.6.x, v0.7.x, v0.8.x, v0.9.xで利用できます
    */
-  initializeV9(rootDirPath: string, useGpu: boolean): Result<boolean>;
+  initializeV5(rootDirPath: string, useGpu: boolean): Result<boolean>;
 
   /**
    * 音素ごとの長さを求める
@@ -992,7 +992,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.5.x, v0.6.x, v0.7.xで利用できます
    */
-  yukarinSForwardV7(phonemeList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
+  yukarinSForwardV5(phonemeList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
 
   /**
    * モーラごとの音高を求める
@@ -1008,7 +1008,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.5.x, v0.6.x, v0.7.xで利用できます
    */
-  yukarinSaForwardV7(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<number> & { result2: boolean };
+  yukarinSaForwardV5(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<number> & { result2: boolean };
 
   /**
    * 波形を求める
@@ -1019,7 +1019,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.5.x, v0.6.x, v0.7.xで利用できます
    */
-  decodeForwardV7(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & { result2: boolean };
+  decodeForwardV5(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & { result2: boolean };
 }
 
 interface Result<T> {

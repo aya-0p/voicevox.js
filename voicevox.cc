@@ -104,13 +104,13 @@ Napi::Object Voicevox::Init(Napi::Env env, Napi::Object exports)
 																												 InstanceMethod("decodeForward", &Voicevox::decodeForward),
 																												 InstanceMethod("lastErrorMessage", &Voicevox::lastErrorMessage),
 																												 InstanceMethod("voicevoxLoadOpenjtalkDict", &Voicevox::voicevoxLoadOpenjtalkDict),
-																												 InstanceMethod("voicevoxTtsV13", &Voicevox::voicevoxTtsV13),
+																												 InstanceMethod("voicevoxTtsV12", &Voicevox::voicevoxTtsV12),
 																												 InstanceMethod("voicevoxTtsFromKana", &Voicevox::voicevoxTtsFromKana),
-																												 InstanceMethod("initializeV11", &Voicevox::initializeV11),
-																												 InstanceMethod("initializeV9", &Voicevox::initializeV9),
-																												 InstanceMethod("yukarinSForwardV7", &Voicevox::yukarinSForwardV7),
-																												 InstanceMethod("yukarinSaForwardV7", &Voicevox::yukarinSaForwardV7),
-																												 InstanceMethod("decodeForwardV7", &Voicevox::decodeForwardV7),
+																												 InstanceMethod("initializeV10", &Voicevox::initializeV10),
+																												 InstanceMethod("initializeV5", &Voicevox::initializeV5),
+																												 InstanceMethod("yukarinSForwardV5", &Voicevox::yukarinSForwardV5),
+																												 InstanceMethod("yukarinSaForwardV5", &Voicevox::yukarinSaForwardV5),
+																												 InstanceMethod("decodeForwardV5", &Voicevox::decodeForwardV5),
 																										 });
 
 	Napi::FunctionReference *constructor = new Napi::FunctionReference();
@@ -1608,12 +1608,12 @@ Napi::Value Voicevox::voicevoxLoadOpenjtalkDict(const Napi::CallbackInfo &info)
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
 	const char *dict_path = load_string(info, 0);
-	VoicevoxResultCodeV13 resultCode = voicevox_load_openjtalk_dict(this->dll, dict_path);
+	VoicevoxResultCodeV12 resultCode = voicevox_load_openjtalk_dict(this->dll, dict_path);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxTtsV13(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxTtsV12(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1621,7 +1621,7 @@ Napi::Value Voicevox::voicevoxTtsV13(const Napi::CallbackInfo &info)
 	int64_t speaker_id = static_cast<int64_t>(load_uint32_t(info, 1));
 	int output_binary_size;
 	uint8_t *output_wav;
-	VoicevoxResultCodeV13 resultCode = voicevox_tts_v13(this->dll, text, speaker_id, &output_binary_size, &output_wav);
+	VoicevoxResultCodeV12 resultCode = voicevox_tts_v12(this->dll, text, speaker_id, &output_binary_size, &output_wav);
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_binary_size));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
@@ -1635,13 +1635,13 @@ Napi::Value Voicevox::voicevoxTtsFromKana(const Napi::CallbackInfo &info)
 	int64_t speaker_id = static_cast<int64_t>(load_uint32_t(info, 1));
 	int output_binary_size;
 	uint8_t *output_wav;
-	VoicevoxResultCodeV13 resultCode = voicevox_tts_from_kana(this->dll, text, speaker_id, &output_binary_size, &output_wav);
+	VoicevoxResultCodeV12 resultCode = voicevox_tts_from_kana(this->dll, text, speaker_id, &output_binary_size, &output_wav);
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_binary_size));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
 }
 
-Napi::Value Voicevox::initializeV11(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::initializeV10(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1651,7 +1651,7 @@ Napi::Value Voicevox::initializeV11(const Napi::CallbackInfo &info)
 	bool result;
 	try
 	{
-		result = initialize_v11(this->dll, root_dir_path, use_gpu, cpu_num_threads);
+		result = initialize_v10(this->dll, root_dir_path, use_gpu, cpu_num_threads);
 	}
 	catch (const std::exception &e)
 	{
@@ -1662,7 +1662,7 @@ Napi::Value Voicevox::initializeV11(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::initializeV9(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::initializeV5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1671,7 +1671,7 @@ Napi::Value Voicevox::initializeV9(const Napi::CallbackInfo &info)
 	bool result;
 	try
 	{
-		result = initialize_v9(this->dll, root_dir_path, use_gpu);
+		result = initialize_v5(this->dll, root_dir_path, use_gpu);
 	}
 	catch (const std::exception &e)
 	{
@@ -1682,7 +1682,7 @@ Napi::Value Voicevox::initializeV9(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::yukarinSForwardV7(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::yukarinSForwardV5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1700,7 +1700,7 @@ Napi::Value Voicevox::yukarinSForwardV7(const Napi::CallbackInfo &info)
 	std::vector<float> output(length, 0.0);
 	try
 	{
-		result = yukarin_s_forward_v7(this->dll, length, phoneme_list.data(), &speaker_id, output.data());
+		result = yukarin_s_forward_v5(this->dll, length, phoneme_list.data(), &speaker_id, output.data());
 	}
 	catch (const std::exception &e)
 	{
@@ -1717,7 +1717,7 @@ Napi::Value Voicevox::yukarinSForwardV7(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::yukarinSaForwardV7(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::yukarinSaForwardV5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1755,7 +1755,7 @@ Napi::Value Voicevox::yukarinSaForwardV7(const Napi::CallbackInfo &info)
 	std::vector<float> output(length, 0.0);
 	try
 	{
-		result = yukarin_sa_forward_v7(this->dll, length, vowel_phoneme_list.data(), consonant_phrase_list.data(), start_accent_list.data(), end_accent_list.data(), start_accent_phrase_list.data(), end_accent_phrase_list.data(), &speaker_id, output.data());
+		result = yukarin_sa_forward_v5(this->dll, length, vowel_phoneme_list.data(), consonant_phrase_list.data(), start_accent_list.data(), end_accent_list.data(), start_accent_phrase_list.data(), end_accent_phrase_list.data(), &speaker_id, output.data());
 	}
 	catch (const std::exception &e)
 	{
@@ -1773,7 +1773,7 @@ Napi::Value Voicevox::yukarinSaForwardV7(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::decodeForwardV7(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::decodeForwardV5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1798,7 +1798,7 @@ Napi::Value Voicevox::decodeForwardV7(const Napi::CallbackInfo &info)
 	std::vector<float> output(length * 256, 0.0);
 	try
 	{
-		result = decode_forward(this->dll, length, phoneme_length, f0.data(), phoneme.data(), &speaker_id, output.data());
+		result = decode_forward_v5(this->dll, length, phoneme_length, f0.data(), phoneme.data(), &speaker_id, output.data());
 	}
 	catch (const std::exception &e)
 	{

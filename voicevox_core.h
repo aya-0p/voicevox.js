@@ -247,7 +247,7 @@ enum VoicevoxResultCodeV14 : int32_t
  * エラーの種類が増えたら定義を増やす。
  * 必ずエラーの値を明示的に指定すること
  */
-enum VoicevoxResultCodeV13 : int32_t
+enum VoicevoxResultCodeV12 : int32_t
 {
   // 成功
   VOICEVOX_RESULT_SUCCEED = 0,
@@ -1616,7 +1616,7 @@ const char *last_error_message(DLL &dll);
  * open jtalkの辞書を読み込む
  * @return 結果コード
  */
-VoicevoxResultCodeV13 voicevox_load_openjtalk_dict(DLL &dll,
+VoicevoxResultCodeV12 voicevox_load_openjtalk_dict(DLL &dll,
                                                    const char *dict_path);
 
 /**
@@ -1628,7 +1628,7 @@ VoicevoxResultCodeV13 voicevox_load_openjtalk_dict(DLL &dll,
  * @param output_wav 音声データを出力する先のポインタ。使用が終わったらvoicevox_wav_freeで開放する必要がある
  * @return 結果コード
  */
-VoicevoxResultCodeV13 voicevox_tts_v13(DLL &dll,
+VoicevoxResultCodeV12 voicevox_tts_v12(DLL &dll,
                                        const char *text,
                                        int64_t speaker_id,
                                        int *output_binary_size,
@@ -1643,7 +1643,7 @@ VoicevoxResultCodeV13 voicevox_tts_v13(DLL &dll,
  * @param output_wav 音声データを出力する先のポインタ。使用が終わったらvoicevox_wav_freeで開放する必要がある
  * @return 結果コード
  */
-VoicevoxResultCodeV13 voicevox_tts_from_kana(DLL &dll,
+VoicevoxResultCodeV12 voicevox_tts_from_kana(DLL &dll,
                                              const char *text,
                                              int64_t speaker_id,
                                              int *output_binary_size,
@@ -1661,7 +1661,7 @@ VoicevoxResultCodeV13 voicevox_tts_from_kana(DLL &dll,
  * 何度も実行可能。use_gpuを変更して実行しなおすことも可能。
  * 最後に実行したuse_gpuに従って他の関数が実行される。
  */
-bool initialize_v11(DLL &dll,
+bool initialize_v10(DLL &dll,
                     const char *root_dir_path,
                     bool use_gpu,
                     int cpu_num_threads);
@@ -1677,7 +1677,7 @@ bool initialize_v11(DLL &dll,
  * 何度も実行可能。use_gpuを変更して実行しなおすことも可能。
  * 最後に実行したuse_gpuに従って他の関数が実行される。
  */
-bool initialize_v9(DLL &dll,
+bool initialize_v5(DLL &dll,
                    const char *root_dir_path,
                    bool use_gpu);
 
@@ -1690,7 +1690,7 @@ bool initialize_v9(DLL &dll,
  * @param speaker_id 話者番号
  * @return 音素ごとの長さ
  */
-bool yukarin_s_forward_v7(DLL &dll,
+bool yukarin_s_forward_v5(DLL &dll,
                           int length,
                           long *phoneme_list,
                           long *speaker_id,
@@ -1710,7 +1710,7 @@ bool yukarin_s_forward_v7(DLL &dll,
  * @param speaker_id 話者番号
  * @return モーラごとの音高
  */
-bool yukarin_sa_forward_v7(DLL &dll,
+bool yukarin_sa_forward_v5(DLL &dll,
                            int length,
                            long *vowel_phoneme_list,
                            long *consonant_phoneme_list,
@@ -1732,7 +1732,7 @@ bool yukarin_sa_forward_v7(DLL &dll,
  * @param speaker_id 話者番号
  * @return 音声波形
  */
-bool decode_forward_v7(DLL &dll,
+bool decode_forward_v5(DLL &dll,
                        int length,
                        int phoneme_size,
                        float *f0,

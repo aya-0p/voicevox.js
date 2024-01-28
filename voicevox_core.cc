@@ -578,31 +578,31 @@ const char *last_error_message(DLL &dll)
   return load_func<const char *(*)(void)>(dll, "last_error_message")();
 }
 
-VoicevoxResultCodeV13 voicevox_load_openjtalk_dict(DLL &dll,
+VoicevoxResultCodeV12 voicevox_load_openjtalk_dict(DLL &dll,
                                                    const char *dict_path)
 {
-  return load_func<VoicevoxResultCodeV13 (*)(const char *)>(dll, "voicevox_load_openjtalk_dict")(dict_path);
+  return load_func<VoicevoxResultCodeV12 (*)(const char *)>(dll, "voicevox_load_openjtalk_dict")(dict_path);
 }
 
-VoicevoxResultCodeV13 voicevox_tts_v13(DLL &dll,
+VoicevoxResultCodeV12 voicevox_tts_v12(DLL &dll,
                                        const char *text,
                                        int64_t speaker_id,
                                        int *output_binary_size,
                                        uint8_t **output_wav)
 {
-  return load_func<VoicevoxResultCodeV13 (*)(const char *, int64_t, int *, uint8_t **)>(dll, "voicevox_tts")(text, speaker_id, output_binary_size, output_wav);
+  return load_func<VoicevoxResultCodeV12 (*)(const char *, int64_t, int *, uint8_t **)>(dll, "voicevox_tts")(text, speaker_id, output_binary_size, output_wav);
 }
 
-VoicevoxResultCodeV13 voicevox_tts_from_kana(DLL &dll,
+VoicevoxResultCodeV12 voicevox_tts_from_kana(DLL &dll,
                                              const char *text,
                                              int64_t speaker_id,
                                              int *output_binary_size,
                                              uint8_t **output_wav)
 {
-  return load_func<VoicevoxResultCodeV13 (*)(const char *, int64_t, int *, uint8_t **)>(dll, "voicevox_tts_from_kana")(text, speaker_id, output_binary_size, output_wav);
+  return load_func<VoicevoxResultCodeV12 (*)(const char *, int64_t, int *, uint8_t **)>(dll, "voicevox_tts_from_kana")(text, speaker_id, output_binary_size, output_wav);
 }
 
-bool initialize_v11(DLL &dll,
+bool initialize_v10(DLL &dll,
                     const char *root_dir_path,
                     bool use_gpu,
                     int cpu_num_threads)
@@ -610,14 +610,14 @@ bool initialize_v11(DLL &dll,
   return load_func<bool (*)(const char *, bool, int)>(dll, "initialize")(root_dir_path, use_gpu, cpu_num_threads);
 }
 
-bool initialize_v9(DLL &dll,
+bool initialize_v5(DLL &dll,
                    const char *root_dir_path,
                    bool use_gpu)
 {
   return load_func<bool (*)(const char *, bool)>(dll, "initialize")(root_dir_path, use_gpu);
 }
 
-bool yukarin_s_forward_v7(DLL &dll,
+bool yukarin_s_forward_v5(DLL &dll,
                           int length,
                           long *phoneme_list,
                           long *speaker_id,
@@ -626,7 +626,7 @@ bool yukarin_s_forward_v7(DLL &dll,
   return load_func<bool (*)(int, long *, long *, float *)>(dll, "yukarin_s_forward")(length, phoneme_list, speaker_id, output);
 }
 
-bool yukarin_sa_forward_v7(DLL &dll,
+bool yukarin_sa_forward_v5(DLL &dll,
                            int length,
                            long *vowel_phoneme_list,
                            long *consonant_phoneme_list,
@@ -640,7 +640,7 @@ bool yukarin_sa_forward_v7(DLL &dll,
   return load_func<bool (*)(int, long *, long *, long *, long *, long *, long *, long *, float *)>(dll, "yukarin_sa_forward")(length, vowel_phoneme_list, consonant_phoneme_list, start_accent_list, end_accent_list, start_accent_phrase_list, end_accent_phrase_list, speaker_id, output);
 }
 
-bool decode_forward_v7(DLL &dll,
+bool decode_forward_v5(DLL &dll,
                        int length,
                        int phoneme_size,
                        float *f0,
