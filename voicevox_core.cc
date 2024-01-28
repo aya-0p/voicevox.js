@@ -56,7 +56,7 @@ T load_func(DLL &dll, const char *func_name)
     Napi::Error::Fatal("", "dll not loaded");
   void *fn = dlsym(dll, func_name);
   if (fn == NULL)
-    Napi::Error::Fatal(func_name, "not found, Did you load voicevox_core?");
+    Napi::Error::Fatal(func_name, "not found, did you load voicevox_core?");
   return reinterpret_cast<T>(fn);
 }
 #endif
@@ -362,13 +362,13 @@ void voicevox_user_dict_delete(DLL &dll,
 }
 
 VoicevoxResultCode voicevox_initialize(DLL &dll,
-                                          struct VoicevoxInitializeOptionsV14 options)
+                                       struct VoicevoxInitializeOptionsV14 options)
 {
   return load_func<VoicevoxResultCode (*)(struct VoicevoxInitializeOptionsV14)>(dll, "voicevox_initialize")(options);
 }
 
 VoicevoxResultCode voicevox_load_model(DLL &dll,
-                                          uint32_t speaker_id)
+                                       uint32_t speaker_id)
 {
   return load_func<VoicevoxResultCode (*)(uint32_t)>(dll, "voicevox_load_model")(speaker_id);
 }
@@ -400,11 +400,11 @@ const char *voicevox_get_supported_devices_json(DLL &dll)
 }
 
 VoicevoxResultCode voicevox_predict_duration(DLL &dll,
-                                                uintptr_t length,
-                                                int64_t *phoneme_vector,
-                                                uint32_t speaker_id,
-                                                uintptr_t *output_predict_duration_data_length,
-                                                float **output_predict_duration_data)
+                                             uintptr_t length,
+                                             int64_t *phoneme_vector,
+                                             uint32_t speaker_id,
+                                             uintptr_t *output_predict_duration_data_length,
+                                             float **output_predict_duration_data)
 {
   return load_func<VoicevoxResultCode (*)(uintptr_t, int64_t *, uint32_t, uintptr_t *, float **)>(dll, "voicevox_predict_duration")(length, phoneme_vector, speaker_id, output_predict_duration_data_length, output_predict_duration_data);
 }
@@ -416,16 +416,16 @@ void voicevox_predict_duration_data_free(DLL &dll,
 }
 
 VoicevoxResultCode voicevox_predict_intonation(DLL &dll,
-                                                  uintptr_t length,
-                                                  int64_t *vowel_phoneme_vector,
-                                                  int64_t *consonant_phoneme_vector,
-                                                  int64_t *start_accent_vector,
-                                                  int64_t *end_accent_vector,
-                                                  int64_t *start_accent_phrase_vector,
-                                                  int64_t *end_accent_phrase_vector,
-                                                  uint32_t speaker_id,
-                                                  uintptr_t *output_predict_intonation_data_length,
-                                                  float **output_predict_intonation_data)
+                                               uintptr_t length,
+                                               int64_t *vowel_phoneme_vector,
+                                               int64_t *consonant_phoneme_vector,
+                                               int64_t *start_accent_vector,
+                                               int64_t *end_accent_vector,
+                                               int64_t *start_accent_phrase_vector,
+                                               int64_t *end_accent_phrase_vector,
+                                               uint32_t speaker_id,
+                                               uintptr_t *output_predict_intonation_data_length,
+                                               float **output_predict_intonation_data)
 {
   return load_func<VoicevoxResultCode (*)(uintptr_t, int64_t *, int64_t *, int64_t *, int64_t *, int64_t *, int64_t *, uint32_t, uintptr_t *, float **)>(dll, "voicevox_predict_intonation")(length, vowel_phoneme_vector, consonant_phoneme_vector, start_accent_vector, end_accent_vector, start_accent_phrase_vector, end_accent_phrase_vector, speaker_id, output_predict_intonation_data_length, output_predict_intonation_data);
 }
@@ -437,13 +437,13 @@ void voicevox_predict_intonation_data_free(DLL &dll,
 }
 
 VoicevoxResultCode voicevox_decode(DLL &dll,
-                                      uintptr_t length,
-                                      uintptr_t phoneme_size,
-                                      float *f0,
-                                      float *phoneme_vector,
-                                      uint32_t speaker_id,
-                                      uintptr_t *output_decode_data_length,
-                                      float **output_decode_data)
+                                   uintptr_t length,
+                                   uintptr_t phoneme_size,
+                                   float *f0,
+                                   float *phoneme_vector,
+                                   uint32_t speaker_id,
+                                   uintptr_t *output_decode_data_length,
+                                   float **output_decode_data)
 {
   return load_func<VoicevoxResultCode (*)(uintptr_t, uintptr_t, float *, float *, uint32_t, uintptr_t *, float **)>(dll, "voicevox_decode")(length, phoneme_size, f0, phoneme_vector, speaker_id, output_decode_data_length, output_decode_data);
 }
@@ -460,10 +460,10 @@ struct VoicevoxAudioQueryOptions voicevox_make_default_audio_query_options(DLL &
 }
 
 VoicevoxResultCode voicevox_audio_query(DLL &dll,
-                                           const char *text,
-                                           uint32_t speaker_id,
-                                           struct VoicevoxAudioQueryOptions options,
-                                           char **output_audio_query_json)
+                                        const char *text,
+                                        uint32_t speaker_id,
+                                        struct VoicevoxAudioQueryOptions options,
+                                        char **output_audio_query_json)
 {
   return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxAudioQueryOptions, char **)>(dll, "voicevox_audio_query")(text, speaker_id, options, output_audio_query_json);
 }
@@ -513,21 +513,21 @@ void voicevox_accent_phrases_json_free(DLL &dll,
 }
 
 VoicevoxResultCode voicevox_synthesis(DLL &dll,
-                                         const char *audio_query_json,
-                                         uint32_t speaker_id,
-                                         struct VoicevoxSynthesisOptions options,
-                                         uintptr_t *output_wav_length,
-                                         uint8_t **output_wav)
+                                      const char *audio_query_json,
+                                      uint32_t speaker_id,
+                                      struct VoicevoxSynthesisOptions options,
+                                      uintptr_t *output_wav_length,
+                                      uint8_t **output_wav)
 {
   return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxSynthesisOptions, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesis")(audio_query_json, speaker_id, options, output_wav_length, output_wav);
 }
 
 VoicevoxResultCode voicevox_tts(DLL &dll,
-                                   const char *text,
-                                   uint32_t speaker_id,
-                                   struct VoicevoxTtsOptionsV14 options,
-                                   uintptr_t *output_wav_length,
-                                   uint8_t **output_wav)
+                                const char *text,
+                                uint32_t speaker_id,
+                                struct VoicevoxTtsOptionsV14 options,
+                                uintptr_t *output_wav_length,
+                                uint8_t **output_wav)
 {
   return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxTtsOptionsV14, uintptr_t *, uint8_t **)>(dll, "voicevox_tts")(text, speaker_id, options, output_wav_length, output_wav);
 }
@@ -623,25 +623,25 @@ const char *last_error_message(DLL &dll)
 }
 
 VoicevoxResultCode voicevox_load_openjtalk_dict(DLL &dll,
-                                                   const char *dict_path)
+                                                const char *dict_path)
 {
   return load_func<VoicevoxResultCode (*)(const char *)>(dll, "voicevox_load_openjtalk_dict")(dict_path);
 }
 
 VoicevoxResultCode voicevox_tts_v12(DLL &dll,
-                                       const char *text,
-                                       int64_t speaker_id,
-                                       int *output_binary_size,
-                                       uint8_t **output_wav)
+                                    const char *text,
+                                    int64_t speaker_id,
+                                    int *output_binary_size,
+                                    uint8_t **output_wav)
 {
   return load_func<VoicevoxResultCode (*)(const char *, int64_t, int *, uint8_t **)>(dll, "voicevox_tts")(text, speaker_id, output_binary_size, output_wav);
 }
 
 VoicevoxResultCode voicevox_tts_from_kana(DLL &dll,
-                                             const char *text,
-                                             int64_t speaker_id,
-                                             int *output_binary_size,
-                                             uint8_t **output_wav)
+                                          const char *text,
+                                          int64_t speaker_id,
+                                          int *output_binary_size,
+                                          uint8_t **output_wav)
 {
   return load_func<VoicevoxResultCode (*)(const char *, int64_t, int *, uint8_t **)>(dll, "voicevox_tts_from_kana")(text, speaker_id, output_binary_size, output_wav);
 }

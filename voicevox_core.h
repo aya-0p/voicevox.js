@@ -290,7 +290,8 @@ typedef struct VoicevoxUserDictWord
 /**
  * `accent_phrases` のオプション
  */
-typedef struct VoicevoxAccentPhrasesOptions {
+typedef struct VoicevoxAccentPhrasesOptions
+{
   /**
    * aquestalk形式のkanaとしてテキストを解釈する
    */
@@ -1099,7 +1100,7 @@ struct VoicevoxInitializeOptionsV14 voicevox_make_default_initialize_options_v14
  * @return 結果コード #VoicevoxResultCode
  */
 VoicevoxResultCode voicevox_initialize(DLL &dll,
-                                          struct VoicevoxInitializeOptionsV14 options);
+                                       struct VoicevoxInitializeOptionsV14 options);
 
 /**
  * モデルを読み込む
@@ -1107,7 +1108,7 @@ VoicevoxResultCode voicevox_initialize(DLL &dll,
  * @return 結果コード #VoicevoxResultCode
  */
 VoicevoxResultCode voicevox_load_model(DLL &dll,
-                                          uint32_t speaker_id);
+                                       uint32_t speaker_id);
 
 /**
  * ハードウェアアクセラレーションがGPUモードか判定する
@@ -1154,11 +1155,11 @@ const char *voicevox_get_supported_devices_json(DLL &dll);
  * @param output_predict_duration_data 成功後にメモリ領域が割り当てられるので ::voicevox_predict_duration_data_free で解放する必要がある
  */
 VoicevoxResultCode voicevox_predict_duration(DLL &dll,
-                                                uintptr_t length,
-                                                int64_t *phoneme_vector,
-                                                uint32_t speaker_id,
-                                                uintptr_t *output_predict_duration_data_length,
-                                                float **output_predict_duration_data);
+                                             uintptr_t length,
+                                             int64_t *phoneme_vector,
+                                             uint32_t speaker_id,
+                                             uintptr_t *output_predict_duration_data_length,
+                                             float **output_predict_duration_data);
 
 /**
  * ::voicevox_predict_durationで出力されたデータを解放する
@@ -1195,16 +1196,16 @@ void voicevox_predict_duration_data_free(DLL &dll,
  * @param output_predict_intonation_data 成功後にメモリ領域が割り当てられるので ::voicevox_predict_intonation_data_free で解放する必要がある
  */
 VoicevoxResultCode voicevox_predict_intonation(DLL &dll,
-                                                  uintptr_t length,
-                                                  int64_t *vowel_phoneme_vector,
-                                                  int64_t *consonant_phoneme_vector,
-                                                  int64_t *start_accent_vector,
-                                                  int64_t *end_accent_vector,
-                                                  int64_t *start_accent_phrase_vector,
-                                                  int64_t *end_accent_phrase_vector,
-                                                  uint32_t speaker_id,
-                                                  uintptr_t *output_predict_intonation_data_length,
-                                                  float **output_predict_intonation_data);
+                                               uintptr_t length,
+                                               int64_t *vowel_phoneme_vector,
+                                               int64_t *consonant_phoneme_vector,
+                                               int64_t *start_accent_vector,
+                                               int64_t *end_accent_vector,
+                                               int64_t *start_accent_phrase_vector,
+                                               int64_t *end_accent_phrase_vector,
+                                               uint32_t speaker_id,
+                                               uintptr_t *output_predict_intonation_data_length,
+                                               float **output_predict_intonation_data);
 
 /**
  * ::voicevox_predict_intonationで出力されたデータを解放する
@@ -1234,13 +1235,13 @@ void voicevox_predict_intonation_data_free(DLL &dll,
  * @param output_decode_data 成功後にメモリ領域が割り当てられるので ::voicevox_decode_data_free で解放する必要がある
  */
 VoicevoxResultCode voicevox_decode(DLL &dll,
-                                      uintptr_t length,
-                                      uintptr_t phoneme_size,
-                                      float *f0,
-                                      float *phoneme_vector,
-                                      uint32_t speaker_id,
-                                      uintptr_t *output_decode_data_length,
-                                      float **output_decode_data);
+                                   uintptr_t length,
+                                   uintptr_t phoneme_size,
+                                   float *f0,
+                                   float *phoneme_vector,
+                                   uint32_t speaker_id,
+                                   uintptr_t *output_decode_data_length,
+                                   float **output_decode_data);
 
 /**
  * ::voicevox_decodeで出力されたデータを解放する
@@ -1271,10 +1272,10 @@ struct VoicevoxAudioQueryOptions voicevox_make_default_audio_query_options(DLL &
  * @param output_audio_query_json 自動でheapメモリが割り当てられるので ::voicevox_audio_query_json_free で解放する必要がある
  */
 VoicevoxResultCode voicevox_audio_query(DLL &dll,
-                                           const char *text,
-                                           uint32_t speaker_id,
-                                           struct VoicevoxAudioQueryOptions options,
-                                           char **output_audio_query_json);
+                                        const char *text,
+                                        uint32_t speaker_id,
+                                        struct VoicevoxAudioQueryOptions options,
+                                        char **output_audio_query_json);
 
 /**
  * デフォルトの `accent_phrases` のオプションを生成する
@@ -1349,7 +1350,6 @@ VoicevoxResultCode voicevox_mora_data(DLL &dll,
                                       uint32_t speaker_id,
                                       char **output_accent_phrases_json);
 
-
 /**
  * jsonフォーマットされた AccnetPhrase データのメモリを解放する
  * @param [in] accented_phrase_json 解放する json フォーマットされた AccnetPhrase データ
@@ -1374,11 +1374,11 @@ void voicevox_accent_phrases_json_free(DLL &dll,
  * @param output_wav 自動で output_wav_length 分のデータが割り当てられるので ::voicevox_wav_free で解放する必要がある
  */
 VoicevoxResultCode voicevox_synthesis(DLL &dll,
-                                         const char *audio_query_json,
-                                         uint32_t speaker_id,
-                                         struct VoicevoxSynthesisOptions options,
-                                         uintptr_t *output_wav_length,
-                                         uint8_t **output_wav);
+                                      const char *audio_query_json,
+                                      uint32_t speaker_id,
+                                      struct VoicevoxSynthesisOptions options,
+                                      uintptr_t *output_wav_length,
+                                      uint8_t **output_wav);
 
 /**
  * デフォルトのテキスト音声合成オプションを生成する
@@ -1400,11 +1400,11 @@ struct VoicevoxTtsOptionsV14 voicevox_make_default_tts_options_v14(DLL &dll);
  * @param output_wav は自動で output_wav_length 分のデータが割り当てられるので ::voicevox_wav_free で解放する必要がある
  */
 VoicevoxResultCode voicevox_tts(DLL &dll,
-                                   const char *text,
-                                   uint32_t speaker_id,
-                                   struct VoicevoxTtsOptionsV14 options,
-                                   uintptr_t *output_wav_length,
-                                   uint8_t **output_wav);
+                                const char *text,
+                                uint32_t speaker_id,
+                                struct VoicevoxTtsOptionsV14 options,
+                                uintptr_t *output_wav_length,
+                                uint8_t **output_wav);
 
 /**
  * jsonフォーマットされた AudioQuery データのメモリを解放する
@@ -1550,7 +1550,7 @@ const char *last_error_message(DLL &dll);
  * @return 結果コード
  */
 VoicevoxResultCode voicevox_load_openjtalk_dict(DLL &dll,
-                                                   const char *dict_path);
+                                                const char *dict_path);
 
 /**
  * @fn
@@ -1562,10 +1562,10 @@ VoicevoxResultCode voicevox_load_openjtalk_dict(DLL &dll,
  * @return 結果コード
  */
 VoicevoxResultCode voicevox_tts_v12(DLL &dll,
-                                       const char *text,
-                                       int64_t speaker_id,
-                                       int *output_binary_size,
-                                       uint8_t **output_wav);
+                                    const char *text,
+                                    int64_t speaker_id,
+                                    int *output_binary_size,
+                                    uint8_t **output_wav);
 
 /**
  * @fn
@@ -1577,10 +1577,10 @@ VoicevoxResultCode voicevox_tts_v12(DLL &dll,
  * @return 結果コード
  */
 VoicevoxResultCode voicevox_tts_from_kana(DLL &dll,
-                                             const char *text,
-                                             int64_t speaker_id,
-                                             int *output_binary_size,
-                                             uint8_t **output_wav);
+                                          const char *text,
+                                          int64_t speaker_id,
+                                          int *output_binary_size,
+                                          uint8_t **output_wav);
 
 /**
  * @fn
