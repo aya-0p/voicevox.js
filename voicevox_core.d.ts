@@ -959,7 +959,7 @@ export declare class VoicevoxCore {
   /**
    * 初期化する
    * 音声合成するための初期化を行う。他の関数を正しく実行するには先に初期化が必要
-   * @param rootDirPath 必要なファイルがあるディレクトリ。相対パス・絶対パスどちらも指定可能。文字コードはUTF
+   * @param rootDirPath 必要なファイルがあるディレクトリ。相対パス・絶対パスどちらも指定可能。
    * @param useGpu trueならGPU用、falseならCPU用の初期化を行う
    * @param cpuNumThreads 推論に用いるスレッド数を設定する。0の場合論理コア数の半分か、物理コア数が設定される
    * @returns 成功したらtrue、失敗したらfalse
@@ -973,7 +973,7 @@ export declare class VoicevoxCore {
   /**
    * 初期化する
    * 音声合成するための初期化を行う。他の関数を正しく実行するには先に初期化が必要
-   * @param rootDirPath 必要なファイルがあるディレクトリ。相対パス・絶対パスどちらも指定可能。文字コードはUTF
+   * @param rootDirPath 必要なファイルがあるディレクトリ。相対パス・絶対パスどちらも指定可能。
    * @param useGpu trueならGPU用、falseならCPU用の初期化を行う
    * @returns 成功したらtrue、失敗したらfalse
    * 何度も実行可能。use_gpuを変更して実行しなおすことも可能。
@@ -1008,7 +1008,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.5.x, v0.6.x, v0.7.xで利用できます
    */
-  yukarinSaForwardV5(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<number> & { result2: boolean };
+  yukarinSaForwardV5(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
 
   /**
    * 波形を求める

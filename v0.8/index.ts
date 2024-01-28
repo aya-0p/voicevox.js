@@ -11,7 +11,7 @@ const Core = Symbol("Core");
 export class Voicevox {
   [Core]: VoicevoxCore;
   /**
-   * @param path libvoicevox_core.so, libvoicevox_core.solib, voicevox_core.dllを指すパス
+   * @param path coreを指すパス
    */
   constructor(path: string) {
     checkValidString(path, "path");
