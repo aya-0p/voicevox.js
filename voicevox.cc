@@ -91,6 +91,10 @@ Napi::Object Voicevox::Init(Napi::Env env, Napi::Object exports)
 																												 InstanceMethod("voicevoxPredictIntonation", &Voicevox::voicevoxPredictIntonation),
 																												 InstanceMethod("voicevoxDecode", &Voicevox::voicevoxDecode),
 																												 InstanceMethod("voicevoxAudioQuery", &Voicevox::voicevoxAudioQuery),
+																												 InstanceMethod("voicevoxAccentPhrases", &Voicevox::voicevoxAudioQuery),
+																												 InstanceMethod("voicevoxMoraLength", &Voicevox::voicevoxAudioQuery),
+																												 InstanceMethod("voicevoxMoraPitch", &Voicevox::voicevoxAudioQuery),
+																												 InstanceMethod("voicevoxMoraData", &Voicevox::voicevoxAudioQuery),
 																												 InstanceMethod("voicevoxSynthesis", &Voicevox::voicevoxSynthesis),
 																												 InstanceMethod("voicevoxTts", &Voicevox::voicevoxTts),
 																												 InstanceMethod("initialize", &Voicevox::initialize),
@@ -1018,7 +1022,7 @@ Napi::Value Voicevox::voicevoxInitialize(const Napi::CallbackInfo &info)
 	options.cpu_num_threads = static_cast<uint16_t>(load_uint32_t(info, 1));
 	options.load_all_models = load_bool(info, 2);
 	options.open_jtalk_dict_dir = load_string(info, 3);
-	VoicevoxResultCodeV14 resultCode = voicevox_initialize(this->dll, options);
+	VoicevoxResultCode resultCode = voicevox_initialize(this->dll, options);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
 }
@@ -1028,7 +1032,7 @@ Napi::Value Voicevox::voicevoxLoadModel(const Napi::CallbackInfo &info)
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
 	uint32_t speaker_id = load_uint32_t(info, 0);
-	VoicevoxResultCodeV14 resultCode = voicevox_load_model(this->dll, speaker_id);
+	VoicevoxResultCode resultCode = voicevox_load_model(this->dll, speaker_id);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
 }
@@ -1138,7 +1142,7 @@ Napi::Value Voicevox::voicevoxPredictDuration(const Napi::CallbackInfo &info)
 	uint32_t speaker_id = load_uint32_t(info, 1);
 	uintptr_t output_decode_data_length;
 	float *output_predict_duration_data;
-	VoicevoxResultCodeV14 resultCode = voicevox_predict_duration(this->dll, length, phoneme_vector.data(), speaker_id, &output_decode_data_length, &output_predict_duration_data);
+	VoicevoxResultCode resultCode = voicevox_predict_duration(this->dll, length, phoneme_vector.data(), speaker_id, &output_decode_data_length, &output_predict_duration_data);
 	Napi::Array result = Napi::Array::New(env, output_decode_data_length);
 	for (uintptr_t i = 0; i < output_decode_data_length; i++)
 	{
@@ -1194,7 +1198,7 @@ Napi::Value Voicevox::voicevoxPredictIntonation(const Napi::CallbackInfo &info)
 	uint32_t speaker_id = load_uint32_t(info, 6);
 	uintptr_t output_predict_intonation_data_length;
 	float *output_predict_intonation_data;
-	VoicevoxResultCodeV14 resultCode = voicevox_predict_intonation(this->dll, length, vowel_phoneme_vector.data(), consonant_phoneme_vector.data(), start_accent_vector.data(), end_accent_vector.data(), start_accent_phrase_vector.data(), end_accent_phrase_vector.data(), speaker_id, &output_predict_intonation_data_length, &output_predict_intonation_data);
+	VoicevoxResultCode resultCode = voicevox_predict_intonation(this->dll, length, vowel_phoneme_vector.data(), consonant_phoneme_vector.data(), start_accent_vector.data(), end_accent_vector.data(), start_accent_phrase_vector.data(), end_accent_phrase_vector.data(), speaker_id, &output_predict_intonation_data_length, &output_predict_intonation_data);
 	Napi::Array result = Napi::Array::New(env, output_predict_intonation_data_length);
 	for (uintptr_t i = 0; i < output_predict_intonation_data_length; i++)
 	{
@@ -1237,7 +1241,7 @@ Napi::Value Voicevox::voicevoxDecode(const Napi::CallbackInfo &info)
 	uint32_t speaker_id = load_uint32_t(info, 2);
 	uintptr_t output_decode_data_length;
 	float *output_decode_data;
-	VoicevoxResultCodeV14 resultCode = voicevox_decode(this->dll, length, phoneme_size, f0_vector.data(), phoneme_vector.data(), speaker_id, &output_decode_data_length, &output_decode_data);
+	VoicevoxResultCode resultCode = voicevox_decode(this->dll, length, phoneme_size, f0_vector.data(), phoneme_vector.data(), speaker_id, &output_decode_data_length, &output_decode_data);
 	Napi::Array result = Napi::Array::New(env, output_decode_data_length);
 	for (uintptr_t i = 0; i < output_decode_data_length; i++)
 	{
@@ -1275,12 +1279,111 @@ Napi::Value Voicevox::voicevoxAudioQuery(const Napi::CallbackInfo &info)
 	uint32_t speaker_id = load_uint32_t(info, 1);
 	options.kana = load_bool(info, 2);
 	char *output_audio_query_json;
-	VoicevoxResultCodeV14 resultCode = voicevox_audio_query(this->dll, text, speaker_id, options, &output_audio_query_json);
+	VoicevoxResultCode resultCode = voicevox_audio_query(this->dll, text, speaker_id, options, &output_audio_query_json);
 	obj.Set("result", Napi::String::New(env, copy_str(output_audio_query_json)));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	try
 	{
 		voicevox_audio_query_json_free(this->dll, output_audio_query_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
+	return obj;
+}
+
+Napi::Value Voicevox::voicevoxAccentPhrases(const Napi::CallbackInfo &info)
+{
+	Napi::Env env = info.Env();
+	Napi::Object obj = Napi::Object::New(env);
+	VoicevoxAccentPhrasesOptions options;
+	try
+	{
+		options = voicevox_make_default_accent_phrases_options(this->dll);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
+	const char *text = load_string(info, 0);
+	uint32_t speaker_id = load_uint32_t(info, 1);
+	options.kana = load_bool(info, 2);
+	char *output_accent_phrases_json;
+	VoicevoxResultCode resultCode = voicevox_accent_phrases(this->dll, text, speaker_id, options, &output_accent_phrases_json);
+	obj.Set("result", Napi::String::New(env, copy_str(output_accent_phrases_json)));
+	obj.Set("resultCode", Napi::Number::New(env, resultCode));
+	try
+	{
+		voicevox_accent_phrases_json_free(this->dll, output_accent_phrases_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
+	return obj;
+}
+
+Napi::Value Voicevox::voicevoxMoraLength(const Napi::CallbackInfo &info)
+{
+	Napi::Env env = info.Env();
+	Napi::Object obj = Napi::Object::New(env);
+	const char *accent_phrases_json = load_string(info, 0);
+	uint32_t speaker_id = load_uint32_t(info, 1);
+	char *output_accent_phrases_json;
+	VoicevoxResultCode resultCode = voicevox_mora_length(this->dll, accent_phrases_json, speaker_id, &output_accent_phrases_json);
+	obj.Set("result", Napi::String::New(env, copy_str(output_accent_phrases_json)));
+	obj.Set("resultCode", Napi::Number::New(env, resultCode));
+	try
+	{
+		voicevox_accent_phrases_json_free(this->dll, output_accent_phrases_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
+	return obj;
+}
+
+Napi::Value Voicevox::voicevoxMoraPitch(const Napi::CallbackInfo &info)
+{
+	Napi::Env env = info.Env();
+	Napi::Object obj = Napi::Object::New(env);
+	const char *accent_phrases_json = load_string(info, 0);
+	uint32_t speaker_id = load_uint32_t(info, 1);
+	char *output_accent_phrases_json;
+	VoicevoxResultCode resultCode = voicevox_mora_pitch(this->dll, accent_phrases_json, speaker_id, &output_accent_phrases_json);
+	obj.Set("result", Napi::String::New(env, copy_str(output_accent_phrases_json)));
+	obj.Set("resultCode", Napi::Number::New(env, resultCode));
+	try
+	{
+		voicevox_accent_phrases_json_free(this->dll, output_accent_phrases_json);
+	}
+	catch (const std::exception &e)
+	{
+		Napi::Error::New(env, e.what()).ThrowAsJavaScriptException();
+		return obj;
+	}
+	return obj;
+}
+
+Napi::Value Voicevox::voicevoxMoraData(const Napi::CallbackInfo &info)
+{
+	Napi::Env env = info.Env();
+	Napi::Object obj = Napi::Object::New(env);
+	const char *accent_phrases_json = load_string(info, 0);
+	uint32_t speaker_id = load_uint32_t(info, 1);
+	char *output_accent_phrases_json;
+	VoicevoxResultCode resultCode = voicevox_mora_data(this->dll, accent_phrases_json, speaker_id, &output_accent_phrases_json);
+	obj.Set("result", Napi::String::New(env, copy_str(output_accent_phrases_json)));
+	obj.Set("resultCode", Napi::Number::New(env, resultCode));
+	try
+	{
+		voicevox_accent_phrases_json_free(this->dll, output_accent_phrases_json);
 	}
 	catch (const std::exception &e)
 	{
@@ -1309,7 +1412,7 @@ Napi::Value Voicevox::voicevoxSynthesis(const Napi::CallbackInfo &info)
 	options.enable_interrogative_upspeak = load_bool(info, 2);
 	uintptr_t output_wav_length;
 	uint8_t *output_wav;
-	VoicevoxResultCodeV14 resultCode = voicevox_synthesis(this->dll, audio_query_json, speaker_id, options, &output_wav_length, &output_wav);
+	VoicevoxResultCode resultCode = voicevox_synthesis(this->dll, audio_query_json, speaker_id, options, &output_wav_length, &output_wav);
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_wav_length));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
@@ -1335,7 +1438,7 @@ Napi::Value Voicevox::voicevoxTts(const Napi::CallbackInfo &info)
 	options.kana = load_bool(info, 3);
 	uintptr_t output_wav_length;
 	uint8_t *output_wav;
-	VoicevoxResultCodeV14 resultCode = voicevox_tts(this->dll, text, speaker_id, options, &output_wav_length, &output_wav);
+	VoicevoxResultCode resultCode = voicevox_tts(this->dll, text, speaker_id, options, &output_wav_length, &output_wav);
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_wav_length));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
@@ -1608,7 +1711,7 @@ Napi::Value Voicevox::voicevoxLoadOpenjtalkDict(const Napi::CallbackInfo &info)
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
 	const char *dict_path = load_string(info, 0);
-	VoicevoxResultCodeV12 resultCode = voicevox_load_openjtalk_dict(this->dll, dict_path);
+	VoicevoxResultCode resultCode = voicevox_load_openjtalk_dict(this->dll, dict_path);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
 }
@@ -1621,7 +1724,7 @@ Napi::Value Voicevox::voicevoxTtsV12(const Napi::CallbackInfo &info)
 	int64_t speaker_id = static_cast<int64_t>(load_uint32_t(info, 1));
 	int output_binary_size;
 	uint8_t *output_wav;
-	VoicevoxResultCodeV12 resultCode = voicevox_tts_v12(this->dll, text, speaker_id, &output_binary_size, &output_wav);
+	VoicevoxResultCode resultCode = voicevox_tts_v12(this->dll, text, speaker_id, &output_binary_size, &output_wav);
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_binary_size));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
@@ -1635,7 +1738,7 @@ Napi::Value Voicevox::voicevoxTtsFromKana(const Napi::CallbackInfo &info)
 	int64_t speaker_id = static_cast<int64_t>(load_uint32_t(info, 1));
 	int output_binary_size;
 	uint8_t *output_wav;
-	VoicevoxResultCodeV12 resultCode = voicevox_tts_from_kana(this->dll, text, speaker_id, &output_binary_size, &output_wav);
+	VoicevoxResultCode resultCode = voicevox_tts_from_kana(this->dll, text, speaker_id, &output_binary_size, &output_wav);
 	obj.Set("result", Napi::Buffer<uint8_t>::Copy(env, output_wav, output_binary_size));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;

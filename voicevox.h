@@ -61,6 +61,10 @@ public:
   Napi::Value voicevoxPredictIntonation(const Napi::CallbackInfo &info);
   Napi::Value voicevoxDecode(const Napi::CallbackInfo &info);
   Napi::Value voicevoxAudioQuery(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxAccentPhrases(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxMoraLength(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxMoraPitch(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxMoraData(const Napi::CallbackInfo &info);
   Napi::Value voicevoxSynthesis(const Napi::CallbackInfo &info);
   Napi::Value voicevoxTts(const Napi::CallbackInfo &info);
   Napi::Value initialize(const Napi::CallbackInfo &info);
