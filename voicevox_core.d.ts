@@ -825,14 +825,14 @@ export declare class VoicevoxCore {
    * 音声合成するための初期化を行う。他の関数を正しく実行するには先に初期化が必要
    * @param useGpu trueならGPU用、falseならCPU用の初期化を行う
    * @param cpuNumThreads 推論に用いるスレッド数を設定する。0の場合論理コア数の半分か、物理コア数が設定される
-   * @param loadAddModels trueなら全てのモデルをロードする
+   * @param loadAllModels trueなら全てのモデルをロードする
    * @returns 成功したらtrue、失敗したらfalse
    * 何度も実行可能。use_gpuを変更して実行しなおすことも可能。
    * 最後に実行したuse_gpuに従って他の関数が実行される。
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  initialize(useGpu: boolean, cpuNumThreads: number, loadAddModels: boolean): Result<boolean>;
+  initialize(useGpu: boolean, cpuNumThreads: number, loadAllModels: boolean): Result<boolean>;
 
   /**
    * モデルをロードする
@@ -906,7 +906,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.8.x, v0.9.x, v0.10.x, v0.11.x, v0.12.x, v0.13.xで利用できます
    */
-  yukarinSaForward(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<number> & { result2: boolean };
+  yukarinSaForward(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
 
   /**
    * 波形を求める
@@ -934,7 +934,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxLoadOpenjtalkDict(dictPath: string): ResultCodeV13;
+  voicevoxLoadOpenjtalkDict(dictPath: string): ResultCodeV12;
 
   /**
    * text to spearchを実行する
@@ -944,7 +944,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsV13(text: string, speakerId: number): Result<Buffer> & ResultCodeV13;
+  voicevoxTtsV13(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
 
   /**
    * text to spearchをAquesTalkライクな記法で実行する
@@ -954,7 +954,7 @@ export declare class VoicevoxCore {
    * 
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsFromKana(text: string, speakerId: number): Result<Buffer> & ResultCodeV13;
+  voicevoxTtsFromKana(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
 
   /**
    * 初期化する
@@ -1176,7 +1176,6 @@ interface ResultCodeV14 {
   resultCode: VoicevoxResultCodeV14;
 }
 
-/** @todo: 書く */
 export declare enum VoicevoxResultCodeV14 {
   /**
    * 成功
@@ -1236,12 +1235,11 @@ export declare enum VoicevoxResultCodeV14 {
   VOICEVOX_RESULT_INVALID_AUDIO_QUERY_ERROR = 13,
 }
 
-interface ResultCodeV13 {
-  resultCode: VoicevoxResultCodeV13;
+interface ResultCodeV12 {
+  resultCode: VoicevoxResultCodeV12;
 }
 
-/** @todo: 書く */
-export declare enum VoicevoxResultCodeV13 {
+export declare enum VoicevoxResultCodeV12 {
   /**
    * 成功
    */

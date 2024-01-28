@@ -146,7 +146,7 @@ export class Voicevox {
       checkValidArray(consonantPhoneme, "consonantPhoneme", "bigint");
       checkValidArray(startAccent, "startAccent", "bigint");
       checkValidArray(endAccent, "endAccent", "bigint");
-      checkValidArray(startAccentPhrase, "startAccnetPhrase", "bigint");
+      checkValidArray(startAccentPhrase, "startAccentPhrase", "bigint");
       checkValidArray(endAccentPhrase, "endAccentPhrase", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
       const { result, resultCode } = this[Core].voicevoxPredictIntonation(vowelPhoneme, consonantPhoneme, startAccent, endAccent, startAccentPhrase, endAccentPhrase, speakerId);
