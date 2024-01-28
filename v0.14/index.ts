@@ -6,6 +6,7 @@ const Core = Symbol("Core");
 /**
  * voicevox_coreを利用してVOICEVOXを使う
  * @version 0.14.x
+ * @version 0.15.x
  */
 export class Voicevox {
   [Core]: VoicevoxCore;
