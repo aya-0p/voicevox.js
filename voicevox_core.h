@@ -124,17 +124,17 @@ enum VoicevoxUserDictWordType : int32_t
 /**
  * テキスト解析器としてのOpen JTalk。
  *
- * <b>構築</b>(_construction_)は ::voicevox_open_jtalk_rc_new で行い、<b>破棄</b>(_destruction_)は ::voicevox_open_jtalk_rc_delete で行う。
+ * <b>構築</b>(_construction_)は ::voicevox_open_jtalk_rc_new_v0_16 で行い、<b>破棄</b>(_destruction_)は ::voicevox_open_jtalk_rc_delete_v0_16 で行う。
  *
  * 参照カウント方式のスマートポインタ(reference-counted smart pointer)であり、
- * ::voicevox_synthesizer_new に渡されるときには参照カウンタがインクリメントされる形でオブジェクトの共有が行われる。
+ * ::voicevox_synthesizer_new_v0_16 に渡されるときには参照カウンタがインクリメントされる形でオブジェクトの共有が行われる。
  *
  * \example{
  * ```c
  * OpenJtalkRc *open_jtalk;
- * voicevox_open_jtalk_rc_new("./open_jtalk_dic_utf_8-1.11", &open_jtalk);
+ * voicevox_open_jtalk_rc_new_v0_16("./open_jtalk_dic_utf_8-1.11", &open_jtalk);
  * // ⋮
- * voicevox_open_jtalk_rc_delete(open_jtalk);
+ * voicevox_open_jtalk_rc_delete_v0_16(open_jtalk);
  * ```
  * }
  */
@@ -143,7 +143,7 @@ typedef struct OpenJtalkRc OpenJtalkRc;
 /**
  * 音声シンセサイザ。
  *
- * <b>構築</b>(_construction_)は ::voicevox_synthesizer_new で行い、<b>破棄</b>(_destruction_)は ::voicevox_synthesizer_delete で行う。
+ * <b>構築</b>(_construction_)は ::voicevox_synthesizer_new_v0_16 で行い、<b>破棄</b>(_destruction_)は ::voicevox_synthesizer_delete_v0_16 で行う。
  */
 typedef struct VoicevoxSynthesizer VoicevoxSynthesizer;
 
@@ -156,7 +156,7 @@ typedef struct VoicevoxUserDict VoicevoxUserDict;
  * 音声モデル。
  *
  * VVMファイルと対応する。
- * <b>構築</b>(_construction_)は ::voicevox_voice_model_new_from_path で行い、<b>破棄</b>(_destruction_)は ::voicevox_voice_model_delete で行う。
+ * <b>構築</b>(_construction_)は ::voicevox_voice_model_new_from_path_v0_16 で行い、<b>破棄</b>(_destruction_)は ::voicevox_voice_model_delete_v0_16 で行う。
  */
 typedef struct VoicevoxVoiceModel VoicevoxVoiceModel;
 
@@ -185,7 +185,7 @@ typedef struct VoicevoxInitializeOptionsV14
 } VoicevoxInitializeOptionsV14;
 
 /**
- * ::voicevox_synthesizer_new のオプション。
+ * ::voicevox_synthesizer_new_v0_16 のオプション。
  */
 typedef struct VoicevoxInitializeOptions
 {
@@ -224,7 +224,7 @@ typedef const char *VoicevoxVoiceModelId;
 typedef uint32_t VoicevoxStyleId;
 
 /**
- * ::voicevox_synthesizer_synthesis のオプション。
+ * ::voicevox_synthesizer_synthesis_v0_16 のオプション。
  */
 typedef struct VoicevoxSynthesisOptions
 {
@@ -250,7 +250,7 @@ typedef struct VoicevoxTtsOptionsV14
 } VoicevoxTtsOptionsV14;
 
 /**
- * ::voicevox_synthesizer_tts のオプション。
+ * ::voicevox_synthesizer_tts_v0_16 のオプション。
  */
 typedef struct VoicevoxTtsOptions
 {
@@ -301,7 +301,7 @@ typedef struct VoicevoxAccentPhrasesOptions
 /**
  * ::OpenJtalkRc を<b>構築</b>(_construct_)する。
  *
- * 解放は ::voicevox_open_jtalk_rc_delete で行う。
+ * 解放は ::voicevox_open_jtalk_rc_delete_v0_16 で行う。
  *
  * @param [in] open_jtalk_dic_dir 辞書ディレクトリを指すUTF-8のパス
  * @param [out] out_open_jtalk 構築先
@@ -311,7 +311,7 @@ typedef struct VoicevoxAccentPhrasesOptions
  * \example{
  * ```c
  * OpenJtalkRc *open_jtalk;
- * voicevox_open_jtalk_rc_new("./open_jtalk_dic_utf_8-1.11", &open_jtalk);
+ * voicevox_open_jtalk_rc_new_v0_16("./open_jtalk_dic_utf_8-1.11", &open_jtalk);
  * ```
  * }
  *
@@ -320,7 +320,7 @@ typedef struct VoicevoxAccentPhrasesOptions
  * - `out_open_jtalk`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_open_jtalk_rc_new(DLL &dll,
+VoicevoxResultCode voicevox_open_jtalk_rc_new_v0_16(DLL &dll,
                                               const char *open_jtalk_dic_dir,
                                               struct OpenJtalkRc **out_open_jtalk);
 
@@ -333,11 +333,11 @@ VoicevoxResultCode voicevox_open_jtalk_rc_new(DLL &dll,
  * @param [in] user_dict ユーザー辞書
  *
  * \safety{
- * - `open_jtalk`は ::voicevox_open_jtalk_rc_new で得たものでなければならず、また ::voicevox_open_jtalk_rc_delete で解放されていてはいけない。
- * - `user_dict`は ::voicevox_user_dict_new で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
+ * - `open_jtalk`は ::voicevox_open_jtalk_rc_new_v0_16 で得たものでなければならず、また ::voicevox_open_jtalk_rc_delete_v0_16 で解放されていてはいけない。
+ * - `user_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また ::voicevox_user_dict_delete_v0_16 で解放されていてはいけない。
  * }
  */
-VoicevoxResultCode voicevox_open_jtalk_rc_use_user_dict(DLL &dll,
+VoicevoxResultCode voicevox_open_jtalk_rc_use_user_dict_v0_16(DLL &dll,
                                                         const struct OpenJtalkRc *open_jtalk,
                                                         const struct VoicevoxUserDict *user_dict);
 
@@ -348,29 +348,29 @@ VoicevoxResultCode voicevox_open_jtalk_rc_use_user_dict(DLL &dll,
  *
  * \example{
  * ```c
- * voicevox_open_jtalk_rc_delete(open_jtalk);
+ * voicevox_open_jtalk_rc_delete_v0_16(open_jtalk);
  * ```
  * }
  *
  * \safety{
- * - `open_jtalk`は ::voicevox_open_jtalk_rc_new で得たものでなければならず、また既にこの関数で解放されていてはいけない。
+ * - `open_jtalk`は ::voicevox_open_jtalk_rc_new_v0_16 で得たものでなければならず、また既にこの関数で解放されていてはいけない。
  * - `open_jtalk`は以後<b>ダングリングポインタ</b>(_dangling pointer_)として扱われなくてはならない。
  * }
  */
-void voicevox_open_jtalk_rc_delete(DLL &dll,
+void voicevox_open_jtalk_rc_delete_v0_16(DLL &dll,
                                    struct OpenJtalkRc *open_jtalk);
 
 /**
  * デフォルトの初期化オプションを生成する
  * @return デフォルト値が設定された初期化オプション
  */
-struct VoicevoxInitializeOptions voicevox_make_default_initialize_options(DLL &dll);
+struct VoicevoxInitializeOptions voicevox_make_default_initialize_options_v0_16(DLL &dll);
 
 /**
  * voicevoxのバージョンを取得する。
  * @return SemVerでフォーマットされたバージョン。
  */
-const char *voicevox_get_version(DLL &dll);
+const char *voicevox_get_version_v0_14(DLL &dll);
 
 /**
  * VVMファイルから ::VoicevoxVoiceModel を<b>構築</b>(_construct_)する。
@@ -385,7 +385,7 @@ const char *voicevox_get_version(DLL &dll);
  * - `out_model`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_voice_model_new_from_path(DLL &dll,
+VoicevoxResultCode voicevox_voice_model_new_from_path_v0_16(DLL &dll,
                                                       const char *path,
                                                       struct VoicevoxVoiceModel **out_model);
 
@@ -397,10 +397,10 @@ VoicevoxResultCode voicevox_voice_model_new_from_path(DLL &dll,
  * @returns 音声モデルID
  *
  * \safety{
- * - `model`は ::voicevox_voice_model_new_from_path で得たものでなければならず、また ::voicevox_voice_model_delete で解放されていてはいけない。
+ * - `model`は ::voicevox_voice_model_new_from_path_v0_16 で得たものでなければならず、また ::voicevox_voice_model_delete_v0_16 で解放されていてはいけない。
  * }
  */
-VoicevoxVoiceModelId voicevox_voice_model_id(DLL &dll,
+VoicevoxVoiceModelId voicevox_voice_model_id_v0_16(DLL &dll,
                                              const struct VoicevoxVoiceModel *model);
 
 /**
@@ -411,11 +411,11 @@ VoicevoxVoiceModelId voicevox_voice_model_id(DLL &dll,
  * @returns メタ情報のJSON文字列
  *
  * \safety{
- * - `model`は ::voicevox_voice_model_new_from_path で得たものでなければならず、また ::voicevox_voice_model_delete で解放されていてはいけない。
+ * - `model`は ::voicevox_voice_model_new_from_path_v0_16 で得たものでなければならず、また ::voicevox_voice_model_delete_v0_16 で解放されていてはいけない。
  * - 戻り値の文字列の<b>生存期間</b>(_lifetime_)は次にこの関数が呼ばれるか、`model`が破棄されるまでである。この生存期間を越えて文字列にアクセスしてはならない。
  * }
  */
-const char *voicevox_voice_model_get_metas_json(DLL &dll,
+const char *voicevox_voice_model_get_metas_json_v0_16(DLL &dll,
                                                 const struct VoicevoxVoiceModel *model);
 
 /**
@@ -424,11 +424,11 @@ const char *voicevox_voice_model_get_metas_json(DLL &dll,
  * @param [in] model 破棄対象
  *
  * \safety{
- * - `model`は ::voicevox_voice_model_new_from_path で得たものでなければならず、また既にこの関数で解放されていてはいけない。
+ * - `model`は ::voicevox_voice_model_new_from_path_v0_16 で得たものでなければならず、また既にこの関数で解放されていてはいけない。
  * - `model`は以後<b>ダングリングポインタ</b>(_dangling pointer_)として扱われなくてはならない。
  * }
  */
-void voicevox_voice_model_delete(DLL &dll,
+void voicevox_voice_model_delete_v0_16(DLL &dll,
                                  struct VoicevoxVoiceModel *model);
 
 /**
@@ -441,11 +441,11 @@ void voicevox_voice_model_delete(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `open_jtalk`は ::voicevox_voice_model_new_from_path で得たものでなければならず、また ::voicevox_open_jtalk_rc_new で解放されていてはいけない。
+ * - `open_jtalk`は ::voicevox_voice_model_new_from_path_v0_16 で得たものでなければならず、また ::voicevox_open_jtalk_rc_new_v0_16 で解放されていてはいけない。
  * - `out_synthesizer`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_new(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_new_v0_16(DLL &dll,
                                             const struct OpenJtalkRc *open_jtalk,
                                             struct VoicevoxInitializeOptions options,
                                             struct VoicevoxSynthesizer **out_synthesizer);
@@ -456,11 +456,11 @@ VoicevoxResultCode voicevox_synthesizer_new(DLL &dll,
  * @param [in] synthesizer 破棄対象
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また既にこの関数で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また既にこの関数で解放されていてはいけない。
  * - `synthesizer`は以後<b>ダングリングポインタ</b>(_dangling pointer_)として扱われなくてはならない。
  * }
  */
-void voicevox_synthesizer_delete(DLL &dll,
+void voicevox_synthesizer_delete_v0_16(DLL &dll,
                                  struct VoicevoxSynthesizer *synthesizer);
 
 /**
@@ -472,11 +472,11 @@ void voicevox_synthesizer_delete(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
- * - `model`は ::voicevox_voice_model_new_from_path で得たものでなければならず、また ::voicevox_voice_model_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
+ * - `model`は ::voicevox_voice_model_new_from_path_v0_16 で得たものでなければならず、また ::voicevox_voice_model_delete_v0_16 で解放されていてはいけない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_load_voice_model(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_load_voice_model_v0_16(DLL &dll,
                                                          const struct VoicevoxSynthesizer *synthesizer,
                                                          const struct VoicevoxVoiceModel *model);
 
@@ -489,11 +489,11 @@ VoicevoxResultCode voicevox_synthesizer_load_voice_model(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `model_id`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_unload_voice_model(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_unload_voice_model_v0_16(DLL &dll,
                                                            const struct VoicevoxSynthesizer *synthesizer,
                                                            VoicevoxVoiceModelId model_id);
 
@@ -505,10 +505,10 @@ VoicevoxResultCode voicevox_synthesizer_unload_voice_model(DLL &dll,
  * @returns GPUモードかどうか
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * }
  */
-bool voicevox_synthesizer_is_gpu_mode(DLL &dll,
+bool voicevox_synthesizer_is_gpu_mode_v0_16(DLL &dll,
                                       const struct VoicevoxSynthesizer *synthesizer);
 
 /**
@@ -520,34 +520,34 @@ bool voicevox_synthesizer_is_gpu_mode(DLL &dll,
  * @returns モデルが読み込まれているかどうか
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `model_id`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * }
  */
-bool voicevox_synthesizer_is_loaded_voice_model(DLL &dll,
+bool voicevox_synthesizer_is_loaded_voice_model_v0_16(DLL &dll,
                                                 const struct VoicevoxSynthesizer *synthesizer,
                                                 VoicevoxVoiceModelId model_id);
 
 /**
  * 今読み込んでいる音声モデルのメタ情報を、JSONで取得する。
  *
- * JSONの解放は ::voicevox_json_free で行う。
+ * JSONの解放は ::voicevox_json_free_v0_16 で行う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  *
  * @return メタ情報のJSON文字列
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * }
  */
-char *voicevox_synthesizer_create_metas_json(DLL &dll,
+char *voicevox_synthesizer_create_metas_json_v0_16(DLL &dll,
                                              const struct VoicevoxSynthesizer *synthesizer);
 
 /**
  * このライブラリで利用可能なデバイスの情報を、JSONで取得する。
  *
- * JSONの解放は ::voicevox_json_free で行う。
+ * JSONの解放は ::voicevox_json_free_v0_16 で行う。
  *
  * あくまで本ライブラリが対応しているデバイスの情報であることに注意。GPUが使える環境ではなかったとしても`cuda`や`dml`は`true`を示しうる。
  *
@@ -558,7 +558,7 @@ char *voicevox_synthesizer_create_metas_json(DLL &dll,
  * \example{
  * ```c
  * char *supported_devices;
- * VoicevoxResultCode result = voicevox_create_supported_devices_json(&supported_devices);
+ * VoicevoxResultCode result = voicevox_create_supported_devices_json_v0_16(&supported_devices);
  * ```
  * }
  *
@@ -566,13 +566,13 @@ char *voicevox_synthesizer_create_metas_json(DLL &dll,
  * - `output_supported_devices_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_create_supported_devices_json(DLL &dll,
+VoicevoxResultCode voicevox_create_supported_devices_json_v0_16(DLL &dll,
                                                           char **output_supported_devices_json);
 
 /**
  * AquesTalk風記法から、AudioQueryをJSONとして生成する。
  *
- * 生成したJSON文字列を解放するには ::voicevox_json_free を使う。
+ * 生成したJSON文字列を解放するには ::voicevox_json_free_v0_16 を使う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  * @param [in] kana AquesTalk風記法
@@ -584,19 +584,19 @@ VoicevoxResultCode voicevox_create_supported_devices_json(DLL &dll,
  * \example{
  * ```c
  * char *audio_query;
- * voicevox_synthesizer_create_audio_query_from_kana(synthesizer, "コンニチワ'",
+ * voicevox_synthesizer_create_audio_query_from_kana_v0_16(synthesizer, "コンニチワ'",
  *                                                   2, // "四国めたん (ノーマル)"
  *                                                   &audio_query);
  * ```
  * }
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `kana`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_audio_query_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_create_audio_query_from_kana(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_create_audio_query_from_kana_v0_16(DLL &dll,
                                                                      const struct VoicevoxSynthesizer *synthesizer,
                                                                      const char *kana,
                                                                      VoicevoxStyleId style_id,
@@ -605,7 +605,7 @@ VoicevoxResultCode voicevox_synthesizer_create_audio_query_from_kana(DLL &dll,
 /**
  * 日本語テキストから、AudioQueryをJSONとして生成する。
  *
- * 生成したJSON文字列を解放するには ::voicevox_json_free を使う。
+ * 生成したJSON文字列を解放するには ::voicevox_json_free_v0_16 を使う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  * @param [in] text UTF-8の日本語テキスト
@@ -617,19 +617,19 @@ VoicevoxResultCode voicevox_synthesizer_create_audio_query_from_kana(DLL &dll,
  * \example{
  * ```c
  * char *audio_query;
- * voicevox_synthesizer_create_audio_query(synthesizer, "こんにちは",
+ * voicevox_synthesizer_create_audio_query_v0_16(synthesizer, "こんにちは",
  *                                         2, // "四国めたん (ノーマル)"
  *                                         &audio_query);
  * ```
  * }
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `text`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_audio_query_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_create_audio_query(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_create_audio_query_v0_16(DLL &dll,
                                                            const struct VoicevoxSynthesizer *synthesizer,
                                                            const char *text,
                                                            VoicevoxStyleId style_id,
@@ -638,7 +638,7 @@ VoicevoxResultCode voicevox_synthesizer_create_audio_query(DLL &dll,
 /**
  * AquesTalk風記法から、AccentPhrase (アクセント句)の配列をJSON形式で生成する。
  *
- * 生成したJSON文字列を解放するには ::voicevox_json_free を使う。
+ * 生成したJSON文字列を解放するには ::voicevox_json_free_v0_16 を使う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  * @param [in] kana AquesTalk風記法
@@ -650,7 +650,7 @@ VoicevoxResultCode voicevox_synthesizer_create_audio_query(DLL &dll,
  * \example{
  * ```c
  * char *accent_phrases;
- * voicevox_synthesizer_create_accent_phrases_from_kana(
+ * voicevox_synthesizer_create_accent_phrases_from_kana_v0_16(
  *     synthesizer, "コンニチワ'",
  *     2, // "四国めたん (ノーマル)"
  *     &accent_phrases);
@@ -658,12 +658,12 @@ VoicevoxResultCode voicevox_synthesizer_create_audio_query(DLL &dll,
  * }
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `kana`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_audio_query_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_create_accent_phrases_from_kana(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_create_accent_phrases_from_kana_v0_16(DLL &dll,
                                                                         const struct VoicevoxSynthesizer *synthesizer,
                                                                         const char *kana,
                                                                         VoicevoxStyleId style_id,
@@ -672,7 +672,7 @@ VoicevoxResultCode voicevox_synthesizer_create_accent_phrases_from_kana(DLL &dll
 /**
  * 日本語テキストから、AccentPhrase (アクセント句)の配列をJSON形式で生成する。
  *
- * 生成したJSON文字列を解放するには ::voicevox_json_free を使う。
+ * 生成したJSON文字列を解放するには ::voicevox_json_free_v0_16 を使う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  * @param [in] text UTF-8の日本語テキスト
@@ -684,19 +684,19 @@ VoicevoxResultCode voicevox_synthesizer_create_accent_phrases_from_kana(DLL &dll
  * \example{
  * ```c
  * char *accent_phrases;
- * voicevox_synthesizer_create_accent_phrases(synthesizer, "こんにちは",
+ * voicevox_synthesizer_create_accent_phrases_v0_16(synthesizer, "こんにちは",
  *                                            2, // "四国めたん (ノーマル)"
  *                                            &accent_phrases);
  * ```
  * }
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `text`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_audio_query_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_create_accent_phrases(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_create_accent_phrases_v0_16(DLL &dll,
                                                               const struct VoicevoxSynthesizer *synthesizer,
                                                               const char *text,
                                                               VoicevoxStyleId style_id,
@@ -705,7 +705,7 @@ VoicevoxResultCode voicevox_synthesizer_create_accent_phrases(DLL &dll,
 /**
  * AccentPhraseの配列の音高・音素長を、特定の声で生成しなおす。
  *
- * 生成したJSON文字列を解放するには ::voicevox_json_free を使う。
+ * 生成したJSON文字列を解放するには ::voicevox_json_free_v0_16 を使う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  * @param [in] accent_phrases_json AccentPhraseの配列のJSON文字列
@@ -715,12 +715,12 @@ VoicevoxResultCode voicevox_synthesizer_create_accent_phrases(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `accent_phrases_json`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_audio_query_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_replace_mora_data(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_replace_mora_data_v0_16(DLL &dll,
                                                           const struct VoicevoxSynthesizer *synthesizer,
                                                           const char *accent_phrases_json,
                                                           VoicevoxStyleId style_id,
@@ -729,7 +729,7 @@ VoicevoxResultCode voicevox_synthesizer_replace_mora_data(DLL &dll,
 /**
  * AccentPhraseの配列の音素長を、特定の声で生成しなおす。
  *
- * 生成したJSON文字列を解放するには ::voicevox_json_free を使う。
+ * 生成したJSON文字列を解放するには ::voicevox_json_free_v0_16 を使う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  * @param [in] accent_phrases_json AccentPhraseの配列のJSON文字列
@@ -739,12 +739,12 @@ VoicevoxResultCode voicevox_synthesizer_replace_mora_data(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `accent_phrases_json`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_audio_query_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_replace_phoneme_length(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_replace_phoneme_length_v0_16(DLL &dll,
                                                                const struct VoicevoxSynthesizer *synthesizer,
                                                                const char *accent_phrases_json,
                                                                VoicevoxStyleId style_id,
@@ -753,7 +753,7 @@ VoicevoxResultCode voicevox_synthesizer_replace_phoneme_length(DLL &dll,
 /**
  * AccentPhraseの配列の音高を、特定の声で生成しなおす。
  *
- * 生成したJSON文字列を解放するには ::voicevox_json_free を使う。
+ * 生成したJSON文字列を解放するには ::voicevox_json_free_v0_16 を使う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  * @param [in] accent_phrases_json AccentPhraseの配列のJSON文字列
@@ -763,27 +763,27 @@ VoicevoxResultCode voicevox_synthesizer_replace_phoneme_length(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `accent_phrases_json`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_audio_query_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_replace_mora_pitch(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_replace_mora_pitch_v0_16(DLL &dll,
                                                            const struct VoicevoxSynthesizer *synthesizer,
                                                            const char *accent_phrases_json,
                                                            VoicevoxStyleId style_id,
                                                            char **output_accent_phrases_json);
 
 /**
- * デフォルトの `voicevox_synthesizer_synthesis` のオプションを生成する
- * @return デフォルト値が設定された `voicevox_synthesizer_synthesis` のオプション
+ * デフォルトの `voicevox_synthesizer_synthesis_v0_16` のオプションを生成する
+ * @return デフォルト値が設定された `voicevox_synthesizer_synthesis_v0_16` のオプション
  */
-struct VoicevoxSynthesisOptions voicevox_make_default_synthesis_options(DLL &dll);
+struct VoicevoxSynthesisOptions voicevox_make_default_synthesis_options_v0_14(DLL &dll);
 
 /**
  * AudioQueryから音声合成を行う。
  *
- * 生成したWAVデータを解放するには ::voicevox_wav_free を使う。
+ * 生成したWAVデータを解放するには ::voicevox_wav_free_v0_12 を使う。
  *
  * @param [in] synthesizer 音声シンセサイザ
  * @param [in] audio_query_json AudioQueryのJSON文字列
@@ -795,13 +795,13 @@ struct VoicevoxSynthesisOptions voicevox_make_default_synthesis_options(DLL &dll
  * @returns 結果コード
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `audio_query_json`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_wav_length`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * - `output_wav`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_synthesis(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_synthesis_v0_16(DLL &dll,
                                                   const struct VoicevoxSynthesizer *synthesizer,
                                                   const char *audio_query_json,
                                                   VoicevoxStyleId style_id,
@@ -813,12 +813,12 @@ VoicevoxResultCode voicevox_synthesizer_synthesis(DLL &dll,
  * デフォルトのテキスト音声合成オプションを生成する
  * @return テキスト音声合成オプション
  */
-struct VoicevoxTtsOptions voicevox_make_default_tts_options(DLL &dll);
+struct VoicevoxTtsOptions voicevox_make_default_tts_options_v0_16(DLL &dll);
 
 /**
  * AquesTalk風記法から音声合成を行う。
  *
- * 生成したWAVデータを解放するには ::voicevox_wav_free を使う。
+ * 生成したWAVデータを解放するには ::voicevox_wav_free_v0_12 を使う。
  *
  * @param [in] synthesizer
  * @param [in] kana AquesTalk風記法
@@ -830,13 +830,13 @@ struct VoicevoxTtsOptions voicevox_make_default_tts_options(DLL &dll);
  * @returns 結果コード
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `kana`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_wav_length`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * - `output_wav`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_tts_from_kana(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_tts_from_kana_v0_16(DLL &dll,
                                                       const struct VoicevoxSynthesizer *synthesizer,
                                                       const char *kana,
                                                       VoicevoxStyleId style_id,
@@ -847,7 +847,7 @@ VoicevoxResultCode voicevox_synthesizer_tts_from_kana(DLL &dll,
 /**
  * 日本語テキストから音声合成を行う。
  *
- * 生成したWAVデータを解放するには ::voicevox_wav_free を使う。
+ * 生成したWAVデータを解放するには ::voicevox_wav_free_v0_12 を使う。
  *
  * @param [in] synthesizer
  * @param [in] text UTF-8の日本語テキスト
@@ -859,13 +859,13 @@ VoicevoxResultCode voicevox_synthesizer_tts_from_kana(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `synthesizer`は ::voicevox_synthesizer_new で得たものでなければならず、また ::voicevox_synthesizer_delete で解放されていてはいけない。
+ * - `synthesizer`は ::voicevox_synthesizer_new_v0_16 で得たものでなければならず、また ::voicevox_synthesizer_delete_v0_16 で解放されていてはいけない。
  * - `text`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_wav_length`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * - `output_wav`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_synthesizer_tts(DLL &dll,
+VoicevoxResultCode voicevox_synthesizer_tts_v0_16(DLL &dll,
                                             const struct VoicevoxSynthesizer *synthesizer,
                                             const char *text,
                                             VoicevoxStyleId style_id,
@@ -880,20 +880,20 @@ VoicevoxResultCode voicevox_synthesizer_tts(DLL &dll,
  *
  * \safety{
  * - `json`は以下のAPIで得られたポインタでなくてはいけない。
- *     - ::voicevox_create_supported_devices_json
- *     - ::voicevox_synthesizer_create_metas_json
- *     - ::voicevox_synthesizer_create_audio_query
- *     - ::voicevox_synthesizer_create_accent_phrases
- *     - ::voicevox_synthesizer_replace_mora_data
- *     - ::voicevox_synthesizer_replace_phoneme_length
- *     - ::voicevox_synthesizer_replace_mora_pitch
- *     - ::voicevox_user_dict_to_json
+ *     - ::voicevox_create_supported_devices_json_v0_16
+ *     - ::voicevox_synthesizer_create_metas_json_v0_16
+ *     - ::voicevox_synthesizer_create_audio_query_v0_16
+ *     - ::voicevox_synthesizer_create_accent_phrases_v0_16
+ *     - ::voicevox_synthesizer_replace_mora_data_v0_16
+ *     - ::voicevox_synthesizer_replace_phoneme_length_v0_16
+ *     - ::voicevox_synthesizer_replace_mora_pitch_v0_16
+ *     - ::voicevox_user_dict_to_json_v0_16
  * - 文字列の長さは生成時より変更されていてはならない。
  * - `json`は<a href="#voicevox-core-safety">読み込みと書き込みについて有効</a>でなければならない。
  * - `json`は以後<b>ダングリングポインタ</b>(_dangling pointer_)として扱われなくてはならない。
  * }
  */
-void voicevox_json_free(DLL &dll,
+void voicevox_json_free_v0_16(DLL &dll,
                         char *json);
 
 /**
@@ -903,13 +903,13 @@ void voicevox_json_free(DLL &dll,
  *
  * \safety{
  * - `wav`は以下のAPIで得られたポインタでなくてはいけない。
- *     - ::voicevox_synthesizer_synthesis
- *     - ::voicevox_synthesizer_tts
+ *     - ::voicevox_synthesizer_synthesis_v0_16
+ *     - ::voicevox_synthesizer_tts_v0_16
  * - `wav`は<a href="#voicevox-core-safety">読み込みと書き込みについて有効</a>でなければならない。
  * - `wav`は以後<b>ダングリングポインタ</b>(_dangling pointer_)として扱われなくてはならない。
  * }
  */
-void voicevox_wav_free(DLL &dll,
+void voicevox_wav_free_v0_12(DLL &dll,
                        uint8_t *wav);
 
 /**
@@ -921,20 +921,20 @@ void voicevox_wav_free(DLL &dll,
  *
  * \examples{
  * ```c
- * const char *actual = voicevox_error_result_to_message(VOICEVOX_RESULT_OK);
+ * const char *actual = voicevox_error_result_to_message_v0_12(VOICEVOX_RESULT_OK);
  * const char *EXPECTED = "エラーが発生しませんでした";
  * assert(strcmp(actual, EXPECTED) == 0);
  * ```
  *
  * ```c
  * const char *actual =
- *     voicevox_error_result_to_message(VOICEVOX_RESULT_LOAD_MODEL_ERROR);
+ *     voicevox_error_result_to_message_v0_12(VOICEVOX_RESULT_LOAD_MODEL_ERROR);
  * const char *EXPECTED = "modelデータ読み込みに失敗しました";
  * assert(strcmp(actual, EXPECTED) == 0);
  * ```
  * }
  */
-const char *voicevox_error_result_to_message(DLL &dll,
+const char *voicevox_error_result_to_message_v0_12(DLL &dll,
                                              VoicevoxResultCode result_code);
 
 /**
@@ -944,7 +944,7 @@ const char *voicevox_error_result_to_message(DLL &dll,
  * @param [in] pronunciation 読み
  * @returns ::VoicevoxUserDictWord
  */
-struct VoicevoxUserDictWord voicevox_user_dict_word_make(DLL &dll,
+struct VoicevoxUserDictWord voicevox_user_dict_word_make_v0_16(DLL &dll,
                                                          const char *surface,
                                                          const char *pronunciation);
 
@@ -953,7 +953,7 @@ struct VoicevoxUserDictWord voicevox_user_dict_word_make(DLL &dll,
  *
  * @returns ::VoicevoxUserDict
  */
-struct VoicevoxUserDict *voicevox_user_dict_new(DLL &dll);
+struct VoicevoxUserDict *voicevox_user_dict_new_v0_16(DLL &dll);
 
 /**
  * ユーザー辞書にファイルを読み込ませる。
@@ -963,11 +963,11 @@ struct VoicevoxUserDict *voicevox_user_dict_new(DLL &dll);
  * @returns 結果コード
  *
  * \safety{
- * - `user_dict`は ::voicevox_user_dict_new で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
+ * - `user_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また ::voicevox_user_dict_delete_v0_16 で解放されていてはいけない。
  * - `dict_path`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_user_dict_load(DLL &dll,
+VoicevoxResultCode voicevox_user_dict_load_v0_16(DLL &dll,
                                            const struct VoicevoxUserDict *user_dict,
                                            const char *dict_path);
 
@@ -983,12 +983,12 @@ VoicevoxResultCode voicevox_user_dict_load(DLL &dll,
  * @param user_dict は有効な :VoicevoxUserDict のポインタであること
  *
  * \safety{
- * - `user_dict`は ::voicevox_user_dict_new で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
+ * - `user_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また ::voicevox_user_dict_delete_v0_16 で解放されていてはいけない。
  * - `word->surface`と`word->pronunciation`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `output_word_uuid`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_user_dict_add_word(DLL &dll,
+VoicevoxResultCode voicevox_user_dict_add_word_v0_16(DLL &dll,
                                                const struct VoicevoxUserDict *user_dict,
                                                const struct VoicevoxUserDictWord *word,
                                                uint8_t (*output_word_uuid)[16]);
@@ -1002,12 +1002,12 @@ VoicevoxResultCode voicevox_user_dict_add_word(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `user_dict`は ::voicevox_user_dict_new で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
+ * - `user_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
  * - `word_uuid`は<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * - `word->surface`と`word->pronunciation`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_user_dict_update_word(DLL &dll,
+VoicevoxResultCode voicevox_user_dict_update_word_v0_16(DLL &dll,
                                                   const struct VoicevoxUserDict *user_dict,
                                                   const uint8_t (*word_uuid)[16],
                                                   const struct VoicevoxUserDictWord *word);
@@ -1020,29 +1020,29 @@ VoicevoxResultCode voicevox_user_dict_update_word(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `user_dict`は ::voicevox_user_dict_new で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
+ * - `user_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
  * - `word_uuid`は<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_user_dict_remove_word(DLL &dll,
+VoicevoxResultCode voicevox_user_dict_remove_word_v0_16(DLL &dll,
                                                   const struct VoicevoxUserDict *user_dict,
                                                   const uint8_t (*word_uuid)[16]);
 
 /**
  * ユーザー辞書の単語をJSON形式で出力する。
  *
- * 生成したJSON文字列を解放するには ::voicevox_json_free を使う。
+ * 生成したJSON文字列を解放するには ::voicevox_json_free_v0_16 を使う。
  *
  * @param [in] user_dict ユーザー辞書
  * @param [out] output_json 出力先
  * @returns 結果コード
  *
  * \safety{
- * - `user_dict`は ::voicevox_user_dict_new で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
+ * - `user_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
  * - `output_json`は<a href="#voicevox-core-safety">書き込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_user_dict_to_json(DLL &dll,
+VoicevoxResultCode voicevox_user_dict_to_json_v0_16(DLL &dll,
                                               const struct VoicevoxUserDict *user_dict,
                                               char **output_json);
 
@@ -1054,10 +1054,10 @@ VoicevoxResultCode voicevox_user_dict_to_json(DLL &dll,
  * @returns 結果コード
  *
  * \safety{
- * - `user_dict`と`other_dict`は ::voicevox_user_dict_new で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
+ * - `user_dict`と`other_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
  * }
  */
-VoicevoxResultCode voicevox_user_dict_import(DLL &dll,
+VoicevoxResultCode voicevox_user_dict_import_v0_16(DLL &dll,
                                              const struct VoicevoxUserDict *user_dict,
                                              const struct VoicevoxUserDict *other_dict);
 
@@ -1068,11 +1068,11 @@ VoicevoxResultCode voicevox_user_dict_import(DLL &dll,
  * @param [in] path 保存先のファイルパス
  *
  * \safety{
- * - `user_dict`は ::voicevox_user_dict_new で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
+ * - `user_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また ::voicevox_user_dict_delete で解放されていてはいけない。
  * - `path`はヌル終端文字列を指し、かつ<a href="#voicevox-core-safety">読み込みについて有効</a>でなければならない。
  * }
  */
-VoicevoxResultCode voicevox_user_dict_save(DLL &dll,
+VoicevoxResultCode voicevox_user_dict_save_v0_16(DLL &dll,
                                            const struct VoicevoxUserDict *user_dict,
                                            const char *path);
 
@@ -1082,10 +1082,10 @@ VoicevoxResultCode voicevox_user_dict_save(DLL &dll,
  * @param [in] user_dict 破棄対象
  *
  * \safety{
- * - `user_dict`は ::voicevox_user_dict_new で得たものでなければならず、また既にこの関数で解放されていてはいけない。
+ * - `user_dict`は ::voicevox_user_dict_new_v0_16 で得たものでなければならず、また既にこの関数で解放されていてはいけない。
  * }
  */
-void voicevox_user_dict_delete(DLL &dll,
+void voicevox_user_dict_delete_v0_16(DLL &dll,
                                struct VoicevoxUserDict *user_dict);
 
 /**
@@ -1099,7 +1099,7 @@ struct VoicevoxInitializeOptionsV14 voicevox_make_default_initialize_options_v14
  * @param [in] options 初期化オプション
  * @return 結果コード #VoicevoxResultCode
  */
-VoicevoxResultCode voicevox_initialize(DLL &dll,
+VoicevoxResultCode voicevox_initialize_v0_14(DLL &dll,
                                        struct VoicevoxInitializeOptionsV14 options);
 
 /**
@@ -1107,38 +1107,38 @@ VoicevoxResultCode voicevox_initialize(DLL &dll,
  * @param [in] speaker_id 読み込むモデルの話者ID
  * @return 結果コード #VoicevoxResultCode
  */
-VoicevoxResultCode voicevox_load_model(DLL &dll,
+VoicevoxResultCode voicevox_load_model_v0_14(DLL &dll,
                                        uint32_t speaker_id);
 
 /**
  * ハードウェアアクセラレーションがGPUモードか判定する
  * @return GPUモードならtrue、そうでないならfalse
  */
-bool voicevox_is_gpu_mode(DLL &dll);
+bool voicevox_is_gpu_mode_v0_14(DLL &dll);
 
 /**
  * 指定したspeaker_idのモデルが読み込まれているか判定する
  * @return モデルが読み込まれているのであればtrue、そうでないならfalse
  */
-bool voicevox_is_model_loaded(DLL &dll,
+bool voicevox_is_model_loaded_v0_14(DLL &dll,
                               uint32_t speaker_id);
 
 /**
  * このライブラリの利用を終了し、確保しているリソースを解放する
  */
-void voicevox_finalize(DLL &dll);
+void voicevox_finalize_v0_14(DLL &dll);
 
 /**
  * メタ情報をjsonで取得する
  * @return メタ情報のjson文字列
  */
-const char *voicevox_get_metas_json(DLL &dll);
+const char *voicevox_get_metas_json_v0_14(DLL &dll);
 
 /**
  * サポートデバイス情報をjsonで取得する
  * @return サポートデバイス情報のjson文字列
  */
-const char *voicevox_get_supported_devices_json(DLL &dll);
+const char *voicevox_get_supported_devices_json_v0_14(DLL &dll);
 
 /**
  * 音素ごとの長さを推論する
@@ -1152,9 +1152,9 @@ const char *voicevox_get_supported_devices_json(DLL &dll);
  * # Safety
  * @param phoneme_vector 必ずlengthの長さだけデータがある状態で渡すこと
  * @param output_predict_duration_data_length uintptr_t 分のメモリ領域が割り当てられていること
- * @param output_predict_duration_data 成功後にメモリ領域が割り当てられるので ::voicevox_predict_duration_data_free で解放する必要がある
+ * @param output_predict_duration_data 成功後にメモリ領域が割り当てられるので ::voicevox_predict_duration_data_free_v0_14 で解放する必要がある
  */
-VoicevoxResultCode voicevox_predict_duration(DLL &dll,
+VoicevoxResultCode voicevox_predict_duration_v0_14(DLL &dll,
                                              uintptr_t length,
                                              int64_t *phoneme_vector,
                                              uint32_t speaker_id,
@@ -1168,7 +1168,7 @@ VoicevoxResultCode voicevox_predict_duration(DLL &dll,
  * # Safety
  * @param predict_duration_data 実行後に割り当てられたメモリ領域が解放される
  */
-void voicevox_predict_duration_data_free(DLL &dll,
+void voicevox_predict_duration_data_free_v0_14(DLL &dll,
                                          float *predict_duration_data);
 
 /**
@@ -1193,9 +1193,9 @@ void voicevox_predict_duration_data_free(DLL &dll,
  * @param start_accent_phrase_vector 必ずlengthの長さだけデータがある状態で渡すこと
  * @param end_accent_phrase_vector 必ずlengthの長さだけデータがある状態で渡すこと
  * @param output_predict_intonation_data_length uintptr_t 分のメモリ領域が割り当てられていること
- * @param output_predict_intonation_data 成功後にメモリ領域が割り当てられるので ::voicevox_predict_intonation_data_free で解放する必要がある
+ * @param output_predict_intonation_data 成功後にメモリ領域が割り当てられるので ::voicevox_predict_intonation_data_free_v0_14 で解放する必要がある
  */
-VoicevoxResultCode voicevox_predict_intonation(DLL &dll,
+VoicevoxResultCode voicevox_predict_intonation_v0_14(DLL &dll,
                                                uintptr_t length,
                                                int64_t *vowel_phoneme_vector,
                                                int64_t *consonant_phoneme_vector,
@@ -1214,7 +1214,7 @@ VoicevoxResultCode voicevox_predict_intonation(DLL &dll,
  * # Safety
  * @param predict_intonation_data 実行後に割り当てられたメモリ領域が解放される
  */
-void voicevox_predict_intonation_data_free(DLL &dll,
+void voicevox_predict_intonation_data_free_v0_14(DLL &dll,
                                            float *predict_intonation_data);
 
 /**
@@ -1232,9 +1232,9 @@ void voicevox_predict_intonation_data_free(DLL &dll,
  * @param f0 必ず length の長さだけデータがある状態で渡すこと
  * @param phoneme_vector 必ず length * phoneme_size の長さだけデータがある状態で渡すこと
  * @param output_decode_data_length uintptr_t 分のメモリ領域が割り当てられていること
- * @param output_decode_data 成功後にメモリ領域が割り当てられるので ::voicevox_decode_data_free で解放する必要がある
+ * @param output_decode_data 成功後にメモリ領域が割り当てられるので ::voicevox_decode_data_free_v0_14 で解放する必要がある
  */
-VoicevoxResultCode voicevox_decode(DLL &dll,
+VoicevoxResultCode voicevox_decode_v0_14(DLL &dll,
                                    uintptr_t length,
                                    uintptr_t phoneme_size,
                                    float *f0,
@@ -1250,14 +1250,14 @@ VoicevoxResultCode voicevox_decode(DLL &dll,
  * # Safety
  * @param decode_data 実行後に割り当てられたメモリ領域が解放される
  */
-void voicevox_decode_data_free(DLL &dll,
+void voicevox_decode_data_free_v0_14(DLL &dll,
                                float *decode_data);
 
 /**
  * デフォルトの AudioQuery のオプションを生成する
  * @return デフォルト値が設定された AudioQuery オプション
  */
-struct VoicevoxAudioQueryOptions voicevox_make_default_audio_query_options(DLL &dll);
+struct VoicevoxAudioQueryOptions voicevox_make_default_audio_query_options_v0_14(DLL &dll);
 
 /**
  * AudioQuery を実行する
@@ -1269,9 +1269,9 @@ struct VoicevoxAudioQueryOptions voicevox_make_default_audio_query_options(DLL &
  *
  * # Safety
  * @param text null終端文字列であること
- * @param output_audio_query_json 自動でheapメモリが割り当てられるので ::voicevox_audio_query_json_free で解放する必要がある
+ * @param output_audio_query_json 自動でheapメモリが割り当てられるので ::voicevox_audio_query_json_free_v0_14 で解放する必要がある
  */
-VoicevoxResultCode voicevox_audio_query(DLL &dll,
+VoicevoxResultCode voicevox_audio_query_v0_14(DLL &dll,
                                         const char *text,
                                         uint32_t speaker_id,
                                         struct VoicevoxAudioQueryOptions options,
@@ -1281,7 +1281,7 @@ VoicevoxResultCode voicevox_audio_query(DLL &dll,
  * デフォルトの `accent_phrases` のオプションを生成する
  * @return デフォルト値が設定された `accent_phrases` のオプション
  */
-struct VoicevoxAccentPhrasesOptions voicevox_make_default_accent_phrases_options(DLL &dll);
+struct VoicevoxAccentPhrasesOptions voicevox_make_default_accent_phrases_options_v0_15(DLL &dll);
 
 /**
  * `accent_phrases` を実行する
@@ -1293,9 +1293,9 @@ struct VoicevoxAccentPhrasesOptions voicevox_make_default_accent_phrases_options
  *
  * # Safety
  * @param text null終端文字列であること
- * @param output_accent_phrases_json 自動でheapメモリが割り当てられるので ::voicevox_accent_phrases_json_free で解放する必要がある
+ * @param output_accent_phrases_json 自動でheapメモリが割り当てられるので ::voicevox_accent_phrases_json_free_v0_15 で解放する必要がある
  */
-VoicevoxResultCode voicevox_accent_phrases(DLL &dll,
+VoicevoxResultCode voicevox_accent_phrases_v0_15(DLL &dll,
                                            const char *text,
                                            uint32_t speaker_id,
                                            struct VoicevoxAccentPhrasesOptions options,
@@ -1311,9 +1311,9 @@ VoicevoxResultCode voicevox_accent_phrases(DLL &dll,
  *
  * # Safety
  * @param accent_phrases_json null終端文字列であること
- * @param output_accent_phrases_json 自動でheapメモリが割り当てられるので ::voicevox_accent_phrases_json_free で解放する必要がある
+ * @param output_accent_phrases_json 自動でheapメモリが割り当てられるので ::voicevox_accent_phrases_json_free_v0_15 で解放する必要がある
  */
-VoicevoxResultCode voicevox_mora_length(DLL &dll,
+VoicevoxResultCode voicevox_mora_length_v0_15(DLL &dll,
                                         const char *accent_phrases_json,
                                         uint32_t speaker_id,
                                         char **output_accent_phrases_json);
@@ -1327,9 +1327,9 @@ VoicevoxResultCode voicevox_mora_length(DLL &dll,
  *
  * # Safety
  * @param accent_phrases_json null終端文字列であること
- * @param output_accent_phrases_json 自動でheapメモリが割り当てられるので ::voicevox_accent_phrases_json_free で解放する必要がある
+ * @param output_accent_phrases_json 自動でheapメモリが割り当てられるので ::voicevox_accent_phrases_json_free_v0_15 で解放する必要がある
  */
-VoicevoxResultCode voicevox_mora_pitch(DLL &dll,
+VoicevoxResultCode voicevox_mora_pitch_v0_15(DLL &dll,
                                        const char *accent_phrases_json,
                                        uint32_t speaker_id,
                                        char **output_accent_phrases_json);
@@ -1343,9 +1343,9 @@ VoicevoxResultCode voicevox_mora_pitch(DLL &dll,
  *
  * # Safety
  * @param accent_phrases_json null終端文字列であること
- * @param output_accent_phrases_json 自動でheapメモリが割り当てられるので ::voicevox_accent_phrases_json_free で解放する必要がある
+ * @param output_accent_phrases_json 自動でheapメモリが割り当てられるので ::voicevox_accent_phrases_json_free_v0_15 で解放する必要がある
  */
-VoicevoxResultCode voicevox_mora_data(DLL &dll,
+VoicevoxResultCode voicevox_mora_data_v0_15(DLL &dll,
                                       const char *accent_phrases_json,
                                       uint32_t speaker_id,
                                       char **output_accent_phrases_json);
@@ -1355,9 +1355,9 @@ VoicevoxResultCode voicevox_mora_data(DLL &dll,
  * @param [in] accented_phrase_json 解放する json フォーマットされた AccnetPhrase データ
  *
  * # Safety
- * @param voicevox_accent_phrases で確保されたポインタであり、かつ呼び出し側でバッファの変更を行われていないこと
+ * @param voicevox_accent_phrases_v0_15 で確保されたポインタであり、かつ呼び出し側でバッファの変更を行われていないこと
  */
-void voicevox_accent_phrases_json_free(DLL &dll,
+void voicevox_accent_phrases_json_free_v0_15(DLL &dll,
                                        char *accented_phrase_json);
 
 /**
@@ -1371,9 +1371,9 @@ void voicevox_accent_phrases_json_free(DLL &dll,
  *
  * # Safety
  * @param output_wav_length 出力先の領域が確保された状態でpointerに渡されていること
- * @param output_wav 自動で output_wav_length 分のデータが割り当てられるので ::voicevox_wav_free で解放する必要がある
+ * @param output_wav 自動で output_wav_length 分のデータが割り当てられるので ::voicevox_wav_free_v0_12 で解放する必要がある
  */
-VoicevoxResultCode voicevox_synthesis(DLL &dll,
+VoicevoxResultCode voicevox_synthesis_v0_14(DLL &dll,
                                       const char *audio_query_json,
                                       uint32_t speaker_id,
                                       struct VoicevoxSynthesisOptions options,
@@ -1397,9 +1397,9 @@ struct VoicevoxTtsOptionsV14 voicevox_make_default_tts_options_v14(DLL &dll);
  *
  * # Safety
  * @param output_wav_length 出力先の領域が確保された状態でpointerに渡されていること
- * @param output_wav は自動で output_wav_length 分のデータが割り当てられるので ::voicevox_wav_free で解放する必要がある
+ * @param output_wav は自動で output_wav_length 分のデータが割り当てられるので ::voicevox_wav_free_v0_12 で解放する必要がある
  */
-VoicevoxResultCode voicevox_tts(DLL &dll,
+VoicevoxResultCode voicevox_tts_v0_14(DLL &dll,
                                 const char *text,
                                 uint32_t speaker_id,
                                 struct VoicevoxTtsOptionsV14 options,
@@ -1413,7 +1413,7 @@ VoicevoxResultCode voicevox_tts(DLL &dll,
  * # Safety
  * @param wav 確保したメモリ領域が破棄される
  */
-void voicevox_audio_query_json_free(DLL &dll,
+void voicevox_audio_query_json_free_v0_14(DLL &dll,
                                     char *audio_query_json);
 
 /**
@@ -1428,7 +1428,7 @@ void voicevox_audio_query_json_free(DLL &dll,
  * 何度も実行可能。use_gpuを変更して実行しなおすことも可能。
  * 最後に実行したuse_gpuに従って他の関数が実行される。
  */
-bool initialize_v(DLL &dll,
+bool initialize_v0_12(DLL &dll,
                   bool use_gpu,
                   int cpu_num_threads,
                   bool load_all_models);
@@ -1440,7 +1440,7 @@ bool initialize_v(DLL &dll,
  * @detail
  * 必ずしも話者とモデルが1:1対応しているわけではない。
  */
-bool load_model(DLL &dll,
+bool load_model_v0_12(DLL &dll,
                 int64_t speaker_id);
 
 /**
@@ -1449,7 +1449,7 @@ bool load_model(DLL &dll,
  * @param speaker_id 話者番号
  * @return ロード済みならtrue、そうでないならfalse
  */
-bool is_model_loaded(DLL &dll,
+bool is_model_loaded_v0_12(DLL &dll,
                      int64_t speaker_id);
 
 /**
@@ -1460,7 +1460,7 @@ bool is_model_loaded(DLL &dll,
  * 何度も実行可能。実行せずにexitしても大抵の場合問題ないが、
  * CUDAを利用している場合これを実行しておかないと例外が起こることがある。
  */
-void finalize_v(DLL &dll);
+void finalize_v0_10(DLL &dll);
 
 /**
  * @fn
@@ -1468,7 +1468,7 @@ void finalize_v(DLL &dll);
  * @brief 話者名や話者IDのリストを取得する
  * @return メタ情報が格納されたjson形式の文字列
  */
-const char *metas_v(DLL &dll);
+const char *metas_v0_5(DLL &dll);
 
 /**
  * @fn
@@ -1476,7 +1476,7 @@ const char *metas_v(DLL &dll);
  * @brief cpu, cudaのうち、使用可能なデバイス情報を取得する
  * @return 各デバイスが使用可能かどうかをboolで格納したjson形式の文字列
  */
-const char *supported_devices(DLL &dll);
+const char *supported_devices_v0_10(DLL &dll);
 
 /**
  * @fn
@@ -1487,7 +1487,7 @@ const char *supported_devices(DLL &dll);
  * @param speaker_id 話者番号
  * @return 音素ごとの長さ
  */
-bool yukarin_s_forward(DLL &dll,
+bool yukarin_s_forward_v0_8(DLL &dll,
                        int64_t length,
                        int64_t *phoneme_list,
                        int64_t *speaker_id,
@@ -1507,7 +1507,7 @@ bool yukarin_s_forward(DLL &dll,
  * @param speaker_id 話者番号
  * @return モーラごとの音高
  */
-bool yukarin_sa_forward(DLL &dll,
+bool yukarin_sa_forward_v0_8(DLL &dll,
                         int64_t length,
                         int64_t *vowel_phoneme_list,
                         int64_t *consonant_phoneme_list,
@@ -1529,7 +1529,7 @@ bool yukarin_sa_forward(DLL &dll,
  * @param speaker_id 話者番号
  * @return 音声波形
  */
-bool decode_forward(DLL &dll,
+bool decode_forward_v0_8(DLL &dll,
                     int64_t length,
                     int64_t phoneme_size,
                     float *f0,
@@ -1542,14 +1542,14 @@ bool decode_forward(DLL &dll,
  * 最後に発生したエラーのメッセージを取得する
  * @return エラーメッセージ
  */
-const char *last_error_message(DLL &dll);
+const char *last_error_message_v0_5(DLL &dll);
 
 /**
  * @fn
  * open jtalkの辞書を読み込む
  * @return 結果コード
  */
-VoicevoxResultCode voicevox_load_openjtalk_dict(DLL &dll,
+VoicevoxResultCode voicevox_load_openjtalk_dict_v0_12(DLL &dll,
                                                 const char *dict_path);
 
 /**
@@ -1561,7 +1561,7 @@ VoicevoxResultCode voicevox_load_openjtalk_dict(DLL &dll,
  * @param output_wav 音声データを出力する先のポインタ。使用が終わったらvoicevox_wav_freeで開放する必要がある
  * @return 結果コード
  */
-VoicevoxResultCode voicevox_tts_v12(DLL &dll,
+VoicevoxResultCode voicevox_tts_v0_12(DLL &dll,
                                     const char *text,
                                     int64_t speaker_id,
                                     int *output_binary_size,
@@ -1576,7 +1576,7 @@ VoicevoxResultCode voicevox_tts_v12(DLL &dll,
  * @param output_wav 音声データを出力する先のポインタ。使用が終わったらvoicevox_wav_freeで開放する必要がある
  * @return 結果コード
  */
-VoicevoxResultCode voicevox_tts_from_kana(DLL &dll,
+VoicevoxResultCode voicevox_tts_from_kana_v0_12(DLL &dll,
                                           const char *text,
                                           int64_t speaker_id,
                                           int *output_binary_size,
@@ -1594,7 +1594,7 @@ VoicevoxResultCode voicevox_tts_from_kana(DLL &dll,
  * 何度も実行可能。use_gpuを変更して実行しなおすことも可能。
  * 最後に実行したuse_gpuに従って他の関数が実行される。
  */
-bool initialize_v10(DLL &dll,
+bool initialize_v0_10(DLL &dll,
                     const char *root_dir_path,
                     bool use_gpu,
                     int cpu_num_threads);
@@ -1610,7 +1610,7 @@ bool initialize_v10(DLL &dll,
  * 何度も実行可能。use_gpuを変更して実行しなおすことも可能。
  * 最後に実行したuse_gpuに従って他の関数が実行される。
  */
-bool initialize_v5(DLL &dll,
+bool initialize_v0_5(DLL &dll,
                    const char *root_dir_path,
                    bool use_gpu);
 
@@ -1623,7 +1623,7 @@ bool initialize_v5(DLL &dll,
  * @param speaker_id 話者番号
  * @return 音素ごとの長さ
  */
-bool yukarin_s_forward_v5(DLL &dll,
+bool yukarin_s_forward_v0_5(DLL &dll,
                           int length,
                           long *phoneme_list,
                           long *speaker_id,
@@ -1643,7 +1643,7 @@ bool yukarin_s_forward_v5(DLL &dll,
  * @param speaker_id 話者番号
  * @return モーラごとの音高
  */
-bool yukarin_sa_forward_v5(DLL &dll,
+bool yukarin_sa_forward_v0_5(DLL &dll,
                            int length,
                            long *vowel_phoneme_list,
                            long *consonant_phoneme_list,
@@ -1665,7 +1665,7 @@ bool yukarin_sa_forward_v5(DLL &dll,
  * @param speaker_id 話者番号
  * @return 音声波形
  */
-bool decode_forward_v5(DLL &dll,
+bool decode_forward_v0_5(DLL &dll,
                        int length,
                        int phoneme_size,
                        float *f0,
