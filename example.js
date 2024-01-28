@@ -1,5 +1,5 @@
 /**
- * @version 0.15.x
+ * @version 0.16.x
  */
 const { VoicevoxAccelerationMode } = require("./index");
 const { Voicevox } = require("./v0.15");
