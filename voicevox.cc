@@ -44,77 +44,77 @@ Napi::Object Voicevox::NewInstance(Napi::Env env, const Napi::CallbackInfo &info
 Napi::Object Voicevox::Init(Napi::Env env, Napi::Object exports)
 {
 	Napi::Function func = DefineClass(env, "Voicevox", {
-																												 InstanceMethod("voicevoxOpenJtalkRcNew", &Voicevox::voicevoxOpenJtalkRcNew),
-																												 InstanceMethod("voicevoxOpenJtalkRcUseUserDict", &Voicevox::voicevoxOpenJtalkRcUseUserDict),
-																												 InstanceMethod("voicevoxOpenJtalkRcDelete", &Voicevox::voicevoxOpenJtalkRcDelete),
-																												 InstanceMethod("voicevoxGetVersion", &Voicevox::voicevoxGetVersion),
-																												 InstanceMethod("voicevoxVoiceModelNewFromPath", &Voicevox::voicevoxVoiceModelNewFromPath),
-																												 InstanceMethod("voicevoxVoiceModelId", &Voicevox::voicevoxVoiceModelId),
-																												 InstanceMethod("voicevoxVoiceModelGetMetasJson", &Voicevox::voicevoxVoiceModelGetMetasJson),
-																												 InstanceMethod("voicevoxVoiceModelDelete", &Voicevox::voicevoxVoiceModelDelete),
-																												 InstanceMethod("voicevoxSynthesizerNew", &Voicevox::voicevoxSynthesizerNew),
-																												 InstanceMethod("voicevoxSynthesizerDelete", &Voicevox::voicevoxSynthesizerDelete),
-																												 InstanceMethod("voicevoxSynthesizerLoadVoiceModel", &Voicevox::voicevoxSynthesizerLoadVoiceModel),
-																												 InstanceMethod("voicevoxSynthesizerUnloadVoiceModel", &Voicevox::voicevoxSynthesizerUnloadVoiceModel),
-																												 InstanceMethod("voicevoxSynthesizerIsGpuMode", &Voicevox::voicevoxSynthesizerIsGpuMode),
-																												 InstanceMethod("voicevoxSynthesizerIsLoadedVoiceModel", &Voicevox::voicevoxSynthesizerIsLoadedVoiceModel),
-																												 InstanceMethod("voicevoxSynthesizerCreateMetasJson", &Voicevox::voicevoxSynthesizerCreateMetasJson),
-																												 InstanceMethod("voicevoxCreateSupportedDevicesJson", &Voicevox::voicevoxCreateSupportedDevicesJson),
-																												 InstanceMethod("voicevoxSynthesizerCreateAudioQueryFromKana", &Voicevox::voicevoxSynthesizerCreateAudioQueryFromKana),
-																												 InstanceMethod("voicevoxSynthesizerCreateAudioQuery", &Voicevox::voicevoxSynthesizerCreateAudioQuery),
-																												 InstanceMethod("voicevoxSynthesizerCreateAccentPhrasesFromKana", &Voicevox::voicevoxSynthesizerCreateAccentPhrasesFromKana),
-																												 InstanceMethod("voicevoxSynthesizerCreateAccentPhrases", &Voicevox::voicevoxSynthesizerCreateAccentPhrases),
-																												 InstanceMethod("voicevoxSynthesizerReplaceMoraData", &Voicevox::voicevoxSynthesizerReplaceMoraData),
-																												 InstanceMethod("voicevoxSynthesizerReplacePhonemeLength", &Voicevox::voicevoxSynthesizerReplacePhonemeLength),
-																												 InstanceMethod("voicevoxSynthesizerReplaceMoraPitch", &Voicevox::voicevoxSynthesizerReplaceMoraPitch),
-																												 InstanceMethod("voicevoxSynthesizerSynthesis", &Voicevox::voicevoxSynthesizerSynthesis),
-																												 InstanceMethod("voicevoxSynthesizerTtsFromKana", &Voicevox::voicevoxSynthesizerTtsFromKana),
-																												 InstanceMethod("voicevoxSynthesizerTts", &Voicevox::voicevoxSynthesizerTts),
-																												 InstanceMethod("voicevoxErrorResultToMessage", &Voicevox::voicevoxErrorResultToMessage),
-																												 InstanceMethod("voicevoxUserDictNew", &Voicevox::voicevoxUserDictNew),
-																												 InstanceMethod("voicevoxUserDictLoad", &Voicevox::voicevoxUserDictLoad),
-																												 InstanceMethod("voicevoxUserDictAddWord", &Voicevox::voicevoxUserDictAddWord),
-																												 InstanceMethod("voicevoxUserDictUpdateWord", &Voicevox::voicevoxUserDictUpdateWord),
-																												 InstanceMethod("voicevoxUserDictRemoveWord", &Voicevox::voicevoxUserDictRemoveWord),
-																												 InstanceMethod("voicevoxUserDictToJson", &Voicevox::voicevoxUserDictToJson),
-																												 InstanceMethod("voicevoxUserDictImport", &Voicevox::voicevoxUserDictImport),
-																												 InstanceMethod("voicevoxUserDictSave", &Voicevox::voicevoxUserDictSave),
-																												 InstanceMethod("voicevoxUserDictDelete", &Voicevox::voicevoxUserDictDelete),
-																												 InstanceMethod("voicevoxInitialize", &Voicevox::voicevoxInitialize),
-																												 InstanceMethod("voicevoxLoadModel", &Voicevox::voicevoxLoadModel),
-																												 InstanceMethod("voicevoxIsGpuMode", &Voicevox::voicevoxIsGpuMode),
-																												 InstanceMethod("voicevoxIsModelLoaded", &Voicevox::voicevoxIsModelLoaded),
-																												 InstanceMethod("voicevoxFinalize", &Voicevox::voicevoxFinalize),
-																												 InstanceMethod("voicevoxGetMetasJson", &Voicevox::voicevoxGetMetasJson),
-																												 InstanceMethod("voicevoxGetSupportedDevicesJson", &Voicevox::voicevoxGetSupportedDevicesJson),
-																												 InstanceMethod("voicevoxPredictDuration", &Voicevox::voicevoxPredictDuration),
-																												 InstanceMethod("voicevoxPredictIntonation", &Voicevox::voicevoxPredictIntonation),
-																												 InstanceMethod("voicevoxDecode", &Voicevox::voicevoxDecode),
-																												 InstanceMethod("voicevoxAudioQuery", &Voicevox::voicevoxAudioQuery),
-																												 InstanceMethod("voicevoxAccentPhrases", &Voicevox::voicevoxAudioQuery),
-																												 InstanceMethod("voicevoxMoraLength", &Voicevox::voicevoxAudioQuery),
-																												 InstanceMethod("voicevoxMoraPitch", &Voicevox::voicevoxAudioQuery),
-																												 InstanceMethod("voicevoxMoraData", &Voicevox::voicevoxAudioQuery),
-																												 InstanceMethod("voicevoxSynthesis", &Voicevox::voicevoxSynthesis),
-																												 InstanceMethod("voicevoxTts", &Voicevox::voicevoxTts),
-																												 InstanceMethod("initialize", &Voicevox::initialize),
-																												 InstanceMethod("loadModel", &Voicevox::loadModel),
-																												 InstanceMethod("isModelLoaded", &Voicevox::isModelLoaded),
-																												 InstanceMethod("finalize", &Voicevox::finalize),
-																												 InstanceMethod("metas", &Voicevox::metas),
-																												 InstanceMethod("supportedDevices", &Voicevox::supportedDevices),
-																												 InstanceMethod("yukarinSForward", &Voicevox::yukarinSForward),
-																												 InstanceMethod("yukarinSaForward", &Voicevox::yukarinSaForward),
-																												 InstanceMethod("decodeForward", &Voicevox::decodeForward),
-																												 InstanceMethod("lastErrorMessage", &Voicevox::lastErrorMessage),
-																												 InstanceMethod("voicevoxLoadOpenjtalkDict", &Voicevox::voicevoxLoadOpenjtalkDict),
-																												 InstanceMethod("voicevoxTtsV12", &Voicevox::voicevoxTtsV12),
-																												 InstanceMethod("voicevoxTtsFromKana", &Voicevox::voicevoxTtsFromKana),
-																												 InstanceMethod("initializeV10", &Voicevox::initializeV10),
-																												 InstanceMethod("initializeV5", &Voicevox::initializeV5),
-																												 InstanceMethod("yukarinSForwardV5", &Voicevox::yukarinSForwardV5),
-																												 InstanceMethod("yukarinSaForwardV5", &Voicevox::yukarinSaForwardV5),
-																												 InstanceMethod("decodeForwardV5", &Voicevox::decodeForwardV5),
+																												 InstanceMethod("voicevoxOpenJtalkRcNewV0_16", &Voicevox::voicevoxOpenJtalkRcNewV0_16),
+																												 InstanceMethod("voicevoxOpenJtalkRcUseUserDictV0_16", &Voicevox::voicevoxOpenJtalkRcUseUserDictV0_16),
+																												 InstanceMethod("voicevoxOpenJtalkRcDeleteV0_16", &Voicevox::voicevoxOpenJtalkRcDeleteV0_16),
+																												 InstanceMethod("voicevoxGetVersionV0_14", &Voicevox::voicevoxGetVersionV0_14),
+																												 InstanceMethod("voicevoxVoiceModelNewFromPathV0_16", &Voicevox::voicevoxVoiceModelNewFromPathV0_16),
+																												 InstanceMethod("voicevoxVoiceModelIdV0_16", &Voicevox::voicevoxVoiceModelIdV0_16),
+																												 InstanceMethod("voicevoxVoiceModelGetMetasJsonV0_16", &Voicevox::voicevoxVoiceModelGetMetasJsonV0_16),
+																												 InstanceMethod("voicevoxVoiceModelDeleteV0_16", &Voicevox::voicevoxVoiceModelDeleteV0_16),
+																												 InstanceMethod("voicevoxSynthesizerNewV0_16", &Voicevox::voicevoxSynthesizerNewV0_16),
+																												 InstanceMethod("voicevoxSynthesizerDeleteV0_16", &Voicevox::voicevoxSynthesizerDeleteV0_16),
+																												 InstanceMethod("voicevoxSynthesizerLoadVoiceModelV0_16", &Voicevox::voicevoxSynthesizerLoadVoiceModelV0_16),
+																												 InstanceMethod("voicevoxSynthesizerUnloadVoiceModelV0_16", &Voicevox::voicevoxSynthesizerUnloadVoiceModelV0_16),
+																												 InstanceMethod("voicevoxSynthesizerIsGpuModeV0_16", &Voicevox::voicevoxSynthesizerIsGpuModeV0_16),
+																												 InstanceMethod("voicevoxSynthesizerIsLoadedVoiceModelV0_16", &Voicevox::voicevoxSynthesizerIsLoadedVoiceModelV0_16),
+																												 InstanceMethod("voicevoxSynthesizerCreateMetasJsonV0_16", &Voicevox::voicevoxSynthesizerCreateMetasJsonV0_16),
+																												 InstanceMethod("voicevoxCreateSupportedDevicesJsonV0_16", &Voicevox::voicevoxCreateSupportedDevicesJsonV0_16),
+																												 InstanceMethod("voicevoxSynthesizerCreateAudioQueryFromKanaV0_16", &Voicevox::voicevoxSynthesizerCreateAudioQueryFromKanaV0_16),
+																												 InstanceMethod("voicevoxSynthesizerCreateAudioQueryV0_16", &Voicevox::voicevoxSynthesizerCreateAudioQueryV0_16),
+																												 InstanceMethod("voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16", &Voicevox::voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16),
+																												 InstanceMethod("voicevoxSynthesizerCreateAccentPhrasesV0_16", &Voicevox::voicevoxSynthesizerCreateAccentPhrasesV0_16),
+																												 InstanceMethod("voicevoxSynthesizerReplaceMoraDataV0_16", &Voicevox::voicevoxSynthesizerReplaceMoraDataV0_16),
+																												 InstanceMethod("voicevoxSynthesizerReplacePhonemeLengthV0_16", &Voicevox::voicevoxSynthesizerReplacePhonemeLengthV0_16),
+																												 InstanceMethod("voicevoxSynthesizerReplaceMoraPitchV0_16", &Voicevox::voicevoxSynthesizerReplaceMoraPitchV0_16),
+																												 InstanceMethod("voicevoxSynthesizerSynthesisV0_16", &Voicevox::voicevoxSynthesizerSynthesisV0_16),
+																												 InstanceMethod("voicevoxSynthesizerTtsFromKanaV0_16", &Voicevox::voicevoxSynthesizerTtsFromKanaV0_16),
+																												 InstanceMethod("voicevoxSynthesizerTtsV0_16", &Voicevox::voicevoxSynthesizerTtsV0_16),
+																												 InstanceMethod("voicevoxErrorResultToMessageV0_12", &Voicevox::voicevoxErrorResultToMessageV0_12),
+																												 InstanceMethod("voicevoxUserDictNewV0_16", &Voicevox::voicevoxUserDictNewV0_16),
+																												 InstanceMethod("voicevoxUserDictLoadV0_16", &Voicevox::voicevoxUserDictLoadV0_16),
+																												 InstanceMethod("voicevoxUserDictAddWordV0_16", &Voicevox::voicevoxUserDictAddWordV0_16),
+																												 InstanceMethod("voicevoxUserDictUpdateWordV0_16", &Voicevox::voicevoxUserDictUpdateWordV0_16),
+																												 InstanceMethod("voicevoxUserDictRemoveWordV0_16", &Voicevox::voicevoxUserDictRemoveWordV0_16),
+																												 InstanceMethod("voicevoxUserDictToJsonV0_16", &Voicevox::voicevoxUserDictToJsonV0_16),
+																												 InstanceMethod("voicevoxUserDictImportV0_16", &Voicevox::voicevoxUserDictImportV0_16),
+																												 InstanceMethod("voicevoxUserDictSaveV0_16", &Voicevox::voicevoxUserDictSaveV0_16),
+																												 InstanceMethod("voicevoxUserDictDeleteV0_16", &Voicevox::voicevoxUserDictDeleteV0_16),
+																												 InstanceMethod("voicevoxInitializeV0_14", &Voicevox::voicevoxInitializeV0_14),
+																												 InstanceMethod("voicevoxLoadModelV0_14", &Voicevox::voicevoxLoadModelV0_14),
+																												 InstanceMethod("voicevoxIsGpuModeV0_14", &Voicevox::voicevoxIsGpuModeV0_14),
+																												 InstanceMethod("voicevoxIsModelLoadedV0_14", &Voicevox::voicevoxIsModelLoadedV0_14),
+																												 InstanceMethod("voicevoxFinalizeV0_14", &Voicevox::voicevoxFinalizeV0_14),
+																												 InstanceMethod("voicevoxGetMetasJsonV0_14", &Voicevox::voicevoxGetMetasJsonV0_14),
+																												 InstanceMethod("voicevoxGetSupportedDevicesJsonV0_14", &Voicevox::voicevoxGetSupportedDevicesJsonV0_14),
+																												 InstanceMethod("voicevoxPredictDurationV0_14", &Voicevox::voicevoxPredictDurationV0_14),
+																												 InstanceMethod("voicevoxPredictIntonationV0_14", &Voicevox::voicevoxPredictIntonationV0_14),
+																												 InstanceMethod("voicevoxDecodeV0_14", &Voicevox::voicevoxDecodeV0_14),
+																												 InstanceMethod("voicevoxAudioQueryV0_14", &Voicevox::voicevoxAudioQueryV0_14),
+																												 InstanceMethod("voicevoxAccentPhrasesV0_15", &Voicevox::voicevoxAudioQueryV0_14),
+																												 InstanceMethod("voicevoxMoraLengthV0_15", &Voicevox::voicevoxAudioQueryV0_14),
+																												 InstanceMethod("voicevoxMoraPitchV0_15", &Voicevox::voicevoxAudioQueryV0_14),
+																												 InstanceMethod("voicevoxMoraDataV0_15", &Voicevox::voicevoxAudioQueryV0_14),
+																												 InstanceMethod("voicevoxSynthesisV0_14", &Voicevox::voicevoxSynthesisV0_14),
+																												 InstanceMethod("voicevoxTtsV0_14", &Voicevox::voicevoxTtsV0_14),
+																												 InstanceMethod("initializeV0_12", &Voicevox::initializeV0_12),
+																												 InstanceMethod("loadModelV0_12", &Voicevox::loadModelV0_12),
+																												 InstanceMethod("isModelLoadedV0_12", &Voicevox::isModelLoadedV0_12),
+																												 InstanceMethod("finalizeV0_10", &Voicevox::finalizeV0_10),
+																												 InstanceMethod("metasV0_5", &Voicevox::metasV0_5),
+																												 InstanceMethod("supportedDevicesV0_10", &Voicevox::supportedDevicesV0_10),
+																												 InstanceMethod("yukarinSForwardV0_8", &Voicevox::yukarinSForwardV0_8),
+																												 InstanceMethod("yukarinSaForwardV0_8", &Voicevox::yukarinSaForwardV0_8),
+																												 InstanceMethod("decodeForwardV0_8", &Voicevox::decodeForwardV0_8),
+																												 InstanceMethod("lastErrorMessageV0_5", &Voicevox::lastErrorMessageV0_5),
+																												 InstanceMethod("voicevoxLoadOpenjtalkDictV0_12", &Voicevox::voicevoxLoadOpenjtalkDictV0_12),
+																												 InstanceMethod("voicevoxTtsV0_12", &Voicevox::voicevoxTtsV0_12),
+																												 InstanceMethod("voicevoxTtsFromKanaV0_12", &Voicevox::voicevoxTtsFromKanaV0_12),
+																												 InstanceMethod("initializeV0_10", &Voicevox::initializeV0_10),
+																												 InstanceMethod("initializeV0_5", &Voicevox::initializeV0_5),
+																												 InstanceMethod("yukarinSForwardV0_5", &Voicevox::yukarinSForwardV0_5),
+																												 InstanceMethod("yukarinSaForwardV0_5", &Voicevox::yukarinSaForwardV0_5),
+																												 InstanceMethod("decodeForwardV0_5", &Voicevox::decodeForwardV0_5),
 																										 });
 
 	Napi::FunctionReference *constructor = new Napi::FunctionReference();
@@ -137,7 +137,7 @@ Voicevox::~Voicevox()
 	dll_free(dll);
 }
 
-Napi::Value Voicevox::voicevoxOpenJtalkRcNew(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxOpenJtalkRcNewV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -150,7 +150,7 @@ Napi::Value Voicevox::voicevoxOpenJtalkRcNew(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxOpenJtalkRcUseUserDict(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxOpenJtalkRcUseUserDictV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -168,7 +168,7 @@ Napi::Value Voicevox::voicevoxOpenJtalkRcUseUserDict(const Napi::CallbackInfo &i
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxOpenJtalkRcDelete(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxOpenJtalkRcDeleteV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -192,7 +192,7 @@ Napi::Value Voicevox::voicevoxOpenJtalkRcDelete(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxGetVersion(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxGetVersionV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -210,7 +210,7 @@ Napi::Value Voicevox::voicevoxGetVersion(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxVoiceModelNewFromPath(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxVoiceModelNewFromPathV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -223,7 +223,7 @@ Napi::Value Voicevox::voicevoxVoiceModelNewFromPath(const Napi::CallbackInfo &in
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxVoiceModelId(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxVoiceModelIdV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -239,7 +239,7 @@ Napi::Value Voicevox::voicevoxVoiceModelId(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxVoiceModelGetMetasJson(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxVoiceModelGetMetasJsonV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -264,7 +264,7 @@ Napi::Value Voicevox::voicevoxVoiceModelGetMetasJson(const Napi::CallbackInfo &i
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxVoiceModelDelete(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxVoiceModelDeleteV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -288,7 +288,7 @@ Napi::Value Voicevox::voicevoxVoiceModelDelete(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerNew(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerNewV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -319,7 +319,7 @@ Napi::Value Voicevox::voicevoxSynthesizerNew(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerDelete(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerDeleteV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -343,7 +343,7 @@ Napi::Value Voicevox::voicevoxSynthesizerDelete(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerLoadVoiceModel(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerLoadVoiceModelV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -366,7 +366,7 @@ Napi::Value Voicevox::voicevoxSynthesizerLoadVoiceModel(const Napi::CallbackInfo
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerUnloadVoiceModel(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerUnloadVoiceModelV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -383,7 +383,7 @@ Napi::Value Voicevox::voicevoxSynthesizerUnloadVoiceModel(const Napi::CallbackIn
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerIsGpuMode(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerIsGpuModeV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -408,7 +408,7 @@ Napi::Value Voicevox::voicevoxSynthesizerIsGpuMode(const Napi::CallbackInfo &inf
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerIsLoadedVoiceModel(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerIsLoadedVoiceModelV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -434,7 +434,7 @@ Napi::Value Voicevox::voicevoxSynthesizerIsLoadedVoiceModel(const Napi::Callback
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerCreateMetasJson(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerCreateMetasJsonV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -469,7 +469,7 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateMetasJson(const Napi::CallbackInf
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxCreateSupportedDevicesJson(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxCreateSupportedDevicesJsonV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -489,7 +489,7 @@ Napi::Value Voicevox::voicevoxCreateSupportedDevicesJson(const Napi::CallbackInf
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQueryFromKana(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQueryFromKanaV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -518,7 +518,7 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQueryFromKana(const Napi::Ca
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQuery(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQueryV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -538,7 +538,7 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQuery(const Napi::CallbackIn
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrasesFromKana(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -567,7 +567,7 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrasesFromKana(const Napi:
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrases(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrasesV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -587,7 +587,7 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrases(const Napi::Callbac
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraData(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraDataV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -616,7 +616,7 @@ Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraData(const Napi::CallbackInf
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerReplacePhonemeLength(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerReplacePhonemeLengthV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -645,7 +645,7 @@ Napi::Value Voicevox::voicevoxSynthesizerReplacePhonemeLength(const Napi::Callba
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraPitch(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraPitchV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -674,7 +674,7 @@ Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraPitch(const Napi::CallbackIn
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerSynthesis(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerSynthesisV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -706,7 +706,7 @@ Napi::Value Voicevox::voicevoxSynthesizerSynthesis(const Napi::CallbackInfo &inf
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerTtsFromKana(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerTtsFromKanaV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -738,7 +738,7 @@ Napi::Value Voicevox::voicevoxSynthesizerTtsFromKana(const Napi::CallbackInfo &i
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesizerTts(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesizerTtsV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -761,7 +761,7 @@ Napi::Value Voicevox::voicevoxSynthesizerTts(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxErrorResultToMessage(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxErrorResultToMessageV0_12(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -780,7 +780,7 @@ Napi::Value Voicevox::voicevoxErrorResultToMessage(const Napi::CallbackInfo &inf
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictNew(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictNewV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -799,7 +799,7 @@ Napi::Value Voicevox::voicevoxUserDictNew(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictLoad(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictLoadV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -816,7 +816,7 @@ Napi::Value Voicevox::voicevoxUserDictLoad(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictAddWord(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictAddWordV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -854,7 +854,7 @@ Napi::Value Voicevox::voicevoxUserDictAddWord(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictUpdateWord(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictUpdateWordV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -891,7 +891,7 @@ Napi::Value Voicevox::voicevoxUserDictUpdateWord(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictRemoveWord(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictRemoveWordV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -913,7 +913,7 @@ Napi::Value Voicevox::voicevoxUserDictRemoveWord(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictToJson(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictToJsonV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -940,7 +940,7 @@ Napi::Value Voicevox::voicevoxUserDictToJson(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictImport(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictImportV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -963,7 +963,7 @@ Napi::Value Voicevox::voicevoxUserDictImport(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictSave(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictSaveV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -980,7 +980,7 @@ Napi::Value Voicevox::voicevoxUserDictSave(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxUserDictDelete(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxUserDictDeleteV0_16(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1004,7 +1004,7 @@ Napi::Value Voicevox::voicevoxUserDictDelete(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxInitialize(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxInitializeV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1027,7 +1027,7 @@ Napi::Value Voicevox::voicevoxInitialize(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxLoadModel(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxLoadModelV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1037,7 +1037,7 @@ Napi::Value Voicevox::voicevoxLoadModel(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxIsGpuMode(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxIsGpuModeV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1055,7 +1055,7 @@ Napi::Value Voicevox::voicevoxIsGpuMode(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxIsModelLoaded(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxIsModelLoadedV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1074,7 +1074,7 @@ Napi::Value Voicevox::voicevoxIsModelLoaded(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxFinalize(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxFinalizeV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1090,7 +1090,7 @@ Napi::Value Voicevox::voicevoxFinalize(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxGetMetasJson(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxGetMetasJsonV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1108,7 +1108,7 @@ Napi::Value Voicevox::voicevoxGetMetasJson(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxGetSupportedDevicesJson(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxGetSupportedDevicesJsonV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1126,7 +1126,7 @@ Napi::Value Voicevox::voicevoxGetSupportedDevicesJson(const Napi::CallbackInfo &
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxPredictDuration(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxPredictDurationV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1162,7 +1162,7 @@ Napi::Value Voicevox::voicevoxPredictDuration(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxPredictIntonation(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxPredictIntonationV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1218,7 +1218,7 @@ Napi::Value Voicevox::voicevoxPredictIntonation(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxDecode(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxDecodeV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1261,7 +1261,7 @@ Napi::Value Voicevox::voicevoxDecode(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxAudioQuery(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxAudioQueryV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1294,7 +1294,7 @@ Napi::Value Voicevox::voicevoxAudioQuery(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxAccentPhrases(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxAccentPhrasesV0_15(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1327,7 +1327,7 @@ Napi::Value Voicevox::voicevoxAccentPhrases(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxMoraLength(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxMoraLengthV0_15(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1349,7 +1349,7 @@ Napi::Value Voicevox::voicevoxMoraLength(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxMoraPitch(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxMoraPitchV0_15(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1371,7 +1371,7 @@ Napi::Value Voicevox::voicevoxMoraPitch(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxMoraData(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxMoraDataV0_15(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1393,7 +1393,7 @@ Napi::Value Voicevox::voicevoxMoraData(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxSynthesis(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxSynthesisV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1418,7 +1418,7 @@ Napi::Value Voicevox::voicevoxSynthesis(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxTts(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxTtsV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1444,7 +1444,7 @@ Napi::Value Voicevox::voicevoxTts(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::initialize(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::initializeV0_12(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1465,7 +1465,7 @@ Napi::Value Voicevox::initialize(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::loadModel(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::loadModelV0_12(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1484,7 +1484,7 @@ Napi::Value Voicevox::loadModel(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::isModelLoaded(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::isModelLoadedV0_12(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1503,7 +1503,7 @@ Napi::Value Voicevox::isModelLoaded(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::finalize(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::finalizeV0_10(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1519,7 +1519,7 @@ Napi::Value Voicevox::finalize(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::metas(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::metasV0_5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1537,7 +1537,7 @@ Napi::Value Voicevox::metas(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::supportedDevices(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::supportedDevicesV0_10(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1555,7 +1555,7 @@ Napi::Value Voicevox::supportedDevices(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::yukarinSForward(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::yukarinSForwardV0_8(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1590,7 +1590,7 @@ Napi::Value Voicevox::yukarinSForward(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::yukarinSaForward(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::yukarinSaForwardV0_8(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1646,7 +1646,7 @@ Napi::Value Voicevox::yukarinSaForward(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::decodeForward(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::decodeForwardV0_8(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1688,7 +1688,7 @@ Napi::Value Voicevox::decodeForward(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::lastErrorMessage(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::lastErrorMessageV0_5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1706,7 +1706,7 @@ Napi::Value Voicevox::lastErrorMessage(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxLoadOpenjtalkDict(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxLoadOpenjtalkDictV0_12(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1716,7 +1716,7 @@ Napi::Value Voicevox::voicevoxLoadOpenjtalkDict(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxTtsV12(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxTtsV0_12(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1730,7 +1730,7 @@ Napi::Value Voicevox::voicevoxTtsV12(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::voicevoxTtsFromKana(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::voicevoxTtsFromKanaV0_12(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1744,7 +1744,7 @@ Napi::Value Voicevox::voicevoxTtsFromKana(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::initializeV10(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::initializeV0_10(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1765,7 +1765,7 @@ Napi::Value Voicevox::initializeV10(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::initializeV5(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::initializeV0_5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1785,7 +1785,7 @@ Napi::Value Voicevox::initializeV5(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::yukarinSForwardV5(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::yukarinSForwardV0_5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1820,7 +1820,7 @@ Napi::Value Voicevox::yukarinSForwardV5(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::yukarinSaForwardV5(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::yukarinSaForwardV0_5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
@@ -1876,7 +1876,7 @@ Napi::Value Voicevox::yukarinSaForwardV5(const Napi::CallbackInfo &info)
 	return obj;
 }
 
-Napi::Value Voicevox::decodeForwardV5(const Napi::CallbackInfo &info)
+Napi::Value Voicevox::decodeForwardV0_5(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
