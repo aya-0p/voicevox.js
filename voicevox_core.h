@@ -1384,7 +1384,7 @@ VoicevoxResultCode voicevox_synthesis_v0_14(DLL &dll,
  * デフォルトのテキスト音声合成オプションを生成する
  * @return テキスト音声合成オプション
  */
-struct VoicevoxTtsOptionsV0_14 voicevox_make_default_tts_options_v14(DLL &dll);
+struct VoicevoxTtsOptionsV0_14 voicevox_make_default_tts_options_v0_14(DLL &dll);
 
 /**
  * テキスト音声合成を実行する

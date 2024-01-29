@@ -543,7 +543,7 @@ struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v
   return load_func<VoicevoxInitializeOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_initialize_options")();
 }
 
-struct VoicevoxTtsOptionsV0_14 voicevox_make_default_tts_options_v14(DLL &dll)
+struct VoicevoxTtsOptionsV0_14 voicevox_make_default_tts_options_v0_14(DLL &dll)
 {
   return load_func<VoicevoxTtsOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_tts_options")();
 }

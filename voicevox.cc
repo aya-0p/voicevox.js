@@ -1425,7 +1425,7 @@ Napi::Value Voicevox::voicevoxTtsV0_14(const Napi::CallbackInfo &info)
 	VoicevoxTtsOptionsV0_14 options;
 	try
 	{
-		options = voicevox_make_default_tts_options_v14(this->dll);
+		options = voicevox_make_default_tts_options_v0_14(this->dll);
 	}
 	catch (const std::exception &e)
 	{
