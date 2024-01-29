@@ -1,19 +1,11 @@
 module.exports.VoicevoxCore = exports.VoicevoxCore = require("bindings")("voicevox");
-exports.VoicevoxResultCodeV12 = exports.VoicevoxResultCodeV14 = exports.VoicevoxUserDictWordType = exports.VoicevoxAccelerationMode = void 0;
+exports.VoicevoxResultCodeV12 = exports.VoicevoxResultCodeV14 = exports.VoicevoxAccelerationMode = void 0;
 var VoicevoxAccelerationMode;
 (function (VoicevoxAccelerationMode) {
   VoicevoxAccelerationMode[(VoicevoxAccelerationMode["VOICEVOX_ACCELERATION_MODE_AUTO"] = 0)] = "VOICEVOX_ACCELERATION_MODE_AUTO";
   VoicevoxAccelerationMode[(VoicevoxAccelerationMode["VOICEVOX_ACCELERATION_MODE_CPU"] = 1)] = "VOICEVOX_ACCELERATION_MODE_CPU";
   VoicevoxAccelerationMode[(VoicevoxAccelerationMode["VOICEVOX_ACCELERATION_MODE_GPU"] = 2)] = "VOICEVOX_ACCELERATION_MODE_GPU";
 })(VoicevoxAccelerationMode || (exports.VoicevoxAccelerationMode = VoicevoxAccelerationMode = {}));
-var VoicevoxUserDictWordType;
-(function (VoicevoxUserDictWordType) {
-  VoicevoxUserDictWordType[(VoicevoxUserDictWordType["VOICEVOX_USER_DICT_WORD_TYPE_PROPER_NOUN"] = 0)] = "VOICEVOX_USER_DICT_WORD_TYPE_PROPER_NOUN";
-  VoicevoxUserDictWordType[(VoicevoxUserDictWordType["VOICEVOX_USER_DICT_WORD_TYPE_COMMON_NOUN"] = 1)] = "VOICEVOX_USER_DICT_WORD_TYPE_COMMON_NOUN";
-  VoicevoxUserDictWordType[(VoicevoxUserDictWordType["VOICEVOX_USER_DICT_WORD_TYPE_VERB"] = 2)] = "VOICEVOX_USER_DICT_WORD_TYPE_VERB";
-  VoicevoxUserDictWordType[(VoicevoxUserDictWordType["VOICEVOX_USER_DICT_WORD_TYPE_ADJECTIVE"] = 3)] = "VOICEVOX_USER_DICT_WORD_TYPE_ADJECTIVE";
-  VoicevoxUserDictWordType[(VoicevoxUserDictWordType["VOICEVOX_USER_DICT_WORD_TYPE_SUFFIX"] = 4)] = "VOICEVOX_USER_DICT_WORD_TYPE_SUFFIX";
-})(VoicevoxUserDictWordType || (exports.VoicevoxUserDictWordType = VoicevoxUserDictWordType = {}));
 var VoicevoxResultCodeV14;
 (function (VoicevoxResultCodeV14) {
   VoicevoxResultCodeV14[(VoicevoxResultCodeV14["VOICEVOX_RESULT_OK"] = 0)] = "VOICEVOX_RESULT_OK";

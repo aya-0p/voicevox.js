@@ -140,10 +140,10 @@ Napi::Value Voicevox::voicevoxInitializeV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
-	VoicevoxInitializeOptionsV14 options;
+	VoicevoxInitializeOptionsV0_14 options;
 	try
 	{
-		options = voicevox_make_default_initialize_options_v14(this->dll);
+		options = voicevox_make_default_initialize_options_v0_14(this->dll);
 	}
 	catch (const std::exception &e)
 	{
@@ -455,10 +455,10 @@ Napi::Value Voicevox::voicevoxTtsV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
-	VoicevoxTtsOptionsV14 options;
+	VoicevoxTtsOptionsV0_14 options;
 	try
 	{
-		options = voicevox_make_default_tts_options_v14(this->dll);
+		options = voicevox_make_default_tts_options_v0_14(this->dll);
 	}
 	catch (const std::exception &e)
 	{

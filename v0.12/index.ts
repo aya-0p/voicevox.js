@@ -1,4 +1,4 @@
-import { VoicevoxCore, VoicevoxResultCodeV12 } from "../voicevox_core";
+import { VoicevoxCore, VoicevoxResultCodeV0_12 } from "../voicevox_core";
 import { Core, VoicevoxError, VoicevoxMetaJson, VoicevoxSupportedDevicesJson, checkValidArray, checkValidBoolean, checkValidNumber, checkValidString } from "../util";
 
 /**
@@ -173,7 +173,7 @@ export class Voicevox {
   voicevoxLoadOpenjtalkDict(dictPath: string): Promise<void> {
     return new Promise<void>((resolve) => {
       const { resultCode } = this[Core].voicevoxLoadOpenjtalkDictV0_12(dictPath);
-      if (resultCode !== VoicevoxResultCodeV12.VOICEVOX_RESULT_SUCCEED) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_12.VOICEVOX_RESULT_SUCCEED) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -189,7 +189,7 @@ export class Voicevox {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
       const { result, resultCode } = this[Core].voicevoxTtsV0_12(text, speakerId);
-      if (resultCode !== VoicevoxResultCodeV12.VOICEVOX_RESULT_SUCCEED) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_12.VOICEVOX_RESULT_SUCCEED) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -205,7 +205,7 @@ export class Voicevox {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
       const { result, resultCode } = this[Core].voicevoxTtsFromKanaV0_12(text, speakerId);
-      if (resultCode !== VoicevoxResultCodeV12.VOICEVOX_RESULT_SUCCEED) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_12.VOICEVOX_RESULT_SUCCEED) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
