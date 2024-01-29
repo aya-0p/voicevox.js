@@ -4,3 +4,4 @@ node_modules/
 .prettierrc
 test
 index.js
+util.js
