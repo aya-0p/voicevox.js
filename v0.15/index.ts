@@ -290,6 +290,56 @@ export class Voicevox {
       resolve(result);
     });
   }
+
+  /**
+   * デフォルトの `accent_phrases` のオプションを生成する
+   * @return デフォルト値が設定された `accent_phrases` のオプション
+   */
+  static voicevoxMakeDefaultAccentPhrasesOptions(): VoicevoxAccentPhrasesOptions {
+    return {
+      kana: false,
+    };
+  }
+
+  static voicevoxMakeDefaultInitializeOptions(): VoicevoxInitializeOptions {
+    return {
+      cpuNumThreads: 0,
+      accelerationMode: VoicevoxAccelerationModeV0_14.VOICEVOX_ACCELERATION_MODE_AUTO,
+      loadAllModels: true,
+      openJtalkDictDir: "",
+    }
+  }
+
+  /**
+   * デフォルトの synthesis のオプションを生成する
+   * @return デフォルト値が設定された synthesis のオプション
+   */
+  static voicevoxMakeDefaultSynthesisOptions(): VoicevoxSynthesisOptions {
+    return {
+      enableInterrogativeUpspeak: false,
+    };
+  }
+
+  /**
+   * デフォルトの AudioQuery のオプションを生成する
+   * @return デフォルト値が設定された AudioQuery オプション
+   */
+  static voicevoxMakeDefaultAudioQueryOptions(): VoicevoxAudioQueryOptions {
+    return {
+      kana: false,
+    };
+  }
+
+  /**
+   * デフォルトのテキスト音声合成オプションを生成する
+   * @return テキスト音声合成オプション
+   */
+  static voicevoxMakeDefaultTtsOptions(): VoicevoxTtsOptions {
+    return {
+      kana: false,
+      enableInterrogativeUpspeak: false,
+    };
+  }
 }
 
 /**
