@@ -32,7 +32,7 @@ export class Voicevox {
    * @param {VoicevoxInitializeOptions} options 初期化オプション
    * @returns {Promise<void>}
    */
-  voicevoxInitializeV0_14(options: VoicevoxInitializeOptions): Promise<void> {
+  voicevoxInitialize(options: VoicevoxInitializeOptions): Promise<void> {
     return new Promise<void>((resolve) => {
       checkVoicevoxInitializeOptions(options);
       const { resultCode } = this[Core].voicevoxInitializeV0_14(options.accelerationMode, options.cpuNumThreads, options.loadAllModels, options.openJtalkDictDir);
@@ -46,7 +46,7 @@ export class Voicevox {
    * @param {number} speakerId 読み込むモデルの話者ID
    * @returns {Promise<void>}
    */
-  voicevoxLoadModelV0_14(speakerId: number): Promise<void> {
+  voicevoxLoadModel(speakerId: number): Promise<void> {
     return new Promise<void>((resolve) => {
       checkValidNumber(speakerId, "speakerId", true);
       const { resultCode } = this[Core].voicevoxLoadModelV0_14(speakerId);
@@ -58,7 +58,7 @@ export class Voicevox {
    * ハードウェアアクセラレーションがGPUモードか判定する
    * @return {Promise<boolean>} GPUモードならtrue、そうでないならfalse
    */
-  voicevoxIsGpuModeV0_14(): Promise<boolean> {
+  voicevoxIsGpuMode(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       const { result } = this[Core].voicevoxIsGpuModeV0_14();
       resolve(result);
@@ -70,7 +70,7 @@ export class Voicevox {
    * @param speakerId 話者ID
    * @returns {Promise<boolean>} モデルが読み込まれているのであればtrue、そうでないならfalse
    */
-  voicevoxIsModelLoadedV0_14(speakerId: number): Promise<boolean> {
+  voicevoxIsModelLoaded(speakerId: number): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       checkValidNumber(speakerId, "speakerId", true);
       const { result } = this[Core].voicevoxIsModelLoadedV0_14(speakerId);
@@ -82,7 +82,7 @@ export class Voicevox {
    * このライブラリの利用を終了し、確保しているリソースを解放する
    * @returns {Promise<void>}
    */
-  voicevoxFinalizeV0_14(): Promise<void> {
+  voicevoxFinalize(): Promise<void> {
     return new Promise<void>((resolve) => {
       this[Core].voicevoxFinalizeV0_14();
       resolve();
@@ -93,7 +93,7 @@ export class Voicevox {
    * メタ情報を取得する
    * @returns {Promise<VoicevoxMetaJson>} メタ情報
    */
-  voicevoxGetMetasJsonV0_14(): Promise<VoicevoxMetaJson> {
+  voicevoxGetMetasJson(): Promise<VoicevoxMetaJson> {
     return new Promise<VoicevoxMetaJson>((resolve) => {
       const { result } = this[Core].voicevoxGetMetasJsonV0_14();
       resolve(JSON.parse(result));
@@ -104,7 +104,7 @@ export class Voicevox {
    * サポートデバイス情報を取得する
    * @returns {Promise<VoicevoxSupportedDevicesJson>} サポートデバイス情報
    */
-  voicevoxGetSupportedDevicesJsonV0_14(): Promise<VoicevoxSupportedDevicesJson> {
+  voicevoxGetSupportedDevicesJson(): Promise<VoicevoxSupportedDevicesJson> {
     return new Promise<VoicevoxSupportedDevicesJson>((resolve) => {
       const { result } = this[Core].voicevoxGetSupportedDevicesJsonV0_14();
       resolve(JSON.parse(result));
@@ -117,7 +117,7 @@ export class Voicevox {
    * @param {number} speakerId 話者ID
    * @returns {Promise<Array<number>>} データ
    */
-  voicevoxPredictDurationV0_14(phoneme: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  voicevoxPredictDuration(phoneme: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(phoneme, "phoneme", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
@@ -138,7 +138,7 @@ export class Voicevox {
    * @param {number} speakerId 話者ID
    * @returns {Promise<Array<number>>} データ
    */
-  voicevoxPredictIntonationV0_14(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  voicevoxPredictIntonation(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(vowelPhoneme, "vowelPhoneme", "bigint");
       checkValidArray(consonantPhoneme, "consonantPhoneme", "bigint");
@@ -160,7 +160,7 @@ export class Voicevox {
    * @param {number} speakerId 話者ID
    * @returns {Promise<Array<number>>} データ
    */
-  voicevoxDecodeV0_14(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
+  voicevoxDecode(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(f0, "f0", "number", false);
       checkValidArray(phoneme, "phoneme", "number", false);
@@ -178,7 +178,7 @@ export class Voicevox {
    * @param {VoicevoxAudioQueryOptions} options AudioQueryのオプション
    * @returns {Promise<VoicevoxAudioQueryJson>} AudioQuery
    */
-  voicevoxAudioQueryV0_14(text: string, speakerId: number, options: VoicevoxAudioQueryOptions): Promise<VoicevoxAudioQueryJson> {
+  voicevoxAudioQuery(text: string, speakerId: number, options: VoicevoxAudioQueryOptions): Promise<VoicevoxAudioQueryJson> {
     return new Promise<VoicevoxAudioQueryJson>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
@@ -196,7 +196,7 @@ export class Voicevox {
    * @param {VoicevoxAccentPhrasesOptions} options `accentPhrases`のオプション
    * @return {Promise<Array<VoicevoxAccentPhraseJson>>} アクセント句の情報の配列
    */
-  voicevoxAccentPhrasesV0_15(text: string, speakerId: number, options: VoicevoxAccentPhrasesOptions): Promise<Array<VoicevoxAccentPhraseJson>> {
+  voicevoxAccentPhrases(text: string, speakerId: number, options: VoicevoxAccentPhrasesOptions): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
@@ -213,7 +213,7 @@ export class Voicevox {
    * @param speakerId 話者ID
    * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音素長が変更されたアクセント句の情報の配列
    */
-  voicevoxMoraLengthV0_15(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+  voicevoxMoraLength(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
       checkVoicevoxAccentPhraseJson(accentPhrases);
       checkValidNumber(speakerId, "speakerId", true);
@@ -229,7 +229,7 @@ export class Voicevox {
    * @param speakerId 話者ID
    * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音高が変更されたアクセント句の情報の配列
    */
-  voicevoxMoraPitchV0_15(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+  voicevoxMoraPitch(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
       checkVoicevoxAccentPhraseJson(accentPhrases);
       checkValidNumber(speakerId, "speakerId", true);
@@ -245,7 +245,7 @@ export class Voicevox {
    * @param speakerId 話者ID
    * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音高・音素長が変更されたアクセント句の情報の配列
    */
-  voicevoxMoraDataV0_15(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+  voicevoxMoraData(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
       checkVoicevoxAccentPhraseJson(accentPhrases);
       checkValidNumber(speakerId, "speakerId", true);
@@ -262,7 +262,7 @@ export class Voicevox {
    * @param {VoicevoxSynthesisOptions} options AudioQueryから音声合成オプション
    * @returns {Promise<Buffer>} wav データ
    */
-  voicevoxSynthesisV0_14(audioQueryJson: VoicevoxAudioQueryJson, speakerId: number, options: VoicevoxSynthesisOptions): Promise<Buffer> {
+  voicevoxSynthesis(audioQueryJson: VoicevoxAudioQueryJson, speakerId: number, options: VoicevoxSynthesisOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
       checkVoicevoxAudioQueryJson(audioQueryJson);
       checkValidNumber(speakerId, "speakerId", true);
@@ -280,7 +280,7 @@ export class Voicevox {
    * @param {VoicevoxTtsOptions} options テキスト音声合成オプション
    * @returns {Promise<Buffer>} wav データ
    */
-  voicevoxTtsV0_14(text: string, speakerId: number, options: VoicevoxTtsOptions): Promise<Buffer> {
+  voicevoxTts(text: string, speakerId: number, options: VoicevoxTtsOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
