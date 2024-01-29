@@ -23,7 +23,7 @@ export class Voicevox {
    */
   getVersion(): Promise<string> {
     return new Promise<string>((resolve) => {
-      const { result } = this[Core].voicevoxGetVersion();
+      const { result } = this[Core].voicevoxGetVersionV0_14();
       resolve(result);
     });
   }
@@ -33,11 +33,11 @@ export class Voicevox {
    * @param {VoicevoxInitializeOptions} options 初期化オプション
    * @returns {Promise<void>}
    */
-  voicevoxInitialize(options: VoicevoxInitializeOptions): Promise<void> {
+  voicevoxInitializeV0_14(options: VoicevoxInitializeOptions): Promise<void> {
     return new Promise<void>((resolve) => {
       checkVoicevoxInitializeOptions(options);
-      const { resultCode } = this[Core].voicevoxInitialize(options.accelerationMode, options.cpuNumThreads, options.loadAllModels, options.openJtalkDictDir);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this[Core].voicevoxInitializeV0_14(options.accelerationMode, options.cpuNumThreads, options.loadAllModels, options.openJtalkDictDir);
+      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -47,11 +47,11 @@ export class Voicevox {
    * @param {number} speakerId 読み込むモデルの話者ID
    * @returns {Promise<void>}
    */
-  voicevoxLoadModel(speakerId: number): Promise<void> {
+  voicevoxLoadModelV0_14(speakerId: number): Promise<void> {
     return new Promise<void>((resolve) => {
       checkValidNumber(speakerId, "speakerId", true);
-      const { resultCode } = this[Core].voicevoxLoadModel(speakerId);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this[Core].voicevoxLoadModelV0_14(speakerId);
+      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -59,9 +59,9 @@ export class Voicevox {
    * ハードウェアアクセラレーションがGPUモードか判定する
    * @return {Promise<boolean>} GPUモードならtrue、そうでないならfalse
    */
-  voicevoxIsGpuMode(): Promise<boolean> {
+  voicevoxIsGpuModeV0_14(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
-      const { result } = this[Core].voicevoxIsGpuMode();
+      const { result } = this[Core].voicevoxIsGpuModeV0_14();
       resolve(result);
     });
   }
@@ -71,10 +71,10 @@ export class Voicevox {
    * @param speakerId 話者ID
    * @returns {Promise<boolean>} モデルが読み込まれているのであればtrue、そうでないならfalse
    */
-  voicevoxIsModelLoaded(speakerId: number): Promise<boolean> {
+  voicevoxIsModelLoadedV0_14(speakerId: number): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       checkValidNumber(speakerId, "speakerId", true);
-      const { result } = this[Core].voicevoxIsModelLoaded(speakerId);
+      const { result } = this[Core].voicevoxIsModelLoadedV0_14(speakerId);
       resolve(result);
     });
   }
@@ -83,9 +83,9 @@ export class Voicevox {
    * このライブラリの利用を終了し、確保しているリソースを解放する
    * @returns {Promise<void>}
    */
-  voicevoxFinalize(): Promise<void> {
+  voicevoxFinalizeV0_14(): Promise<void> {
     return new Promise<void>((resolve) => {
-      this[Core].voicevoxFinalize();
+      this[Core].voicevoxFinalizeV0_14();
       resolve();
     });
   }
@@ -94,9 +94,9 @@ export class Voicevox {
    * メタ情報を取得する
    * @returns {Promise<VoicevoxMetaJson>} メタ情報
    */
-  voicevoxGetMetasJson(): Promise<VoicevoxMetaJson> {
+  voicevoxGetMetasJsonV0_14(): Promise<VoicevoxMetaJson> {
     return new Promise<VoicevoxMetaJson>((resolve) => {
-      const { result } = this[Core].voicevoxGetMetasJson();
+      const { result } = this[Core].voicevoxGetMetasJsonV0_14();
       resolve(JSON.parse(result));
     });
   }
@@ -105,9 +105,9 @@ export class Voicevox {
    * サポートデバイス情報を取得する
    * @returns {Promise<VoicevoxSupportedDevicesJson>} サポートデバイス情報
    */
-  voicevoxGetSupportedDevicesJson(): Promise<VoicevoxSupportedDevicesJson> {
+  voicevoxGetSupportedDevicesJsonV0_14(): Promise<VoicevoxSupportedDevicesJson> {
     return new Promise<VoicevoxSupportedDevicesJson>((resolve) => {
-      const { result } = this[Core].voicevoxGetSupportedDevicesJson();
+      const { result } = this[Core].voicevoxGetSupportedDevicesJsonV0_14();
       resolve(JSON.parse(result));
     });
   }
@@ -118,12 +118,12 @@ export class Voicevox {
    * @param {number} speakerId 話者ID
    * @returns {Promise<Array<number>>} データ
    */
-  voicevoxPredictDuration(phoneme: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  voicevoxPredictDurationV0_14(phoneme: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(phoneme, "phoneme", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, resultCode } = this[Core].voicevoxPredictDuration(phoneme, speakerId);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxPredictDurationV0_14(phoneme, speakerId);
+      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -139,7 +139,7 @@ export class Voicevox {
    * @param {number} speakerId 話者ID
    * @returns {Promise<Array<number>>} データ
    */
-  voicevoxPredictIntonation(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  voicevoxPredictIntonationV0_14(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(vowelPhoneme, "vowelPhoneme", "bigint");
       checkValidArray(consonantPhoneme, "consonantPhoneme", "bigint");
@@ -148,8 +148,8 @@ export class Voicevox {
       checkValidArray(startAccentPhrase, "startAccentPhrase", "bigint");
       checkValidArray(endAccentPhrase, "endAccentPhrase", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, resultCode } = this[Core].voicevoxPredictIntonation(vowelPhoneme, consonantPhoneme, startAccent, endAccent, startAccentPhrase, endAccentPhrase, speakerId);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxPredictIntonationV0_14(vowelPhoneme, consonantPhoneme, startAccent, endAccent, startAccentPhrase, endAccentPhrase, speakerId);
+      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -161,13 +161,13 @@ export class Voicevox {
    * @param {number} speakerId 話者ID
    * @returns {Promise<Array<number>>} データ
    */
-  voicevoxDecode(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
+  voicevoxDecodeV0_14(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(f0, "f0", "number", false);
       checkValidArray(phoneme, "phoneme", "number", false);
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, resultCode } = this[Core].voicevoxDecode(f0, phoneme, speakerId);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxDecodeV0_14(f0, phoneme, speakerId);
+      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -179,13 +179,13 @@ export class Voicevox {
    * @param {VoicevoxAudioQueryOptions} options AudioQueryのオプション
    * @returns {Promise<VoicevoxAudioQueryJson>} AudioQuery
    */
-  voicevoxAudioQuery(text: string, speakerId: number, options: VoicevoxAudioQueryOptions): Promise<VoicevoxAudioQueryJson> {
+  voicevoxAudioQueryV0_14(text: string, speakerId: number, options: VoicevoxAudioQueryOptions): Promise<VoicevoxAudioQueryJson> {
     return new Promise<VoicevoxAudioQueryJson>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
       checkVoicevoxAudioQueryOptions(options);
-      const { result, resultCode } = this[Core].voicevoxAudioQuery(text, speakerId, options.kana);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxAudioQueryV0_14(text, speakerId, options.kana);
+      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -197,13 +197,13 @@ export class Voicevox {
    * @param {VoicevoxAccentPhrasesOptions} options `accentPhrases`のオプション
    * @return {Promise<Array<VoicevoxAccentPhraseJson>>} アクセント句の情報の配列
    */
-  voicevoxAccentPhrases(text: string, speakerId: number, options: VoicevoxAccentPhrasesOptions): Promise<Array<VoicevoxAccentPhraseJson>> {
+  voicevoxAccentPhrasesV0_15(text: string, speakerId: number, options: VoicevoxAccentPhrasesOptions): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
       checkVoicevoxAccentPhrasesOptions(options);
-      const { result, resultCode } = this[Core].voicevoxAccentPhrases(text, speakerId, options.kana);
-      if (resultCode !== VoicevoxResultCodeV15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxAccentPhrasesV0_15(text, speakerId, options.kana);
+      if (resultCode !== VoicevoxResultCodeV15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -214,12 +214,12 @@ export class Voicevox {
    * @param speakerId 話者ID
    * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音素長が変更されたアクセント句の情報の配列
    */
-  voicevoxMoraLength(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+  voicevoxMoraLengthV0_15(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
       checkVoicevoxAccentPhraseJson(accentPhrases);
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, resultCode } = this[Core].voicevoxMoraLength(JSON.stringify(accentPhrases), speakerId);
-      if (resultCode !== VoicevoxResultCodeV15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxMoraLengthV0_15(JSON.stringify(accentPhrases), speakerId);
+      if (resultCode !== VoicevoxResultCodeV15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -230,12 +230,12 @@ export class Voicevox {
    * @param speakerId 話者ID
    * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音高が変更されたアクセント句の情報の配列
    */
-  voicevoxMoraPitch(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+  voicevoxMoraPitchV0_15(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
       checkVoicevoxAccentPhraseJson(accentPhrases);
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, resultCode } = this[Core].voicevoxMoraPitch(JSON.stringify(accentPhrases), speakerId);
-      if (resultCode !== VoicevoxResultCodeV15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxMoraPitchV0_15(JSON.stringify(accentPhrases), speakerId);
+      if (resultCode !== VoicevoxResultCodeV15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -246,12 +246,12 @@ export class Voicevox {
    * @param speakerId 話者ID
    * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音高・音素長が変更されたアクセント句の情報の配列
    */
-  voicevoxMoraData(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+  voicevoxMoraDataV0_15(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
     return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
       checkVoicevoxAccentPhraseJson(accentPhrases);
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, resultCode } = this[Core].voicevoxMoraData(JSON.stringify(accentPhrases), speakerId);
-      if (resultCode !== VoicevoxResultCodeV15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxMoraDataV0_15(JSON.stringify(accentPhrases), speakerId);
+      if (resultCode !== VoicevoxResultCodeV15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -263,13 +263,13 @@ export class Voicevox {
    * @param {VoicevoxSynthesisOptions} options AudioQueryから音声合成オプション
    * @returns {Promise<Buffer>} wav データ
    */
-  voicevoxSynthesis(audioQueryJson: VoicevoxAudioQueryJson, speakerId: number, options: VoicevoxSynthesisOptions): Promise<Buffer> {
+  voicevoxSynthesisV0_14(audioQueryJson: VoicevoxAudioQueryJson, speakerId: number, options: VoicevoxSynthesisOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
       checkVoicevoxAudioQueryJson(audioQueryJson);
       checkValidNumber(speakerId, "speakerId", true);
       checkVoicevoxSynthesisOptions(options);
-      const { result, resultCode } = this[Core].voicevoxSynthesis(JSON.stringify(audioQueryJson), speakerId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxSynthesisV0_14(JSON.stringify(audioQueryJson), speakerId, options.enableInterrogativeUpspeak);
+      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -281,13 +281,13 @@ export class Voicevox {
    * @param {VoicevoxTtsOptions} options テキスト音声合成オプション
    * @returns {Promise<Buffer>} wav データ
    */
-  voicevoxTts(text: string, speakerId: number, options: VoicevoxTtsOptions): Promise<Buffer> {
+  voicevoxTtsV0_14(text: string, speakerId: number, options: VoicevoxTtsOptions): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
       checkVoicevoxTtsOptions(options);
-      const { result, resultCode } = this[Core].voicevoxTts(text, speakerId, options.enableInterrogativeUpspeak, options.kana);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxTtsV0_14(text, speakerId, options.enableInterrogativeUpspeak, options.kana);
+      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }

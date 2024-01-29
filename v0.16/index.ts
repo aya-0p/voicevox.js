@@ -49,8 +49,8 @@ export class Voicevox {
       checkValidString(openJtalkDicDir, "openJtalkDicDir");
       const openJtalkPointerName = this.#openJtalkPointerCounter;
       this.#openJtalkPointerCounter++;
-      const { resultCode } = this[Core].voicevoxOpenJtalkRcNew(openJtalkDicDir, openJtalkPointerName);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this[Core].voicevoxOpenJtalkRcNewV0_16(openJtalkDicDir, openJtalkPointerName);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(new VoicevoxOpenJtalkRc(this, openJtalkPointerName));
     });
   }
@@ -61,7 +61,7 @@ export class Voicevox {
    */
   getVersion(): Promise<string> {
     return new Promise<string>((resolve) => {
-      const { result } = this[Core].voicevoxGetVersion();
+      const { result } = this[Core].voicevoxGetVersionV0_14();
       resolve(result);
     });
   }
@@ -76,8 +76,8 @@ export class Voicevox {
       checkValidString(path, "path");
       const modelPonterName = this.#voiceModelCounter;
       this.#voiceModelCounter++;
-      const { resultCode } = this[Core].voicevoxVoiceModelNewFromPath(path, modelPonterName);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this[Core].voicevoxVoiceModelNewFromPathV0_16(path, modelPonterName);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(new VoicevoxVoiceModel(this, modelPonterName));
     });
   }
@@ -93,8 +93,8 @@ export class Voicevox {
       checkValidObject(openJtalkRc, "openJtalkRc", VoicevoxOpenJtalkRc, "VoicevoxOpenJtalkRc");
       checkVoicevoxInitializeOptions(options);
       const synthesizerPointerName = this.#synthesizerPointer++;
-      const { resultCode } = this[Core].voicevoxSynthesizerNew(openJtalkRc[Pointer], synthesizerPointerName, options.accelerationMode, options.cpuNumThreads);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this[Core].voicevoxSynthesizerNewV0_16(openJtalkRc[Pointer], synthesizerPointerName, options.accelerationMode, options.cpuNumThreads);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(new VoicevoxSynthesizer(this, synthesizerPointerName));
     });
   }
@@ -106,8 +106,8 @@ export class Voicevox {
    */
   createSupportedDevicesJson(): Promise<VoicevoxSupportedDevicesJson> {
     return new Promise<VoicevoxSupportedDevicesJson>((resolve) => {
-      const { result, resultCode } = this[Core].voicevoxCreateSupportedDevicesJson();
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this[Core].voicevoxCreateSupportedDevicesJsonV0_16();
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -119,7 +119,7 @@ export class Voicevox {
   userDictNew(): Promise<VoicevoxUserDict> {
     return new Promise<VoicevoxUserDict>((resolve) => {
       const userDictPointerName = this.#userDictCounter++;
-      this[Core].voicevoxUserDictNew(userDictPointerName);
+      this[Core].voicevoxUserDictNewV0_16(userDictPointerName);
       resolve(new VoicevoxUserDict(this, userDictPointerName));
     });
   }
@@ -137,8 +137,8 @@ export class Voicevox {
   }
 
   /**
-   * デフォルトの`voicevoxSynthesizerSynthesis`のオプションを生成する
-   * @returns {VoicevoxSynthesisOptions} デフォルト値が設定された`voicevoxSynthesizerSynthesis`のオプション
+   * デフォルトの`voicevoxSynthesizerSynthesisV0_16`のオプションを生成する
+   * @returns {VoicevoxSynthesisOptions} デフォルト値が設定された`voicevoxSynthesizerSynthesisV0_16`のオプション
    * @static
    */
   static makeDefaultSynthesisOptions(): VoicevoxSynthesisOptions {
@@ -148,8 +148,8 @@ export class Voicevox {
   }
 
   /**
-   * デフォルトの`voicevoxSynthesizerTts`のオプションを生成する
-   * @returns {VoicevoxTtsOptions} デフォルト値が設定された`voicevoxSynthesizerTts`のオプション
+   * デフォルトの`voicevoxSynthesizerTtsV0_16`のオプションを生成する
+   * @returns {VoicevoxTtsOptions} デフォルト値が設定された`voicevoxSynthesizerTtsV0_16`のオプション
    * @static
    */
   static makeDefaultTtsOptions(): VoicevoxTtsOptions {
@@ -198,8 +198,8 @@ class VoicevoxOpenJtalkRc {
     return new Promise<void>((resolve) => {
       checkValidObject(userDict, "userDict", VoicevoxUserDict, "VoicevoxUserDict");
       if (this[Deleted]) throw new VoicevoxJsError("Open JTalkは破棄済みです");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxOpenJtalkRcUseUserDict(this[Pointer], userDict[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxOpenJtalkRcUseUserDictV0_16(this[Pointer], userDict[Pointer]);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -211,7 +211,7 @@ class VoicevoxOpenJtalkRc {
   delete(): Promise<void> {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("Open JTalkは破棄済みです");
-      this.#voicevoxBase[Core].voicevoxOpenJtalkRcDelete(this[Pointer]);
+      this.#voicevoxBase[Core].voicevoxOpenJtalkRcDeleteV0_16(this[Pointer]);
       resolve();
     });
   }
@@ -236,7 +236,7 @@ class VoicevoxSynthesizer {
   delete(): Promise<void> {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
-      this.#voicevoxBase[Core].voicevoxSynthesizerDelete(this[Pointer]);
+      this.#voicevoxBase[Core].voicevoxSynthesizerDeleteV0_16(this[Pointer]);
       resolve();
     });
   }
@@ -250,8 +250,8 @@ class VoicevoxSynthesizer {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidObject(model, "model", VoicevoxVoiceModel, "VoicevoxVoiceModel");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerLoadVoiceModel(this[Pointer], model[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerLoadVoiceModelV0_16(this[Pointer], model[Pointer]);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -265,8 +265,8 @@ class VoicevoxSynthesizer {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidString(modelId, "modelId");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerUnloadVoiceModel(this[Pointer], modelId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerUnloadVoiceModelV0_16(this[Pointer], modelId);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -278,7 +278,7 @@ class VoicevoxSynthesizer {
   isGpuMode(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
-      const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerIsGpuMode(this[Pointer]);
+      const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerIsGpuModeV0_16(this[Pointer]);
       resolve(result);
     });
   }
@@ -292,7 +292,7 @@ class VoicevoxSynthesizer {
     return new Promise<boolean>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidString(modelId, "modelId");
-      const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerIsLoadedVoiceModel(this[Pointer], modelId);
+      const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerIsLoadedVoiceModelV0_16(this[Pointer], modelId);
       resolve(result);
     });
   }
@@ -304,7 +304,7 @@ class VoicevoxSynthesizer {
   createMetasJson(): Promise<Array<VoicevoxMetaJson>> {
     return new Promise<Array<VoicevoxMetaJson>>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
-      const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateMetasJson(this[Pointer]);
+      const { result } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateMetasJsonV0_16(this[Pointer]);
       resolve(JSON.parse(result));
     });
   }
@@ -320,8 +320,8 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidString(kana, "kana");
       checkValidNumber(styleId, "styleId", true);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAudioQueryFromKana(this[Pointer], kana, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAudioQueryFromKanaV0_16(this[Pointer], kana, styleId);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -337,8 +337,8 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidString(text, "text");
       checkValidNumber(styleId, "styleId", true);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAudioQuery(this[Pointer], text, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAudioQueryV0_16(this[Pointer], text, styleId);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -354,8 +354,8 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidString(kana, "kana");
       checkValidNumber(styleId, "styleId", true);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAccentPhrasesFromKana(this[Pointer], kana, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16(this[Pointer], kana, styleId);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -371,8 +371,8 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidString(text, "text");
       checkValidNumber(styleId, "styleId", true);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAccentPhrases(this[Pointer], text, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAccentPhrasesV0_16(this[Pointer], text, styleId);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -388,8 +388,8 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkVoicevoxAccentPhraseJson(accentPhrasesJson);
       checkValidNumber(styleId, "styleId", true);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplaceMoraData(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplaceMoraDataV0_16(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -405,8 +405,8 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkVoicevoxAccentPhraseJson(accentPhrasesJson);
       checkValidNumber(styleId, "styleId", true);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplacePhonemeLength(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplacePhonemeLengthV0_16(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -422,8 +422,8 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkVoicevoxAccentPhraseJson(accentPhrasesJson);
       checkValidNumber(styleId, "styleId", true);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplaceMoraPitch(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplaceMoraPitchV0_16(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -441,8 +441,8 @@ class VoicevoxSynthesizer {
       checkVoicevoxAudioQueryJson(audioQueryJson);
       checkValidNumber(styleId, "styleId", true);
       checkVoicevoxSynthesisOptions(options);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerSynthesis(this[Pointer], JSON.stringify(audioQueryJson), styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerSynthesisV0_16(this[Pointer], JSON.stringify(audioQueryJson), styleId, options.enableInterrogativeUpspeak);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -460,8 +460,8 @@ class VoicevoxSynthesizer {
       checkValidString(kana, "kana");
       checkValidNumber(styleId, "styleId", true);
       checkVoicevoxTtsOptions(options);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerTtsFromKana(this[Pointer], kana, styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerTtsFromKanaV0_16(this[Pointer], kana, styleId, options.enableInterrogativeUpspeak);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -479,8 +479,8 @@ class VoicevoxSynthesizer {
       checkValidString(text, "text");
       checkValidNumber(styleId, "styleId", true);
       checkVoicevoxTtsOptions(options);
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerTts(this[Pointer], text, styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerTtsV0_16(this[Pointer], text, styleId, options.enableInterrogativeUpspeak);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -507,8 +507,8 @@ class VoicevoxUserDict {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkValidString(dictPath, "dictPath");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictLoad(this[Pointer], dictPath);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictLoadV0_16(this[Pointer], dictPath);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -522,8 +522,8 @@ class VoicevoxUserDict {
     return new Promise<string>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkVoicevoxUserDictWord(word);
-      const { resultCode, result } = this.#voicevoxBase[Core].voicevoxUserDictAddWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode, result } = this.#voicevoxBase[Core].voicevoxUserDictAddWordV0_16(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(bufferToUuid(result));
     });
   }
@@ -539,8 +539,8 @@ class VoicevoxUserDict {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkVoicevoxUserDictWord(word);
       checkValidString(wordUuid, "wordUuid");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictUpdateWord(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType, uuidToBuffer(wordUuid));
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictUpdateWordV0_16(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType, uuidToBuffer(wordUuid));
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -554,8 +554,8 @@ class VoicevoxUserDict {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkValidString(wordUuid, "wordUuid");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictRemoveWord(this[Pointer], uuidToBuffer(wordUuid));
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictRemoveWordV0_16(this[Pointer], uuidToBuffer(wordUuid));
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -567,8 +567,8 @@ class VoicevoxUserDict {
   toJson(): Promise<VoicevoxUserDictsJson> {
     return new Promise<VoicevoxUserDictsJson>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
-      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxUserDictToJson(this[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { result, resultCode } = this.#voicevoxBase[Core].voicevoxUserDictToJsonV0_16(this[Pointer]);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -582,8 +582,8 @@ class VoicevoxUserDict {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkValidObject(otherDict, "otherDict", VoicevoxUserDict, "VoicevoxUserDict");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictImport(this[Pointer], otherDict[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictImportV0_16(this[Pointer], otherDict[Pointer]);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -597,8 +597,8 @@ class VoicevoxUserDict {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkValidString(path, "path");
-      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictSave(this[Pointer], path);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessage(resultCode).result);
+      const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictSaveV0_16(this[Pointer], path);
+      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -610,7 +610,7 @@ class VoicevoxUserDict {
   delete(): Promise<void> {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
-      this.#voicevoxBase[Core].voicevoxUserDictDelete(this[Pointer]);
+      this.#voicevoxBase[Core].voicevoxUserDictDeleteV0_16(this[Pointer]);
       this[Deleted] = true;
       resolve();
     });
@@ -636,7 +636,7 @@ class VoicevoxVoiceModel {
   id(): Promise<VoicevoxVoiceModelId> {
     return new Promise<VoicevoxVoiceModelId>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxVoiceModelは破棄済みです");
-      const { result } = this.#voicevoxBase[Core].voicevoxVoiceModelId(this[Pointer]);
+      const { result } = this.#voicevoxBase[Core].voicevoxVoiceModelIdV0_16(this[Pointer]);
       resolve(result);
     });
   }
@@ -648,7 +648,7 @@ class VoicevoxVoiceModel {
   getMetasJson(): Promise<Array<VoicevoxMetaJson>> {
     return new Promise<Array<VoicevoxMetaJson>>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxVoiceModelは破棄済みです");
-      const { result } = this.#voicevoxBase[Core].voicevoxVoiceModelGetMetasJson(this[Pointer]);
+      const { result } = this.#voicevoxBase[Core].voicevoxVoiceModelGetMetasJsonV0_16(this[Pointer]);
       resolve(JSON.parse(result));
     });
   }
@@ -660,7 +660,7 @@ class VoicevoxVoiceModel {
   delete(): Promise<void> {
     return new Promise<void>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxVoiceModelは破棄済みです");
-      this.#voicevoxBase[Core].voicevoxVoiceModelDelete(this[Pointer]);
+      this.#voicevoxBase[Core].voicevoxVoiceModelDeleteV0_16(this[Pointer]);
       resolve();
     });
   }
@@ -678,7 +678,7 @@ type VoicevoxVoiceModelId = string;
 type VoicevoxStyleId = number;
 
 /**
- * `Voicevox#voicevoxSynthesizerNew`のオプション。
+ * `Voicevox#voicevoxSynthesizerNewV0_16`のオプション。
  */
 interface VoicevoxInitializeOptions {
   /**

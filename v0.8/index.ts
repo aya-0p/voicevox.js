@@ -31,8 +31,8 @@ export class Voicevox {
     return new Promise<void>((resolve) => {
       checkValidString(rootDirPath, "rootDirPath");
       checkValidBoolean(useGpu, "useGpu");
-      const { result } = this[Core].initializeV5(rootDirPath, useGpu);
-      if (!result) throw new VoicevoxError(this[Core].lastErrorMessage().result);
+      const { result } = this[Core].initializeV0_5(rootDirPath, useGpu);
+      if (!result) throw new VoicevoxError(this[Core].lastErrorMessageV0_5().result);
       resolve();
     });
   }
@@ -42,9 +42,9 @@ export class Voicevox {
    * 話者名や話者IDのリストを取得する
    * @returns {Promise<VoicevoxMetaJson>} メタ情報
    */
-  metas(): Promise<VoicevoxMetaJson> {
+  metasV0_5(): Promise<VoicevoxMetaJson> {
     return new Promise<VoicevoxMetaJson>((resolve) => {
-      const { result } = this[Core].metas();
+      const { result } = this[Core].metasV0_5();
       resolve(JSON.parse(result));
     });
   }
@@ -56,12 +56,12 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} 音素ごとの長さ
    */
-  yukarinSForward(phonemeList: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  yukarinSForwardV0_8(phonemeList: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(phonemeList, "phonemeList", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, result2 } = this[Core].yukarinSForward(phonemeList, speakerId);
-      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessage().result);
+      const { result, result2 } = this[Core].yukarinSForwardV0_8(phonemeList, speakerId);
+      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessageV0_5().result);
       resolve(result);
     });
   }
@@ -78,7 +78,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} モーラごとの音高
    */
-  yukarinSaForward(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  yukarinSaForwardV0_8(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(vowelPhonemeList, "vowelPhonemeList", "bigint");
       checkValidArray(consonantPhonemeList, "consonantPhonemeList", "bigint");
@@ -87,8 +87,8 @@ export class Voicevox {
       checkValidArray(startAccentPhraseList, "startAccentPhraseList", "bigint");
       checkValidArray(endAccentPhraseList, "endAccentPhraseList", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, result2 } = this[Core].yukarinSaForward(vowelPhonemeList, consonantPhonemeList, startAccentList, endAccentList, startAccentPhraseList, endAccentPhraseList, speakerId);
-      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessage().result);
+      const { result, result2 } = this[Core].yukarinSaForwardV0_8(vowelPhonemeList, consonantPhonemeList, startAccentList, endAccentList, startAccentPhraseList, endAccentPhraseList, speakerId);
+      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessageV0_5().result);
       resolve(result);
     });
   }
@@ -100,13 +100,13 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} 音声波形
    */
-  decodeForward(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
+  decodeForwardV0_8(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(f0, "f0", "number", false);
       checkValidArray(phoneme, "phoneme", "number", false);
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, result2 } = this[Core].decodeForward(f0, phoneme, speakerId);
-      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessage().result);
+      const { result, result2 } = this[Core].decodeForwardV0_8(f0, phoneme, speakerId);
+      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessageV0_5().result);
       resolve(result);
     });
   }

@@ -16,7 +16,7 @@ export declare class VoicevoxCore {
   /**
    * OpenJtalkRc を<b>構築</b>(_construct_)する。
    *
-   * 解放は voicevoxOpenJtalkRcDelete で行う。
+   * 解放は voicevoxOpenJtalkRcDeleteV0_16 で行う。
    *
    * @param {string} openJtalkDicDir 辞書ディレクトリを指すUTF-8のパス
    * @param {number} openJtalkPointerName 構築先Open JTalkポインタ名
@@ -25,7 +25,7 @@ export declare class VoicevoxCore {
    *
    * \example{
    * ```js
-   * voicevoxOpenJtalkRcNew("./open_jtalk_dic_utf_8-1.11", 0);
+   * voicevoxOpenJtalkRcNewV0_16("./open_jtalk_dic_utf_8-1.11", 0);
    * ```
    * }
    *
@@ -36,7 +36,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxOpenJtalkRcNew(openJtalkDicDir: string, openJtalkPointerName: number): ResultCode;
+  voicevoxOpenJtalkRcNewV0_16(openJtalkDicDir: string, openJtalkPointerName: number): ResultCode;
 
   /**
    * OpenJtalkの使うユーザー辞書を設定する。
@@ -47,14 +47,14 @@ export declare class VoicevoxCore {
    * @param {number} userDictPointerName ユーザー辞書ポインタ名
    *
    * \safety{
-   * - `openJtalkPointerName`は`voicevoxOpenJtalkRcNew`で設定したものでなければならず、また`voicevoxOpenJtalkRcDelete`で解放されていてはいけない。
-   * - `userDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また`voicevoxUserDictDelete`で解放されていてはいけない。
+   * - `openJtalkPointerName`は`voicevoxOpenJtalkRcNew`で設定したものでなければならず、また`voicevoxOpenJtalkRcDeleteV0_16`で解放されていてはいけない。
+   * - `userDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また`voicevoxUserDictDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxOpenJtalkRcUseUserDict(openJtalkPointerName: number, userDictPointerName: number): ResultCode;
+  voicevoxOpenJtalkRcUseUserDictV0_16(openJtalkPointerName: number, userDictPointerName: number): ResultCode;
 
   /**
    * OpenJtalkRc を<b>破棄</b>(_destruct_)する。
@@ -63,7 +63,7 @@ export declare class VoicevoxCore {
    *
    * \example{
    * ```js
-   * voicevoxOpenJtalkRcDelete(0);
+   * voicevoxOpenJtalkRcDeleteV0_16(0);
    * ```
    * }
    *
@@ -74,7 +74,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxOpenJtalkRcDelete(openJtalkPointerName: number): {};
+  voicevoxOpenJtalkRcDeleteV0_16(openJtalkPointerName: number): {};
 
   /**
    * voicevoxのバージョンを取得する。
@@ -82,7 +82,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.x, v0.16.xで利用できます
    */
-  voicevoxGetVersion(): { result: string };
+  voicevoxGetVersionV0_14(): { result: string };
 
   /**
    * VVMファイルから VoicevoxVoiceModel を<b>構築</b>(_construct_)する。
@@ -99,7 +99,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxVoiceModelNewFromPath(path: string, modelPointerName: number): ResultCode;
+  voicevoxVoiceModelNewFromPathV0_16(path: string, modelPointerName: number): ResultCode;
 
   /**
    * VoicevoxVoiceModel からIDを取得する。
@@ -109,13 +109,13 @@ export declare class VoicevoxCore {
    * @returns 音声モデルID
    *
    * \safety{
-   * - `modelPointerName`は`voicevoxVoiceModelNewFromPath`で設定したものでなければならず、また`voicevoxVoiceModelDelete`で解放されていてはいけない。
+   * - `modelPointerName`は`voicevoxVoiceModelNewFromPathV0_16`で設定したものでなければならず、また`voicevoxVoiceModelDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxVoiceModelId(modelPointerName: number): { result: string };
+  voicevoxVoiceModelIdV0_16(modelPointerName: number): { result: string };
 
   /**
    * VoicevoxVoiceModel からメタ情報を取得する。
@@ -125,13 +125,13 @@ export declare class VoicevoxCore {
    * @returns メタ情報のJSON文字列
    *
    * \safety{
-   * - `modelPointerName`は`voicevoxVoiceModelNewFromPath`で設定したものでなければならず、また`voicevoxVoiceModelDelete`で解放されていてはいけない。
+   * - `modelPointerName`は`voicevoxVoiceModelNewFromPathV0_16`で設定したものでなければならず、また`voicevoxVoiceModelDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxVoiceModelGetMetasJson(modelPointerName: number): { result: string };
+  voicevoxVoiceModelGetMetasJsonV0_16(modelPointerName: number): { result: string };
 
   /**
    * VoicevoxVoiceModel を<b>破棄</b>(_destruct_)する。
@@ -139,13 +139,13 @@ export declare class VoicevoxCore {
    * @param {number} modelPointerName 破棄対象音声モデルポインタ名
    *
    * \safety{
-   * - `modelPointerName`は`voicevoxVoiceModelNewFromPath`で設定したものでなければならず、また既にこの関数で解放されていてはいけない。
+   * - `modelPointerName`は`voicevoxVoiceModelNewFromPathV0_16`で設定したものでなければならず、また既にこの関数で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxVoiceModelDelete(modelPointerName: number): {};
+  voicevoxVoiceModelDeleteV0_16(modelPointerName: number): {};
 
   /**
    * VoicevoxSynthesizer を<b>構築</b>(_construct_)する。
@@ -158,14 +158,14 @@ export declare class VoicevoxCore {
    * @returns 結果コード
    *
    * \safety{
-   * - `openJtalkPointerName`は`voicevoxOpenJtalkRcNew`で設定したものでなければならず、また`voicevoxOpenJtalkRcDelete`で解放されていてはいけない。
+   * - `openJtalkPointerName`は`voicevoxOpenJtalkRcNew`で設定したものでなければならず、また`voicevoxOpenJtalkRcDeleteV0_16`で解放されていてはいけない。
    * - `synthesizerPointerName`は他の`VoicevoxSynthesizer`とかぶってはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerNew(openJtalkPointerName: number, synthesizerPointerName: number, accelerationMode: number, cpuNumThreads: number): ResultCode;
+  voicevoxSynthesizerNewV0_16(openJtalkPointerName: number, synthesizerPointerName: number, accelerationMode: number, cpuNumThreads: number): ResultCode;
 
   /**
    * VoicevoxSynthesizer を<b>破棄</b>(_destruct_)する。
@@ -173,13 +173,13 @@ export declare class VoicevoxCore {
    * @param {number} synthesizerPointerName 破棄対象音声シンセサイザポインタ名
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また既にこの関数で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また既にこの関数で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerDelete(synthesizerPointerName: number): {};
+  voicevoxSynthesizerDeleteV0_16(synthesizerPointerName: number): {};
 
   /**
    * 音声モデルを読み込む。
@@ -190,14 +190,14 @@ export declare class VoicevoxCore {
    * @returns 結果コード
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
-   * - `modelPointerName`は`voicevoxVoiceModelNewFromPath`で設定したものでなければならず、また`voicevoxVoiceModelDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
+   * - `modelPointerName`は`voicevoxVoiceModelNewFromPathV0_16`で設定したものでなければならず、また`voicevoxVoiceModelDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerLoadVoiceModel(synthesizerPointerName: number, modelPointerName: number): ResultCode;
+  voicevoxSynthesizerLoadVoiceModelV0_16(synthesizerPointerName: number, modelPointerName: number): ResultCode;
 
   /**
    * 音声モデルの読み込みを解除する。
@@ -208,13 +208,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerUnloadVoiceModel(synthesizerPointerName: number, modelId: string): ResultCode;
+  voicevoxSynthesizerUnloadVoiceModelV0_16(synthesizerPointerName: number, modelId: string): ResultCode;
 
   /**
    * ハードウェアアクセラレーションがGPUモードか判定する。
@@ -224,13 +224,13 @@ export declare class VoicevoxCore {
    * @returns GPUモードかどうか
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerIsGpuMode(synthesizerPointerName: number): { result: boolean };
+  voicevoxSynthesizerIsGpuModeV0_16(synthesizerPointerName: number): { result: boolean };
 
   /**
    * 指定したIDの音声モデルが読み込まれているか判定する。
@@ -241,13 +241,13 @@ export declare class VoicevoxCore {
    * @returns モデルが読み込まれているかどうか
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerIsLoadedVoiceModel(synthesizerPointerName: number, modelId: string): { result: boolean };
+  voicevoxSynthesizerIsLoadedVoiceModelV0_16(synthesizerPointerName: number, modelId: string): { result: boolean };
 
   /**
    * 今読み込んでいる音声モデルのメタ情報を、JSONで取得する。
@@ -257,13 +257,13 @@ export declare class VoicevoxCore {
    * @return メタ情報のJSON文字列
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateMetasJson(synthesizerPointerName: number): { result: string };
+  voicevoxSynthesizerCreateMetasJsonV0_16(synthesizerPointerName: number): { result: string };
 
   /**
    * このライブラリで利用可能なデバイスの情報を、JSONで取得する。
@@ -274,13 +274,13 @@ export declare class VoicevoxCore {
    *
    * \example{
    * ```js
-   * const { result, resultCode } = voicevoxCreateSupportedDevicesJson();
+   * const { result, resultCode } = voicevoxCreateSupportedDevicesJsonV0_16();
    * ```
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxCreateSupportedDevicesJson(): ResultCode & { result: string };
+  voicevoxCreateSupportedDevicesJsonV0_16(): ResultCode & { result: string };
 
   /**
    * AquesTalk風記法から、AudioQueryをJSONとして生成する。
@@ -295,7 +295,7 @@ export declare class VoicevoxCore {
    *
    * \example{
    * ```js
-   * const { result, resultCode } = voicevoxSynthesizerCreateAudioQueryFromKana(
+   * const { result, resultCode } = voicevoxSynthesizerCreateAudioQueryFromKanaV0_16(
    *   0,
    *   "コンニチワ'",
    *   2, // "四国めたん (ノーマル)"
@@ -304,13 +304,13 @@ export declare class VoicevoxCore {
    * }
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateAudioQueryFromKana(synthesizerPointerName: number, kana: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerCreateAudioQueryFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number): ResultCode & { result: string };
 
   /**
    * 日本語テキストから、AudioQueryをJSONとして生成する。
@@ -323,7 +323,7 @@ export declare class VoicevoxCore {
    *
    * \example{
    * ```js
-   * const { result, resultCode } = voicevoxSynthesizerCreateAudioQuery(
+   * const { result, resultCode } = voicevoxSynthesizerCreateAudioQueryV0_16(
    *   0,
    *   "こんにちは",
    *   2, // "四国めたん (ノーマル)"
@@ -332,13 +332,13 @@ export declare class VoicevoxCore {
    * }
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateAudioQuery(synthesizerPointerName: number, text: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerCreateAudioQueryV0_16(synthesizerPointerName: number, text: string, styleId: number): ResultCode & { result: string };
 
   /**
    * AquesTalk風記法から、AccentPhrase (アクセント句)の配列をJSON形式で生成する。
@@ -351,7 +351,7 @@ export declare class VoicevoxCore {
    *
    * \example{
    * ```js
-   * const { result, resultCode } = voicevoxSynthesizerCreateAccentPhrasesFromKana(
+   * const { result, resultCode } = voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16(
    *   0,
    *   "コンニチワ'",
    *   2, // "四国めたん (ノーマル)"
@@ -360,13 +360,13 @@ export declare class VoicevoxCore {
    * }
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateAccentPhrasesFromKana(synthesizerPointerName: number, kana: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number): ResultCode & { result: string };
 
   /**
    * 日本語テキストから、AccentPhrase (アクセント句)の配列をJSON形式で生成する。
@@ -379,7 +379,7 @@ export declare class VoicevoxCore {
    *
    * \example{
    * ```js
-   * const { result, resultCode } = voicevoxSynthesizerCreateAccentPhrases(
+   * const { result, resultCode } = voicevoxSynthesizerCreateAccentPhrasesV0_16(
    *   0,
    *   "こんにちは",
    *   2, // "四国めたん (ノーマル)"
@@ -388,13 +388,13 @@ export declare class VoicevoxCore {
    * }
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateAccentPhrases(synthesizerPointerName: number, text: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerCreateAccentPhrasesV0_16(synthesizerPointerName: number, text: string, styleId: number): ResultCode & { result: string };
 
   /**
    * AccentPhraseの配列の音高・音素長を、特定の声で生成しなおす。
@@ -406,13 +406,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード, AccentPhraseの配列のJSON文字列
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerReplaceMoraData(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerReplaceMoraDataV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
 
   /**
    * AccentPhraseの配列の音素長を、特定の声で生成しなおす。
@@ -424,13 +424,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード, AccentPhraseの配列のJSON文字列
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerReplacePhonemeLength(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerReplacePhonemeLengthV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
 
   /**
    * AccentPhraseの配列の音高を、特定の声で生成しなおす。
@@ -442,13 +442,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード, AccentPhraseの配列のJSON文字列
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerReplaceMoraPitch(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerReplaceMoraPitchV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
 
   /**
    * AudioQueryから音声合成を行う。
@@ -461,13 +461,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード, WAVデータ
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerSynthesis(synthesizerPointerName: number, audioQueryJson: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
+  voicevoxSynthesizerSynthesisV0_16(synthesizerPointerName: number, audioQueryJson: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
 
   /**
    * AquesTalk風記法から音声合成を行う。
@@ -480,13 +480,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード, WAVデータ
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerTtsFromKana(synthesizerPointerName: number, kana: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
+  voicevoxSynthesizerTtsFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
 
   /**
    * 日本語テキストから音声合成を行う。
@@ -499,13 +499,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード, WAVデータ
    *
    * \safety{
-   * - `synthesizerPointerName`は`voicevoxSynthesizerNew`で設定したものでなければならず、また`voicevoxSynthesizerDelete`で解放されていてはいけない。
+   * - `synthesizerPointerName`は`voicevoxSynthesizerNewV0_16`で設定したものでなければならず、また`voicevoxSynthesizerDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerTts(synthesizerPointerName: number, text: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
+  voicevoxSynthesizerTtsV0_16(synthesizerPointerName: number, text: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
 
   /**
    * 結果コードに対応したメッセージ文字列を取得する。
@@ -516,13 +516,13 @@ export declare class VoicevoxCore {
    *
    * \examples{
    * ```js
-   * const actual = voicevoxErrorResultToMessage(VOICEVOX_RESULT_OK);
+   * const actual = voicevoxErrorResultToMessageV0_12(VOICEVOX_RESULT_OK);
    * const EXPECTED = "エラーが発生しませんでした";
    * actual === EXPECTED; // true
    * ```
    * --
    * ```js
-   * const actual = voicevoxErrorResultToMessage(VOICEVOX_RESULT_LOAD_MODEL_ERROR);
+   * const actual = voicevoxErrorResultToMessageV0_12(VOICEVOX_RESULT_LOAD_MODEL_ERROR);
    * const EXPECTED = "modelデータ読み込みに失敗しました";
    * actual === EXPECTED; // true
    * ```
@@ -530,7 +530,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.x, v0.14.x, v0.15.x, v0.16.xで利用できます
    */
-  voicevoxErrorResultToMessage(resultCode: number): { result: string };
+  voicevoxErrorResultToMessageV0_12(resultCode: number): { result: string };
 
   /**
    * ユーザー辞書を<b>構築</b>(_construct_)する。
@@ -544,7 +544,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictNew(userDictPointerName: number): {};
+  voicevoxUserDictNewV0_16(userDictPointerName: number): {};
 
   /**
    * ユーザー辞書にファイルを読み込ませる。
@@ -555,13 +555,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード
    *
    * \safety{
-   * - `userDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また`voicevoxUserDictDelete`で解放されていてはいけない。
+   * - `userDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また`voicevoxUserDictDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictLoad(userDictPointerName: number, dictPath: string): ResultCode;
+  voicevoxUserDictLoadV0_16(userDictPointerName: number, dictPath: string): ResultCode;
 
   /**
    * ユーザー辞書に単語を追加する。
@@ -576,13 +576,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード, 追加した単語のUUID
    *
    * \safety{
-   * - `userDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また`voicevoxUserDictDelete`で解放されていてはいけない。
+   * - `userDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また`voicevoxUserDictDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictAddWord(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number): ResultCode & { result: Buffer };
+  voicevoxUserDictAddWordV0_16(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number): ResultCode & { result: Buffer };
 
   /**
    * ユーザー辞書の単語を更新する。
@@ -598,13 +598,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード
    *
    * \safety{
-   * - `userDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また`voicevoxUserDictDelete`で解放されていてはいけない。
+   * - `userDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また`voicevoxUserDictDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictUpdateWord(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number, uuid: Buffer): ResultCode;
+  voicevoxUserDictUpdateWordV0_16(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number, uuid: Buffer): ResultCode;
 
   /**
    * ユーザー辞書から単語を削除する。
@@ -615,13 +615,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード
    *
    * \safety{
-   * - `userDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また`voicevoxUserDictDelete`で解放されていてはいけない。
+   * - `userDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また`voicevoxUserDictDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictRemoveWord(userDictPointerName: number, uuid: Buffer): ResultCode;
+  voicevoxUserDictRemoveWordV0_16(userDictPointerName: number, uuid: Buffer): ResultCode;
 
   /**
    * ユーザー辞書の単語をJSON形式で出力する。
@@ -631,13 +631,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード, ユーザー辞書のJSON文字列
    *
    * \safety{
-   * - `userDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また`voicevoxUserDictDelete`で解放されていてはいけない。
+   * - `userDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また`voicevoxUserDictDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictToJson(userDictPointerName: number): ResultCode & { result: string };
+  voicevoxUserDictToJsonV0_16(userDictPointerName: number): ResultCode & { result: string };
 
   /**
    * 他のユーザー辞書をインポートする。
@@ -648,13 +648,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード
    *
    * \safety{
-   * - `userDictPointerName`と`otherDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また`voicevoxUserDictDelete`で解放されていてはいけない。
+   * - `userDictPointerName`と`otherDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また`voicevoxUserDictDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictImport(userDictPointerName: number, otherDictPointerName: number): ResultCode;
+  voicevoxUserDictImportV0_16(userDictPointerName: number, otherDictPointerName: number): ResultCode;
 
   /**
    * ユーザー辞書をファイルに保存する。
@@ -665,13 +665,13 @@ export declare class VoicevoxCore {
    * @returns 結果コード
    *
    * \safety{
-   * - `userDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また`voicevoxUserDictDelete`で解放されていてはいけない。
+   * - `userDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また`voicevoxUserDictDeleteV0_16`で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictSave(userDictPointerName: number, path: string): ResultCode;
+  voicevoxUserDictSaveV0_16(userDictPointerName: number, path: string): ResultCode;
 
   /**
    * ユーザー辞書を<b>破棄</b>(_destruct_)する。
@@ -679,13 +679,13 @@ export declare class VoicevoxCore {
    * @param {number} userDictPointerName 破棄対象ユーザー辞書ポインタ名
    *
    * \safety{
-   * - `userDictPointerName`は`voicevoxUserDictNew`で設定したものでなければならず、また既にこの関数で解放されていてはいけない。
+   * - `userDictPointerName`は`voicevoxUserDictNewV0_16`で設定したものでなければならず、また既にこの関数で解放されていてはいけない。
    *
    * }
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictDelete(userDictPointerName: number): {};
+  voicevoxUserDictDeleteV0_16(userDictPointerName: number): {};
 
   /**
    * 初期化する
@@ -697,7 +697,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxInitialize(accelerationMode: VoicevoxAccelerationMode, cpuNumThreads: number, loadAllModels: boolean, openJtalkDictDir: string): ResultCodeV14;
+  voicevoxInitializeV0_14(accelerationMode: VoicevoxAccelerationMode, cpuNumThreads: number, loadAllModels: boolean, openJtalkDictDir: string): ResultCodeV14;
 
   /**
    * モデルを読み込む
@@ -706,7 +706,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxLoadModel(speakerId: number): ResultCodeV14;
+  voicevoxLoadModelV0_14(speakerId: number): ResultCodeV14;
 
   /**
    * ハードウェアアクセラレーションがGPUモードか判定する
@@ -714,7 +714,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxIsGpuMode(): Result<boolean>;
+  voicevoxIsGpuModeV0_14(): Result<boolean>;
 
   /**
    * 指定したspeaker_idのモデルが読み込まれているか判定する
@@ -722,14 +722,14 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxIsModelLoaded(speakerId: number): Result<boolean>;
+  voicevoxIsModelLoadedV0_14(speakerId: number): Result<boolean>;
 
   /**
    * このライブラリの利用を終了し、確保しているリソースを解放する
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxFinalize(): {};
+  voicevoxFinalizeV0_14(): {};
 
   /**
    * メタ情報をjsonで取得する
@@ -737,7 +737,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxGetMetasJson(): Result<string>;
+  voicevoxGetMetasJsonV0_14(): Result<string>;
 
   /**
    * サポートデバイス情報をjsonで取得する
@@ -745,7 +745,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxGetSupportedDevicesJson(): Result<string>;
+  voicevoxGetSupportedDevicesJsonV0_14(): Result<string>;
 
   /**
    * 音素ごとの長さを推論する
@@ -755,7 +755,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxPredictDuration(phoneme: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV14;
+  voicevoxPredictDurationV0_14(phoneme: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV14;
 
   /**
    * モーラごとのF0を推論する
@@ -773,7 +773,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxPredictIntonation(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV14;
+  voicevoxPredictIntonationV0_14(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV14;
 
   /**
    * decodeを実行する
@@ -784,7 +784,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxDecode(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & ResultCodeV14;
+  voicevoxDecodeV0_14(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & ResultCodeV14;
 
   /**
    * AudioQuery を実行する
@@ -795,7 +795,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxAudioQuery(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV14;
+  voicevoxAudioQueryV0_14(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV14;
 
   /**
    * `accent_phrases` を実行する
@@ -806,7 +806,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.15.xで利用できます
    */
-  voicevoxAccentPhrases(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV15;
+  voicevoxAccentPhrasesV0_15(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV15;
 
   /**
    * アクセント句の音素長を変更する
@@ -816,7 +816,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.15.xで利用できます
    */
-  voicevoxMoraLength(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
+  voicevoxMoraLengthV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
 
   /**
    * アクセント句の音高を変更する
@@ -826,7 +826,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.15.xで利用できます
    */
-  voicevoxMoraPitch(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
+  voicevoxMoraPitchV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
 
   /**
    * アクセント句の音高・音素長を変更する
@@ -836,7 +836,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.15.xで利用できます
    */
-  voicevoxMoraData(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
+  voicevoxMoraDataV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
 
   /**
    * AudioQuery から音声合成する
@@ -847,7 +847,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxSynthesis(audioQueryJson: string, speakerId: number, enableInterrogativeUpspeak: boolean): Result<Buffer> & ResultCodeV14;
+  voicevoxSynthesisV0_14(audioQueryJson: string, speakerId: number, enableInterrogativeUpspeak: boolean): Result<Buffer> & ResultCodeV14;
 
   /**
    * テキスト音声合成を実行する
@@ -859,7 +859,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxTts(text: string, speakerId: number, enableInterrogativeUpspeak: boolean, kana: boolean): Result<Buffer> & ResultCodeV14;
+  voicevoxTtsV0_14(text: string, speakerId: number, enableInterrogativeUpspeak: boolean, kana: boolean): Result<Buffer> & ResultCodeV14;
 
   /**
    * 初期化する
@@ -873,7 +873,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  initialize(useGpu: boolean, cpuNumThreads: number, loadAllModels: boolean): Result<boolean>;
+  initializeV0_12(useGpu: boolean, cpuNumThreads: number, loadAllModels: boolean): Result<boolean>;
 
   /**
    * モデルをロードする
@@ -883,7 +883,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  loadModel(speakerId: number): Result<boolean>;
+  loadModelV0_12(speakerId: number): Result<boolean>;
 
   /**
    * モデルがロード済みかどうか
@@ -892,7 +892,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  isModelLoaded(speakerId: number): Result<boolean>;
+  isModelLoadedV0_12(speakerId: number): Result<boolean>;
 
   /**
    * 終了処理を行う
@@ -902,7 +902,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.10.x, v0.11.x, v0.12.x, v0.13.xで利用できます
    */
-  finalize(): {};
+  finalizeV0_10(): {};
 
   /**
    * メタ情報を取得する
@@ -911,7 +911,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.5.x, v0.6.x, v0.7.x, v0.8.x, v0.9.x, v0.10.x, v0.11.x, v0.12.x, v0.13.xで利用できます
    */
-  metas(): Result<string>;
+  metasV0_5(): Result<string>;
 
   /**
    * 対応デバイス情報を取得する
@@ -920,7 +920,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.10.x, v0.11.x, v0.12.x, v0.13.xで利用できます
    */
-  supportedDevices(): Result<string>;
+  supportedDevicesV0_10(): Result<string>;
 
   /**
    * 音素ごとの長さを求める
@@ -931,7 +931,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.8.x, v0.9.x, v0.10.x, v0.11.x, v0.12.x, v0.13.xで利用できます
    */
-  yukarinSForward(phonemeList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
+  yukarinSForwardV0_8(phonemeList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
 
   /**
    * モーラごとの音高を求める
@@ -947,7 +947,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.8.x, v0.9.x, v0.10.x, v0.11.x, v0.12.x, v0.13.xで利用できます
    */
-  yukarinSaForward(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
+  yukarinSaForwardV0_8(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
 
   /**
    * 波形を求める
@@ -958,7 +958,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.8.x, v0.9.x, v0.10.x, v0.11.x, v0.12.x, v0.13.xで利用できます
    */
-  decodeForward(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & { result2: boolean };
+  decodeForwardV0_8(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & { result2: boolean };
 
   /**
    * 最後に発生したエラーのメッセージを取得する
@@ -966,7 +966,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.5.x, v0.6.x, v0.7.x, v0.8.x, v0.9.x, v0.10.x, v0.11.x, v0.12.x, v0.13.xで利用できます
    */
-  lastErrorMessage(): Result<string>;
+  lastErrorMessageV0_5(): Result<string>;
 
   /**
    * open jtalkの辞書を読み込む
@@ -975,7 +975,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxLoadOpenjtalkDict(dictPath: string): ResultCodeV12;
+  voicevoxLoadOpenjtalkDictV0_12(dictPath: string): ResultCodeV12;
 
   /**
    * text to spearchを実行する
@@ -985,7 +985,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsV12(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
+  voicevoxTtsV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
 
   /**
    * text to spearchをAquesTalkライクな記法で実行する
@@ -995,7 +995,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsFromKana(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
+  voicevoxTtsFromKanaV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
 
   /**
    * 初期化する
@@ -1009,7 +1009,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.10.x, v0.11.xで利用できます
    */
-  initializeV10(rootDirPath: string, useGpu: boolean, cpuNumThreads: number): Result<boolean>;
+  initializeV0_10(rootDirPath: string, useGpu: boolean, cpuNumThreads: number): Result<boolean>;
 
   /**
    * 初期化する
@@ -1022,7 +1022,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.5.x, v0.6.x, v0.7.x, v0.8.x, v0.9.xで利用できます
    */
-  initializeV5(rootDirPath: string, useGpu: boolean): Result<boolean>;
+  initializeV0_5(rootDirPath: string, useGpu: boolean): Result<boolean>;
 
   /**
    * 音素ごとの長さを求める
@@ -1033,7 +1033,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.5.x, v0.6.x, v0.7.xで利用できます
    */
-  yukarinSForwardV5(phonemeList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
+  yukarinSForwardV0_5(phonemeList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
 
   /**
    * モーラごとの音高を求める
@@ -1049,7 +1049,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.5.x, v0.6.x, v0.7.xで利用できます
    */
-  yukarinSaForwardV5(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
+  yukarinSaForwardV0_5(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Result<Array<number>> & { result2: boolean };
 
   /**
    * 波形を求める
@@ -1060,7 +1060,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.5.x, v0.6.x, v0.7.xで利用できます
    */
-  decodeForwardV5(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & { result2: boolean };
+  decodeForwardV0_5(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & { result2: boolean };
 }
 
 interface Result<T> {

@@ -32,8 +32,8 @@ export class Voicevox {
     return new Promise<void>((resolve) => {
       checkValidString(rootDirPath, "rootDirPath");
       checkValidBoolean(useGpu, "useGpu");
-      const { result } = this[Core].initializeV5(rootDirPath, useGpu);
-      if (!result) throw new VoicevoxError(this[Core].lastErrorMessage().result);
+      const { result } = this[Core].initializeV0_5(rootDirPath, useGpu);
+      if (!result) throw new VoicevoxError(this[Core].lastErrorMessageV0_5().result);
       resolve();
     });
   }
@@ -43,9 +43,9 @@ export class Voicevox {
    * 話者名や話者IDのリストを取得する
    * @returns {Promise<VoicevoxMetaJson>} メタ情報
    */
-  metas(): Promise<VoicevoxMetaJson> {
+  metasV0_5(): Promise<VoicevoxMetaJson> {
     return new Promise<VoicevoxMetaJson>((resolve) => {
-      const { result } = this[Core].metas();
+      const { result } = this[Core].metasV0_5();
       resolve(JSON.parse(result));
     });
   }
@@ -61,8 +61,8 @@ export class Voicevox {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(phonemeList, "phonemeList", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, result2 } = this[Core].yukarinSForwardV5(phonemeList, speakerId);
-      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessage().result);
+      const { result, result2 } = this[Core].yukarinSForwardV0_5(phonemeList, speakerId);
+      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessageV0_5().result);
       resolve(result);
     });
   }
@@ -88,8 +88,8 @@ export class Voicevox {
       checkValidArray(startAccentPhraseList, "startAccentPhraseList", "bigint");
       checkValidArray(endAccentPhraseList, "endAccentPhraseList", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, result2 } = this[Core].yukarinSaForwardV5(vowelPhonemeList, consonantPhonemeList, startAccentList, endAccentList, startAccentPhraseList, endAccentPhraseList, speakerId);
-      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessage().result);
+      const { result, result2 } = this[Core].yukarinSaForwardV0_5(vowelPhonemeList, consonantPhonemeList, startAccentList, endAccentList, startAccentPhraseList, endAccentPhraseList, speakerId);
+      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessageV0_5().result);
       resolve(result);
     });
   }
@@ -106,8 +106,8 @@ export class Voicevox {
       checkValidArray(f0, "f0", "number", false);
       checkValidArray(phoneme, "phoneme", "number", false);
       checkValidNumber(speakerId, "speakerId", true);
-      const { result, result2 } = this[Core].decodeForwardV5(f0, phoneme, speakerId);
-      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessage().result);
+      const { result, result2 } = this[Core].decodeForwardV0_5(f0, phoneme, speakerId);
+      if (!result2) throw new VoicevoxError(this[Core].lastErrorMessageV0_5().result);
       resolve(result);
     });
   }
