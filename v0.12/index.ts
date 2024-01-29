@@ -184,7 +184,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Buffer>} 音声データ
    */
-  voicevoxTtsV0_14(text: string, speakerId: number): Promise<Buffer> {
+  voicevoxTts(text: string, speakerId: number): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
