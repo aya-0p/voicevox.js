@@ -3,6 +3,7 @@ import { Core, VoicevoxAccentPhraseJson, VoicevoxAudioQueryJson, VoicevoxError, 
 
 /**
  * voicevox_coreを利用してVOICEVOXを使う
+ * @description このバージョンは正式版ではありません
  * @version 0.15.x
  */
 export class Voicevox {

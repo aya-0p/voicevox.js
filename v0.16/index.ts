@@ -22,6 +22,7 @@ const Deleted = Symbol("Deleted");
 
 /**
  * voicevox_coreを利用してVOICEVOXを使う
+ * @description このバージョンは正式版ではありません
  * @version 0.16.x
  */
 export class Voicevox {
