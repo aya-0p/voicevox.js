@@ -1,7 +1,5 @@
 import { VoicevoxCore } from "../voicevox_core";
-import { VoicevoxError, VoicevoxMetaJson, checkValidArray, checkValidBoolean, checkValidNumber, checkValidString } from "../util";
-
-const Core = Symbol("Core");
+import { Core, VoicevoxError, VoicevoxMetaJson, checkValidArray, checkValidBoolean, checkValidNumber, checkValidString } from "../util";
 
 /**
  * voicevox_coreを利用してVOICEVOXを使う

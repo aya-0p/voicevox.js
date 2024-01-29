@@ -2,10 +2,14 @@
  * voicevox.jsにより生成されたエラー
  */
 export class VoicevoxJsError extends Error {}
+
 /**
  * voicevox coreにより生成されたエラー
  */
 export class VoicevoxError extends Error {}
+
+export const Core = Symbol("Core");
+
 /**
  * Buffer形式のuuidを文字列に変換
  * @example

@@ -1,7 +1,5 @@
 import { VoicevoxAccelerationMode, VoicevoxCore, VoicevoxResultCodeV14, VoicevoxResultCodeV15 } from "../voicevox_core";
-import { VoicevoxAccentPhraseJson, VoicevoxAudioQueryJson, VoicevoxError, VoicevoxMetaJson, VoicevoxSupportedDevicesJson, checkValidArray, checkValidNumber, checkValidOption, checkValidString, checkVoicevoxAccentPhraseJson, checkVoicevoxAudioQueryJson } from "../util";
-
-const Core = Symbol("Core");
+import { Core, VoicevoxAccentPhraseJson, VoicevoxAudioQueryJson, VoicevoxError, VoicevoxMetaJson, VoicevoxSupportedDevicesJson, checkValidArray, checkValidNumber, checkValidOption, checkValidString, checkVoicevoxAccentPhraseJson, checkVoicevoxAudioQueryJson } from "../util";
 
 /**
  * voicevox_coreを利用してVOICEVOXを使う

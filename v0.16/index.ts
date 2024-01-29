@@ -14,10 +14,10 @@ import {
   VoicevoxAccentPhraseJson,
   checkVoicevoxAccentPhraseJson,
   checkVoicevoxAudioQueryJson,
+  Core,
 } from "../util";
 
 const Pointer = Symbol("Pointer");
-const Core = Symbol("Core");
 const Deleted = Symbol("Deleted");
 
 /**
