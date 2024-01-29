@@ -1092,7 +1092,7 @@ void voicevox_user_dict_delete_v0_16(DLL &dll,
  * デフォルトの初期化オプションを生成する
  * @return デフォルト値が設定された初期化オプション
  */
-struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v14(DLL &dll);
+struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v0_14(DLL &dll);
 
 /**
  * 初期化する

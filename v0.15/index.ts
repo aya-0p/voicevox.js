@@ -301,13 +301,17 @@ export class Voicevox {
     };
   }
 
+  /**
+   * デフォルトの初期化オプションを生成する
+   * @return デフォルト値が設定された初期化オプション
+   */
   static voicevoxMakeDefaultInitializeOptions(): VoicevoxInitializeOptions {
     return {
       cpuNumThreads: 0,
       accelerationMode: VoicevoxAccelerationModeV0_14.VOICEVOX_ACCELERATION_MODE_AUTO,
       loadAllModels: true,
       openJtalkDictDir: "",
-    }
+    };
   }
 
   /**

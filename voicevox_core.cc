@@ -538,7 +538,7 @@ void voicevox_audio_query_json_free_v0_14(DLL &dll,
   return load_func<void (*)(char *)>(dll, "voicevox_audio_query_json_free")(audio_query_json);
 }
 
-struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v14(DLL &dll)
+struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v0_14(DLL &dll)
 {
   return load_func<VoicevoxInitializeOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_initialize_options")();
 }

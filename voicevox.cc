@@ -1011,7 +1011,7 @@ Napi::Value Voicevox::voicevoxInitializeV0_14(const Napi::CallbackInfo &info)
 	VoicevoxInitializeOptionsV0_14 options;
 	try
 	{
-		options = voicevox_make_default_initialize_options_v14(this->dll);
+		options = voicevox_make_default_initialize_options_v0_14(this->dll);
 	}
 	catch (const std::exception &e)
 	{
