@@ -1,4 +1,4 @@
-import { VoicevoxAccelerationMode, VoicevoxCore, VoicevoxResultCodeV14 } from "../voicevox_core";
+import { VoicevoxAccelerationModeV0_14, VoicevoxCore, VoicevoxResultCodeV0_14 } from "../voicevox_core";
 import { Core, VoicevoxAudioQueryJson, VoicevoxError, VoicevoxMetaJson, VoicevoxSupportedDevicesJson, checkValidArray, checkValidNumber, checkValidOption, checkValidString, checkVoicevoxAudioQueryJson } from "../util";
 
 /**
@@ -35,7 +35,7 @@ export class Voicevox {
     return new Promise<void>((resolve) => {
       checkVoicevoxInitializeOptions(options);
       const { resultCode } = this[Core].voicevoxInitializeV0_14(options.accelerationMode, options.cpuNumThreads, options.loadAllModels, options.openJtalkDictDir);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -49,7 +49,7 @@ export class Voicevox {
     return new Promise<void>((resolve) => {
       checkValidNumber(speakerId, "speakerId", true);
       const { resultCode } = this[Core].voicevoxLoadModelV0_14(speakerId);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -121,7 +121,7 @@ export class Voicevox {
       checkValidArray(phoneme, "phoneme", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
       const { result, resultCode } = this[Core].voicevoxPredictDurationV0_14(phoneme, speakerId);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -147,7 +147,7 @@ export class Voicevox {
       checkValidArray(endAccentPhrase, "endAccentPhrase", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
       const { result, resultCode } = this[Core].voicevoxPredictIntonationV0_14(vowelPhoneme, consonantPhoneme, startAccent, endAccent, startAccentPhrase, endAccentPhrase, speakerId);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -165,7 +165,7 @@ export class Voicevox {
       checkValidArray(phoneme, "phoneme", "number", false);
       checkValidNumber(speakerId, "speakerId", true);
       const { result, resultCode } = this[Core].voicevoxDecodeV0_14(f0, phoneme, speakerId);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -183,7 +183,7 @@ export class Voicevox {
       checkValidNumber(speakerId, "speakerId", true);
       checkVoicevoxAudioQueryOptions(options);
       const { result, resultCode } = this[Core].voicevoxAudioQueryV0_14(text, speakerId, options.kana);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -201,7 +201,7 @@ export class Voicevox {
       checkValidNumber(speakerId, "speakerId", true);
       checkVoicevoxSynthesisOptions(options);
       const { result, resultCode } = this[Core].voicevoxSynthesisV0_14(JSON.stringify(audioQueryJson), speakerId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -219,7 +219,7 @@ export class Voicevox {
       checkValidNumber(speakerId, "speakerId", true);
       checkVoicevoxTtsOptions(options);
       const { result, resultCode } = this[Core].voicevoxTtsV0_14(text, speakerId, options.enableInterrogativeUpspeak, options.kana);
-      if (resultCode !== VoicevoxResultCodeV14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -232,7 +232,7 @@ interface VoicevoxInitializeOptions {
   /**
    * ハードウェアアクセラレーションモード
    */
-  accelerationMode: VoicevoxAccelerationMode;
+  accelerationMode: VoicevoxAccelerationModeV0_14;
   /**
    * CPU利用数を指定 0を指定すると環境に合わせたCPUが利用される
    */

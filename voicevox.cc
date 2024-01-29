@@ -143,7 +143,7 @@ Napi::Value Voicevox::voicevoxOpenJtalkRcNewV0_16(const Napi::CallbackInfo &info
 	Napi::Object obj = Napi::Object::New(env);
 	const char *open_jtalk_dic_dir = load_string(info, 0);
 	uint32_t open_jtalk_pointer_name = load_uint32_t(info, 1);
-	OpenJtalkRc *out_open_jtalk;
+	OpenJtalkRcV0_16 *out_open_jtalk;
 	VoicevoxResultCode resultCode = voicevox_open_jtalk_rc_new_v0_16(this->dll, open_jtalk_dic_dir, &out_open_jtalk);
 	this->open_jtalk_pointers.emplace(open_jtalk_pointer_name, reinterpret_cast<uintptr_t>(out_open_jtalk));
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -161,8 +161,8 @@ Napi::Value Voicevox::voicevoxOpenJtalkRcUseUserDictV0_16(const Napi::CallbackIn
 		Napi::Error::New(env, "open_jtalkのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const OpenJtalkRc *open_jtalk = reinterpret_cast<const OpenJtalkRc *>(this->open_jtalk_pointers.at(open_jtalk_pointer_name));
-	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	const OpenJtalkRcV0_16 *open_jtalk = reinterpret_cast<const OpenJtalkRcV0_16 *>(this->open_jtalk_pointers.at(open_jtalk_pointer_name));
+	const VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	VoicevoxResultCode resultCode = voicevox_open_jtalk_rc_use_user_dict_v0_16(this->dll, open_jtalk, user_dict);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
@@ -178,7 +178,7 @@ Napi::Value Voicevox::voicevoxOpenJtalkRcDeleteV0_16(const Napi::CallbackInfo &i
 		Napi::Error::New(env, "open_jtalkのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	OpenJtalkRc *open_jtalk = reinterpret_cast<OpenJtalkRc *>(this->open_jtalk_pointers.at(open_jtalk_pointer_name));
+	OpenJtalkRcV0_16 *open_jtalk = reinterpret_cast<OpenJtalkRcV0_16 *>(this->open_jtalk_pointers.at(open_jtalk_pointer_name));
 	try
 	{
 		voicevox_open_jtalk_rc_delete_v0_16(this->dll, open_jtalk);
@@ -215,7 +215,7 @@ Napi::Value Voicevox::voicevoxVoiceModelNewFromPathV0_16(const Napi::CallbackInf
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
 	const char *path = load_string(info, 0);
-	VoicevoxVoiceModel *out_model;
+	VoicevoxVoiceModelV0_16 *out_model;
 	uint32_t model_pointer_name = load_uint32_t(info, 1);
 	VoicevoxResultCode resultCode = voicevox_voice_model_new_from_path_v0_16(this->dll, path, &out_model);
 	this->model_pointers.emplace(model_pointer_name, reinterpret_cast<uintptr_t>(out_model));
@@ -233,8 +233,8 @@ Napi::Value Voicevox::voicevoxVoiceModelIdV0_16(const Napi::CallbackInfo &info)
 		Napi::Error::New(env, "voice_modelのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxVoiceModel *model = reinterpret_cast<const VoicevoxVoiceModel *>(this->model_pointers.at(model_pointer_name));
-	VoicevoxVoiceModelId result = voicevox_voice_model_id_v0_16(this->dll, model);
+	const VoicevoxVoiceModelV0_16 *model = reinterpret_cast<const VoicevoxVoiceModelV0_16 *>(this->model_pointers.at(model_pointer_name));
+	VoicevoxVoiceModelIdV0_16 result = voicevox_voice_model_id_v0_16(this->dll, model);
 	obj.Set("result", Napi::String::New(env, copy_str(result)));
 	return obj;
 }
@@ -249,7 +249,7 @@ Napi::Value Voicevox::voicevoxVoiceModelGetMetasJsonV0_16(const Napi::CallbackIn
 		Napi::Error::New(env, "voice_modelのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxVoiceModel *model = reinterpret_cast<const VoicevoxVoiceModel *>(this->model_pointers.at(model_pointer_name));
+	const VoicevoxVoiceModelV0_16 *model = reinterpret_cast<const VoicevoxVoiceModelV0_16 *>(this->model_pointers.at(model_pointer_name));
 	const char *result;
 	try
 	{
@@ -274,7 +274,7 @@ Napi::Value Voicevox::voicevoxVoiceModelDeleteV0_16(const Napi::CallbackInfo &in
 		Napi::Error::New(env, "voice_modelのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	VoicevoxVoiceModel *model = reinterpret_cast<VoicevoxVoiceModel *>(this->model_pointers.at(model_pointer_name));
+	VoicevoxVoiceModelV0_16 *model = reinterpret_cast<VoicevoxVoiceModelV0_16 *>(this->model_pointers.at(model_pointer_name));
 	try
 	{
 		voicevox_voice_model_delete_v0_16(this->dll, model);
@@ -298,10 +298,10 @@ Napi::Value Voicevox::voicevoxSynthesizerNewV0_16(const Napi::CallbackInfo &info
 		Napi::Error::New(env, "open_jtalkのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const OpenJtalkRc *open_jtalk = reinterpret_cast<const OpenJtalkRc *>(this->open_jtalk_pointers.at(open_jtalk_pointer_name));
+	const OpenJtalkRcV0_16 *open_jtalk = reinterpret_cast<const OpenJtalkRcV0_16 *>(this->open_jtalk_pointers.at(open_jtalk_pointer_name));
 	uint32_t out_synthesizer_pointer_name = load_uint32_t(info, 1);
-	VoicevoxSynthesizer *out_synthesizer;
-	VoicevoxInitializeOptions options;
+	VoicevoxSynthesizerV0_16 *out_synthesizer;
+	VoicevoxInitializeOptionsV0_16 options;
 	try
 	{
 		options = voicevox_make_default_initialize_options_v0_16(this->dll);
@@ -329,7 +329,7 @@ Napi::Value Voicevox::voicevoxSynthesizerDeleteV0_16(const Napi::CallbackInfo &i
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	VoicevoxSynthesizer *synthesizer = reinterpret_cast<VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	try
 	{
 		voicevox_synthesizer_delete_v0_16(this->dll, synthesizer);
@@ -353,14 +353,14 @@ Napi::Value Voicevox::voicevoxSynthesizerLoadVoiceModelV0_16(const Napi::Callbac
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	uint32_t model_pointer_name = load_uint32_t(info, 1);
 	if (!this->model_pointers.count(model_pointer_name))
 	{
 		Napi::Error::New(env, "voice_modelのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxVoiceModel *model = reinterpret_cast<const VoicevoxVoiceModel *>(this->model_pointers.at(model_pointer_name));
+	const VoicevoxVoiceModelV0_16 *model = reinterpret_cast<const VoicevoxVoiceModelV0_16 *>(this->model_pointers.at(model_pointer_name));
 	VoicevoxResultCode resultCode = voicevox_synthesizer_load_voice_model_v0_16(this->dll, synthesizer, model);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
@@ -376,8 +376,8 @@ Napi::Value Voicevox::voicevoxSynthesizerUnloadVoiceModelV0_16(const Napi::Callb
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
-	VoicevoxVoiceModelId model_id = load_string(info, 1);
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	VoicevoxVoiceModelIdV0_16 model_id = load_string(info, 1);
 	VoicevoxResultCode resultCode = voicevox_synthesizer_unload_voice_model_v0_16(this->dll, synthesizer, model_id);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
@@ -393,7 +393,7 @@ Napi::Value Voicevox::voicevoxSynthesizerIsGpuModeV0_16(const Napi::CallbackInfo
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	bool result;
 	try
 	{
@@ -418,8 +418,8 @@ Napi::Value Voicevox::voicevoxSynthesizerIsLoadedVoiceModelV0_16(const Napi::Cal
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
-	VoicevoxVoiceModelId model_id = load_string(info, 1);
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	VoicevoxVoiceModelIdV0_16 model_id = load_string(info, 1);
 	bool result;
 	try
 	{
@@ -444,7 +444,7 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateMetasJsonV0_16(const Napi::Callba
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	char *result;
 	try
 	{
@@ -499,9 +499,9 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQueryFromKanaV0_16(const Nap
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *kana = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
 	char *output_audio_query_json;
 	VoicevoxResultCode resultCode = voicevox_synthesizer_create_audio_query_from_kana_v0_16(this->dll, synthesizer, kana, style_id, &output_audio_query_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -528,9 +528,9 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAudioQueryV0_16(const Napi::Callb
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *text = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
 	char *output_audio_query_json;
 	VoicevoxResultCode resultCode = voicevox_synthesizer_create_audio_query_v0_16(this->dll, synthesizer, text, style_id, &output_audio_query_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -548,9 +548,9 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16(const 
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *kana = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
 	char *output_accent_phrases_json;
 	VoicevoxResultCode resultCode = voicevox_synthesizer_create_accent_phrases_from_kana_v0_16(this->dll, synthesizer, kana, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -577,9 +577,9 @@ Napi::Value Voicevox::voicevoxSynthesizerCreateAccentPhrasesV0_16(const Napi::Ca
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *text = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
 	char *output_accent_phrases_json;
 	VoicevoxResultCode resultCode = voicevox_synthesizer_create_accent_phrases_v0_16(this->dll, synthesizer, text, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -597,9 +597,9 @@ Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraDataV0_16(const Napi::Callba
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *accent_phrases_json = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
 	char *output_accent_phrases_json;
 	VoicevoxResultCode resultCode = voicevox_synthesizer_replace_mora_data_v0_16(this->dll, synthesizer, accent_phrases_json, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -626,9 +626,9 @@ Napi::Value Voicevox::voicevoxSynthesizerReplacePhonemeLengthV0_16(const Napi::C
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *accent_phrases_json = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
 	char *output_accent_phrases_json;
 	VoicevoxResultCode resultCode = voicevox_synthesizer_replace_phoneme_length_v0_16(this->dll, synthesizer, accent_phrases_json, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -655,9 +655,9 @@ Napi::Value Voicevox::voicevoxSynthesizerReplaceMoraPitchV0_16(const Napi::Callb
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *accent_phrases_json = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
 	char *output_accent_phrases_json;
 	VoicevoxResultCode resultCode = voicevox_synthesizer_replace_mora_pitch_v0_16(this->dll, synthesizer, accent_phrases_json, style_id, &output_accent_phrases_json);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -684,10 +684,10 @@ Napi::Value Voicevox::voicevoxSynthesizerSynthesisV0_16(const Napi::CallbackInfo
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *audio_query_json = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
-	VoicevoxSynthesisOptions options;
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
+	VoicevoxSynthesisOptionsV0_14 options;
 	try
 	{
 		options = voicevox_make_default_synthesis_options_v0_14(this->dll);
@@ -716,10 +716,10 @@ Napi::Value Voicevox::voicevoxSynthesizerTtsFromKanaV0_16(const Napi::CallbackIn
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *kana = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
-	VoicevoxTtsOptions options;
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
+	VoicevoxTtsOptionsV0_16 options;
 	try
 	{
 		options = voicevox_make_default_tts_options_v0_16(this->dll);
@@ -748,10 +748,10 @@ Napi::Value Voicevox::voicevoxSynthesizerTtsV0_16(const Napi::CallbackInfo &info
 		Napi::Error::New(env, "synthesizerのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxSynthesizer *synthesizer = reinterpret_cast<const VoicevoxSynthesizer *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
+	const VoicevoxSynthesizerV0_16 *synthesizer = reinterpret_cast<const VoicevoxSynthesizerV0_16 *>(this->synthesizer_pointers.at(synthesizer_pointer_name));
 	const char *text = load_string(info, 1);
-	VoicevoxStyleId style_id = static_cast<VoicevoxStyleId>(load_uint32_t(info, 2));
-	VoicevoxTtsOptions options = voicevox_make_default_tts_options_v0_16(this->dll);
+	VoicevoxStyleIdV0_16 style_id = static_cast<VoicevoxStyleIdV0_16>(load_uint32_t(info, 2));
+	VoicevoxTtsOptionsV0_16 options = voicevox_make_default_tts_options_v0_16(this->dll);
 	options.enable_interrogative_upspeak = load_bool(info, 3);
 	uintptr_t output_wav_length;
 	uint8_t *output_wav;
@@ -785,7 +785,7 @@ Napi::Value Voicevox::voicevoxUserDictNewV0_16(const Napi::CallbackInfo &info)
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
 	uint32_t user_dict_pointer_name = load_uint32_t(info, 0);
-	VoicevoxUserDict *userDict;
+	VoicevoxUserDictV0_16 *userDict;
 	try
 	{
 		userDict = voicevox_user_dict_new_v0_16(this->dll);
@@ -809,7 +809,7 @@ Napi::Value Voicevox::voicevoxUserDictLoadV0_16(const Napi::CallbackInfo &info)
 		Napi::Error::New(env, "user_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	const VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	const char *dict_path = load_string(info, 1);
 	VoicevoxResultCode resultCode = voicevox_user_dict_load_v0_16(this->dll, user_dict, dict_path);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -826,10 +826,10 @@ Napi::Value Voicevox::voicevoxUserDictAddWordV0_16(const Napi::CallbackInfo &inf
 		Napi::Error::New(env, "user_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	const VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	const char *surface = load_string(info, 1);
 	const char *pronunciation = load_string(info, 2);
-	VoicevoxUserDictWord word;
+	VoicevoxUserDictWordV0_16 word;
 	try
 	{
 		word = voicevox_user_dict_word_make_v0_16(this->dll, surface, pronunciation);
@@ -864,10 +864,10 @@ Napi::Value Voicevox::voicevoxUserDictUpdateWordV0_16(const Napi::CallbackInfo &
 		Napi::Error::New(env, "user_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	const VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	const char *surface = load_string(info, 1);
 	const char *pronunciation = load_string(info, 2);
-	VoicevoxUserDictWord word;
+	VoicevoxUserDictWordV0_16 word;
 	try
 	{
 		word = voicevox_user_dict_word_make_v0_16(this->dll, surface, pronunciation);
@@ -901,7 +901,7 @@ Napi::Value Voicevox::voicevoxUserDictRemoveWordV0_16(const Napi::CallbackInfo &
 		Napi::Error::New(env, "user_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	const VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	uint8_t word_uuid[16];
 	Napi::Buffer<uint8_t> uuid = info[1].As<Napi::Buffer<uint8_t>>();
 	for (size_t i = 0; i < 16; i++)
@@ -923,7 +923,7 @@ Napi::Value Voicevox::voicevoxUserDictToJsonV0_16(const Napi::CallbackInfo &info
 		Napi::Error::New(env, "user_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	const VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	char *output_json;
 	VoicevoxResultCode resultCode = voicevox_user_dict_to_json_v0_16(this->dll, user_dict, &output_json);
 	obj.Set("result", Napi::String::New(env, copy_str(output_json)));
@@ -950,14 +950,14 @@ Napi::Value Voicevox::voicevoxUserDictImportV0_16(const Napi::CallbackInfo &info
 		Napi::Error::New(env, "user_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	const VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	uint32_t other_dict_pointer_name = load_uint32_t(info, 1);
 	if (!this->user_dict_pointers.count(other_dict_pointer_name))
 	{
 		Napi::Error::New(env, "other_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxUserDict *other_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(other_dict_pointer_name));
+	const VoicevoxUserDictV0_16 *other_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(other_dict_pointer_name));
 	VoicevoxResultCode resultCode = voicevox_user_dict_import_v0_16(this->dll, user_dict, other_dict);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
 	return obj;
@@ -973,7 +973,7 @@ Napi::Value Voicevox::voicevoxUserDictSaveV0_16(const Napi::CallbackInfo &info)
 		Napi::Error::New(env, "user_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	const VoicevoxUserDict *user_dict = reinterpret_cast<const VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	const VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<const VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	const char *path = load_string(info, 1);
 	VoicevoxResultCode resultCode = voicevox_user_dict_save_v0_16(this->dll, user_dict, path);
 	obj.Set("resultCode", Napi::Number::New(env, resultCode));
@@ -990,7 +990,7 @@ Napi::Value Voicevox::voicevoxUserDictDeleteV0_16(const Napi::CallbackInfo &info
 		Napi::Error::New(env, "user_dictのポインタが見つかりませんでした").ThrowAsJavaScriptException();
 		return obj;
 	}
-	VoicevoxUserDict *user_dict = reinterpret_cast<VoicevoxUserDict *>(this->user_dict_pointers.at(user_dict_pointer_name));
+	VoicevoxUserDictV0_16 *user_dict = reinterpret_cast<VoicevoxUserDictV0_16 *>(this->user_dict_pointers.at(user_dict_pointer_name));
 	try
 	{
 		voicevox_user_dict_delete_v0_16(this->dll, user_dict);
@@ -1008,7 +1008,7 @@ Napi::Value Voicevox::voicevoxInitializeV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
-	VoicevoxInitializeOptionsV14 options;
+	VoicevoxInitializeOptionsV0_14 options;
 	try
 	{
 		options = voicevox_make_default_initialize_options_v14(this->dll);
@@ -1265,7 +1265,7 @@ Napi::Value Voicevox::voicevoxAudioQueryV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
-	VoicevoxAudioQueryOptions options;
+	VoicevoxAudioQueryOptionsV0_14 options;
 	try
 	{
 		options = voicevox_make_default_audio_query_options_v0_14(this->dll);
@@ -1298,7 +1298,7 @@ Napi::Value Voicevox::voicevoxAccentPhrasesV0_15(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
-	VoicevoxAccentPhrasesOptions options;
+	VoicevoxAccentPhrasesOptionsV0_15 options;
 	try
 	{
 		options = voicevox_make_default_accent_phrases_options_v0_15(this->dll);
@@ -1397,7 +1397,7 @@ Napi::Value Voicevox::voicevoxSynthesisV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
-	VoicevoxSynthesisOptions options;
+	VoicevoxSynthesisOptionsV0_14 options;
 	try
 	{
 		options = voicevox_make_default_synthesis_options_v0_14(this->dll);
@@ -1422,7 +1422,7 @@ Napi::Value Voicevox::voicevoxTtsV0_14(const Napi::CallbackInfo &info)
 {
 	Napi::Env env = info.Env();
 	Napi::Object obj = Napi::Object::New(env);
-	VoicevoxTtsOptionsV14 options;
+	VoicevoxTtsOptionsV0_14 options;
 	try
 	{
 		options = voicevox_make_default_tts_options_v14(this->dll);

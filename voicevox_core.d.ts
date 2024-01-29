@@ -36,7 +36,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxOpenJtalkRcNewV0_16(openJtalkDicDir: string, openJtalkPointerName: number): ResultCode;
+  voicevoxOpenJtalkRcNewV0_16(openJtalkDicDir: string, openJtalkPointerName: number): ResultCodeV0_16;
 
   /**
    * OpenJtalkの使うユーザー辞書を設定する。
@@ -54,7 +54,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxOpenJtalkRcUseUserDictV0_16(openJtalkPointerName: number, userDictPointerName: number): ResultCode;
+  voicevoxOpenJtalkRcUseUserDictV0_16(openJtalkPointerName: number, userDictPointerName: number): ResultCodeV0_16;
 
   /**
    * OpenJtalkRc を<b>破棄</b>(_destruct_)する。
@@ -99,7 +99,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxVoiceModelNewFromPathV0_16(path: string, modelPointerName: number): ResultCode;
+  voicevoxVoiceModelNewFromPathV0_16(path: string, modelPointerName: number): ResultCodeV0_16;
 
   /**
    * VoicevoxVoiceModel からIDを取得する。
@@ -165,7 +165,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerNewV0_16(openJtalkPointerName: number, synthesizerPointerName: number, accelerationMode: number, cpuNumThreads: number): ResultCode;
+  voicevoxSynthesizerNewV0_16(openJtalkPointerName: number, synthesizerPointerName: number, accelerationMode: number, cpuNumThreads: number): ResultCodeV0_16;
 
   /**
    * VoicevoxSynthesizer を<b>破棄</b>(_destruct_)する。
@@ -197,7 +197,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerLoadVoiceModelV0_16(synthesizerPointerName: number, modelPointerName: number): ResultCode;
+  voicevoxSynthesizerLoadVoiceModelV0_16(synthesizerPointerName: number, modelPointerName: number): ResultCodeV0_16;
 
   /**
    * 音声モデルの読み込みを解除する。
@@ -214,7 +214,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerUnloadVoiceModelV0_16(synthesizerPointerName: number, modelId: string): ResultCode;
+  voicevoxSynthesizerUnloadVoiceModelV0_16(synthesizerPointerName: number, modelId: string): ResultCodeV0_16;
 
   /**
    * ハードウェアアクセラレーションがGPUモードか判定する。
@@ -280,7 +280,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxCreateSupportedDevicesJsonV0_16(): ResultCode & { result: string };
+  voicevoxCreateSupportedDevicesJsonV0_16(): ResultCodeV0_16 & { result: string };
 
   /**
    * AquesTalk風記法から、AudioQueryをJSONとして生成する。
@@ -310,7 +310,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateAudioQueryFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerCreateAudioQueryFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number): ResultCodeV0_16 & { result: string };
 
   /**
    * 日本語テキストから、AudioQueryをJSONとして生成する。
@@ -338,7 +338,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateAudioQueryV0_16(synthesizerPointerName: number, text: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerCreateAudioQueryV0_16(synthesizerPointerName: number, text: string, styleId: number): ResultCodeV0_16 & { result: string };
 
   /**
    * AquesTalk風記法から、AccentPhrase (アクセント句)の配列をJSON形式で生成する。
@@ -366,7 +366,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number): ResultCodeV0_16 & { result: string };
 
   /**
    * 日本語テキストから、AccentPhrase (アクセント句)の配列をJSON形式で生成する。
@@ -394,7 +394,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerCreateAccentPhrasesV0_16(synthesizerPointerName: number, text: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerCreateAccentPhrasesV0_16(synthesizerPointerName: number, text: string, styleId: number): ResultCodeV0_16 & { result: string };
 
   /**
    * AccentPhraseの配列の音高・音素長を、特定の声で生成しなおす。
@@ -412,7 +412,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerReplaceMoraDataV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerReplaceMoraDataV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCodeV0_16 & { result: string };
 
   /**
    * AccentPhraseの配列の音素長を、特定の声で生成しなおす。
@@ -430,7 +430,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerReplacePhonemeLengthV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerReplacePhonemeLengthV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCodeV0_16 & { result: string };
 
   /**
    * AccentPhraseの配列の音高を、特定の声で生成しなおす。
@@ -448,7 +448,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerReplaceMoraPitchV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCode & { result: string };
+  voicevoxSynthesizerReplaceMoraPitchV0_16(synthesizerPointerName: number, accentPhrasesJson: string, styleId: number): ResultCodeV0_16 & { result: string };
 
   /**
    * AudioQueryから音声合成を行う。
@@ -467,7 +467,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerSynthesisV0_16(synthesizerPointerName: number, audioQueryJson: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
+  voicevoxSynthesizerSynthesisV0_16(synthesizerPointerName: number, audioQueryJson: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCodeV0_16 & { result: Buffer };
 
   /**
    * AquesTalk風記法から音声合成を行う。
@@ -486,7 +486,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerTtsFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
+  voicevoxSynthesizerTtsFromKanaV0_16(synthesizerPointerName: number, kana: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCodeV0_16 & { result: Buffer };
 
   /**
    * 日本語テキストから音声合成を行う。
@@ -505,7 +505,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxSynthesizerTtsV0_16(synthesizerPointerName: number, text: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCode & { result: Buffer };
+  voicevoxSynthesizerTtsV0_16(synthesizerPointerName: number, text: string, styleId: number, enableInterrogativeUpspeak: boolean): ResultCodeV0_16 & { result: Buffer };
 
   /**
    * 結果コードに対応したメッセージ文字列を取得する。
@@ -561,7 +561,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictLoadV0_16(userDictPointerName: number, dictPath: string): ResultCode;
+  voicevoxUserDictLoadV0_16(userDictPointerName: number, dictPath: string): ResultCodeV0_16;
 
   /**
    * ユーザー辞書に単語を追加する。
@@ -582,7 +582,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictAddWordV0_16(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number): ResultCode & { result: Buffer };
+  voicevoxUserDictAddWordV0_16(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number): ResultCodeV0_16 & { result: Buffer };
 
   /**
    * ユーザー辞書の単語を更新する。
@@ -604,7 +604,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictUpdateWordV0_16(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number, uuid: Buffer): ResultCode;
+  voicevoxUserDictUpdateWordV0_16(userDictPointerName: number, surface: string, pronunciation: string, accentType: number, priority: number, wordType: number, uuid: Buffer): ResultCodeV0_16;
 
   /**
    * ユーザー辞書から単語を削除する。
@@ -621,7 +621,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictRemoveWordV0_16(userDictPointerName: number, uuid: Buffer): ResultCode;
+  voicevoxUserDictRemoveWordV0_16(userDictPointerName: number, uuid: Buffer): ResultCodeV0_16;
 
   /**
    * ユーザー辞書の単語をJSON形式で出力する。
@@ -637,7 +637,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictToJsonV0_16(userDictPointerName: number): ResultCode & { result: string };
+  voicevoxUserDictToJsonV0_16(userDictPointerName: number): ResultCodeV0_16 & { result: string };
 
   /**
    * 他のユーザー辞書をインポートする。
@@ -654,7 +654,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictImportV0_16(userDictPointerName: number, otherDictPointerName: number): ResultCode;
+  voicevoxUserDictImportV0_16(userDictPointerName: number, otherDictPointerName: number): ResultCodeV0_16;
 
   /**
    * ユーザー辞書をファイルに保存する。
@@ -671,7 +671,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.16.xで利用できます
    */
-  voicevoxUserDictSaveV0_16(userDictPointerName: number, path: string): ResultCode;
+  voicevoxUserDictSaveV0_16(userDictPointerName: number, path: string): ResultCodeV0_16;
 
   /**
    * ユーザー辞書を<b>破棄</b>(_destruct_)する。
@@ -697,7 +697,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxInitializeV0_14(accelerationMode: VoicevoxAccelerationMode, cpuNumThreads: number, loadAllModels: boolean, openJtalkDictDir: string): ResultCodeV14;
+  voicevoxInitializeV0_14(accelerationMode: VoicevoxAccelerationModeV0_14, cpuNumThreads: number, loadAllModels: boolean, openJtalkDictDir: string): ResultCodeV0_14;
 
   /**
    * モデルを読み込む
@@ -706,7 +706,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxLoadModelV0_14(speakerId: number): ResultCodeV14;
+  voicevoxLoadModelV0_14(speakerId: number): ResultCodeV0_14;
 
   /**
    * ハードウェアアクセラレーションがGPUモードか判定する
@@ -755,7 +755,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxPredictDurationV0_14(phoneme: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV14;
+  voicevoxPredictDurationV0_14(phoneme: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV0_14;
 
   /**
    * モーラごとのF0を推論する
@@ -773,7 +773,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxPredictIntonationV0_14(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV14;
+  voicevoxPredictIntonationV0_14(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV0_14;
 
   /**
    * decodeを実行する
@@ -784,7 +784,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxDecodeV0_14(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & ResultCodeV14;
+  voicevoxDecodeV0_14(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & ResultCodeV0_14;
 
   /**
    * AudioQuery を実行する
@@ -795,7 +795,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxAudioQueryV0_14(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV14;
+  voicevoxAudioQueryV0_14(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV0_14;
 
   /**
    * `accent_phrases` を実行する
@@ -806,7 +806,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.15.xで利用できます
    */
-  voicevoxAccentPhrasesV0_15(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV15;
+  voicevoxAccentPhrasesV0_15(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV0_15;
 
   /**
    * アクセント句の音素長を変更する
@@ -816,7 +816,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.15.xで利用できます
    */
-  voicevoxMoraLengthV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
+  voicevoxMoraLengthV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV0_15;
 
   /**
    * アクセント句の音高を変更する
@@ -826,7 +826,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.15.xで利用できます
    */
-  voicevoxMoraPitchV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
+  voicevoxMoraPitchV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV0_15;
 
   /**
    * アクセント句の音高・音素長を変更する
@@ -836,7 +836,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.15.xで利用できます
    */
-  voicevoxMoraDataV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV15;
+  voicevoxMoraDataV0_15(accentPhrasesJson: string, speakerId: number): Result<string> & ResultCodeV0_15;
 
   /**
    * AudioQuery から音声合成する
@@ -847,7 +847,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxSynthesisV0_14(audioQueryJson: string, speakerId: number, enableInterrogativeUpspeak: boolean): Result<Buffer> & ResultCodeV14;
+  voicevoxSynthesisV0_14(audioQueryJson: string, speakerId: number, enableInterrogativeUpspeak: boolean): Result<Buffer> & ResultCodeV0_14;
 
   /**
    * テキスト音声合成を実行する
@@ -859,7 +859,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.x, v0.15.xで利用できます
    */
-  voicevoxTtsV0_14(text: string, speakerId: number, enableInterrogativeUpspeak: boolean, kana: boolean): Result<Buffer> & ResultCodeV14;
+  voicevoxTtsV0_14(text: string, speakerId: number, enableInterrogativeUpspeak: boolean, kana: boolean): Result<Buffer> & ResultCodeV0_14;
 
   /**
    * 初期化する
@@ -975,7 +975,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxLoadOpenjtalkDictV0_12(dictPath: string): ResultCodeV12;
+  voicevoxLoadOpenjtalkDictV0_12(dictPath: string): ResultCodeV0_12;
 
   /**
    * text to spearchを実行する
@@ -985,7 +985,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
+  voicevoxTtsV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV0_12;
 
   /**
    * text to spearchをAquesTalkライクな記法で実行する
@@ -995,7 +995,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsFromKanaV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
+  voicevoxTtsFromKanaV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV0_12;
 
   /**
    * 初期化する
@@ -1067,14 +1067,14 @@ interface Result<T> {
   result: T;
 }
 
-interface ResultCode {
-  resultCode: VoicevoxResultCode;
+interface ResultCodeV0_16 {
+  resultCode: VoicevoxResultCodeV0_16;
 }
 
 /**
  * 処理結果を示す結果コード。
  */
-export declare enum VoicevoxResultCode {
+export declare enum VoicevoxResultCodeV0_16 {
   /**
    * 成功
    */
@@ -1172,7 +1172,7 @@ export declare enum VoicevoxResultCode {
 /**
  * ハードウェアアクセラレーションモードを設定する設定値。
  */
-export declare enum VoicevoxAccelerationMode {
+export declare enum VoicevoxAccelerationModeV0_14 {
   /**
    * 実行環境に合った適切なハードウェアアクセラレーションモードを選択する
    */
@@ -1190,7 +1190,7 @@ export declare enum VoicevoxAccelerationMode {
 /**
  * ユーザー辞書の単語の種類。
  */
-export declare enum VoicevoxUserDictWordType {
+export declare enum VoicevoxUserDictWordTypeV0_16 {
   /**
    * 固有名詞。
    */
@@ -1213,11 +1213,11 @@ export declare enum VoicevoxUserDictWordType {
   VOICEVOX_USER_DICT_WORD_TYPE_SUFFIX = 4,
 }
 
-interface ResultCodeV15 {
-  resultCode: VoicevoxResultCodeV15;
+interface ResultCodeV0_15 {
+  resultCode: VoicevoxResultCodeV0_15;
 }
 
-export declare enum VoicevoxResultCodeV15 {
+export declare enum VoicevoxResultCodeV0_15 {
   /**
    * 成功
    */
@@ -1280,11 +1280,11 @@ export declare enum VoicevoxResultCodeV15 {
   VOICEVOX_RESULT_INVALID_ACCENT_PHRASE_ERROR = 14,
 }
 
-interface ResultCodeV14 {
-  resultCode: VoicevoxResultCodeV14;
+interface ResultCodeV0_14 {
+  resultCode: VoicevoxResultCodeV0_14;
 }
 
-export declare enum VoicevoxResultCodeV14 {
+export declare enum VoicevoxResultCodeV0_14 {
   /**
    * 成功
    */
@@ -1343,11 +1343,11 @@ export declare enum VoicevoxResultCodeV14 {
   VOICEVOX_RESULT_INVALID_AUDIO_QUERY_ERROR = 13,
 }
 
-interface ResultCodeV12 {
-  resultCode: VoicevoxResultCodeV12;
+interface ResultCodeV0_12 {
+  resultCode: VoicevoxResultCodeV0_12;
 }
 
-export declare enum VoicevoxResultCodeV12 {
+export declare enum VoicevoxResultCodeV0_12 {
   /**
    * 成功
    */

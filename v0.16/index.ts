@@ -1,4 +1,4 @@
-import { VoicevoxCore, VoicevoxResultCode, VoicevoxAccelerationMode, VoicevoxUserDictWordType } from "../voicevox_core";
+import { VoicevoxCore, VoicevoxResultCodeV0_16, VoicevoxAccelerationModeV0_14, VoicevoxUserDictWordTypeV0_16 } from "../voicevox_core";
 import {
   checkValidNumber,
   checkValidObject,
@@ -50,7 +50,7 @@ export class Voicevox {
       const openJtalkPointerName = this.#openJtalkPointerCounter;
       this.#openJtalkPointerCounter++;
       const { resultCode } = this[Core].voicevoxOpenJtalkRcNewV0_16(openJtalkDicDir, openJtalkPointerName);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(new VoicevoxOpenJtalkRc(this, openJtalkPointerName));
     });
   }
@@ -77,7 +77,7 @@ export class Voicevox {
       const modelPonterName = this.#voiceModelCounter;
       this.#voiceModelCounter++;
       const { resultCode } = this[Core].voicevoxVoiceModelNewFromPathV0_16(path, modelPonterName);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(new VoicevoxVoiceModel(this, modelPonterName));
     });
   }
@@ -94,7 +94,7 @@ export class Voicevox {
       checkVoicevoxInitializeOptions(options);
       const synthesizerPointerName = this.#synthesizerPointer++;
       const { resultCode } = this[Core].voicevoxSynthesizerNewV0_16(openJtalkRc[Pointer], synthesizerPointerName, options.accelerationMode, options.cpuNumThreads);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(new VoicevoxSynthesizer(this, synthesizerPointerName));
     });
   }
@@ -107,7 +107,7 @@ export class Voicevox {
   createSupportedDevicesJson(): Promise<VoicevoxSupportedDevicesJson> {
     return new Promise<VoicevoxSupportedDevicesJson>((resolve) => {
       const { result, resultCode } = this[Core].voicevoxCreateSupportedDevicesJsonV0_16();
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -131,7 +131,7 @@ export class Voicevox {
    */
   static makeDefaultInitializeOptions(): VoicevoxInitializeOptions {
     return {
-      accelerationMode: VoicevoxAccelerationMode.VOICEVOX_ACCELERATION_MODE_AUTO,
+      accelerationMode: VoicevoxAccelerationModeV0_14.VOICEVOX_ACCELERATION_MODE_AUTO,
       cpuNumThreads: 0,
     };
   }
@@ -171,7 +171,7 @@ export class Voicevox {
       priority: 0,
       pronunciation,
       accentType: 0,
-      wordType: VoicevoxUserDictWordType.VOICEVOX_USER_DICT_WORD_TYPE_PROPER_NOUN,
+      wordType: VoicevoxUserDictWordTypeV0_16.VOICEVOX_USER_DICT_WORD_TYPE_PROPER_NOUN,
     };
   }
 }
@@ -199,7 +199,7 @@ class VoicevoxOpenJtalkRc {
       checkValidObject(userDict, "userDict", VoicevoxUserDict, "VoicevoxUserDict");
       if (this[Deleted]) throw new VoicevoxJsError("Open JTalkは破棄済みです");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxOpenJtalkRcUseUserDictV0_16(this[Pointer], userDict[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -251,7 +251,7 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidObject(model, "model", VoicevoxVoiceModel, "VoicevoxVoiceModel");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerLoadVoiceModelV0_16(this[Pointer], model[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -266,7 +266,7 @@ class VoicevoxSynthesizer {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxSynthesizerは破棄されています");
       checkValidString(modelId, "modelId");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerUnloadVoiceModelV0_16(this[Pointer], modelId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -321,7 +321,7 @@ class VoicevoxSynthesizer {
       checkValidString(kana, "kana");
       checkValidNumber(styleId, "styleId", true);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAudioQueryFromKanaV0_16(this[Pointer], kana, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -338,7 +338,7 @@ class VoicevoxSynthesizer {
       checkValidString(text, "text");
       checkValidNumber(styleId, "styleId", true);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAudioQueryV0_16(this[Pointer], text, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -355,7 +355,7 @@ class VoicevoxSynthesizer {
       checkValidString(kana, "kana");
       checkValidNumber(styleId, "styleId", true);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAccentPhrasesFromKanaV0_16(this[Pointer], kana, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -372,7 +372,7 @@ class VoicevoxSynthesizer {
       checkValidString(text, "text");
       checkValidNumber(styleId, "styleId", true);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerCreateAccentPhrasesV0_16(this[Pointer], text, styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -389,7 +389,7 @@ class VoicevoxSynthesizer {
       checkVoicevoxAccentPhraseJson(accentPhrasesJson);
       checkValidNumber(styleId, "styleId", true);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplaceMoraDataV0_16(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -406,7 +406,7 @@ class VoicevoxSynthesizer {
       checkVoicevoxAccentPhraseJson(accentPhrasesJson);
       checkValidNumber(styleId, "styleId", true);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplacePhonemeLengthV0_16(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -423,7 +423,7 @@ class VoicevoxSynthesizer {
       checkVoicevoxAccentPhraseJson(accentPhrasesJson);
       checkValidNumber(styleId, "styleId", true);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerReplaceMoraPitchV0_16(this[Pointer], JSON.stringify(accentPhrasesJson), styleId);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -442,7 +442,7 @@ class VoicevoxSynthesizer {
       checkValidNumber(styleId, "styleId", true);
       checkVoicevoxSynthesisOptions(options);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerSynthesisV0_16(this[Pointer], JSON.stringify(audioQueryJson), styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -461,7 +461,7 @@ class VoicevoxSynthesizer {
       checkValidNumber(styleId, "styleId", true);
       checkVoicevoxTtsOptions(options);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerTtsFromKanaV0_16(this[Pointer], kana, styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -480,7 +480,7 @@ class VoicevoxSynthesizer {
       checkValidNumber(styleId, "styleId", true);
       checkVoicevoxTtsOptions(options);
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxSynthesizerTtsV0_16(this[Pointer], text, styleId, options.enableInterrogativeUpspeak);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
   }
@@ -508,7 +508,7 @@ class VoicevoxUserDict {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkValidString(dictPath, "dictPath");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictLoadV0_16(this[Pointer], dictPath);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -523,7 +523,7 @@ class VoicevoxUserDict {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkVoicevoxUserDictWord(word);
       const { resultCode, result } = this.#voicevoxBase[Core].voicevoxUserDictAddWordV0_16(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(bufferToUuid(result));
     });
   }
@@ -540,7 +540,7 @@ class VoicevoxUserDict {
       checkVoicevoxUserDictWord(word);
       checkValidString(wordUuid, "wordUuid");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictUpdateWordV0_16(this[Pointer], word.surface, word.pronunciation, word.accentType, word.priority, word.wordType, uuidToBuffer(wordUuid));
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -555,7 +555,7 @@ class VoicevoxUserDict {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkValidString(wordUuid, "wordUuid");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictRemoveWordV0_16(this[Pointer], uuidToBuffer(wordUuid));
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -568,7 +568,7 @@ class VoicevoxUserDict {
     return new Promise<VoicevoxUserDictsJson>((resolve) => {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       const { result, resultCode } = this.#voicevoxBase[Core].voicevoxUserDictToJsonV0_16(this[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(JSON.parse(result));
     });
   }
@@ -583,7 +583,7 @@ class VoicevoxUserDict {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkValidObject(otherDict, "otherDict", VoicevoxUserDict, "VoicevoxUserDict");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictImportV0_16(this[Pointer], otherDict[Pointer]);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -598,7 +598,7 @@ class VoicevoxUserDict {
       if (this[Deleted]) throw new VoicevoxJsError("VoicevoxUserDictは破棄されています");
       checkValidString(path, "path");
       const { resultCode } = this.#voicevoxBase[Core].voicevoxUserDictSaveV0_16(this[Pointer], path);
-      if (resultCode !== VoicevoxResultCode.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this.#voicevoxBase[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve();
     });
   }
@@ -684,7 +684,7 @@ interface VoicevoxInitializeOptions {
   /**
    * ハードウェアアクセラレーションモード
    */
-  accelerationMode: VoicevoxAccelerationMode;
+  accelerationMode: VoicevoxAccelerationModeV0_14;
   /**
    * CPU利用数を指定
    * 0を指定すると環境に合わせたCPUが利用される
@@ -747,7 +747,7 @@ interface VoicevoxUserDictWord {
   /**
    * 単語の種類
    */
-  wordType: VoicevoxUserDictWordType;
+  wordType: VoicevoxUserDictWordTypeV0_16;
   /**
    * 優先度
    * 0から10

@@ -63,27 +63,27 @@ T load_func(DLL &dll, const char *func_name)
 
 VoicevoxResultCode voicevox_open_jtalk_rc_new_v0_16(DLL &dll,
                                                     const char *open_jtalk_dic_dir,
-                                                    struct OpenJtalkRc **out_open_jtalk)
+                                                    struct OpenJtalkRcV0_16 **out_open_jtalk)
 {
-  return load_func<VoicevoxResultCode (*)(const char *, struct OpenJtalkRc **)>(dll, "voicevox_open_jtalk_rc_new")(open_jtalk_dic_dir, out_open_jtalk);
+  return load_func<VoicevoxResultCode (*)(const char *, struct OpenJtalkRcV0_16 **)>(dll, "voicevox_open_jtalk_rc_new")(open_jtalk_dic_dir, out_open_jtalk);
 }
 
 VoicevoxResultCode voicevox_open_jtalk_rc_use_user_dict_v0_16(DLL &dll,
-                                                              const struct OpenJtalkRc *open_jtalk,
-                                                              const struct VoicevoxUserDict *user_dict)
+                                                              const struct OpenJtalkRcV0_16 *open_jtalk,
+                                                              const struct VoicevoxUserDictV0_16 *user_dict)
 {
-  return load_func<VoicevoxResultCode (*)(const struct OpenJtalkRc *, const struct VoicevoxUserDict *)>(dll, "voicevox_open_jtalk_rc_use_user_dict")(open_jtalk, user_dict);
+  return load_func<VoicevoxResultCode (*)(const struct OpenJtalkRcV0_16 *, const struct VoicevoxUserDictV0_16 *)>(dll, "voicevox_open_jtalk_rc_use_user_dict")(open_jtalk, user_dict);
 }
 
 void voicevox_open_jtalk_rc_delete_v0_16(DLL &dll,
-                                         struct OpenJtalkRc *open_jtalk)
+                                         struct OpenJtalkRcV0_16 *open_jtalk)
 {
-  return load_func<void (*)(struct OpenJtalkRc *)>(dll, "voicevox_open_jtalk_rc_delete")(open_jtalk);
+  return load_func<void (*)(struct OpenJtalkRcV0_16 *)>(dll, "voicevox_open_jtalk_rc_delete")(open_jtalk);
 }
 
-struct VoicevoxInitializeOptions voicevox_make_default_initialize_options_v0_16(DLL &dll)
+struct VoicevoxInitializeOptionsV0_16 voicevox_make_default_initialize_options_v0_16(DLL &dll)
 {
-  return load_func<VoicevoxInitializeOptions (*)(void)>(dll, "voicevox_make_default_initialize_options")();
+  return load_func<VoicevoxInitializeOptionsV0_16 (*)(void)>(dll, "voicevox_make_default_initialize_options")();
 }
 
 const char *voicevox_get_version_v0_14(DLL &dll)
@@ -93,73 +93,73 @@ const char *voicevox_get_version_v0_14(DLL &dll)
 
 VoicevoxResultCode voicevox_voice_model_new_from_path_v0_16(DLL &dll,
                                                             const char *path,
-                                                            struct VoicevoxVoiceModel **out_model)
+                                                            struct VoicevoxVoiceModelV0_16 **out_model)
 {
-  return load_func<VoicevoxResultCode (*)(const char *, struct VoicevoxVoiceModel **)>(dll, "voicevox_voice_model_new_from_path")(path, out_model);
+  return load_func<VoicevoxResultCode (*)(const char *, struct VoicevoxVoiceModelV0_16 **)>(dll, "voicevox_voice_model_new_from_path")(path, out_model);
 }
 
-VoicevoxVoiceModelId voicevox_voice_model_id_v0_16(DLL &dll,
-                                                   const struct VoicevoxVoiceModel *model)
+VoicevoxVoiceModelIdV0_16 voicevox_voice_model_id_v0_16(DLL &dll,
+                                                        const struct VoicevoxVoiceModelV0_16 *model)
 {
-  return load_func<VoicevoxVoiceModelId (*)(const struct VoicevoxVoiceModel *)>(dll, "voicevox_voice_model_id")(model);
+  return load_func<VoicevoxVoiceModelIdV0_16 (*)(const struct VoicevoxVoiceModelV0_16 *)>(dll, "voicevox_voice_model_id")(model);
 }
 
 const char *voicevox_voice_model_get_metas_json_v0_16(DLL &dll,
-                                                      const struct VoicevoxVoiceModel *model)
+                                                      const struct VoicevoxVoiceModelV0_16 *model)
 {
-  return load_func<const char *(*)(const struct VoicevoxVoiceModel *)>(dll, "voicevox_voice_model_get_metas_json")(model);
+  return load_func<const char *(*)(const struct VoicevoxVoiceModelV0_16 *)>(dll, "voicevox_voice_model_get_metas_json")(model);
 }
 
 void voicevox_voice_model_delete_v0_16(DLL &dll,
-                                       struct VoicevoxVoiceModel *model)
+                                       struct VoicevoxVoiceModelV0_16 *model)
 {
-  return load_func<void (*)(struct VoicevoxVoiceModel *)>(dll, "voicevox_voice_model_delete")(model);
+  return load_func<void (*)(struct VoicevoxVoiceModelV0_16 *)>(dll, "voicevox_voice_model_delete")(model);
 }
 
 VoicevoxResultCode voicevox_synthesizer_new_v0_16(DLL &dll,
-                                                  const struct OpenJtalkRc *open_jtalk,
-                                                  struct VoicevoxInitializeOptions options,
-                                                  struct VoicevoxSynthesizer **out_synthesizer)
+                                                  const struct OpenJtalkRcV0_16 *open_jtalk,
+                                                  struct VoicevoxInitializeOptionsV0_16 options,
+                                                  struct VoicevoxSynthesizerV0_16 **out_synthesizer)
 {
-  return load_func<VoicevoxResultCode (*)(const struct OpenJtalkRc *, struct VoicevoxInitializeOptions, struct VoicevoxSynthesizer **)>(dll, "voicevox_synthesizer_new")(open_jtalk, options, out_synthesizer);
+  return load_func<VoicevoxResultCode (*)(const struct OpenJtalkRcV0_16 *, struct VoicevoxInitializeOptionsV0_16, struct VoicevoxSynthesizerV0_16 **)>(dll, "voicevox_synthesizer_new")(open_jtalk, options, out_synthesizer);
 }
 
 void voicevox_synthesizer_delete_v0_16(DLL &dll,
-                                       struct VoicevoxSynthesizer *synthesizer)
+                                       struct VoicevoxSynthesizerV0_16 *synthesizer)
 {
-  return load_func<void (*)(struct VoicevoxSynthesizer *)>(dll, "voicevox_synthesizer_delete")(synthesizer);
+  return load_func<void (*)(struct VoicevoxSynthesizerV0_16 *)>(dll, "voicevox_synthesizer_delete")(synthesizer);
 }
 
 VoicevoxResultCode voicevox_synthesizer_load_voice_model_v0_16(DLL &dll,
-                                                               const struct VoicevoxSynthesizer *synthesizer,
-                                                               const struct VoicevoxVoiceModel *model)
+                                                               const struct VoicevoxSynthesizerV0_16 *synthesizer,
+                                                               const struct VoicevoxVoiceModelV0_16 *model)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const struct VoicevoxVoiceModel *)>(dll, "voicevox_synthesizer_load_voice_model")(synthesizer, model);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const struct VoicevoxVoiceModelV0_16 *)>(dll, "voicevox_synthesizer_load_voice_model")(synthesizer, model);
 }
 
 VoicevoxResultCode voicevox_synthesizer_unload_voice_model_v0_16(DLL &dll,
-                                                                 const struct VoicevoxSynthesizer *synthesizer,
-                                                                 VoicevoxVoiceModelId model_id)
+                                                                 const struct VoicevoxSynthesizerV0_16 *synthesizer,
+                                                                 VoicevoxVoiceModelIdV0_16 model_id)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, VoicevoxVoiceModelId)>(dll, "voicevox_synthesizer_unload_voice_model")(synthesizer, model_id);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, VoicevoxVoiceModelIdV0_16)>(dll, "voicevox_synthesizer_unload_voice_model")(synthesizer, model_id);
 }
 bool voicevox_synthesizer_is_gpu_mode_v0_16(DLL &dll,
-                                            const struct VoicevoxSynthesizer *synthesizer)
+                                            const struct VoicevoxSynthesizerV0_16 *synthesizer)
 {
-  return load_func<bool (*)(const struct VoicevoxSynthesizer *)>(dll, "voicevox_synthesizer_is_gpu_mode")(synthesizer);
+  return load_func<bool (*)(const struct VoicevoxSynthesizerV0_16 *)>(dll, "voicevox_synthesizer_is_gpu_mode")(synthesizer);
 }
 
 bool voicevox_synthesizer_is_loaded_voice_model_v0_16(DLL &dll,
-                                                      const struct VoicevoxSynthesizer *synthesizer,
-                                                      VoicevoxVoiceModelId model_id)
+                                                      const struct VoicevoxSynthesizerV0_16 *synthesizer,
+                                                      VoicevoxVoiceModelIdV0_16 model_id)
 {
-  return load_func<bool (*)(const struct VoicevoxSynthesizer *, VoicevoxVoiceModelId)>(dll, "voicevox_synthesizer_is_loaded_voice_model")(synthesizer, model_id);
+  return load_func<bool (*)(const struct VoicevoxSynthesizerV0_16 *, VoicevoxVoiceModelIdV0_16)>(dll, "voicevox_synthesizer_is_loaded_voice_model")(synthesizer, model_id);
 }
 
 char *voicevox_synthesizer_create_metas_json_v0_16(DLL &dll,
-                                                   const struct VoicevoxSynthesizer *synthesizer)
+                                                   const struct VoicevoxSynthesizerV0_16 *synthesizer)
 {
-  return load_func<char *(*)(const struct VoicevoxSynthesizer *)>(dll, "voicevox_synthesizer_create_metas_json")(synthesizer);
+  return load_func<char *(*)(const struct VoicevoxSynthesizerV0_16 *)>(dll, "voicevox_synthesizer_create_metas_json")(synthesizer);
 }
 
 VoicevoxResultCode voicevox_create_supported_devices_json_v0_16(DLL &dll,
@@ -169,109 +169,109 @@ VoicevoxResultCode voicevox_create_supported_devices_json_v0_16(DLL &dll,
 }
 
 VoicevoxResultCode voicevox_synthesizer_create_audio_query_from_kana_v0_16(DLL &dll,
-                                                                           const struct VoicevoxSynthesizer *synthesizer,
+                                                                           const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                                            const char *kana,
-                                                                           VoicevoxStyleId style_id,
+                                                                           VoicevoxStyleIdV0_16 style_id,
                                                                            char **output_audio_query_json)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, char **)>(dll, "voicevox_synthesizer_create_audio_query_from_kana")(synthesizer, kana, style_id, output_audio_query_json);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, char **)>(dll, "voicevox_synthesizer_create_audio_query_from_kana")(synthesizer, kana, style_id, output_audio_query_json);
 }
 
 VoicevoxResultCode voicevox_synthesizer_create_audio_query_v0_16(DLL &dll,
-                                                                 const struct VoicevoxSynthesizer *synthesizer,
+                                                                 const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                                  const char *text,
-                                                                 VoicevoxStyleId style_id,
+                                                                 VoicevoxStyleIdV0_16 style_id,
                                                                  char **output_audio_query_json)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, char **)>(dll, "voicevox_synthesizer_create_audio_query")(synthesizer, text, style_id, output_audio_query_json);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, char **)>(dll, "voicevox_synthesizer_create_audio_query")(synthesizer, text, style_id, output_audio_query_json);
 }
 
 VoicevoxResultCode voicevox_synthesizer_create_accent_phrases_from_kana_v0_16(DLL &dll,
-                                                                              const struct VoicevoxSynthesizer *synthesizer,
+                                                                              const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                                               const char *kana,
-                                                                              VoicevoxStyleId style_id,
+                                                                              VoicevoxStyleIdV0_16 style_id,
                                                                               char **output_accent_phrases_json)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, char **)>(dll, "voicevox_synthesizer_create_accent_phrases_from_kana")(synthesizer, kana, style_id, output_accent_phrases_json);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, char **)>(dll, "voicevox_synthesizer_create_accent_phrases_from_kana")(synthesizer, kana, style_id, output_accent_phrases_json);
 }
 
 VoicevoxResultCode voicevox_synthesizer_create_accent_phrases_v0_16(DLL &dll,
-                                                                    const struct VoicevoxSynthesizer *synthesizer,
+                                                                    const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                                     const char *text,
-                                                                    VoicevoxStyleId style_id,
+                                                                    VoicevoxStyleIdV0_16 style_id,
                                                                     char **output_accent_phrases_json)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, char **)>(dll, "voicevox_synthesizer_create_accent_phrases")(synthesizer, text, style_id, output_accent_phrases_json);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, char **)>(dll, "voicevox_synthesizer_create_accent_phrases")(synthesizer, text, style_id, output_accent_phrases_json);
 }
 
 VoicevoxResultCode voicevox_synthesizer_replace_mora_data_v0_16(DLL &dll,
-                                                                const struct VoicevoxSynthesizer *synthesizer,
+                                                                const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                                 const char *accent_phrases_json,
-                                                                VoicevoxStyleId style_id,
+                                                                VoicevoxStyleIdV0_16 style_id,
                                                                 char **output_accent_phrases_json)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, char **)>(dll, "voicevox_synthesizer_replace_mora_data")(synthesizer, accent_phrases_json, style_id, output_accent_phrases_json);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, char **)>(dll, "voicevox_synthesizer_replace_mora_data")(synthesizer, accent_phrases_json, style_id, output_accent_phrases_json);
 }
 
 VoicevoxResultCode voicevox_synthesizer_replace_phoneme_length_v0_16(DLL &dll,
-                                                                     const struct VoicevoxSynthesizer *synthesizer,
+                                                                     const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                                      const char *accent_phrases_json,
-                                                                     VoicevoxStyleId style_id,
+                                                                     VoicevoxStyleIdV0_16 style_id,
                                                                      char **output_accent_phrases_json)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, char **)>(dll, "voicevox_synthesizer_replace_phoneme_length")(synthesizer, accent_phrases_json, style_id, output_accent_phrases_json);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, char **)>(dll, "voicevox_synthesizer_replace_phoneme_length")(synthesizer, accent_phrases_json, style_id, output_accent_phrases_json);
 }
 
 VoicevoxResultCode voicevox_synthesizer_replace_mora_pitch_v0_16(DLL &dll,
-                                                                 const struct VoicevoxSynthesizer *synthesizer,
+                                                                 const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                                  const char *accent_phrases_json,
-                                                                 VoicevoxStyleId style_id,
+                                                                 VoicevoxStyleIdV0_16 style_id,
                                                                  char **output_accent_phrases_json)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, char **)>(dll, "voicevox_synthesizer_replace_mora_pitch")(synthesizer, accent_phrases_json, style_id, output_accent_phrases_json);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, char **)>(dll, "voicevox_synthesizer_replace_mora_pitch")(synthesizer, accent_phrases_json, style_id, output_accent_phrases_json);
 }
 
-struct VoicevoxSynthesisOptions voicevox_make_default_synthesis_options_v0_14(DLL &dll)
+struct VoicevoxSynthesisOptionsV0_14 voicevox_make_default_synthesis_options_v0_14(DLL &dll)
 {
-  return load_func<VoicevoxSynthesisOptions (*)(void)>(dll, "voicevox_make_default_synthesis_options")();
+  return load_func<VoicevoxSynthesisOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_synthesis_options")();
 }
 
 VoicevoxResultCode voicevox_synthesizer_synthesis_v0_16(DLL &dll,
-                                                        const struct VoicevoxSynthesizer *synthesizer,
+                                                        const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                         const char *audio_query_json,
-                                                        VoicevoxStyleId style_id,
-                                                        struct VoicevoxSynthesisOptions options,
+                                                        VoicevoxStyleIdV0_16 style_id,
+                                                        struct VoicevoxSynthesisOptionsV0_14 options,
                                                         uintptr_t *output_wav_length,
                                                         uint8_t **output_wav)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, struct VoicevoxSynthesisOptions, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesizer_synthesis")(synthesizer, audio_query_json, style_id, options, output_wav_length, output_wav);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, struct VoicevoxSynthesisOptionsV0_14, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesizer_synthesis")(synthesizer, audio_query_json, style_id, options, output_wav_length, output_wav);
 }
 
-struct VoicevoxTtsOptions voicevox_make_default_tts_options_v0_16(DLL &dll)
+struct VoicevoxTtsOptionsV0_16 voicevox_make_default_tts_options_v0_16(DLL &dll)
 {
-  return load_func<VoicevoxTtsOptions (*)(void)>(dll, "voicevox_make_default_tts_options")();
+  return load_func<VoicevoxTtsOptionsV0_16 (*)(void)>(dll, "voicevox_make_default_tts_options")();
 }
 
 VoicevoxResultCode voicevox_synthesizer_tts_from_kana_v0_16(DLL &dll,
-                                                            const struct VoicevoxSynthesizer *synthesizer,
+                                                            const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                             const char *kana,
-                                                            VoicevoxStyleId style_id,
-                                                            struct VoicevoxTtsOptions options,
+                                                            VoicevoxStyleIdV0_16 style_id,
+                                                            struct VoicevoxTtsOptionsV0_16 options,
                                                             uintptr_t *output_wav_length,
                                                             uint8_t **output_wav)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, struct VoicevoxTtsOptions, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesizer_tts_from_kana")(synthesizer, kana, style_id, options, output_wav_length, output_wav);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, struct VoicevoxTtsOptionsV0_16, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesizer_tts_from_kana")(synthesizer, kana, style_id, options, output_wav_length, output_wav);
 }
 
 VoicevoxResultCode voicevox_synthesizer_tts_v0_16(DLL &dll,
-                                                  const struct VoicevoxSynthesizer *synthesizer,
+                                                  const struct VoicevoxSynthesizerV0_16 *synthesizer,
                                                   const char *text,
-                                                  VoicevoxStyleId style_id,
-                                                  struct VoicevoxTtsOptions options,
+                                                  VoicevoxStyleIdV0_16 style_id,
+                                                  struct VoicevoxTtsOptionsV0_16 options,
                                                   uintptr_t *output_wav_length,
                                                   uint8_t **output_wav)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizer *, const char *, VoicevoxStyleId, struct VoicevoxTtsOptions, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesizer_tts")(synthesizer, text, style_id, options, output_wav_length, output_wav);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxSynthesizerV0_16 *, const char *, VoicevoxStyleIdV0_16, struct VoicevoxTtsOptionsV0_16, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesizer_tts")(synthesizer, text, style_id, options, output_wav_length, output_wav);
 }
 
 void voicevox_json_free_v0_16(DLL &dll,
@@ -292,79 +292,79 @@ const char *voicevox_error_result_to_message_v0_12(DLL &dll,
   return load_func<const char *(*)(VoicevoxResultCode)>(dll, "voicevox_error_result_to_message")(result_code);
 }
 
-struct VoicevoxUserDictWord voicevox_user_dict_word_make_v0_16(DLL &dll,
-                                                               const char *surface,
-                                                               const char *pronunciation)
+struct VoicevoxUserDictWordV0_16 voicevox_user_dict_word_make_v0_16(DLL &dll,
+                                                                    const char *surface,
+                                                                    const char *pronunciation)
 {
-  return load_func<VoicevoxUserDictWord (*)(const char *, const char *)>(dll, "voicevox_user_dict_word_make")(surface, pronunciation);
+  return load_func<VoicevoxUserDictWordV0_16 (*)(const char *, const char *)>(dll, "voicevox_user_dict_word_make")(surface, pronunciation);
 }
 
-struct VoicevoxUserDict *voicevox_user_dict_new_v0_16(DLL &dll)
+struct VoicevoxUserDictV0_16 *voicevox_user_dict_new_v0_16(DLL &dll)
 {
-  return load_func<struct VoicevoxUserDict *(*)(void)>(dll, "voicevox_user_dict_new")();
+  return load_func<struct VoicevoxUserDictV0_16 *(*)(void)>(dll, "voicevox_user_dict_new")();
 }
 
 VoicevoxResultCode voicevox_user_dict_load_v0_16(DLL &dll,
-                                                 const struct VoicevoxUserDict *user_dict,
+                                                 const struct VoicevoxUserDictV0_16 *user_dict,
                                                  const char *dict_path)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const char *)>(dll, "voicevox_user_dict_load")(user_dict, dict_path);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDictV0_16 *, const char *)>(dll, "voicevox_user_dict_load")(user_dict, dict_path);
 }
 
 VoicevoxResultCode voicevox_user_dict_add_word_v0_16(DLL &dll,
-                                                     const struct VoicevoxUserDict *user_dict,
-                                                     const struct VoicevoxUserDictWord *word,
+                                                     const struct VoicevoxUserDictV0_16 *user_dict,
+                                                     const struct VoicevoxUserDictWordV0_16 *word,
                                                      uint8_t (*output_word_uuid)[16])
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const struct VoicevoxUserDictWord *, uint8_t(*)[16])>(dll, "voicevox_user_dict_add_word")(user_dict, word, output_word_uuid);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDictV0_16 *, const struct VoicevoxUserDictWordV0_16 *, uint8_t(*)[16])>(dll, "voicevox_user_dict_add_word")(user_dict, word, output_word_uuid);
 }
 
 VoicevoxResultCode voicevox_user_dict_update_word_v0_16(DLL &dll,
-                                                        const struct VoicevoxUserDict *user_dict,
+                                                        const struct VoicevoxUserDictV0_16 *user_dict,
                                                         const uint8_t (*word_uuid)[16],
-                                                        const struct VoicevoxUserDictWord *word)
+                                                        const struct VoicevoxUserDictWordV0_16 *word)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const uint8_t(*)[16], const struct VoicevoxUserDictWord *)>(dll, "voicevox_user_dict_update_word")(user_dict, word_uuid, word);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDictV0_16 *, const uint8_t(*)[16], const struct VoicevoxUserDictWordV0_16 *)>(dll, "voicevox_user_dict_update_word")(user_dict, word_uuid, word);
 }
 
 VoicevoxResultCode voicevox_user_dict_remove_word_v0_16(DLL &dll,
-                                                        const struct VoicevoxUserDict *user_dict,
+                                                        const struct VoicevoxUserDictV0_16 *user_dict,
                                                         const uint8_t (*word_uuid)[16])
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const uint8_t(*)[16])>(dll, "voicevox_user_dict_remove_word")(user_dict, word_uuid);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDictV0_16 *, const uint8_t(*)[16])>(dll, "voicevox_user_dict_remove_word")(user_dict, word_uuid);
 }
 
 VoicevoxResultCode voicevox_user_dict_to_json_v0_16(DLL &dll,
-                                                    const struct VoicevoxUserDict *user_dict,
+                                                    const struct VoicevoxUserDictV0_16 *user_dict,
                                                     char **output_json)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, char **)>(dll, "voicevox_user_dict_to_json")(user_dict, output_json);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDictV0_16 *, char **)>(dll, "voicevox_user_dict_to_json")(user_dict, output_json);
 }
 
 VoicevoxResultCode voicevox_user_dict_import_v0_16(DLL &dll,
-                                                   const struct VoicevoxUserDict *user_dict,
-                                                   const struct VoicevoxUserDict *other_dict)
+                                                   const struct VoicevoxUserDictV0_16 *user_dict,
+                                                   const struct VoicevoxUserDictV0_16 *other_dict)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const struct VoicevoxUserDict *)>(dll, "voicevox_user_dict_import")(user_dict, other_dict);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDictV0_16 *, const struct VoicevoxUserDictV0_16 *)>(dll, "voicevox_user_dict_import")(user_dict, other_dict);
 }
 
 VoicevoxResultCode voicevox_user_dict_save_v0_16(DLL &dll,
-                                                 const struct VoicevoxUserDict *user_dict,
+                                                 const struct VoicevoxUserDictV0_16 *user_dict,
                                                  const char *path)
 {
-  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDict *, const char *)>(dll, "voicevox_user_dict_save")(user_dict, path);
+  return load_func<VoicevoxResultCode (*)(const struct VoicevoxUserDictV0_16 *, const char *)>(dll, "voicevox_user_dict_save")(user_dict, path);
 }
 
 void voicevox_user_dict_delete_v0_16(DLL &dll,
-                                     struct VoicevoxUserDict *user_dict)
+                                     struct VoicevoxUserDictV0_16 *user_dict)
 {
-  return load_func<void (*)(struct VoicevoxUserDict *)>(dll, "voicevox_user_dict_delete")(user_dict);
+  return load_func<void (*)(struct VoicevoxUserDictV0_16 *)>(dll, "voicevox_user_dict_delete")(user_dict);
 }
 
 VoicevoxResultCode voicevox_initialize_v0_14(DLL &dll,
-                                             struct VoicevoxInitializeOptionsV14 options)
+                                             struct VoicevoxInitializeOptionsV0_14 options)
 {
-  return load_func<VoicevoxResultCode (*)(struct VoicevoxInitializeOptionsV14)>(dll, "voicevox_initialize")(options);
+  return load_func<VoicevoxResultCode (*)(struct VoicevoxInitializeOptionsV0_14)>(dll, "voicevox_initialize")(options);
 }
 
 VoicevoxResultCode voicevox_load_model_v0_14(DLL &dll,
@@ -454,32 +454,32 @@ void voicevox_decode_data_free_v0_14(DLL &dll,
   return load_func<void (*)(float *)>(dll, "voicevox_decode_data_free")(decode_data);
 }
 
-struct VoicevoxAudioQueryOptions voicevox_make_default_audio_query_options_v0_14(DLL &dll)
+struct VoicevoxAudioQueryOptionsV0_14 voicevox_make_default_audio_query_options_v0_14(DLL &dll)
 {
-  return load_func<VoicevoxAudioQueryOptions (*)(void)>(dll, "voicevox_make_default_audio_query_options")();
+  return load_func<VoicevoxAudioQueryOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_audio_query_options")();
 }
 
 VoicevoxResultCode voicevox_audio_query_v0_14(DLL &dll,
                                               const char *text,
                                               uint32_t speaker_id,
-                                              struct VoicevoxAudioQueryOptions options,
+                                              struct VoicevoxAudioQueryOptionsV0_14 options,
                                               char **output_audio_query_json)
 {
-  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxAudioQueryOptions, char **)>(dll, "voicevox_audio_query")(text, speaker_id, options, output_audio_query_json);
+  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxAudioQueryOptionsV0_14, char **)>(dll, "voicevox_audio_query")(text, speaker_id, options, output_audio_query_json);
 }
 
-struct VoicevoxAccentPhrasesOptions voicevox_make_default_accent_phrases_options_v0_15(DLL &dll)
+struct VoicevoxAccentPhrasesOptionsV0_15 voicevox_make_default_accent_phrases_options_v0_15(DLL &dll)
 {
-  return load_func<VoicevoxAccentPhrasesOptions (*)()>(dll, "voicevox_make_default_accent_phrases_options")();
+  return load_func<VoicevoxAccentPhrasesOptionsV0_15 (*)()>(dll, "voicevox_make_default_accent_phrases_options")();
 }
 
 VoicevoxResultCode voicevox_accent_phrases_v0_15(DLL &dll,
                                                  const char *text,
                                                  uint32_t speaker_id,
-                                                 struct VoicevoxAccentPhrasesOptions options,
+                                                 struct VoicevoxAccentPhrasesOptionsV0_15 options,
                                                  char **output_accent_phrases_json)
 {
-  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, VoicevoxAccentPhrasesOptions, char **)>(dll, "voicevox_accent_phrases")(text, speaker_id, options, output_accent_phrases_json);
+  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, VoicevoxAccentPhrasesOptionsV0_15, char **)>(dll, "voicevox_accent_phrases")(text, speaker_id, options, output_accent_phrases_json);
 }
 
 VoicevoxResultCode voicevox_mora_length_v0_15(DLL &dll,
@@ -515,21 +515,21 @@ void voicevox_accent_phrases_json_free_v0_15(DLL &dll,
 VoicevoxResultCode voicevox_synthesis_v0_14(DLL &dll,
                                             const char *audio_query_json,
                                             uint32_t speaker_id,
-                                            struct VoicevoxSynthesisOptions options,
+                                            struct VoicevoxSynthesisOptionsV0_14 options,
                                             uintptr_t *output_wav_length,
                                             uint8_t **output_wav)
 {
-  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxSynthesisOptions, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesis")(audio_query_json, speaker_id, options, output_wav_length, output_wav);
+  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxSynthesisOptionsV0_14, uintptr_t *, uint8_t **)>(dll, "voicevox_synthesis")(audio_query_json, speaker_id, options, output_wav_length, output_wav);
 }
 
 VoicevoxResultCode voicevox_tts_v0_14(DLL &dll,
                                       const char *text,
                                       uint32_t speaker_id,
-                                      struct VoicevoxTtsOptionsV14 options,
+                                      struct VoicevoxTtsOptionsV0_14 options,
                                       uintptr_t *output_wav_length,
                                       uint8_t **output_wav)
 {
-  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxTtsOptionsV14, uintptr_t *, uint8_t **)>(dll, "voicevox_tts")(text, speaker_id, options, output_wav_length, output_wav);
+  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxTtsOptionsV0_14, uintptr_t *, uint8_t **)>(dll, "voicevox_tts")(text, speaker_id, options, output_wav_length, output_wav);
 }
 
 void voicevox_audio_query_json_free_v0_14(DLL &dll,
@@ -538,14 +538,14 @@ void voicevox_audio_query_json_free_v0_14(DLL &dll,
   return load_func<void (*)(char *)>(dll, "voicevox_audio_query_json_free")(audio_query_json);
 }
 
-struct VoicevoxInitializeOptionsV14 voicevox_make_default_initialize_options_v14(DLL &dll)
+struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v14(DLL &dll)
 {
-  return load_func<VoicevoxInitializeOptionsV14 (*)(void)>(dll, "voicevox_make_default_initialize_options")();
+  return load_func<VoicevoxInitializeOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_initialize_options")();
 }
 
-struct VoicevoxTtsOptionsV14 voicevox_make_default_tts_options_v14(DLL &dll)
+struct VoicevoxTtsOptionsV0_14 voicevox_make_default_tts_options_v14(DLL &dll)
 {
-  return load_func<VoicevoxTtsOptionsV14 (*)(void)>(dll, "voicevox_make_default_tts_options")();
+  return load_func<VoicevoxTtsOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_tts_options")();
 }
 
 bool initialize_v0_12(DLL &dll,
