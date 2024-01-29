@@ -8,6 +8,10 @@ export class VoicevoxJsError extends Error {}
  */
 export class VoicevoxError extends Error {}
 
+/**
+ * 各バージョンのVoicevoxクラスからvoicevox_coreを利用する
+ * @see voicevox_core.d.ts
+ */
 export const Core = Symbol("Core");
 
 /**
