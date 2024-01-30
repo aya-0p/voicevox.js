@@ -84,9 +84,9 @@ const char *voicevox_error_result_to_message_v0_12(DLL &dll,
 }
 
 VoicevoxResultCode voicevox_initialize_v0_14(DLL &dll,
-                                             struct VoicevoxInitializeOptionsV0_14 options)
+                                             struct VoicevoxInitializeOptionsV14 options)
 {
-  return load_func<VoicevoxResultCode (*)(struct VoicevoxInitializeOptionsV0_14)>(dll, "voicevox_initialize")(options);
+  return load_func<VoicevoxResultCode (*)(struct VoicevoxInitializeOptionsV14)>(dll, "voicevox_initialize")(options);
 }
 
 VoicevoxResultCode voicevox_load_model_v0_14(DLL &dll,
@@ -203,11 +203,11 @@ VoicevoxResultCode voicevox_synthesis_v0_14(DLL &dll,
 VoicevoxResultCode voicevox_tts_v0_14(DLL &dll,
                                       const char *text,
                                       uint32_t speaker_id,
-                                      struct VoicevoxTtsOptionsV0_14 options,
+                                      struct VoicevoxTtsOptionsV14 options,
                                       uintptr_t *output_wav_length,
                                       uint8_t **output_wav)
 {
-  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxTtsOptionsV0_14, uintptr_t *, uint8_t **)>(dll, "voicevox_tts")(text, speaker_id, options, output_wav_length, output_wav);
+  return load_func<VoicevoxResultCode (*)(const char *, uint32_t, struct VoicevoxTtsOptionsV14, uintptr_t *, uint8_t **)>(dll, "voicevox_tts")(text, speaker_id, options, output_wav_length, output_wav);
 }
 
 void voicevox_audio_query_json_free_v0_14(DLL &dll,
@@ -216,14 +216,14 @@ void voicevox_audio_query_json_free_v0_14(DLL &dll,
   return load_func<void (*)(char *)>(dll, "voicevox_audio_query_json_free")(audio_query_json);
 }
 
-struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v0_14(DLL &dll)
+struct VoicevoxInitializeOptionsV14 voicevox_make_default_initialize_options_v14(DLL &dll)
 {
-  return load_func<VoicevoxInitializeOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_initialize_options")();
+  return load_func<VoicevoxInitializeOptionsV14 (*)(void)>(dll, "voicevox_make_default_initialize_options")();
 }
 
-struct VoicevoxTtsOptionsV0_14 voicevox_make_default_tts_options_v0_14(DLL &dll)
+struct VoicevoxTtsOptionsV14 voicevox_make_default_tts_options_v14(DLL &dll)
 {
-  return load_func<VoicevoxTtsOptionsV0_14 (*)(void)>(dll, "voicevox_make_default_tts_options")();
+  return load_func<VoicevoxTtsOptionsV14 (*)(void)>(dll, "voicevox_make_default_tts_options")();
 }
 
 bool initialize_v0_12(DLL &dll,

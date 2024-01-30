@@ -97,7 +97,7 @@ enum VoicevoxResultCode : int32_t
 /**
  * 初期化オプション
  */
-typedef struct VoicevoxInitializeOptionsV0_14
+typedef struct VoicevoxInitializeOptionsV14
 {
   /**
    * ハードウェアアクセラレーションモード
@@ -116,7 +116,7 @@ typedef struct VoicevoxInitializeOptionsV0_14
    * open_jtalkの辞書ディレクトリ
    */
   const char *open_jtalk_dict_dir;
-} VoicevoxInitializeOptionsV0_14;
+} VoicevoxInitializeOptionsV14;
 
 /**
  * Audio query のオプション
@@ -143,7 +143,7 @@ typedef struct VoicevoxSynthesisOptions
 /**
  * テキスト音声合成オプション
  */
-typedef struct VoicevoxTtsOptionsV0_14
+typedef struct VoicevoxTtsOptionsV14
 {
   /**
    * aquestalk形式のkanaとしてテキストを解釈する
@@ -153,7 +153,7 @@ typedef struct VoicevoxTtsOptionsV0_14
    * 疑問文の調整を有効にする
    */
   bool enable_interrogative_upspeak;
-} VoicevoxTtsOptionsV0_14;
+} VoicevoxTtsOptionsV14;
 
 /**
  * voicevoxのバージョンを取得する。
@@ -212,7 +212,7 @@ const char *voicevox_error_result_to_message_v0_12(DLL &dll,
  * デフォルトの初期化オプションを生成する
  * @return デフォルト値が設定された初期化オプション
  */
-struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v0_14(DLL &dll);
+struct VoicevoxInitializeOptionsV14 voicevox_make_default_initialize_options_v14(DLL &dll);
 
 /**
  * 初期化する
@@ -220,7 +220,7 @@ struct VoicevoxInitializeOptionsV0_14 voicevox_make_default_initialize_options_v
  * @return 結果コード #VoicevoxResultCode
  */
 VoicevoxResultCode voicevox_initialize_v0_14(DLL &dll,
-                                             struct VoicevoxInitializeOptionsV0_14 options);
+                                             struct VoicevoxInitializeOptionsV14 options);
 
 /**
  * モデルを読み込む
@@ -421,7 +421,7 @@ VoicevoxResultCode voicevox_synthesis_v0_14(DLL &dll,
  * デフォルトのテキスト音声合成オプションを生成する
  * @return テキスト音声合成オプション
  */
-struct VoicevoxTtsOptionsV0_14 voicevox_make_default_tts_options_v0_14(DLL &dll);
+struct VoicevoxTtsOptionsV14 voicevox_make_default_tts_options_v14(DLL &dll);
 
 /**
  * テキスト音声合成を実行する
@@ -439,7 +439,7 @@ struct VoicevoxTtsOptionsV0_14 voicevox_make_default_tts_options_v0_14(DLL &dll)
 VoicevoxResultCode voicevox_tts_v0_14(DLL &dll,
                                       const char *text,
                                       uint32_t speaker_id,
-                                      struct VoicevoxTtsOptionsV0_14 options,
+                                      struct VoicevoxTtsOptionsV14 options,
                                       uintptr_t *output_wav_length,
                                       uint8_t **output_wav);
 

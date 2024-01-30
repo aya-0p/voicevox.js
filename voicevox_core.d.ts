@@ -53,7 +53,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.xで利用できます
    */
-  voicevoxInitializeV0_14(accelerationMode: VoicevoxAccelerationMode, cpuNumThreads: number, loadAllModels: boolean, openJtalkDictDir: string): ResultCodeV0_14;
+  voicevoxInitializeV0_14(accelerationMode: VoicevoxAccelerationMode, cpuNumThreads: number, loadAllModels: boolean, openJtalkDictDir: string): ResultCodeV14;
 
   /**
    * モデルを読み込む
@@ -62,7 +62,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.xで利用できます
    */
-  voicevoxLoadModelV0_14(speakerId: number): ResultCodeV0_14;
+  voicevoxLoadModelV0_14(speakerId: number): ResultCodeV14;
 
   /**
    * ハードウェアアクセラレーションがGPUモードか判定する
@@ -111,7 +111,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.xで利用できます
    */
-  voicevoxPredictDurationV0_14(phoneme: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV0_14;
+  voicevoxPredictDurationV0_14(phoneme: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV14;
 
   /**
    * モーラごとのF0を推論する
@@ -129,7 +129,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.xで利用できます
    */
-  voicevoxPredictIntonationV0_14(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV0_14;
+  voicevoxPredictIntonationV0_14(vowelPhoneme: Array<bigint>, consonantPhoneme: Array<bigint>, startAccent: Array<bigint>, endAccent: Array<bigint>, startAccentPhrase: Array<bigint>, endAccentPhrase: Array<bigint>, speakerId: number): Result<Array<number>> & ResultCodeV14;
 
   /**
    * decodeを実行する
@@ -140,7 +140,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.xで利用できます
    */
-  voicevoxDecodeV0_14(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & ResultCodeV0_14;
+  voicevoxDecodeV0_14(f0: Array<number>, phoneme: Array<number>, speakerId: number): Result<Array<number>> & ResultCodeV14;
 
   /**
    * AudioQuery を実行する
@@ -151,7 +151,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.xで利用できます
    */
-  voicevoxAudioQueryV0_14(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV0_14;
+  voicevoxAudioQueryV0_14(text: string, speakerId: number, kana: boolean): Result<string> & ResultCodeV14;
 
   /**
    * AudioQuery から音声合成する
@@ -162,7 +162,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.xで利用できます
    */
-  voicevoxSynthesisV0_14(audioQueryJson: string, speakerId: number, enableInterrogativeUpspeak: boolean): Result<Buffer> & ResultCodeV0_14;
+  voicevoxSynthesisV0_14(audioQueryJson: string, speakerId: number, enableInterrogativeUpspeak: boolean): Result<Buffer> & ResultCodeV14;
 
   /**
    * テキスト音声合成を実行する
@@ -174,7 +174,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.14.xで利用できます
    */
-  voicevoxTtsV0_14(text: string, speakerId: number, enableInterrogativeUpspeak: boolean, kana: boolean): Result<Buffer> & ResultCodeV0_14;
+  voicevoxTtsV0_14(text: string, speakerId: number, enableInterrogativeUpspeak: boolean, kana: boolean): Result<Buffer> & ResultCodeV14;
 
   /**
    * 初期化する
@@ -290,7 +290,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxLoadOpenjtalkDictV0_12(dictPath: string): ResultCodeV0_12;
+  voicevoxLoadOpenjtalkDictV0_12(dictPath: string): ResultCodeV12;
 
   /**
    * text to spearchを実行する
@@ -300,7 +300,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV0_12;
+  voicevoxTtsV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
 
   /**
    * text to spearchをAquesTalkライクな記法で実行する
@@ -310,7 +310,7 @@ export declare class VoicevoxCore {
    *
    * この関数はv0.12.x, v0.13.xで利用できます
    */
-  voicevoxTtsFromKanaV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV0_12;
+  voicevoxTtsFromKanaV0_12(text: string, speakerId: number): Result<Buffer> & ResultCodeV12;
 
   /**
    * 初期化する
@@ -502,11 +502,104 @@ export declare enum VoicevoxAccelerationMode {
   VOICEVOX_ACCELERATION_MODE_GPU = 2,
 }
 
-interface ResultCodeV0_14 {
-  resultCode: VoicevoxResultCodeV0_14;
+/**
+ * ユーザー辞書の単語の種類。
+ */
+export declare enum VoicevoxUserDictWordType {
+  /**
+   * 固有名詞。
+   */
+  VOICEVOX_USER_DICT_WORD_TYPE_PROPER_NOUN = 0,
+  /**
+   * 一般名詞。
+   */
+  VOICEVOX_USER_DICT_WORD_TYPE_COMMON_NOUN = 1,
+  /**
+   * 動詞。
+   */
+  VOICEVOX_USER_DICT_WORD_TYPE_VERB = 2,
+  /**
+   * 形容詞。
+   */
+  VOICEVOX_USER_DICT_WORD_TYPE_ADJECTIVE = 3,
+  /**
+   * 接尾辞。
+   */
+  VOICEVOX_USER_DICT_WORD_TYPE_SUFFIX = 4,
 }
 
-export declare enum VoicevoxResultCodeV0_14 {
+interface ResultCodeV15 {
+  resultCode: VoicevoxResultCodeV15;
+}
+
+export declare enum VoicevoxResultCodeV15 {
+  /**
+   * 成功
+   */
+  VOICEVOX_RESULT_OK = 0,
+  /**
+   * open_jtalk辞書ファイルが読み込まれていない
+   */
+  VOICEVOX_RESULT_NOT_LOADED_OPENJTALK_DICT_ERROR = 1,
+  /**
+   * modelの読み込みに失敗した
+   */
+  VOICEVOX_RESULT_LOAD_MODEL_ERROR = 2,
+  /**
+   * サポートされているデバイス情報取得に失敗した
+   */
+  VOICEVOX_RESULT_GET_SUPPORTED_DEVICES_ERROR = 3,
+  /**
+   * GPUモードがサポートされていない
+   */
+  VOICEVOX_RESULT_GPU_SUPPORT_ERROR = 4,
+  /**
+   * メタ情報読み込みに失敗した
+   */
+  VOICEVOX_RESULT_LOAD_METAS_ERROR = 5,
+  /**
+   * ステータスが初期化されていない
+   */
+  VOICEVOX_RESULT_UNINITIALIZED_STATUS_ERROR = 6,
+  /**
+   * 無効なspeaker_idが指定された
+   */
+  VOICEVOX_RESULT_INVALID_SPEAKER_ID_ERROR = 7,
+  /**
+   * 無効なmodel_indexが指定された
+   */
+  VOICEVOX_RESULT_INVALID_MODEL_INDEX_ERROR = 8,
+  /**
+   * 推論に失敗した
+   */
+  VOICEVOX_RESULT_INFERENCE_ERROR = 9,
+  /**
+   * コンテキストラベル出力に失敗した
+   */
+  VOICEVOX_RESULT_EXTRACT_FULL_CONTEXT_LABEL_ERROR = 10,
+  /**
+   * 無効なutf8文字列が入力された
+   */
+  VOICEVOX_RESULT_INVALID_UTF8_INPUT_ERROR = 11,
+  /**
+   * aquestalk形式のテキストの解析に失敗した
+   */
+  VOICEVOX_RESULT_PARSE_KANA_ERROR = 12,
+  /**
+   * 無効なAudioQuery
+   */
+  VOICEVOX_RESULT_INVALID_AUDIO_QUERY_ERROR = 13,
+  /**
+   * 無効なAccentPhrase
+   */
+  VOICEVOX_RESULT_INVALID_ACCENT_PHRASE_ERROR = 14,
+}
+
+interface ResultCodeV14 {
+  resultCode: VoicevoxResultCodeV14;
+}
+
+export declare enum VoicevoxResultCodeV14 {
   /**
    * 成功
    */
@@ -565,11 +658,11 @@ export declare enum VoicevoxResultCodeV0_14 {
   VOICEVOX_RESULT_INVALID_AUDIO_QUERY_ERROR = 13,
 }
 
-interface ResultCodeV0_12 {
-  resultCode: VoicevoxResultCodeV0_12;
+interface ResultCodeV12 {
+  resultCode: VoicevoxResultCodeV12;
 }
 
-export declare enum VoicevoxResultCodeV0_12 {
+export declare enum VoicevoxResultCodeV12 {
   /**
    * 成功
    */
