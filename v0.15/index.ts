@@ -1,9 +1,10 @@
-import { VoicevoxAccelerationModeV0_14, VoicevoxCore, VoicevoxResultCodeV0_14 } from "../voicevox_core";
-import { Core, VoicevoxAudioQueryJson, VoicevoxError, VoicevoxMetaJson, VoicevoxSupportedDevicesJson, checkValidArray, checkValidNumber, checkValidOption, checkValidString, checkVoicevoxAudioQueryJson } from "../util";
+import { VoicevoxAccelerationModeV0_14, VoicevoxCore, VoicevoxResultCodeV0_14, VoicevoxResultCodeV0_15 } from "../voicevox_core";
+import { Core, VoicevoxAccentPhraseJson, VoicevoxAudioQueryJson, VoicevoxError, VoicevoxMetaJson, VoicevoxSupportedDevicesJson, checkValidArray, checkValidNumber, checkValidOption, checkValidString, checkVoicevoxAccentPhraseJson, checkVoicevoxAudioQueryJson } from "../util";
 
 /**
  * voicevox_coreを利用してVOICEVOXを使う
- * @version 0.14.x
+ * @description このバージョンは正式版ではありません
+ * @version 0.15.x
  */
 export class Voicevox {
   [Core]: VoicevoxCore;
@@ -189,6 +190,72 @@ export class Voicevox {
   }
 
   /**
+   * `accent_phrases` を実行する
+   * @param {string} text テキスト
+   * @param {number} speakerId 話者ID
+   * @param {VoicevoxAccentPhrasesOptions} options `accentPhrases`のオプション
+   * @return {Promise<Array<VoicevoxAccentPhraseJson>>} アクセント句の情報の配列
+   */
+  voicevoxAccentPhrases(text: string, speakerId: number, options: VoicevoxAccentPhrasesOptions): Promise<Array<VoicevoxAccentPhraseJson>> {
+    return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
+      checkValidString(text, "text");
+      checkValidNumber(speakerId, "speakerId", true);
+      checkVoicevoxAccentPhrasesOptions(options);
+      const { result, resultCode } = this[Core].voicevoxAccentPhrasesV0_15(text, speakerId, options.kana);
+      if (resultCode !== VoicevoxResultCodeV0_15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      resolve(JSON.parse(result));
+    });
+  }
+
+  /**
+   * アクセント句の音素長を変更する
+   * @param {Array<VoicevoxAccentPhraseJson>} accentPhrasesJson アクセント句の配列
+   * @param speakerId 話者ID
+   * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音素長が変更されたアクセント句の情報の配列
+   */
+  voicevoxMoraLength(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+    return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
+      checkVoicevoxAccentPhraseJson(accentPhrases);
+      checkValidNumber(speakerId, "speakerId", true);
+      const { result, resultCode } = this[Core].voicevoxMoraLengthV0_15(JSON.stringify(accentPhrases), speakerId);
+      if (resultCode !== VoicevoxResultCodeV0_15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      resolve(JSON.parse(result));
+    });
+  }
+
+  /**
+   * アクセント句の音高を変更する
+   * @param {Array<VoicevoxAccentPhraseJson>} accentPhrasesJson アクセント句の配列
+   * @param speakerId 話者ID
+   * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音高が変更されたアクセント句の情報の配列
+   */
+  voicevoxMoraPitch(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+    return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
+      checkVoicevoxAccentPhraseJson(accentPhrases);
+      checkValidNumber(speakerId, "speakerId", true);
+      const { result, resultCode } = this[Core].voicevoxMoraPitchV0_15(JSON.stringify(accentPhrases), speakerId);
+      if (resultCode !== VoicevoxResultCodeV0_15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      resolve(JSON.parse(result));
+    });
+  }
+
+  /**
+   * アクセント句の音高・音素長を変更する
+   * @param {Array<VoicevoxAccentPhraseJson>} accentPhrasesJson アクセント句の配列
+   * @param speakerId 話者ID
+   * @return {Promise<Array<VoicevoxAccentPhraseJson>>} 音高・音素長が変更されたアクセント句の情報の配列
+   */
+  voicevoxMoraData(accentPhrases: Array<VoicevoxAccentPhraseJson>, speakerId: number): Promise<Array<VoicevoxAccentPhraseJson>> {
+    return new Promise<Array<VoicevoxAccentPhraseJson>>((resolve) => {
+      checkVoicevoxAccentPhraseJson(accentPhrases);
+      checkValidNumber(speakerId, "speakerId", true);
+      const { result, resultCode } = this[Core].voicevoxMoraDataV0_15(JSON.stringify(accentPhrases), speakerId);
+      if (resultCode !== VoicevoxResultCodeV0_15.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      resolve(JSON.parse(result));
+    });
+  }
+
+  /**
    * AudioQuery から音声合成する
    * @param {VoicevoxAudioQueryJson} audioQueryJson AudioQuery
    * @param {number} speakerId 話者ID
@@ -222,6 +289,16 @@ export class Voicevox {
       if (resultCode !== VoicevoxResultCodeV0_14.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(result);
     });
+  }
+
+  /**
+   * デフォルトの `accent_phrases` のオプションを生成する
+   * @return デフォルト値が設定された `accent_phrases` のオプション
+   */
+  static voicevoxMakeDefaultAccentPhrasesOptions(): VoicevoxAccentPhrasesOptions {
+    return {
+      kana: false,
+    };
   }
 
   /**
@@ -344,4 +421,15 @@ function checkVoicevoxTtsOptions(obj: VoicevoxTtsOptions) {
     ["enableInterrogativeUpspeak", "boolean"],
     ["kana", "boolean"],
   ]);
+}
+
+interface VoicevoxAccentPhrasesOptions {
+  /**
+   * aquestalk形式のkanaとしてテキストを解釈する
+   */
+  kana: boolean;
+}
+
+function checkVoicevoxAccentPhrasesOptions(obj: VoicevoxAccentPhrasesOptions) {
+  checkValidOption(obj, "VoicevoxAccentPhrasesOptions", [["kana", "boolean"]]);
 }
