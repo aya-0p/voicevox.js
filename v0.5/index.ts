@@ -41,7 +41,7 @@ export class Voicevox {
    * 話者名や話者IDのリストを取得する
    * @returns {Promise<VoicevoxMetaJson>} メタ情報
    */
-  metas(): Promise<VoicevoxMetaJson> {
+  metasV0_5(): Promise<VoicevoxMetaJson> {
     return new Promise<VoicevoxMetaJson>((resolve) => {
       const { result } = this[Core].metasV0_5();
       resolve(JSON.parse(result));
