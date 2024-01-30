@@ -1,4 +1,4 @@
-import { VoicevoxAccelerationModeV0_14, VoicevoxCore, VoicevoxResultCodeV0_14 } from "../voicevox_core";
+import { VoicevoxAccelerationMode, VoicevoxCore, VoicevoxResultCodeV0_14 } from "../voicevox_core";
 import { Core, VoicevoxAudioQueryJson, VoicevoxError, VoicevoxMetaJson, VoicevoxSupportedDevicesJson, checkValidArray, checkValidNumber, checkValidOption, checkValidString, checkVoicevoxAudioQueryJson } from "../util";
 
 /**
@@ -231,7 +231,7 @@ export class Voicevox {
   static voicevoxMakeDefaultInitializeOptions(): VoicevoxInitializeOptions {
     return {
       cpuNumThreads: 0,
-      accelerationMode: VoicevoxAccelerationModeV0_14.VOICEVOX_ACCELERATION_MODE_AUTO,
+      accelerationMode: VoicevoxAccelerationMode.VOICEVOX_ACCELERATION_MODE_AUTO,
       loadAllModels: true,
       openJtalkDictDir: "",
     };
@@ -276,7 +276,7 @@ interface VoicevoxInitializeOptions {
   /**
    * ハードウェアアクセラレーションモード
    */
-  accelerationMode: VoicevoxAccelerationModeV0_14;
+  accelerationMode: VoicevoxAccelerationMode;
   /**
    * CPU利用数を指定 0を指定すると環境に合わせたCPUが利用される
    */
