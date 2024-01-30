@@ -43,7 +43,7 @@ export class Voicevox {
    * 話者名や話者IDのリストを取得する
    * @returns {Promise<VoicevoxMetaJson>} メタ情報
    */
-  metasV0_5(): Promise<VoicevoxMetaJson> {
+  metas(): Promise<VoicevoxMetaJson> {
     return new Promise<VoicevoxMetaJson>((resolve) => {
       const { result } = this[Core].metasV0_5();
       resolve(JSON.parse(result));
@@ -57,7 +57,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} 音素ごとの長さ
    */
-  yukarinSForwardV0_8(phonemeList: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  yukarinSForward(phonemeList: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(phonemeList, "phonemeList", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
@@ -79,7 +79,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} モーラごとの音高
    */
-  yukarinSaForwardV0_8(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  yukarinSaForward(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(vowelPhonemeList, "vowelPhonemeList", "bigint");
       checkValidArray(consonantPhonemeList, "consonantPhonemeList", "bigint");
@@ -101,7 +101,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} 音声波形
    */
-  decodeForwardV0_8(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
+  decodeForward(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(f0, "f0", "number", false);
       checkValidArray(phoneme, "phoneme", "number", false);

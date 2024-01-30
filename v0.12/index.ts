@@ -29,7 +29,7 @@ export class Voicevox {
    * 何度も実行可能。useGpuを変更して実行しなおすことも可能。
    * 最後に実行したuseGpuに従って他の関数が実行される。
    */
-  initializeV0_12(useGpu: boolean, cpuNumThreads: number, loadAllModels: boolean): Promise<void> {
+  initialize(useGpu: boolean, cpuNumThreads: number, loadAllModels: boolean): Promise<void> {
     return new Promise<void>((resolve) => {
       checkValidBoolean(useGpu, "useGpu");
       checkValidNumber(cpuNumThreads, "cpuNumThreads", true);
@@ -46,7 +46,7 @@ export class Voicevox {
    * @returns {Promise<void>}
    * 必ずしも話者とモデルが1:1対応しているわけではない。
    */
-  loadModelV0_12(speakerId: number): Promise<void> {
+  loadModel(speakerId: number): Promise<void> {
     return new Promise<void>((resolve) => {
       checkValidNumber(speakerId, "speakerId", true);
       const { result } = this[Core].loadModelV0_12(speakerId);
@@ -60,7 +60,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<boolean>}
    */
-  isModelLoadedV0_12(speakerId: number): Promise<boolean> {
+  isModelLoaded(speakerId: number): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       checkValidNumber(speakerId, "speakerId", true);
       const { result } = this[Core].isModelLoadedV0_12(speakerId);
@@ -75,7 +75,7 @@ export class Voicevox {
    * CUDAを利用している場合これを実行しておかないと例外が起こることがある。
    * @returns {Promise<void>}
    */
-  finalizeV0_10(): Promise<void> {
+  finalize(): Promise<void> {
     return new Promise<void>((resolve) => {
       this[Core].finalizeV0_10();
       resolve();
@@ -87,7 +87,7 @@ export class Voicevox {
    * 話者名や話者IDのリストを取得する
    * @returns {Promise<VoicevoxMetaJson>} メタ情報
    */
-  metasV0_5(): Promise<VoicevoxMetaJson> {
+  metas(): Promise<VoicevoxMetaJson> {
     return new Promise<VoicevoxMetaJson>((resolve) => {
       const { result } = this[Core].metasV0_5();
       resolve(JSON.parse(result));
@@ -99,7 +99,7 @@ export class Voicevox {
    * cpu, cudaのうち、使用可能なデバイス情報を取得する
    * @returns {Promise<VoicevoxSupportedDevicesJson>} 各デバイスが使用可能かどうか
    */
-  supportedDevicesV0_10(): Promise<VoicevoxSupportedDevicesJson> {
+  supportedDevices(): Promise<VoicevoxSupportedDevicesJson> {
     return new Promise<VoicevoxSupportedDevicesJson>((resolve) => {
       const { result } = this[Core].supportedDevicesV0_10();
       resolve(JSON.parse(result));
@@ -113,7 +113,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} 音素ごとの長さ
    */
-  yukarinSForwardV0_8(phonemeList: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  yukarinSForward(phonemeList: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(phonemeList, "phonemeList", "bigint");
       checkValidNumber(speakerId, "speakerId", true);
@@ -135,7 +135,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} モーラごとの音高
    */
-  yukarinSaForwardV0_8(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Promise<Array<number>> {
+  yukarinSaForward(vowelPhonemeList: Array<bigint>, consonantPhonemeList: Array<bigint>, startAccentList: Array<bigint>, endAccentList: Array<bigint>, startAccentPhraseList: Array<bigint>, endAccentPhraseList: Array<bigint>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(vowelPhonemeList, "vowelPhonemeList", "bigint");
       checkValidArray(consonantPhonemeList, "consonantPhonemeList", "bigint");
@@ -157,7 +157,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Array<number>>} 音声波形
    */
-  decodeForwardV0_8(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
+  decodeForward(f0: Array<number>, phoneme: Array<number>, speakerId: number): Promise<Array<number>> {
     return new Promise<Array<number>>((resolve) => {
       checkValidArray(f0, "f0", "number", false);
       checkValidArray(phoneme, "phoneme", "number", false);
@@ -173,7 +173,7 @@ export class Voicevox {
    * @param {string} dictPath
    * @returns {Promise<void>}
    */
-  voicevoxLoadOpenjtalkDictV0_12(dictPath: string): Promise<void> {
+  voicevoxLoadOpenjtalkDict(dictPath: string): Promise<void> {
     return new Promise<void>((resolve) => {
       const { resultCode } = this[Core].voicevoxLoadOpenjtalkDictV0_12(dictPath);
       if (resultCode !== VoicevoxResultCodeV12.VOICEVOX_RESULT_SUCCEED) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
@@ -187,7 +187,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Buffer>} 音声データ
    */
-  voicevoxTtsV0_14(text: string, speakerId: number): Promise<Buffer> {
+  voicevoxTts(text: string, speakerId: number): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
@@ -203,7 +203,7 @@ export class Voicevox {
    * @param {number} speakerId 話者番号
    * @returns {Promise<Buffer>} 音声データ
    */
-  voicevoxTtsFromKanaV0_12(text: string, speakerId: number): Promise<Buffer> {
+  voicevoxTtsFromKana(text: string, speakerId: number): Promise<Buffer> {
     return new Promise<Buffer>((resolve) => {
       checkValidString(text, "text");
       checkValidNumber(speakerId, "speakerId", true);
