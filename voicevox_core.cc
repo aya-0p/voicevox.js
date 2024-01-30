@@ -39,7 +39,7 @@ DLL dll_load(const char *path)
 {
   DLL dll = dlopen(path, RTLD_NOW);
   if (dll == NULL)
-    Napi::Error::Fatal(path, "is not dll");
+    Napi::Error::Fatal("", dlerror());
   return dll;
 }
 
@@ -53,7 +53,7 @@ template <typename T>
 T load_func(DLL &dll, const char *func_name)
 {
   if (dll == NULL)
-    Napi::Error::Fatal("", "dll not loaded");
+    Napi::Error::Fatal("", "dll is not loaded");
   void *fn = dlsym(dll, func_name);
   if (fn == NULL)
     Napi::Error::Fatal(func_name, "not found, did you load voicevox_core?");

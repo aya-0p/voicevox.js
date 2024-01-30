@@ -32,10 +32,13 @@ export class Voicevox {
   #userDictCounter: number = 0;
   /**
    * @param path libvoicevox_core.so, libvoicevox_core.solib, voicevox_core.dllを指すパス
+   * @param otherDll その他利用にあたって必要なdllファイル(onnxruntimeなど)があるディレクトリ(フォルダ)へのパス(Windowsのみ)
+   * @see voicevox_core.d.ts
    */
-  constructor(path: string) {
+  constructor(path: string, otherDll?: string) {
     checkValidString(path, "path");
-    this[Core] = new VoicevoxCore(path);
+    if (otherDll != null) checkValidString(otherDll, "otherDll");
+    this[Core] = new VoicevoxCore(path, otherDll);
   }
 
   /**

@@ -3,6 +3,15 @@
 #include "voicevox_core.h"
 #include <map>
 
+#ifdef _WIN32
+#include <windows.h>
+void load(char *path)
+{
+	SetDllDirectoryA(path);
+	return;
+}
+#endif
+
 using namespace Napi;
 
 const char *load_string(const Napi::CallbackInfo &info, size_t index)
@@ -129,6 +138,10 @@ Voicevox::Voicevox(const Napi::CallbackInfo &info)
 		: Napi::ObjectWrap<Voicevox>(info)
 {
 	const char *voicevox_core = load_string(info, 0);
+#ifdef _WIN32
+	const char *other_dll = load_string(info, 1);
+	load(other_dll);
+#endif
 	dll = dll_load(voicevox_core);
 }
 

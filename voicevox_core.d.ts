@@ -11,7 +11,37 @@
  * これらの要件を満たさない場合即座にプログラムが終了する可能性がある
  */
 export declare class VoicevoxCore {
-  constructor(path: string);
+  /**
+   * voicevox_coreを読み込む
+   * @param path voicevox_coreのパス
+   * @param otherDll その他利用にあたって必要なdllファイルがあるディレクトリ(フォルダ)へのパス(Windowsのみ)
+   * 
+   * Windows以外の場合、利用にあたって必要なso/dylibファイルは読み込まれる場所に置いてください。`otherDll`は無視されます。voicevox_coreと同じディレクトリでも可能です。
+   * 
+   * @example
+   * ファイル構造
+   * ```txt
+   * project
+   *   /voicevox.js
+   *     /...
+   *   /core
+   *     (linux:)
+   *     /libvoicevox_core.so
+   *     /libonnxruntime.so.x.xx.x <- version
+   *     (windows:)
+   *     /voicevox_core.dll
+   *     /onnxruntime.dll
+   *   /...
+   * ```
+   * js
+   * ```js
+   * // linux
+   * new VoicevoxCore(path.join(__dirname, "core/libvoicevox_core.so"));
+   * // windows
+   * new VoicevoxCore(path.join(__dirname, "core/voicevox_core.dll"), path.join(__dirname, "core"));
+   * ```
+   */
+  constructor(path: string, otherDll?: string);
 
   /**
    * OpenJtalkRc を<b>構築</b>(_construct_)する。
