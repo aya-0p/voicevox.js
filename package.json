@@ -1,6 +1,6 @@
 {
   "name": "voicevox.js",
-  "version": "1.2.0_0.14.x+0.16.x",
+  "version": "1.2.0_0.15.x+0.16.x",
   "main": "index.js",
   "scripts": {
     "install": "node-gyp rebuild"
