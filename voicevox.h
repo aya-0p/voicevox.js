@@ -14,6 +14,9 @@ public:
   Voicevox(const Napi::CallbackInfo &info);
   ~Voicevox();
 
+  Napi::Value voicevoxGetOnnxruntimeLibVersionedFilenameV0_16(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxGetOnnxruntimeLibUnversionedFilenameV0_16(const Napi::CallbackInfo &info);
+  Napi::Value voicevoxOnnxruntimeLoadOnceV0_16(const Napi::CallbackInfo &info);
   Napi::Value voicevoxOpenJtalkRcNewV0_16(const Napi::CallbackInfo &info);
   Napi::Value voicevoxOpenJtalkRcUseUserDictV0_16(const Napi::CallbackInfo &info);
   Napi::Value voicevoxOpenJtalkRcDeleteV0_16(const Napi::CallbackInfo &info);
@@ -88,10 +91,11 @@ public:
 
 private:
   DLL dll;
-  std::unordered_map<uint32_t, uintptr_t> open_jtalk_pointers;
-  std::unordered_map<uint32_t, uintptr_t> user_dict_pointers;
-  std::unordered_map<uint32_t, uintptr_t> model_pointers;
-  std::unordered_map<uint32_t, uintptr_t> synthesizer_pointers;
+  const VoicevoxOnnxruntime *onnxruntime_pointer;
+  std::unordered_map<uint32_t, OpenJtalkRc *> open_jtalk_pointers;
+  std::unordered_map<uint32_t, VoicevoxUserDict *> user_dict_pointers;
+  std::unordered_map<uint32_t, VoicevoxVoiceModel *> model_pointers;
+  std::unordered_map<uint32_t, VoicevoxSynthesizer *> synthesizer_pointers;
 };
 
 #endif

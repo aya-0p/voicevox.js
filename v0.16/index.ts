@@ -28,17 +28,57 @@ export class Voicevox {
   [Core]: VoicevoxCore;
   #openJtalkPointerCounter: number = 0;
   #voiceModelCounter: number = 0;
-  #synthesizerPointer: number = 0;
+  #synthesizerCounter: number = 0;
   #userDictCounter: number = 0;
   /**
    * @param path libvoicevox_core.so, libvoicevox_core.solib, voicevox_core.dllを指すパス
-   * @param otherDll その他利用にあたって必要なdllファイル(onnxruntimeなど)があるディレクトリ(フォルダ)へのパス(Windowsのみ)
+   * @param otherDll その他利用にあたって必要なdllファイル(onnxruntimeなど)があるディレクトリ(フォルダ)へのパス(Windowsのみ, onnxruntimeは後で指定可能)
    * @see voicevox_core.d.ts
    */
   constructor(path: string, otherDll?: string) {
     checkValidString(path, "path");
     if (otherDll != null) checkValidString(otherDll, "otherDll");
     this[Core] = new VoicevoxCore(path, otherDll);
+  }
+
+  /**
+   * ONNX Runtimeの動的ライブラリの、バージョン付きのファイル名。
+   *
+   * Windowsでは `voicevoxGetOnnxruntimeLibUnversionedFilenameV0_16` と同じ。
+   */
+  getOnnxruntimeLibVersionedFilename(): Promise<string> {
+    return new Promise<string>((resolve) => {
+      const { result } = this[Core].voicevoxGetOnnxruntimeLibVersionedFilenameV0_16();
+      resolve(result);
+    });
+  }
+
+  /**
+   * ONNX Runtimeの動的ライブラリの、バージョン付きのファイル名。
+   *
+   * Windowsでは `voicevoxGetOnnxruntimeLibUnversionedFilenameV0_16` と同じ。
+   */
+  getOnnxruntimeLibUnversionedFilename(): Promise<string> {
+    return new Promise<string>((resolve) => {
+      const { result } = this[Core].voicevoxGetOnnxruntimeLibUnversionedFilenameV0_16();
+      resolve(result);
+    });
+  }
+
+  /**
+   * ONNX Runtimeをロードして初期化する。
+   *
+   * 一度成功したら、以後はなにも行わない。
+   * @param {VoicevoxLoadOnnxruntimeOptions} options オプション
+   * @returns {Promise<void>}
+   */
+  onnxruntimeLoadOnce(options: VoicevoxLoadOnnxruntimeOptions): Promise<void> {
+    return new Promise<void>((resolve) => {
+      checkVoicevoxLoadOnnxruntimeOptions(options);
+      const { resultCode } = this[Core].voicevoxOnnxruntimeLoadOnceV0_16(options.filename);
+      if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
+      resolve();
+    });
   }
 
   /**
@@ -95,7 +135,7 @@ export class Voicevox {
     return new Promise<VoicevoxSynthesizer>((resolve) => {
       checkValidObject(openJtalkRc, "openJtalkRc", VoicevoxOpenJtalkRc, "VoicevoxOpenJtalkRc");
       checkVoicevoxInitializeOptions(options);
-      const synthesizerPointerName = this.#synthesizerPointer++;
+      const synthesizerPointerName = this.#synthesizerCounter++;
       const { resultCode } = this[Core].voicevoxSynthesizerNewV0_16(openJtalkRc[Pointer], synthesizerPointerName, options.accelerationMode, options.cpuNumThreads);
       if (resultCode !== VoicevoxResultCodeV0_16.VOICEVOX_RESULT_OK) throw new VoicevoxError(this[Core].voicevoxErrorResultToMessageV0_12(resultCode).result);
       resolve(new VoicevoxSynthesizer(this, synthesizerPointerName));
@@ -128,6 +168,17 @@ export class Voicevox {
   }
 
   /**
+   * デフォルトの`Voicevox#onnxruntimeLoadOnce`のオプションを生成する。
+   *
+   * @return デフォルトの`Voicevox#onnxruntimeLoadOnce`のオプション
+   */
+  static makeDefaultLoadOnnxruntimeOptions(): VoicevoxLoadOnnxruntimeOptions {
+    return {
+      filename: undefined,
+    };
+  }
+
+  /**
    * デフォルトの初期化オプションを生成する
    * @returns {VoicevoxInitializeOptions} デフォルト値が設定された初期化オプション
    * @static
@@ -140,7 +191,7 @@ export class Voicevox {
   }
 
   /**
-   * デフォルトの`voicevoxSynthesizerSynthesisV0_16`のオプションを生成する
+   * デフォルトの`Voicevox#synthesizerNew`のオプションを生成する
    * @returns {VoicevoxSynthesisOptions} デフォルト値が設定された`voicevoxSynthesizerSynthesisV0_16`のオプション
    * @static
    */
@@ -151,7 +202,7 @@ export class Voicevox {
   }
 
   /**
-   * デフォルトの`voicevoxSynthesizerTtsV0_16`のオプションを生成する
+   * デフォルトの`VoicevoxSynthesizer#tts`のオプションを生成する
    * @returns {VoicevoxTtsOptions} デフォルト値が設定された`voicevoxSynthesizerTtsV0_16`のオプション
    * @static
    */
@@ -681,7 +732,26 @@ type VoicevoxVoiceModelId = string;
 type VoicevoxStyleId = number;
 
 /**
- * `Voicevox#voicevoxSynthesizerNewV0_16`のオプション。
+ * `Voicevox#onnxruntimeLoadOnce`のオプション。
+ */
+interface VoicevoxLoadOnnxruntimeOptions {
+  /**
+   * ONNX Runtimeのファイル名（モジュール名）もしくはファイルパスを指定する。
+   *
+   * `dlopen`/[`LoadLibraryExW`](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexw)の引数に使われる。未指定で`Voicevox#getOnnxruntimeLibVersionedFilename`と同じ。
+   */
+  filename?: string;
+}
+
+function checkVoicevoxLoadOnnxruntimeOptions(obj: VoicevoxLoadOnnxruntimeOptions) {
+  if (obj.filename === undefined) return;
+  checkValidOption(obj, "VoicevoxInitializeOptions", [
+    ["filename", "string"],
+  ]);
+}
+
+/**
+ * `Voicevox#synthesizerNew`のオプション。
  */
 interface VoicevoxInitializeOptions {
   /**
@@ -694,6 +764,7 @@ interface VoicevoxInitializeOptions {
    */
   cpuNumThreads: number;
 }
+
 function checkVoicevoxInitializeOptions(obj: VoicevoxInitializeOptions) {
   checkValidOption(obj, "VoicevoxInitializeOptions", [
     ["accelerationMode", "number", true],

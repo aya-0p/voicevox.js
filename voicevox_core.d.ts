@@ -16,9 +16,10 @@ export declare class VoicevoxCore {
    * voicevox_coreを読み込む
    * @param path voicevox_coreのパス
    * @param otherDll その他利用にあたって必要なdllファイルがあるディレクトリ(フォルダ)へのパス(Windowsのみ)
-   * 
+   *
    * Windows以外の場合、利用にあたって必要なso/dylibファイルは読み込まれる場所に置いてください。`otherDll`は無視されます。voicevox_coreと同じディレクトリでも可能です。
-   * 
+   * (v0.16から) ONNX Runtimeの動的ライブラリは後で指定することができます。
+   *
    * @example
    * ファイル構造
    * ```txt
@@ -43,6 +44,31 @@ export declare class VoicevoxCore {
    * ```
    */
   constructor(path: string, otherDll?: string);
+
+  /**
+   * ONNX Runtimeの動的ライブラリの、バージョン付きのファイル名。
+   *
+   * Windowsでは `voicevoxGetOnnxruntimeLibUnversionedFilenameV0_16` と同じ。
+   */
+  voicevoxGetOnnxruntimeLibVersionedFilenameV0_16(): Result<string>;
+
+  /**
+   * ONNX Runtimeの動的ライブラリの、バージョン無しのファイル名。
+   */
+  voicevoxGetOnnxruntimeLibUnversionedFilenameV0_16(): Result<string>;
+
+  /**
+   * ONNX Runtimeをロードして初期化する。
+   *
+   * 一度成功したら、以後はなにも行わない。
+   * @param {string} [filename]
+   * ONNX Runtimeのファイル名（モジュール名）もしくはファイルパスを指定する。
+   *
+   * `dlopen`/[`LoadLibraryExW`](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexw)の引数に使われる。デフォルトは ::voicevox_get_onnxruntime_lib_versioned_filename_v0_16 と同じ。
+   *
+   * @returns 結果コード
+   */
+  voicevoxOnnxruntimeLoadOnceV0_16(filename?: string): ResultCodeV0_16;
 
   /**
    * OpenJtalkRc を<b>構築</b>(_construct_)する。
@@ -1125,6 +1151,10 @@ export declare enum VoicevoxResultCodeV0_16 {
    */
   VOICEVOX_RESULT_GPU_SUPPORT_ERROR = 4,
   /**
+   * 推論ライブラリのロードまたは初期化ができなかった
+   */
+  VOICEVOX_RESULT_INIT_INFERENCE_RUNTIME_ERROR = 29,
+  /**
    * スタイルIDに対するスタイルが見つからなかった
    */
   VOICEVOX_RESULT_STYLE_NOT_FOUND_ERROR = 6,
@@ -1164,6 +1194,10 @@ export declare enum VoicevoxResultCodeV0_16 {
    * ZIP内のファイルが読めなかった
    */
   VOICEVOX_RESULT_READ_ZIP_ENTRY_ERROR = 17,
+  /**
+   * モデルの形式が不正
+   */
+  VOICEVOX_RESULT_INVALID_MODEL_HEADER_ERROR = 28,
   /**
    * すでに読み込まれている音声モデルを読み込もうとした
    */
